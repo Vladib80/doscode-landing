@@ -12,46 +12,60 @@
 }
 
 :root {
-  /* Colors */
-  --deep-dark: #0A0A0F;
-  --dark-surface: #111119;
-  --dark-card: rgba(255, 255, 255, 0.03);
-  --dark-card-border: rgba(255, 255, 255, 0.06);
-  --green: #00E676;
-  --green-bright: #33eb91;
-  --green-glow: rgba(0, 230, 118, 0.2);
-  --green-dim: rgba(0, 230, 118, 0.08);
-  --green-subtle: rgba(0, 230, 118, 0.04);
-  --teal: #00BFA5;
-  --emerald: #10B981;
-  --light-bg: #F8F9FA;
+  /* === ANTHROPIC-INSPIRED PALETTE === */
+  /* Warm backgrounds */
+  --cream: #F5F0E8;
+  --cream-light: #FAF7F2;
+  --cream-dark: #EDE7DB;
+  --sand: #E8E0D0;
+
+  /* Text */
+  --charcoal: #1A1A1A;
+  --charcoal-light: #2D2D2D;
+  --text-secondary: #5C5851;
+  --text-muted: #8C857A;
+
+  /* Accent — Anthropic coral/terracotta */
+  --coral: #CF6B4B;
+  --coral-bright: #E05A3A;
+  --coral-glow: rgba(207, 107, 75, 0.2);
+  --coral-dim: rgba(207, 107, 75, 0.08);
+  --coral-subtle: rgba(207, 107, 75, 0.04);
+
+  /* Code accent */
+  --amber: #C49A3C;
+  --amber-dim: rgba(196, 154, 60, 0.12);
+
+  /* Dark sections */
+  --deep-dark: #0F0E0C;
+  --dark-surface: #1A1815;
+  --dark-card: rgba(255, 255, 255, 0.04);
+  --dark-card-border: rgba(255, 255, 255, 0.08);
+
+  /* Neutrals */
   --white: #FFFFFF;
-  --muted: #9CA3AF;
-  --muted-light: #6B7280;
-  --border-dark: rgba(255, 255, 255, 0.06);
+  --muted: #8C857A;
+  --muted-light: #6B665E;
   --border-light: rgba(0, 0, 0, 0.08);
+  --border-dark: rgba(255, 255, 255, 0.08);
 
   /* Glass */
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-blur: 12px;
+  --glass-blur: 16px;
 
-  /* Typography */
-  --font-display: 'Clash Display', sans-serif;
-  --font-body: 'General Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* Typography — Editorial */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Spacing */
   --section-pad: clamp(80px, 10vw, 140px);
   --container-max: 1200px;
-  --gap: 20px;
+  --gap: 24px;
 
   /* Transitions */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
   --duration: 0.5s;
-
-  /* Cursor */
-  --cursor-size: 12px;
-  --cursor-size-hover: 44px;
 }

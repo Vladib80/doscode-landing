@@ -146,52 +146,41 @@ const serviceIcons = [
 
 /* ===== SERVICE GRAPHICS (bottom illustrations) ===== */
 const serviceGraphics = [
-  // 1. Web & Mobile — browser window + phone side by side (narrow card)
+  // 1. Web & Mobile — browser window + phone side by side
   `<svg class="svc-graphic-svg" viewBox="0 0 240 148" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
-    <!-- Browser shell -->
     <rect x="6" y="8" width="148" height="136" rx="7" opacity="0.18"/>
     <rect x="6" y="8" width="148" height="20" rx="7" fill="currentColor" opacity="0.07"/>
     <circle cx="17" cy="18" r="3" fill="currentColor" opacity="0.2"/>
     <circle cx="27" cy="18" r="3" fill="currentColor" opacity="0.15"/>
     <circle cx="37" cy="18" r="3" fill="currentColor" opacity="0.1"/>
     <rect x="50" y="12" width="76" height="10" rx="3" opacity="0.09"/>
-    <!-- Browser nav bar -->
     <rect x="12" y="36" width="136" height="6" rx="1" opacity="0.07"/>
     <rect x="110" y="36" width="38" height="6" rx="3" fill="currentColor" opacity="0.12"/>
-    <!-- Hero title -->
     <rect x="12" y="50" width="80" height="10" rx="2" fill="currentColor" opacity="0.2"/>
     <rect x="12" y="64" width="60" height="6" rx="2" opacity="0.1"/>
-    <!-- CTA button -->
     <rect x="12" y="76" width="52" height="16" rx="8" fill="currentColor" opacity="0.22"/>
-    <!-- Hero image placeholder -->
     <rect x="94" y="44" width="54" height="50" rx="5" opacity="0.07"/>
     <line x1="94" y1="44" x2="148" y2="94" opacity="0.04" stroke-width="0.5"/>
     <line x1="148" y1="44" x2="94" y2="94" opacity="0.04" stroke-width="0.5"/>
-    <!-- Feature cards row -->
     <rect x="12" y="104" width="40" height="18" rx="3" opacity="0.08"/>
     <rect x="58" y="104" width="40" height="18" rx="3" opacity="0.08"/>
     <rect x="104" y="104" width="40" height="18" rx="3" opacity="0.08"/>
     <rect x="16" y="108" width="24" height="4" rx="1" fill="currentColor" opacity="0.15"/>
     <rect x="62" y="108" width="24" height="4" rx="1" fill="currentColor" opacity="0.15"/>
     <rect x="108" y="108" width="24" height="4" rx="1" fill="currentColor" opacity="0.15"/>
-    <!-- Phone shell -->
     <rect x="166" y="6" width="68" height="136" rx="14" opacity="0.22"/>
     <rect x="171" y="18" width="58" height="112" rx="4" opacity="0.06"/>
     <rect x="186" y="8" width="28" height="5" rx="2.5" fill="currentColor" opacity="0.12"/>
-    <!-- App top bar -->
     <rect x="171" y="18" width="58" height="12" rx="2" opacity="0.1"/>
-    <!-- App hero card -->
     <rect x="176" y="36" width="48" height="28" rx="4" fill="currentColor" opacity="0.13"/>
     <rect x="181" y="41" width="30" height="5" rx="2" fill="currentColor" opacity="0.3"/>
     <rect x="181" y="50" width="20" height="4" rx="2" opacity="0.18"/>
-    <!-- List items -->
     <rect x="176" y="70" width="48" height="10" rx="3" opacity="0.09"/>
     <rect x="176" y="84" width="48" height="10" rx="3" opacity="0.09"/>
     <rect x="176" y="98" width="48" height="10" rx="3" opacity="0.09"/>
     <rect x="180" y="73" width="22" height="4" rx="1" fill="currentColor" opacity="0.14"/>
     <rect x="180" y="87" width="18" height="4" rx="1" fill="currentColor" opacity="0.14"/>
     <rect x="180" y="101" width="26" height="4" rx="1" fill="currentColor" opacity="0.14"/>
-    <!-- Bottom nav -->
     <rect x="171" y="120" width="58" height="10" rx="2" opacity="0.08"/>
     <circle cx="185" cy="125" r="3" fill="currentColor" opacity="0.2"/>
     <circle cx="200" cy="125" r="2.5" opacity="0.08"/>
@@ -200,36 +189,29 @@ const serviceGraphics = [
 
   // 2. Dashboards — bar chart + trend line + stat cards
   `<svg class="svc-graphic-svg" viewBox="0 0 240 148" fill="none" stroke="currentColor" stroke-width="0.8">
-    <!-- Grid lines -->
     <line x1="28" y1="18" x2="232" y2="18" opacity="0.05"/>
     <line x1="28" y1="40" x2="232" y2="40" opacity="0.05"/>
     <line x1="28" y1="62" x2="232" y2="62" opacity="0.05"/>
     <line x1="28" y1="84" x2="232" y2="84" opacity="0.05"/>
     <line x1="28" y1="106" x2="232" y2="106" opacity="0.05"/>
-    <!-- Y axis -->
     <line x1="28" y1="18" x2="28" y2="108" opacity="0.1"/>
-    <!-- Bars -->
     <rect x="42" y="62" width="20" height="44" rx="3" fill="currentColor" opacity="0.12"/>
     <rect x="72" y="40" width="20" height="66" rx="3" fill="currentColor" opacity="0.18"/>
     <rect x="102" y="50" width="20" height="56" rx="3" fill="currentColor" opacity="0.14"/>
     <rect x="132" y="22" width="20" height="84" rx="3" fill="currentColor" opacity="0.28"/>
     <rect x="162" y="48" width="20" height="58" rx="3" fill="currentColor" opacity="0.16"/>
     <rect x="192" y="34" width="20" height="72" rx="3" fill="currentColor" opacity="0.22"/>
-    <!-- Trend line -->
     <polyline points="52,66 82,44 112,54 142,26 172,52 202,38" fill="none" stroke-width="1.5" opacity="0.45"/>
-    <!-- Trend dots -->
     <circle cx="52" cy="66" r="3" fill="currentColor" opacity="0.5"/>
     <circle cx="82" cy="44" r="3" fill="currentColor" opacity="0.5"/>
     <circle cx="142" cy="26" r="4" fill="currentColor" opacity="0.75"/>
     <circle cx="202" cy="38" r="3" fill="currentColor" opacity="0.5"/>
-    <!-- X-axis labels -->
     <rect x="42" y="112" width="20" height="4" rx="1" opacity="0.1"/>
     <rect x="72" y="112" width="20" height="4" rx="1" opacity="0.1"/>
     <rect x="102" y="112" width="20" height="4" rx="1" opacity="0.1"/>
     <rect x="132" y="112" width="20" height="4" rx="1" opacity="0.1"/>
     <rect x="162" y="112" width="20" height="4" rx="1" opacity="0.1"/>
     <rect x="192" y="112" width="20" height="4" rx="1" opacity="0.1"/>
-    <!-- Stat cards -->
     <rect x="10" y="124" width="64" height="20" rx="4" opacity="0.08"/>
     <rect x="16" y="129" width="30" height="5" rx="2" fill="currentColor" opacity="0.18"/>
     <rect x="16" y="137" width="20" height="4" rx="1" opacity="0.1"/>
@@ -239,7 +221,6 @@ const serviceGraphics = [
     <rect x="154" y="124" width="64" height="20" rx="4" opacity="0.08"/>
     <rect x="160" y="129" width="30" height="5" rx="2" fill="currentColor" opacity="0.18"/>
     <rect x="160" y="137" width="20" height="4" rx="1" opacity="0.1"/>
-    <!-- Y-axis labels -->
     <rect x="6" y="16" width="16" height="4" rx="1" opacity="0.08"/>
     <rect x="6" y="60" width="16" height="4" rx="1" opacity="0.08"/>
     <rect x="6" y="104" width="16" height="4" rx="1" opacity="0.08"/>
@@ -247,35 +228,28 @@ const serviceGraphics = [
 
   // 3. AI Agents — chat bubbles + bot elements
   `<svg class="svc-graphic-svg" viewBox="0 0 240 148" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
-    <!-- Bot avatar -->
     <rect x="8" y="12" width="30" height="30" rx="10" fill="currentColor" opacity="0.1"/>
     <rect x="8" y="12" width="30" height="30" rx="10" opacity="0.18"/>
     <rect x="17" y="22" width="12" height="2" rx="1" fill="currentColor" opacity="0.3"/>
     <rect x="21" y="18" width="4" height="10" rx="2" fill="currentColor" opacity="0.3"/>
-    <!-- Bot bubble 1 -->
     <rect x="46" y="12" width="148" height="32" rx="16" fill="currentColor" opacity="0.1"/>
     <rect x="46" y="12" width="148" height="32" rx="16" opacity="0.15"/>
     <rect x="58" y="23" width="88" height="5" rx="2.5" fill="currentColor" opacity="0.28"/>
     <rect x="58" y="32" width="62" height="5" rx="2.5" opacity="0.18"/>
-    <!-- Thinking bubble -->
     <rect x="46" y="52" width="80" height="28" rx="14" fill="currentColor" opacity="0.08"/>
     <rect x="46" y="52" width="80" height="28" rx="14" opacity="0.12"/>
     <circle cx="68" cy="66" r="4" fill="currentColor" opacity="0.28"/>
     <circle cx="82" cy="66" r="4" fill="currentColor" opacity="0.38"/>
     <circle cx="96" cy="66" r="4" fill="currentColor" opacity="0.5"/>
-    <!-- User avatar -->
     <circle cx="228" cy="98" r="14" fill="currentColor" opacity="0.08"/>
     <circle cx="228" cy="98" r="14" opacity="0.12"/>
     <circle cx="228" cy="93" r="5" fill="currentColor" opacity="0.15"/>
     <path d="M220 107 q4-6 8-6 t8 6" fill="currentColor" opacity="0.15" stroke="none"/>
-    <!-- User bubble -->
     <rect x="40" y="84" width="180" height="28" rx="14" opacity="0.1"/>
     <rect x="52" y="94" width="110" height="5" rx="2.5" opacity="0.18"/>
     <rect x="52" y="103" width="80" height="5" rx="2.5" opacity="0.12"/>
-    <!-- Bot response -->
     <rect x="46" y="120" width="160" height="24" rx="12" fill="currentColor" opacity="0.12"/>
     <rect x="58" y="129" width="100" height="5" rx="2.5" fill="currentColor" opacity="0.25"/>
-    <!-- Circuit accent (top right) -->
     <line x1="190" y1="8" x2="232" y2="8" stroke-dasharray="4 3" opacity="0.15"/>
     <line x1="232" y1="8" x2="232" y2="46" stroke-dasharray="4 3" opacity="0.15"/>
     <circle cx="232" cy="8" r="2.5" fill="currentColor" opacity="0.3"/>
@@ -286,29 +260,22 @@ const serviceGraphics = [
 
   // 4. Landing / MVP — page wireframe with sections
   `<svg class="svc-graphic-svg" viewBox="0 0 240 148" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round">
-    <!-- Page shell -->
     <rect x="8" y="5" width="224" height="142" rx="7" opacity="0.15"/>
-    <!-- Browser bar -->
     <rect x="8" y="5" width="224" height="18" rx="7" fill="currentColor" opacity="0.07"/>
     <circle cx="19" cy="14" r="3" fill="currentColor" opacity="0.15"/>
     <circle cx="29" cy="14" r="3" fill="currentColor" opacity="0.12"/>
     <circle cx="39" cy="14" r="3" fill="currentColor" opacity="0.1"/>
     <rect x="55" y="9" width="100" height="10" rx="3" opacity="0.08"/>
-    <!-- Nav bar -->
     <rect x="16" y="30" width="208" height="8" rx="2" opacity="0.07"/>
     <rect x="172" y="30" width="52" height="8" rx="4" fill="currentColor" opacity="0.16"/>
-    <!-- Hero text block -->
     <rect x="16" y="46" width="118" height="11" rx="3" fill="currentColor" opacity="0.2"/>
     <rect x="16" y="62" width="94" height="7" rx="2" opacity="0.1"/>
     <rect x="16" y="73" width="76" height="7" rx="2" opacity="0.08"/>
-    <!-- CTA button (green-tinted) -->
     <rect x="16" y="86" width="80" height="20" rx="10" fill="currentColor" opacity="0.25"/>
     <rect x="30" y="93" width="48" height="5" rx="2" fill="currentColor" opacity="0.5"/>
-    <!-- Hero image area -->
     <rect x="158" y="40" width="62" height="72" rx="5" opacity="0.08"/>
     <line x1="158" y1="40" x2="220" y2="112" opacity="0.04" stroke-width="0.5"/>
     <line x1="220" y1="40" x2="158" y2="112" opacity="0.04" stroke-width="0.5"/>
-    <!-- Features row (3 cards) -->
     <rect x="16" y="118" width="62" height="24" rx="4" opacity="0.08"/>
     <rect x="86" y="118" width="62" height="24" rx="4" opacity="0.08"/>
     <rect x="156" y="118" width="62" height="24" rx="4" opacity="0.08"/>
@@ -318,7 +285,6 @@ const serviceGraphics = [
     <rect x="92" y="132" width="26" height="4" rx="1" opacity="0.08"/>
     <rect x="162" y="123" width="38" height="5" rx="2" fill="currentColor" opacity="0.15"/>
     <rect x="162" y="132" width="26" height="4" rx="1" opacity="0.08"/>
-    <!-- Speed badge -->
     <rect x="136" y="86" width="84" height="20" rx="5" opacity="0.07"/>
     <rect x="142" y="91" width="28" height="5" rx="2" fill="currentColor" opacity="0.18"/>
     <rect x="142" y="99" width="20" height="4" rx="1" opacity="0.1"/>
@@ -350,7 +316,6 @@ function renderPortfolio(t) {
   const grid = document.getElementById('portfolioGrid');
   if (!grid || !t.portfolio?.projects) return;
 
-  // Browser chrome + real screenshot for each project
   const browserBar = `
     <div class="mockup-browser-bar">
       <span class="mockup-dot"></span>
@@ -360,15 +325,12 @@ function renderPortfolio(t) {
     </div>`;
 
   const mockups = [
-    // DosPass — analytics dashboard screenshot
     `<div class="mockup-browser">${browserBar}
       <img class="mockup-screenshot" src="/screenshots/dospass.jpg" alt="DosPass Analytics Dashboard" loading="lazy">
     </div>`,
-    // Chicago Pizza — menu ordering screenshot
     `<div class="mockup-browser">${browserBar}
       <img class="mockup-screenshot" src="/screenshots/chicagopizza.jpg" alt="Chicago Pizza Menu" loading="lazy">
     </div>`,
-    // MMG Dashboard — analytics & reports screenshot
     `<div class="mockup-browser">${browserBar}
       <img class="mockup-screenshot" src="/screenshots/mmg.jpg" alt="MMG Analytics Dashboard" loading="lazy">
     </div>`,
@@ -452,14 +414,12 @@ function initTextSplit() {
   if (!headline) return;
 
   const html = headline.innerHTML;
-  // Extract accent spans and split surrounding text into words
   const parts = [];
   let cursor = 0;
   const spanRe = /<span class="accent">(.*?)<\/span>/g;
   let match;
 
   while ((match = spanRe.exec(html)) !== null) {
-    // text before this span
     if (match.index > cursor) {
       const before = html.slice(cursor, match.index).trim();
       if (before) {
@@ -471,7 +431,6 @@ function initTextSplit() {
     parts.push({ text: match[1], accent: true });
     cursor = match.index + match[0].length;
   }
-  // text after last span
   const after = html.slice(cursor).trim();
   if (after) {
     after.split(/\s+/).forEach(w => {
@@ -484,85 +443,9 @@ function initTextSplit() {
     return `<span class="${cls}" style="animation-delay: ${i * 0.08}s">${p.text}</span>`;
   }).join(' ');
 
-  // Trigger animation by adding class after a tiny delay
   requestAnimationFrame(() => {
     headline.classList.add('words-ready');
   });
-}
-
-/* ===== CUSTOM CURSOR ===== */
-function initCustomCursor() {
-  // Only on fine pointer (desktop)
-  if (!window.matchMedia('(pointer: fine)').matches) return;
-
-  const cursor = document.getElementById('cursor');
-  const follower = document.getElementById('cursorFollower');
-  if (!cursor || !follower) return;
-
-  let mouseX = -100, mouseY = -100;
-  let cursorX = -100, cursorY = -100;
-  let followerX = -100, followerY = -100;
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  }, { passive: true });
-
-  // Hover detection for interactive elements
-  const interactiveSelectors = 'a, button, input, textarea, select, .service-card, .portfolio-card, .lang-btn, .social-link';
-
-  document.addEventListener('mouseover', (e) => {
-    if (e.target.closest(interactiveSelectors)) {
-      cursor.classList.add('cursor-hover');
-      follower.classList.add('cursor-hover');
-    }
-  }, { passive: true });
-
-  document.addEventListener('mouseout', (e) => {
-    if (e.target.closest(interactiveSelectors)) {
-      cursor.classList.remove('cursor-hover');
-      follower.classList.remove('cursor-hover');
-    }
-  }, { passive: true });
-
-  // Lerp loop
-  function animate() {
-    // Cursor follows instantly
-    cursorX += (mouseX - cursorX) * 0.8;
-    cursorY += (mouseY - cursorY) * 0.8;
-    // Follower follows with lag
-    followerX += (mouseX - followerX) * 0.15;
-    followerY += (mouseY - followerY) * 0.15;
-
-    cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-    follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
-
-    requestAnimationFrame(animate);
-  }
-  animate();
-
-  // Show cursors on first move
-  document.addEventListener('mousemove', () => {
-    cursor.style.opacity = '1';
-    follower.style.opacity = '1';
-  }, { once: true, passive: true });
-}
-
-/* ===== MOUSE SPOTLIGHT (Service Cards) ===== */
-function initSpotlight() {
-  const grid = document.getElementById('servicesGrid');
-  if (!grid) return;
-
-  grid.addEventListener('mousemove', (e) => {
-    const cards = grid.querySelectorAll('.service-card');
-    cards.forEach(card => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-    });
-  }, { passive: true });
 }
 
 /* ===== 3D TILT (Portfolio Cards) ===== */
@@ -581,15 +464,15 @@ function initTilt() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -6;
-      const rotateY = ((x - centerX) / centerX) * 6;
+      const rotateX = ((y - centerY) / centerY) * -4;
+      const rotateY = ((x - centerX) / centerX) * 4;
 
-      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
 
       if (glare) {
         const glareX = (x / rect.width) * 100;
         const glareY = (y / rect.height) * 100;
-        glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.12) 0%, transparent 60%)`;
+        glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.08) 0%, transparent 60%)`;
         glare.style.opacity = '1';
       }
     }, { passive: true });
@@ -703,8 +586,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initMobileMenu();
   initForm();
-  initCustomCursor();
-  initSpotlight();
   initLangSwitcher();
   observeReveals();
 });
