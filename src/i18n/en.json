@@ -1,0 +1,187 @@
+{
+  "nav": {
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact",
+    "cta": "Discuss Project"
+  },
+  "hero": {
+    "headline": "We Build Apps <span class=\"accent\">Fast</span> & <span class=\"accent\">Affordable</span>",
+    "subheadline": "From idea to app in days, not months. AI-powered development — faster and more affordable than a traditional agency.",
+    "cta": "Get a Free Estimate",
+    "secondary": "View Our Work"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "What we build",
+    "items": [
+      {
+        "title": "Web & Mobile Apps",
+        "description": "PWA, native-feel and cross-platform apps — from food ordering to marketplaces.",
+        "bullets": ["iOS, Android & browser", "Order & delivery systems", "Offline-capable (PWA)", "Launch in weeks, not months"]
+      },
+      {
+        "title": "Dashboards & Internal Tools",
+        "description": "Data visualization, internal panels and CRM systems tailored to your team.",
+        "bullets": ["Real-time analytics", "Role-based access control", "REST API & DB integrations", "Export to Excel / PDF"]
+      },
+      {
+        "title": "AI Agents & Automation",
+        "description": "Smart bots and workflow automation — Telegram, WhatsApp, and ChatGPT integration.",
+        "bullets": ["Telegram & WhatsApp bots", "ChatGPT / GPT-4 integration", "Auto-notifications & triggers", "Zero-code request handling"]
+      },
+      {
+        "title": "Landing Pages & MVPs",
+        "description": "Fast go-to-market: from idea to working product in 1–2 weeks.",
+        "bullets": ["Launch in 1–2 weeks", "SEO & performance first", "CMS-ready content", "Scales easily"]
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Latest Projects",
+    "subtitle": "What we've shipped",
+    "projects": [
+      {
+        "name": "DosPass",
+        "url": "https://dospass.com",
+        "type": "Viral Loyalty Platform",
+        "description": "Loyalty engine that turns customers into brand ambassadors. Digital stamp cards, referral programs, and gamification — all via WhatsApp, no app download needed.",
+        "features": ["Digital stamp cards via QR", "Referral & viral growth tools", "WhatsApp-based, no app needed", "Spin wheel & gamification"],
+        "tags": ["PWA", "Vue.js", "Node.js"]
+      },
+      {
+        "name": "Chicago Pizza App",
+        "url": "https://chicagopizza.kz",
+        "type": "Restaurant Ecosystem",
+        "description": "End-to-end restaurant platform with ordering, kitchen management, and delivery logistics. iiko POS integration, Telegram bots for staff and customers, courier services via Wolt Drive & Chocofood.",
+        "features": ["iiko POS integration", "Customer & employee Telegram bots", "Wolt Drive & Choco delivery", "WhatsApp & Telegram order notifications"],
+        "tags": ["React", "Firebase", "PWA"]
+      },
+      {
+        "name": "MMG Dashboard",
+        "type": "Tender Management Platform",
+        "description": "Automated tender monitoring and pipeline system. Auto-fetches from Goszakup.gov.kz, AI pre-qualification, and a full tender funnel with win-rate analytics.",
+        "features": ["Auto-fetch from Goszakup.gov.kz", "AI pre-qualification filters", "Tender funnel & status tracking", "Win-rate & competitor analytics"],
+        "tags": ["React", "Node.js", "AI"],
+        "comingSoon": "Coming Soon"
+      }
+    ]
+  },
+  "industries": {
+    "title": "We Know Your Business",
+    "subtitle": "Industries we serve",
+    "items": [
+      {
+        "icon": "restaurant",
+        "name": "Restaurants & F&B",
+        "items": ["Online ordering & POS integration", "Kitchen & delivery management", "Telegram & WhatsApp customer bots"]
+      },
+      {
+        "icon": "retail",
+        "name": "Retail & E-commerce",
+        "items": ["Online stores & product catalogs", "Loyalty programs & CRM", "Kaspi & payment integrations"]
+      },
+      {
+        "icon": "healthcare",
+        "name": "Healthcare & Medical",
+        "items": ["Patient portals & appointment booking", "Medical supply CRM systems", "Clinic management platforms"]
+      },
+      {
+        "icon": "education",
+        "name": "Education & EdTech",
+        "items": ["Learning management systems", "Student enrollment portals", "Online courses & testing tools"]
+      },
+      {
+        "icon": "agency",
+        "name": "Agencies & Marketing",
+        "items": ["Campaign dashboards & analytics", "Client portals & reporting", "Workflow automation tools"]
+      },
+      {
+        "icon": "logistics",
+        "name": "Logistics & Delivery",
+        "items": ["Fleet tracking & management", "Courier dispatch & routing", "Client delivery portals"]
+      },
+      {
+        "icon": "govtender",
+        "name": "Gov Tenders & Procurement",
+        "items": ["Real-time Goszakup monitoring", "AI pre-qualification & tender funnel", "Win-rate analytics & alerts"]
+      },
+      {
+        "icon": "realestate",
+        "name": "Real Estate",
+        "items": ["Property listings & search portals", "Agent & developer CRM systems", "Mortgage calculator & floor plans"]
+      }
+    ]
+  },
+  "stats": {
+    "items": [
+      { "value": "15+", "label": "Projects launched" },
+      { "value": "3 wks", "label": "Avg. delivery time" },
+      { "value": "100%", "label": "Clients recommend us" },
+      { "value": "3 yrs", "label": "On the market" }
+    ]
+  },
+  "logos": { "label": "Trusted by" },
+  "process": {
+    "title": "How We Work",
+    "subtitle": "Simple and transparent",
+    "steps": [
+      { "num": "01", "title": "Discuss", "description": "Free call, project scope and cost estimate — within 24 hours." },
+      { "num": "02", "title": "Build", "description": "Iterative development with weekly demos. You see progress at every step." },
+      { "num": "03", "title": "Launch", "description": "Deployment, team onboarding, and post-launch support. We stay with you after go-live." }
+    ]
+  },
+  "testimonials": {
+    "title": "Client Stories",
+    "subtitle": "Testimonials",
+    "items": [
+      { "quote": "DosCode launched our loyalty system in 3 weeks. Customers started bringing friends immediately — the viral effect is real. Online sign-ups tripled in the first month.", "author": "Dosmukhamad A.", "role": "Founder, DosPass" },
+      { "quote": "iiko integration, Telegram bot for guests and staff, Wolt couriers — everything runs flawlessly. Online orders grew 40% in the first month after launch.", "author": "General Manager", "role": "Chicago Pizza KZ" },
+      { "quote": "The team got up to speed on our tender business within days. Monitoring and filtering that used to take half a day are now fully automated. We save 15+ hours every week.", "author": "Department Head", "role": "MMG Group" }
+    ]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "FAQ",
+    "items": [
+      { "q": "How much does development cost?", "a": "It depends on the project. A landing page starts from 150K ₸, a mobile app or MVP from 500K ₸. We give a precise estimate for free after a short intake call." },
+      { "q": "How fast do you work?", "a": "A landing page takes 1–2 weeks, a mobile app or dashboard 4–8 weeks. We work iteratively — every week you see a working result." },
+      { "q": "Do you sign NDAs?", "a": "Yes, we sign NDAs before any project discussions begin. Confidentiality is non-negotiable." },
+      { "q": "Who will work on my project?", "a": "Our in-house team: developer, designer, and project manager. No outsourcing — only DosCode people." },
+      { "q": "What happens after launch?", "a": "Support and minor updates are included in the standard contract. We don't abandon projects after deployment." },
+      { "q": "How does payment work?", "a": "We work on a 50/50 model: 50% upfront to kick off development, 50% upon delivery. Everything is formalized in a contract that protects both sides." }
+    ]
+  },
+  "about": {
+    "label": "Who we are",
+    "title": "Code from a friend",
+    "text": "A small team from Almaty: developers, designer, and PM. We work directly — no middlemen, no agency markups. Every project is handled personally: from the first call to deployment and support."
+  },
+  "whatsapp": { "tooltip": "Chat on WhatsApp" },
+  "form": {
+    "title": "Discuss Your Project",
+    "subtitle": "Tell us about your idea — we'll respond within a day",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "description": "Describe your project",
+    "tellMore": "Tell us more",
+    "projectType": "Project type",
+    "projectTypes": ["Web app", "Dashboard", "AI agent", "Landing page", "Other"],
+    "budget": "Budget",
+    "budgets": ["Up to 500K ₸", "500K–2M ₸", "2M–5M ₸", "5M+ ₸", "Not determined"],
+    "timeline": "Timeline",
+    "timelines": ["1–2 weeks", "1 month", "2–3 months", "Not urgent"],
+    "submit": "Submit Request",
+    "trust": "No commitment · We respond within 24 hours",
+    "success": "Thank you! We'll get back to you soon.",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "email@example.com",
+    "phonePlaceholder": "+7 (___) ___-__-__",
+    "descriptionPlaceholder": "Tell us what you'd like to build..."
+  },
+  "footer": {
+    "tagline": "Friendly Code. AI development in Kazakhstan.",
+    "rights": "© 2026 DosCode. All rights reserved."
+  }
+}

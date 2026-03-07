@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DosCode — AI-разработка приложений в Казахстане</title>
+  <meta name="description" content="DosCode — AI-усиленная разработка приложений. От идеи до приложения за дни, а не месяцы. Веб-приложения, дашборды, AI-агенты." />
+  <meta name="keywords" content="разработка приложений, Казахстан, AI, веб-приложения, PWA, MVP" />
+  <meta property="og:title" content="DosCode — AI-разработка приложений" />
+  <meta property="og:description" content="От идеи до приложения за дни, а не месяцы. AI-усиленная разработка для бизнеса в Казахстане." />
+  <meta property="og:image" content="https://doscode.kz/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DosCode — AI-разработка приложений" />
+  <meta name="twitter:description" content="От идеи до приложения за дни, а не месяцы. AI-усиленная разработка для бизнеса в Казахстане." />
+  <meta name="twitter:image" content="https://doscode.kz/og-image.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://doscode.kz" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:locale:alternate" content="kk_KZ" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <link rel="alternate" hreflang="ru" href="https://doscode.kz/?lang=ru" />
+  <link rel="alternate" hreflang="kk" href="https://doscode.kz/?lang=kk" />
+  <link rel="alternate" hreflang="en" href="https://doscode.kz/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://doscode.kz" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "DosCode",
+    "alternateName": "Дос Код",
+    "url": "https://doscode.kz",
+    "description": "AI-powered development studio in Kazakhstan.",
+    "areaServed": { "@type": "Country", "name": "Kazakhstan" },
+    "founder": { "@type": "Person", "name": "Volodya" },
+    "knowsLanguage": ["ru", "kk", "en"],
+    "serviceType": ["Web Development", "Mobile App Development", "AI Development"]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- SVG Grain Filter (reused across dark sections) -->
+  <svg style="position:absolute;width:0;height:0">
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter>
+  </svg>
+
+  <!-- Custom cursor (desktop) -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="logo-dos">Dos</span><span class="logo-code">Code</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#services" data-i18n="nav.services">Услуги</a>
+        <a href="#portfolio" data-i18n="nav.portfolio">Портфолио</a>
+        <a href="#contact" data-i18n="nav.contact">Контакты</a>
+      </div>
+      <div class="nav-right">
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-btn active" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="kk">KZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="#contact" class="btn btn-primary nav-cta" data-i18n="nav.cta">Обсудить проект</a>
+      </div>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <!-- Aurora blobs -->
+    <div class="hero-aurora">
+      <div class="aurora-blob aurora-1"></div>
+      <div class="aurora-blob aurora-2"></div>
+      <div class="aurora-blob aurora-3"></div>
+      <div class="aurora-blob aurora-4"></div>
+    </div>
+    <!-- Grain overlay -->
+    <div class="grain-overlay"></div>
+    <!-- Grid pattern -->
+    <div class="hero-grid"></div>
+
+    <div class="hero-content">
+      <h1 class="hero-headline" id="heroHeadline" data-i18n-html="hero.headline">
+        Мы создаём приложения <span class="accent">быстро</span> и <span class="accent">доступно</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero.subheadline">
+        От идеи до приложения за дни, а не месяцы. AI-усиленная разработка для бизнеса в Казахстане.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary btn-lg btn-glow" data-i18n="hero.cta">Обсудить проект</a>
+        <a href="#portfolio" class="btn btn-ghost btn-lg" data-i18n="hero.secondary">Посмотреть работы</a>
+      </div>
+    </div>
+
+    <!-- Floating code card -->
+    <div class="floating-card floating-card-code">
+      <div class="floating-card-dot green"></div>
+      <div class="floating-card-dot yellow"></div>
+      <div class="floating-card-dot red"></div>
+      <code><span class="code-kw">const</span> app = <span class="code-fn">buildFast</span>();</code>
+    </div>
+    <div class="floating-card floating-card-status">
+      <span class="status-dot"></span>
+      <span class="status-text">deploy: <span class="code-fn">success</span></span>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section class="stats-bar" id="stats">
+    <div class="container">
+      <div class="stats-grid" id="statsGrid"></div>
+    </div>
+  </section>
+
+  <!-- LOGOS STRIP -->
+  <section class="logos-strip" id="logos">
+    <div class="container">
+      <p class="logos-label" data-i18n="logos.label">Нам доверяют</p>
+      <div class="logos-grid" id="logosGrid"></div>
+    </div>
+  </section>
+
+  <!-- SERVICES (now dark) -->
+  <section class="services" id="services">
+    <div class="grain-overlay"></div>
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" data-i18n="services.subtitle">Что мы создаём</span>
+        <h2 class="section-title section-title--light" data-i18n="services.title">Услуги</h2>
+      </div>
+      <div class="services-grid" id="servicesGrid"></div>
+    </div>
+  </section>
+
+  <!-- HOW WE WORK -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" data-i18n="process.subtitle">Просто и прозрачно</span>
+        <h2 class="section-title" data-i18n="process.title">Как мы работаем</h2>
+      </div>
+      <div class="process-steps" id="processSteps"></div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="grain-overlay"></div>
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" data-i18n="portfolio.subtitle">Наши проекты</span>
+        <h2 class="section-title section-title--light" data-i18n="portfolio.title">Портфолио</h2>
+      </div>
+      <div class="portfolio-grid" id="portfolioGrid"></div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="industries" id="industries">
+    <div class="grain-overlay"></div>
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" data-i18n="industries.subtitle">Отрасли</span>
+        <h2 class="section-title section-title--light" data-i18n="industries.title">Мы знаем ваш бизнес</h2>
+      </div>
+      <div class="industries-grid" id="industriesGrid"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="grain-overlay"></div>
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" data-i18n="testimonials.subtitle">Отзывы</span>
+        <h2 class="section-title section-title--light" data-i18n="testimonials.title">Говорят клиенты</h2>
+      </div>
+      <div class="testimonials-grid" id="testimonialsGrid"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" data-i18n="faq.subtitle">FAQ</span>
+        <h2 class="section-title" data-i18n="faq.title">Частые вопросы</h2>
+      </div>
+      <div class="faq-list" id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner reveal">
+        <div class="about-text">
+          <span class="section-label" data-i18n="about.label">Кто мы</span>
+          <h2 class="about-title" data-i18n="about.title">Код от друга</h2>
+          <p data-i18n="about.text">Небольшая команда из Алматы — работаем напрямую, без посредников и студийных наценок.</p>
+        </div>
+        <div class="about-avatars" id="aboutAvatars"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" data-i18n="form.title">Обсудить проект</span>
+        <h2 class="section-title" data-i18n="form.subtitle">Расскажите о вашей идее — мы ответим в течение дня</h2>
+      </div>
+      <form class="contact-form reveal" id="contactForm" novalidate>
+        <div class="form-step form-step-1">
+          <div class="form-group">
+            <input type="text" id="formName" name="name" required placeholder=" " />
+            <label for="formName" data-i18n="form.name">Имя</label>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="email" id="formEmail" name="email" placeholder=" " />
+              <label for="formEmail" data-i18n="form.email">Эл. почта</label>
+            </div>
+            <div class="form-group">
+              <input type="tel" id="formPhone" name="phone" placeholder=" " />
+              <label for="formPhone" data-i18n="form.phone">Телефон</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea id="formDesc" name="description" rows="4" required placeholder=" "></textarea>
+            <label for="formDesc" data-i18n="form.description">Опишите ваш проект</label>
+          </div>
+        </div>
+
+        <button type="button" class="form-expand-btn" id="formExpandBtn" data-i18n="form.tellMore">Рассказать подробнее</button>
+
+        <div class="form-step form-step-2" id="formStep2">
+          <div class="form-row form-row-3">
+            <div class="form-group form-group--select">
+              <label for="formType" data-i18n="form.projectType">Тип проекта</label>
+              <select id="formType" name="projectType"><option value="">—</option></select>
+            </div>
+            <div class="form-group form-group--select">
+              <label for="formBudget" data-i18n="form.budget">Бюджет</label>
+              <select id="formBudget" name="budget"><option value="">—</option></select>
+            </div>
+            <div class="form-group form-group--select">
+              <label for="formTimeline" data-i18n="form.timeline">Сроки</label>
+              <select id="formTimeline" name="timeline"><option value="">—</option></select>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-submit btn-shine" data-i18n="form.submit">Отправить заявку</button>
+        <p class="form-trust" data-i18n="form.trust">Без обязательств · Ответим в течение 24 часов</p>
+
+        <div class="form-success" id="formSuccess">
+          <div class="form-success-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#00E676" opacity="0.15"/><path d="M16 24l6 6 10-12" stroke="#00E676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p data-i18n="form.success">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="nav-logo"><span class="logo-dos">Dos</span><span class="logo-code">Code</span></span>
+        <p class="footer-tagline" data-i18n="footer.tagline">Код от друга. AI-разработка в Казахстане.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#services" data-i18n="nav.services">Услуги</a>
+        <a href="#portfolio" data-i18n="nav.portfolio">Портфолио</a>
+        <a href="#contact" data-i18n="nav.contact">Контакты</a>
+      </div>
+      <div class="footer-socials">
+        <a href="#" aria-label="Telegram" class="social-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.904-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.492-1.302.486-.429-.008-1.252-.242-1.865-.442-.751-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.141.12.098.153.23.169.332.015.102.034.332.019.512z"/></svg></a>
+        <a href="#" aria-label="WhatsApp" class="social-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="#" aria-label="Instagram" class="social-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        <a href="#" aria-label="GitHub" class="social-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.rights">&copy; 2026 DosCode. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- WhatsApp floating CTA -->
+  <a class="whatsapp-float" id="whatsappFloat" href="https://wa.me/77771234567" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="whatsapp-tooltip" data-i18n="whatsapp.tooltip">Написать в WhatsApp</span>
+  </a>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+/* Shimmer border angle — registered for CSS animation */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --shimmer-pos {
+  syntax: "<percentage>";
+  initial-value: -100%;
+  inherits: false;
+}
+
+:root {
+  /* Colors */
+  --deep-dark: #0A0A0F;
+  --dark-surface: #111119;
+  --dark-card: rgba(255, 255, 255, 0.03);
+  --dark-card-border: rgba(255, 255, 255, 0.06);
+  --green: #00E676;
+  --green-bright: #33eb91;
+  --green-glow: rgba(0, 230, 118, 0.2);
+  --green-dim: rgba(0, 230, 118, 0.08);
+  --green-subtle: rgba(0, 230, 118, 0.04);
+  --teal: #00BFA5;
+  --emerald: #10B981;
+  --light-bg: #F8F9FA;
+  --white: #FFFFFF;
+  --muted: #9CA3AF;
+  --muted-light: #6B7280;
+  --border-dark: rgba(255, 255, 255, 0.06);
+  --border-light: rgba(0, 0, 0, 0.08);
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: 12px;
+
+  /* Typography */
+  --font-display: 'Clash Display', sans-serif;
+  --font-body: 'General Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --section-pad: clamp(80px, 10vw, 140px);
+  --container-max: 1200px;
+  --gap: 20px;
+
+  /* Transitions */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --duration: 0.5s;
+
+  /* Cursor */
+  --cursor-size: 12px;
+  --cursor-size-hover: 44px;
+}
