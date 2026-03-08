@@ -56,10 +56,10 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 56px);
+  font-size: clamp(28px, 3.8vw, 46px);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -1px;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
   color: var(--deep-dark);
 }
 
@@ -252,11 +252,13 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 .nav-links { display: flex; gap: 36px; }
 
 .nav-links a {
-  font-size: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
   font-weight: 500;
   color: var(--muted);
   transition: color 0.25s;
   position: relative;
+  letter-spacing: -0.2px;
 }
 
 .nav-links a::after {
@@ -300,7 +302,7 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 .lang-btn.active { background: var(--green); color: var(--deep-dark); }
 .lang-btn:not(.active):hover { color: var(--white); }
 
-.nav-cta { padding: 10px 20px; font-size: 13px; border-radius: 10px; }
+.nav-cta { padding: 10px 20px; font-size: 12px; font-family: var(--font-mono); border-radius: 10px; }
 
 .nav-burger {
   display: none;
@@ -435,10 +437,10 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 
 .hero-headline {
   font-family: var(--font-display);
-  font-size: clamp(40px, 7vw, 80px);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -2px;
+  font-size: clamp(32px, 5.5vw, 64px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1px;
   color: var(--white);
   margin-bottom: 28px;
 }
@@ -1443,9 +1445,9 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 .stat-item:last-child { border-right: none; }
 .stat-value {
   display: block;
-  font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 600;
   color: var(--green);
   line-height: 1;
   margin-bottom: 6px;
@@ -1453,9 +1455,11 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 }
 .stat-label {
   display: block;
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 11px;
   color: var(--muted);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 /* ===== LOGOS STRIP ===== */
@@ -1845,7 +1849,7 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
     margin: 0 auto;
   }
   .form-row, .form-row-3 { grid-template-columns: 1fr; }
-  .hero-headline { font-size: clamp(32px, 9vw, 52px); letter-spacing: -1px; }
+  .hero-headline { font-size: clamp(26px, 8vw, 40px); letter-spacing: -0.5px; }
 
   .footer-inner {
     grid-template-columns: 1fr;
