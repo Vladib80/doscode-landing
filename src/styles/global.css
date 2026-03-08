@@ -235,15 +235,19 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 }
 
 .nav-logo {
-  font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
-.logo-dos { color: var(--white); }
-.logo-code { color: var(--green); }
+.nav-logo-img {
+  height: 40px;
+  width: 160px;
+  object-fit: cover;
+  object-position: center 50%;
+  mix-blend-mode: screen;
+  display: block;
+}
 
 .nav-links { display: flex; gap: 36px; }
 
@@ -1348,7 +1352,10 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
   border-bottom: 1px solid var(--border-dark);
 }
 
-.footer-brand .nav-logo { font-size: 22px; }
+.footer-logo-img {
+  height: 34px;
+  width: 136px;
+}
 
 .footer-tagline {
   font-size: 14px;
