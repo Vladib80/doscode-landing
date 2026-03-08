@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "DosCode — App Development in Almaty | Web, Mobile, AI",
+    "description": "We build web and mobile apps in Almaty. Landing pages from 150K ₸ in 2 weeks, MVPs in 4–8 weeks. Telegram bots, AI agents, dashboards. Free estimate."
+  },
   "nav": {
     "services": "Services",
     "portfolio": "Portfolio",
@@ -8,7 +12,7 @@
     "cta": "Discuss Project"
   },
   "hero": {
-    "headline": "We write code that <span class=\"accent\">drives</span> business",
+    "headline": "App development in Almaty that <span class=\"accent\">drives</span> your business",
     "subheadline": "Web apps, dashboards, AI agents & MVPs — from idea to product in days, not months.",
     "cta": "Get a Free Estimate",
     "secondary": "View Our Work"

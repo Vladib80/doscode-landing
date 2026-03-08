@@ -45,6 +45,15 @@ function applyTranslations(lang) {
   initTextSplit();
 
   document.documentElement.lang = lang === 'kk' ? 'kk' : lang === 'en' ? 'en' : 'ru';
+
+  const metaTitle = getNestedValue(t, 'meta.title');
+  if (metaTitle) document.title = metaTitle;
+
+  const metaDesc = getNestedValue(t, 'meta.description');
+  if (metaDesc) {
+    const descEl = document.querySelector('meta[name="description"]');
+    if (descEl) descEl.setAttribute('content', metaDesc);
+  }
 }
 
 function switchLang(lang) {
