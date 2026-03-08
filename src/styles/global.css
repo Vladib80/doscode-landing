@@ -249,7 +249,7 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
   display: block;
 }
 
-.nav-links { display: flex; gap: 36px; }
+.nav-links { display: flex; gap: 26px; }
 
 .nav-links a {
   font-family: var(--font-mono);
@@ -1761,7 +1761,7 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 
 /* ===== ABOUT ===== */
 .about {
-  padding: clamp(48px, 6vw, 80px) 0;
+  padding: var(--section-pad) 0;
   background: var(--deep-dark);
   border-top: 1px solid var(--border-dark);
   border-bottom: 1px solid var(--border-dark);
