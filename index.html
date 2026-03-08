@@ -105,18 +105,26 @@
         <a href="#contact" class="btn btn-primary btn-lg btn-glow" data-i18n="hero.cta">Обсудить проект</a>
         <a href="#portfolio" class="btn btn-ghost btn-lg" data-i18n="hero.secondary">Посмотреть работы</a>
       </div>
-    </div>
 
-    <!-- Floating code card -->
-    <div class="floating-card floating-card-code">
-      <div class="floating-card-dot green"></div>
-      <div class="floating-card-dot yellow"></div>
-      <div class="floating-card-dot red"></div>
-      <code><span class="code-kw">const</span> app = <span class="code-fn">buildFast</span>();</code>
-    </div>
-    <div class="floating-card floating-card-status">
-      <span class="status-dot"></span>
-      <span class="status-text">deploy: <span class="code-fn">success</span></span>
+      <!-- Code editor with typing animation -->
+      <div class="hero-editor" id="heroEditor">
+      <div class="editor-chrome">
+        <div class="editor-dots">
+          <span class="editor-dot editor-dot--red"></span>
+          <span class="editor-dot editor-dot--yellow"></span>
+          <span class="editor-dot editor-dot--green"></span>
+        </div>
+        <span class="editor-filename" id="editorFilename">app.js</span>
+      </div>
+      <div class="editor-body">
+        <div class="editor-lines" id="editorLines"></div>
+        <pre class="editor-code" id="editorCode"></pre>
+      </div>
+      <div class="editor-statusbar">
+        <span class="editor-status-dot"></span>
+        <span class="editor-status-text" id="editorStatus">ready</span>
+      </div>
+      </div>
     </div>
   </section>
 

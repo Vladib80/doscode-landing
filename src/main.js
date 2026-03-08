@@ -490,6 +490,341 @@ function initTextSplit() {
   });
 }
 
+/* ===== HERO CODE EDITOR ===== */
+const editorSnippets = [
+  {
+    file: 'app.js',
+    status: 'deployed',
+    lines: [
+      { text: '// Web App', cls: 'hl-cm' },
+      { parts: [
+        { text: 'const ', cls: 'hl-kw' },
+        { text: 'app' },
+        { text: ' = ', cls: 'hl-op' },
+        { text: 'createApp', cls: 'hl-fn' },
+        { text: '({', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  name' },
+        { text: ': ', cls: 'hl-op' },
+        { text: '"ChicagoPizza"', cls: 'hl-str' },
+        { text: ',', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  features' },
+        { text: ': ', cls: 'hl-op' },
+        { text: '[', cls: 'hl-op' },
+        { text: '"orders"', cls: 'hl-str' },
+        { text: ', ', cls: 'hl-op' },
+        { text: '"delivery"', cls: 'hl-str' },
+        { text: ']', cls: 'hl-op' },
+        { text: ',', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  stack' },
+        { text: ': ', cls: 'hl-op' },
+        { text: '[', cls: 'hl-op' },
+        { text: '"React"', cls: 'hl-str' },
+        { text: ', ', cls: 'hl-op' },
+        { text: '"Node"', cls: 'hl-str' },
+        { text: ', ', cls: 'hl-op' },
+        { text: '"PWA"', cls: 'hl-str' },
+        { text: ']', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '})', cls: 'hl-op' },
+        { text: ';', cls: 'hl-op' }
+      ]},
+      { text: '' },
+      { parts: [
+        { text: 'await ', cls: 'hl-kw' },
+        { text: 'app' },
+        { text: '.', cls: 'hl-op' },
+        { text: 'deploy', cls: 'hl-fn' },
+        { text: '();', cls: 'hl-op' },
+        { text: ' // ✓ Live', cls: 'hl-ok' }
+      ]}
+    ]
+  },
+  {
+    file: 'dashboard.js',
+    status: 'streaming',
+    lines: [
+      { text: '// Analytics Dashboard', cls: 'hl-cm' },
+      { parts: [
+        { text: 'const ', cls: 'hl-kw' },
+        { text: 'dashboard' },
+        { text: ' = ', cls: 'hl-op' },
+        { text: 'buildDashboard', cls: 'hl-fn' },
+        { text: '({', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  data' },
+        { text: ': ', cls: 'hl-op' },
+        { text: 'connectAPI', cls: 'hl-fn' },
+        { text: '(', cls: 'hl-op' },
+        { text: '"analytics"', cls: 'hl-str' },
+        { text: ')', cls: 'hl-op' },
+        { text: ',', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  charts' },
+        { text: ': ', cls: 'hl-op' },
+        { text: '[', cls: 'hl-op' },
+        { text: '"revenue"', cls: 'hl-str' },
+        { text: ', ', cls: 'hl-op' },
+        { text: '"growth"', cls: 'hl-str' },
+        { text: ']', cls: 'hl-op' },
+        { text: ',', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  access' },
+        { text: ': ', cls: 'hl-op' },
+        { text: '"role-based"', cls: 'hl-str' }
+      ]},
+      { parts: [
+        { text: '})', cls: 'hl-op' },
+        { text: ';', cls: 'hl-op' }
+      ]},
+      { text: '' },
+      { parts: [
+        { text: 'dashboard' },
+        { text: '.', cls: 'hl-op' },
+        { text: 'launch', cls: 'hl-fn' },
+        { text: '();', cls: 'hl-op' },
+        { text: ' // ✓ Live', cls: 'hl-ok' }
+      ]}
+    ]
+  },
+  {
+    file: 'agent.js',
+    status: 'listening',
+    lines: [
+      { text: '// AI Agent', cls: 'hl-cm' },
+      { parts: [
+        { text: 'const ', cls: 'hl-kw' },
+        { text: 'agent' },
+        { text: ' = ', cls: 'hl-op' },
+        { text: 'createAgent', cls: 'hl-fn' },
+        { text: '({', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  platform' },
+        { text: ': ', cls: 'hl-op' },
+        { text: '[', cls: 'hl-op' },
+        { text: '"Telegram"', cls: 'hl-str' },
+        { text: ', ', cls: 'hl-op' },
+        { text: '"WhatsApp"', cls: 'hl-str' },
+        { text: ']', cls: 'hl-op' },
+        { text: ',', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  model' },
+        { text: ': ', cls: 'hl-op' },
+        { text: '"GPT-4"', cls: 'hl-str' },
+        { text: ',', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  tasks' },
+        { text: ': ', cls: 'hl-op' },
+        { text: '[', cls: 'hl-op' },
+        { text: '"support"', cls: 'hl-str' },
+        { text: ', ', cls: 'hl-op' },
+        { text: '"orders"', cls: 'hl-str' },
+        { text: ']', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '})', cls: 'hl-op' },
+        { text: ';', cls: 'hl-op' }
+      ]},
+      { text: '' },
+      { parts: [
+        { text: 'agent' },
+        { text: '.', cls: 'hl-op' },
+        { text: 'activate', cls: 'hl-fn' },
+        { text: '();', cls: 'hl-op' },
+        { text: ' // ✓ Live', cls: 'hl-ok' }
+      ]}
+    ]
+  },
+  {
+    file: 'mvp.js',
+    status: 'deployed',
+    lines: [
+      { text: '// MVP Launch', cls: 'hl-cm' },
+      { parts: [
+        { text: 'const ', cls: 'hl-kw' },
+        { text: 'mvp' },
+        { text: ' = ', cls: 'hl-op' },
+        { text: 'quickLaunch', cls: 'hl-fn' },
+        { text: '({', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  idea' },
+        { text: ': ', cls: 'hl-op' },
+        { text: '"marketplace"', cls: 'hl-str' },
+        { text: ',', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  timeline' },
+        { text: ': ', cls: 'hl-op' },
+        { text: '"2 weeks"', cls: 'hl-str' },
+        { text: ',', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '  seo' },
+        { text: ': ', cls: 'hl-op' },
+        { text: 'true', cls: 'hl-num' },
+        { text: ',', cls: 'hl-op' }
+      ]},
+      { parts: [
+        { text: '})', cls: 'hl-op' },
+        { text: ';', cls: 'hl-op' }
+      ]},
+      { text: '' },
+      { parts: [
+        { text: 'await ', cls: 'hl-kw' },
+        { text: 'mvp' },
+        { text: '.', cls: 'hl-op' },
+        { text: 'goLive', cls: 'hl-fn' },
+        { text: '();', cls: 'hl-op' },
+        { text: ' // ✓ Live', cls: 'hl-ok' }
+      ]}
+    ]
+  }
+];
+
+function initHeroEditor() {
+  const codeEl = document.getElementById('editorCode');
+  const linesEl = document.getElementById('editorLines');
+  const filenameEl = document.getElementById('editorFilename');
+  const statusEl = document.getElementById('editorStatus');
+  if (!codeEl || !linesEl) return;
+
+  let snippetIdx = 0;
+  let editorTimeout = null;
+
+  function lineToPlain(line) {
+    if (line.text !== undefined) return line.text;
+    return line.parts.map(p => p.text).join('');
+  }
+
+  function lineToHtml(line) {
+    if (line.text !== undefined) {
+      return line.cls ? `<span class="${line.cls}">${line.text}</span>` : line.text;
+    }
+    return line.parts.map(p => p.cls ? `<span class="${p.cls}">${p.text}</span>` : p.text).join('');
+  }
+
+  // Flatten snippet into a sequence of timed events
+  function buildTimeline(snippet) {
+    const events = [];
+    let time = 0;
+    const allLines = snippet.lines;
+
+    for (let li = 0; li < allLines.length; li++) {
+      const plain = lineToPlain(allLines[li]);
+      for (let ci = 0; ci <= plain.length; ci++) {
+        events.push({ time, line: li, char: ci });
+        const ch = plain[ci];
+        let delay = 30;
+        if (ch === ' ' || ch === ',' || ch === ';') delay = 12;
+        else if (ch === '{' || ch === '}' || ch === '(' || ch === ')') delay = 15;
+        else if (plain.startsWith('//')) delay = 20;
+        time += delay;
+      }
+      // Line break pause
+      time += (plain === '' ? 60 : 120);
+    }
+    return { events, totalTime: time };
+  }
+
+  function renderAtEvent(ev, snippet) {
+    const allLines = snippet.lines;
+    const htmlLines = allLines.map(lineToHtml);
+
+    // All fully typed lines before current
+    const completedHtml = htmlLines.slice(0, ev.line);
+
+    // Partial current line
+    let partialHtml = '';
+    if (ev.line < allLines.length) {
+      const line = allLines[ev.line];
+      if (line.text !== undefined) {
+        const clipped = line.text.slice(0, ev.char);
+        partialHtml = line.cls ? `<span class="${line.cls}">${clipped}</span>` : clipped;
+      } else {
+        let charsLeft = ev.char;
+        const parts = [];
+        for (const p of line.parts) {
+          if (charsLeft <= 0) break;
+          const take = p.text.slice(0, charsLeft);
+          charsLeft -= take.length;
+          parts.push(p.cls ? `<span class="${p.cls}">${take}</span>` : take);
+        }
+        partialHtml = parts.join('');
+      }
+    }
+
+    const cursor = '<span class="editor-cursor"></span>';
+    const prev = completedHtml.length > 0 ? completedHtml.join('\n') + '\n' : '';
+    codeEl.innerHTML = prev + partialHtml + cursor;
+
+    // Line numbers
+    const lineCount = ev.line + 1;
+    linesEl.innerHTML = Array.from({ length: lineCount }, (_, i) => i + 1).join('\n');
+  }
+
+  function typeSnippet(snippet) {
+    filenameEl.textContent = snippet.file;
+    statusEl.textContent = 'typing...';
+
+    const { events, totalTime } = buildTimeline(snippet);
+    const htmlLines = snippet.lines.map(lineToHtml);
+    const startTime = performance.now();
+    let evIdx = 0;
+
+    function tick() {
+      const elapsed = performance.now() - startTime;
+
+      // Advance to the correct event based on elapsed time
+      while (evIdx < events.length && events[evIdx].time <= elapsed) {
+        evIdx++;
+      }
+
+      if (evIdx >= events.length) {
+        // Done — show final state
+        codeEl.innerHTML = htmlLines.join('\n');
+        linesEl.innerHTML = htmlLines.map((_, i) => i + 1).join('\n');
+        statusEl.textContent = snippet.status;
+
+        setTimeout(() => {
+          snippetIdx = (snippetIdx + 1) % editorSnippets.length;
+          typeSnippet(editorSnippets[snippetIdx]);
+        }, 2500);
+        return;
+      }
+
+      // Render the last passed event
+      renderAtEvent(events[evIdx > 0 ? evIdx - 1 : 0], snippet);
+
+      // Schedule next tick
+      const nextTime = events[evIdx].time;
+      const wait = Math.max(8, nextTime - elapsed);
+      setTimeout(tick, wait);
+    }
+
+    codeEl.innerHTML = '<span class="editor-cursor"></span>';
+    linesEl.innerHTML = '1';
+    setTimeout(tick, 300);
+  }
+
+  // Start the first snippet after the editor fades in
+  setTimeout(() => {
+    typeSnippet(editorSnippets[0]);
+  }, 1600);
+}
+
 /* ===== CUSTOM CURSOR ===== */
 function initCustomCursor() {
   // Only on fine pointer (desktop)
@@ -706,5 +1041,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCustomCursor();
   initSpotlight();
   initLangSwitcher();
+  initHeroEditor();
   observeReveals();
 });
