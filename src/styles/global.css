@@ -437,10 +437,10 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 
 .hero-headline {
   font-family: var(--font-display);
-  font-size: clamp(32px, 5.5vw, 64px);
+  font-size: clamp(26px, 3.8vw, 48px);
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -1px;
+  line-height: 1.18;
+  letter-spacing: -0.5px;
   color: var(--white);
   margin-bottom: 28px;
 }
