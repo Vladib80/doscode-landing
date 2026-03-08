@@ -115,6 +115,10 @@
       }
     ]
   },
+  "stack": {
+    "subtitle": "Tech Stack",
+    "title": "We build with the best"
+  },
   "stats": {
     "items": [
       { "value": "15+", "label": "Projects launched" },

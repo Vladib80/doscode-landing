@@ -840,6 +840,90 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 
 .service-card:hover .svc-graphic-svg { opacity: 0.75; }
 
+/* ===== TECH STACK MARQUEE ===== */
+.stack {
+  background: var(--deep-dark);
+  padding-top: var(--section-pad);
+  padding-bottom: var(--section-pad);
+  border-top: 1px solid var(--border-dark);
+  overflow: hidden;
+}
+
+.stack-marquee-wrap {
+  margin-top: clamp(48px, 6vw, 64px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+}
+
+.stack-row { overflow: hidden; }
+
+.stack-inner {
+  display: flex;
+  width: max-content;
+}
+
+.stack-inner--left  { animation: marqueeLeft  40s linear infinite; }
+.stack-inner--right { animation: marqueeRight 50s linear infinite; }
+.stack-row:hover .stack-inner { animation-play-state: paused; }
+
+.stack-track {
+  display: flex;
+  gap: 16px;
+  padding-right: 16px; /* matches gap so loop seam is invisible */
+  flex-shrink: 0;
+}
+
+.stack-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: default;
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.stack-item:hover {
+  background: rgba(0, 230, 118, 0.07);
+  border-color: rgba(0, 230, 118, 0.22);
+  transform: translateY(-2px);
+}
+
+.stack-item img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Next.js logo is white on transparent — invert for dark bg */
+.stack-item img.icon-invert { filter: invert(1); }
+
+.stack-item span {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.62);
+  letter-spacing: 0.2px;
+}
+
+@keyframes marqueeLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marqueeRight {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
 /* ===== PORTFOLIO ===== */
 .portfolio {
   background: var(--deep-dark);
