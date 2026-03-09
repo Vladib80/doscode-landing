@@ -404,12 +404,136 @@ function renderPortfolio(t) {
         <div class="portfolio-tags">
           ${proj.tags.map(tag => `<span class="portfolio-tag">${tag}</span>`).join('')}
         </div>
+        ${!proj.comingSoon ? `<button class="case-study-btn" data-index="${i}">View Case Study →</button>` : ''}
       </div>
       <div class="card-glare"></div>
     </div>
   `).join('');
   observeReveals();
   initTilt();
+  initCaseStudyModal(t);
+}
+
+/* ===== CASE STUDY MODAL ===== */
+function initCaseStudyModal(t) {
+  const modal = document.getElementById('caseStudyModal');
+  if (!modal) return;
+
+  let currentSlide = 0;
+
+  function goToSlide(n) {
+    const track = modal.querySelector('.case-gallery__track');
+    const dots = modal.querySelectorAll('.case-gallery__dot');
+    if (!track) return;
+    currentSlide = n;
+    track.style.transform = `translateX(-${n * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('case-gallery__dot--active', i === n));
+  }
+
+  function openModal(index) {
+    const proj = t.portfolio?.projects?.[index];
+    if (!proj) return;
+    currentSlide = 0;
+
+    const gallery = proj.gallery && proj.gallery.length ? proj.gallery : [];
+    const hasMultiple = gallery.length > 1;
+
+    const galleryHtml = gallery.length ? `
+      <div class="case-gallery">
+        <div class="case-gallery__track">
+          ${gallery.map(src => `
+            <div class="case-gallery__slide">
+              <img src="${src}" alt="${proj.name}" loading="lazy">
+            </div>
+          `).join('')}
+        </div>
+        ${hasMultiple ? `
+          <button class="case-gallery__nav case-gallery__nav--prev" aria-label="Previous">&#8249;</button>
+          <button class="case-gallery__nav case-gallery__nav--next" aria-label="Next">&#8250;</button>
+          <div class="case-gallery__dots">
+            ${gallery.map((_, i) => `<button class="case-gallery__dot${i === 0 ? ' case-gallery__dot--active' : ''}" aria-label="Slide ${i + 1}"></button>`).join('')}
+          </div>
+        ` : ''}
+      </div>
+    ` : '';
+
+    const psHtml = (proj.problem || proj.solution) ? `
+      <div class="case-ps">
+        ${proj.problem ? `
+          <div class="case-ps__block">
+            <div class="case-ps__label">Problem</div>
+            <p class="case-ps__text">${proj.problem}</p>
+          </div>
+        ` : ''}
+        ${proj.solution ? `
+          <div class="case-ps__block">
+            <div class="case-ps__label">Solution</div>
+            <p class="case-ps__text">${proj.solution}</p>
+          </div>
+        ` : ''}
+      </div>
+    ` : '';
+
+    const checkSvg = `<svg class="feature-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+    document.getElementById('caseModalContent').innerHTML = `
+      ${galleryHtml}
+      <div class="case-modal__header">
+        ${proj.type ? `<span class="portfolio-type">${proj.type}</span>` : ''}
+        <h2 id="caseModalTitle" class="case-modal__title">${proj.url
+          ? `<a href="${proj.url}" target="_blank" rel="noopener noreferrer">${proj.name}<svg class="link-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H7M13 3v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>`
+          : proj.name
+        }</h2>
+      </div>
+      ${psHtml}
+      ${(proj.features && proj.features.length) ? `
+        <ul class="portfolio-features case-modal__features">
+          ${proj.features.map(f => `<li>${checkSvg}${f}</li>`).join('')}
+        </ul>
+      ` : ''}
+      <div class="portfolio-tags">
+        ${proj.tags.map(tag => `<span class="portfolio-tag">${tag}</span>`).join('')}
+      </div>
+    `;
+
+    modal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+
+    // Wire up gallery controls
+    if (hasMultiple) {
+      modal.querySelector('.case-gallery__nav--prev').addEventListener('click', () => {
+        goToSlide((currentSlide - 1 + gallery.length) % gallery.length);
+      });
+      modal.querySelector('.case-gallery__nav--next').addEventListener('click', () => {
+        goToSlide((currentSlide + 1) % gallery.length);
+      });
+      modal.querySelectorAll('.case-gallery__dot').forEach((dot, i) => {
+        dot.addEventListener('click', () => goToSlide(i));
+      });
+    }
+  }
+
+  function closeModal() {
+    modal.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+  }
+
+  // Open on button click
+  document.getElementById('portfolioGrid').addEventListener('click', e => {
+    const btn = e.target.closest('.case-study-btn');
+    if (btn) openModal(Number(btn.dataset.index));
+  });
+
+  // Close on backdrop click
+  modal.querySelector('.case-modal__backdrop').addEventListener('click', closeModal);
+
+  // Close on X button
+  modal.querySelector('.case-modal__close').addEventListener('click', closeModal);
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !modal.hasAttribute('hidden')) closeModal();
+  });
 }
 
 /* ===== INDUSTRY ICONS (inline SVG) ===== */

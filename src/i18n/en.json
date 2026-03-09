@@ -53,7 +53,10 @@
         "type": "Viral Loyalty Platform",
         "description": "Loyalty engine that turns customers into brand ambassadors. Digital stamp cards, referral programs, and gamification — all via WhatsApp, no app download needed.",
         "features": ["Digital stamp cards via QR", "Referral & viral growth tools", "WhatsApp-based, no app needed", "Spin wheel & gamification"],
-        "tags": ["PWA", "Vue.js", "Node.js"]
+        "tags": ["PWA", "Vue.js", "Node.js"],
+        "gallery": ["/screenshots/dospass.jpg"],
+        "problem": "Cafes and small businesses were using paper stamp cards that got lost, offered no data, and had zero viral reach. Customer retention relied entirely on habit — not engagement.",
+        "solution": "We built a WhatsApp-native loyalty engine with digital stamp cards, referral mechanics, and a spin-wheel gamification layer. Customers share with friends automatically — no app download, no friction. Businesses get a real-time dashboard with retention and referral analytics."
       },
       {
         "name": "Chicago Pizza App",
@@ -61,7 +64,10 @@
         "type": "Restaurant Ecosystem",
         "description": "End-to-end restaurant platform with ordering, kitchen management, and delivery logistics. iiko POS integration, Telegram bots for staff and customers, courier services via Wolt Drive & Chocofood.",
         "features": ["iiko POS integration", "Customer & employee Telegram bots", "Wolt Drive & Choco delivery", "WhatsApp & Telegram order notifications"],
-        "tags": ["React", "Firebase", "PWA"]
+        "tags": ["React", "Firebase", "PWA"],
+        "gallery": ["/screenshots/chicagopizza.jpg"],
+        "problem": "The restaurant was managing orders through phone calls, losing track of kitchen tickets during peak hours, and handling delivery dispatch manually. Online orders were nearly zero.",
+        "solution": "We built a full restaurant ecosystem: a customer-facing ordering PWA, a kitchen display system synced with iiko POS, Telegram bots for staff coordination and customer notifications, and automated dispatch to Wolt Drive and Chocofood couriers. Online orders grew 40% in the first month."
       },
       {
         "name": "MMG Dashboard",
@@ -69,7 +75,10 @@
         "description": "Automated tender monitoring and pipeline system. Auto-fetches from Goszakup.gov.kz, AI pre-qualification, and a full tender funnel with win-rate analytics.",
         "features": ["Auto-fetch from Goszakup.gov.kz", "AI pre-qualification filters", "Tender funnel & status tracking", "Win-rate & competitor analytics"],
         "tags": ["React", "Node.js", "AI"],
-        "comingSoon": "Coming Soon"
+        "comingSoon": "Coming Soon",
+        "gallery": ["/screenshots/mmg.jpg"],
+        "problem": "The procurement team was manually scanning Goszakup.gov.kz every morning, copy-pasting tender data into spreadsheets, and missing opportunities due to slow filtering. Half a day lost to routine work.",
+        "solution": "We built an automated tender intelligence platform that fetches and classifies tenders from Goszakup in real time, applies AI pre-qualification filters, and tracks each opportunity through a visual pipeline. The team now monitors 10x more tenders with 15+ hours saved weekly."
       }
     ]
   },
