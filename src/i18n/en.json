@@ -54,7 +54,7 @@
         "description": "Loyalty engine that turns customers into brand ambassadors. Digital stamp cards, referral programs, and gamification — all via WhatsApp, no app download needed.",
         "features": ["Digital stamp cards via QR", "Referral & viral growth tools", "WhatsApp-based, no app needed", "Spin wheel & gamification"],
         "tags": ["PWA", "Vue.js", "Node.js"],
-        "gallery": ["/screenshots/dospass.jpg"],
+        "gallery": ["/screenshots/dospass.jpg", "/screenshots/dospass.png", "/screenshots/dospass3.png", "/screenshots/dospass4.png"],
         "problem": "Cafes and small businesses were using paper stamp cards that got lost, offered no data, and had zero viral reach. Customer retention relied entirely on habit — not engagement.",
         "solution": "We built a WhatsApp-native loyalty engine with digital stamp cards, referral mechanics, and a spin-wheel gamification layer. Customers share with friends automatically — no app download, no friction. Businesses get a real-time dashboard with retention and referral analytics."
       },
