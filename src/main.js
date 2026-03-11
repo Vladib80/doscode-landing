@@ -385,8 +385,21 @@ function renderPortfolio(t) {
 
   const checkSvg = `<svg class="feature-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-  grid.innerHTML = t.portfolio.projects.map((proj, i) => `
-    <div class="portfolio-card${proj.comingSoon ? ' portfolio-card--coming-soon' : ''} reveal" style="transition-delay: ${i * 0.12}s">
+  grid.innerHTML = t.portfolio.projects.map((proj, i) => {
+    const isFeatured = i === 0;
+    const cardClass = `portfolio-card${isFeatured ? ' portfolio-card--featured' : ' portfolio-card--compact'}${proj.comingSoon ? ' portfolio-card--coming-soon' : ''} reveal`;
+    const metricsHtml = (isFeatured && proj.metrics && proj.metrics.length) ? `
+      <div class="portfolio-metrics">
+        ${proj.metrics.map(m => `
+          <div class="portfolio-metric">
+            <span class="metric-value">${m.value}</span>
+            <span class="metric-label">${m.label}</span>
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+    return `
+    <div class="${cardClass}" style="transition-delay: ${i * 0.12}s">
       ${proj.comingSoon ? `<span class="coming-soon-badge">${proj.comingSoon}</span>` : ''}
       <div class="portfolio-mockup">${mockups[i] || mockups[0]}</div>
       <div class="portfolio-info">
@@ -401,6 +414,7 @@ function renderPortfolio(t) {
             ${proj.features.map(f => `<li>${checkSvg}${f}</li>`).join('')}
           </ul>
         ` : ''}
+        ${metricsHtml}
         <div class="portfolio-tags">
           ${proj.tags.map(tag => `<span class="portfolio-tag">${tag}</span>`).join('')}
         </div>
@@ -408,7 +422,8 @@ function renderPortfolio(t) {
       </div>
       <div class="card-glare"></div>
     </div>
-  `).join('');
+  `;
+  }).join('');
   observeReveals();
   initTilt();
   initCaseStudyModal(t);
@@ -476,6 +491,17 @@ function initCaseStudyModal(t) {
 
     const checkSvg = `<svg class="feature-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
+    const caseMetricsHtml = (proj.metrics && proj.metrics.length) ? `
+      <div class="case-metrics">
+        ${proj.metrics.map(m => `
+          <div class="case-metric">
+            <span class="case-metric__value">${m.value}</span>
+            <span class="case-metric__label">${m.label}</span>
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+
     document.getElementById('caseModalContent').innerHTML = `
       ${galleryHtml}
       <div class="case-modal__header">
@@ -485,6 +511,7 @@ function initCaseStudyModal(t) {
           : proj.name
         }</h2>
       </div>
+      ${caseMetricsHtml}
       ${psHtml}
       ${(proj.features && proj.features.length) ? `
         <ul class="portfolio-features case-modal__features">

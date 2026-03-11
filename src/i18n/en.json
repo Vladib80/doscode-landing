@@ -55,6 +55,7 @@
         "features": ["Digital stamp cards via QR", "Referral & viral growth tools", "WhatsApp-based, no app needed", "Spin wheel & gamification"],
         "tags": ["PWA", "Vue.js", "Node.js"],
         "gallery": ["/screenshots/dospass.jpg", "/screenshots/dosspass1.png", "/screenshots/Dosspas2.png", "/screenshots/dospass.png", "/screenshots/dospass3.png", "/screenshots/dospass4.png"],
+        "metrics": [{"value": "3×", "label": "sign-up growth"}, {"value": "3 wks", "label": "to launch"}],
         "problem": "Cafes and small businesses were using paper stamp cards that got lost, offered no data, and had zero viral reach. Customer retention relied entirely on habit — not engagement.",
         "solution": "We built a WhatsApp-native loyalty engine with digital stamp cards, referral mechanics, and a spin-wheel gamification layer. Customers share with friends automatically — no app download, no friction. Businesses get a real-time dashboard with retention and referral analytics."
       },
@@ -66,6 +67,7 @@
         "features": ["iiko POS integration", "Customer & employee Telegram bots", "Wolt Drive & Choco delivery", "WhatsApp & Telegram order notifications"],
         "tags": ["React", "Firebase", "PWA"],
         "gallery": ["/screenshots/chicagopizza.jpg"],
+        "metrics": [{"value": "40%", "label": "more online orders"}, {"value": "1 mo", "label": "to see results"}],
         "problem": "The restaurant was managing orders through phone calls, losing track of kitchen tickets during peak hours, and handling delivery dispatch manually. Online orders were nearly zero.",
         "solution": "We built a full restaurant ecosystem: a customer-facing ordering PWA, a kitchen display system synced with iiko POS, Telegram bots for staff coordination and customer notifications, and automated dispatch to Wolt Drive and Chocofood couriers. Online orders grew 40% in the first month."
       },
@@ -77,6 +79,7 @@
         "tags": ["React", "Node.js", "AI"],
         "comingSoon": "Coming Soon",
         "gallery": ["/screenshots/mmg.jpg"],
+        "metrics": [{"value": "10×", "label": "more tenders tracked"}, {"value": "15+ hrs", "label": "saved weekly"}],
         "problem": "The procurement team was manually scanning Goszakup.gov.kz every morning, copy-pasting tender data into spreadsheets, and missing opportunities due to slow filtering. Half a day lost to routine work.",
         "solution": "We built an automated tender intelligence platform that fetches and classifies tenders from Goszakup in real time, applies AI pre-qualification filters, and tracks each opportunity through a visual pipeline. The team now monitors 10x more tenders with 15+ hours saved weekly."
       }

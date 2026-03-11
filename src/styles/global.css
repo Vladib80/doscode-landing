@@ -934,8 +934,10 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
   gap: var(--gap);
+  align-items: stretch;
 }
 
 .portfolio-card {
@@ -1174,6 +1176,54 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 /* Coming-soon card dimming */
 .portfolio-card--coming-soon .portfolio-features li { opacity: 0.5; }
 .portfolio-card--coming-soon .portfolio-mockup { opacity: 0.6; }
+
+/* Featured card — spans both bento rows */
+.portfolio-card--featured {
+  grid-row: 1 / 3;
+}
+.portfolio-card--featured .portfolio-mockup { height: 280px; }
+.portfolio-card--featured .portfolio-info h3 { font-size: 22px; }
+
+/* Compact side cards */
+.portfolio-card--compact .portfolio-mockup { height: 160px; }
+.portfolio-card--compact .portfolio-features { display: none; }
+.portfolio-card--compact .portfolio-info { padding: 18px 20px; }
+.portfolio-card--compact .portfolio-info p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Metrics strip on featured card */
+.portfolio-metrics {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.portfolio-metric {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(0, 230, 118, 0.04);
+  border: 1px solid rgba(0, 230, 118, 0.12);
+  border-radius: 10px;
+  text-align: center;
+}
+.metric-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--green);
+  display: block;
+  line-height: 1.2;
+}
+.metric-label {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  display: block;
+  margin-top: 3px;
+}
 
 /* ===== INDUSTRIES ===== */
 .industries {
@@ -1941,7 +1991,7 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
-  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .portfolio-grid { grid-template-columns: 2fr 1fr; }
   .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
   .process-steps { grid-template-columns: 1fr; gap: 32px; }
   .process-step::before, .process-step::after { display: none; }
@@ -1985,9 +2035,14 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 
   .portfolio-grid {
     grid-template-columns: 1fr;
-    max-width: 400px;
+    max-width: 480px;
     margin: 0 auto;
   }
+  .portfolio-card--featured { grid-row: auto; }
+  .portfolio-card--compact .portfolio-features { display: flex; }
+  .portfolio-card--compact .portfolio-info { padding: 24px; }
+  .portfolio-card--compact .portfolio-info p { -webkit-line-clamp: unset; overflow: visible; display: block; }
+  .portfolio-card--compact .portfolio-mockup { height: 220px; }
   .form-row, .form-row-3 { grid-template-columns: 1fr; }
   .hero-headline { font-size: clamp(26px, 8vw, 40px); letter-spacing: -0.5px; }
 
@@ -2141,7 +2196,8 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 .case-gallery__slide img {
   width: 100%;
   height: 360px;
-  object-fit: cover;
+  object-fit: contain;
+  background: #06080e;
   display: block;
 }
 
@@ -2187,6 +2243,35 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 .case-gallery__dot--active {
   background: var(--green);
   transform: scale(1.3);
+}
+
+/* Metrics strip in modal */
+.case-metrics {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.case-metric {
+  flex: 1;
+  padding: 16px 20px;
+  background: rgba(0, 230, 118, 0.04);
+  border: 1px solid rgba(0, 230, 118, 0.1);
+  border-radius: 12px;
+  text-align: center;
+}
+.case-metric__value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--green);
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.case-metric__label {
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 /* Problem / Solution */
