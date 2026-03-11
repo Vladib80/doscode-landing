@@ -1184,6 +1184,14 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
 .portfolio-card--featured .portfolio-mockup { height: 280px; }
 .portfolio-card--featured .portfolio-info h3 { font-size: 22px; }
 
+/* Full-width bottom card (4th item in even-count grids) */
+.portfolio-card--full {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.portfolio-card--full .portfolio-mockup { height: 220px; }
+
 /* Compact side cards */
 .portfolio-card--compact .portfolio-mockup { height: 160px; }
 .portfolio-card--compact .portfolio-features { display: none; }
@@ -2043,6 +2051,8 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
   .portfolio-card--compact .portfolio-info { padding: 24px; }
   .portfolio-card--compact .portfolio-info p { -webkit-line-clamp: unset; overflow: visible; display: block; }
   .portfolio-card--compact .portfolio-mockup { height: 220px; }
+  .portfolio-card--full { grid-template-columns: 1fr; }
+  .portfolio-card--full .portfolio-mockup { height: 220px; }
   .form-row, .form-row-3 { grid-template-columns: 1fr; }
   .hero-headline { font-size: clamp(26px, 8vw, 40px); letter-spacing: -0.5px; }
 

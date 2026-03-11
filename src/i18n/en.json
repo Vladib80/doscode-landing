@@ -46,6 +46,7 @@
   "portfolio": {
     "title": "Latest Projects",
     "subtitle": "What we've shipped",
+    "caseStudyBtn": "View Case Study →",
     "projects": [
       {
         "name": "DosPass",
@@ -82,6 +83,18 @@
         "metrics": [{"value": "10×", "label": "more tenders tracked"}, {"value": "15+ hrs", "label": "saved weekly"}],
         "problem": "The procurement team was manually scanning Goszakup.gov.kz every morning, copy-pasting tender data into spreadsheets, and missing opportunities due to slow filtering. Half a day lost to routine work.",
         "solution": "We built an automated tender intelligence platform that fetches and classifies tenders from Goszakup in real time, applies AI pre-qualification filters, and tracks each opportunity through a visual pipeline. The team now monitors 10x more tenders with 15+ hours saved weekly."
+      },
+      {
+        "name": "VoiceClaw",
+        "url": "https://voiceclaw.io",
+        "type": "AI Voice Interface",
+        "description": "Open-source voice layer for any AI — connect your own LLM and talk to it privately. Wake word detection, offline STT & TTS, supports Claude, GPT, and Ollama. Your voice. Your AI. Any device.",
+        "features": ["\"Hey Claw\" wake word, always listening", "Fully offline STT & TTS — no cloud calls", "Plug in Claude, GPT, or Ollama", "100% private — data never leaves your device"],
+        "tags": ["Node.js", "Python", "AI", "Open Source"],
+        "gallery": ["/screenshots/voiceclaw.png", "/screenshots/voiceclaw2.png", "/screenshots/voiceclaw3.png", "/screenshots/voiceclaw4.png", "/screenshots/voiceclaw5.png", "/screenshots/voiceclaw6.png"],
+        "metrics": [{"value": "4+", "label": "LLM providers"}, {"value": "100%", "label": "private"}],
+        "problem": "Voice AI assistants like Alexa and Siri send everything to the cloud. Developers and privacy-conscious users had no open way to add voice to their own AI models without vendor lock-in.",
+        "solution": "We built an open-source voice interface for AI agents: wake word detection, offline speech recognition via Whisper, cloud-free TTS, and plug-and-play connections to any LLM — Ollama, Claude, or GPT. Full data ownership, zero vendor dependency."
       }
     ]
   },

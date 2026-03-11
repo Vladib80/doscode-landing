@@ -381,13 +381,18 @@ function renderPortfolio(t) {
     `<div class="mockup-browser">${browserBar}
       <img class="mockup-screenshot" src="/screenshots/mmg.jpg" alt="MMG Analytics Dashboard" loading="lazy">
     </div>`,
+    // VoiceClaw — voice AI interface screenshot
+    `<div class="mockup-browser">${browserBar}
+      <img class="mockup-screenshot" src="/screenshots/voiceclaw.png" alt="VoiceClaw Voice Interface" loading="lazy">
+    </div>`,
   ];
 
   const checkSvg = `<svg class="feature-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-  grid.innerHTML = t.portfolio.projects.map((proj, i) => {
+  grid.innerHTML = t.portfolio.projects.map((proj, i, arr) => {
     const isFeatured = i === 0;
-    const cardClass = `portfolio-card${isFeatured ? ' portfolio-card--featured' : ' portfolio-card--compact'}${proj.comingSoon ? ' portfolio-card--coming-soon' : ''} reveal`;
+    const isFullWidth = i === arr.length - 1 && arr.length % 2 === 0;
+    const cardClass = `portfolio-card${isFeatured ? ' portfolio-card--featured' : isFullWidth ? ' portfolio-card--full' : ' portfolio-card--compact'}${proj.comingSoon ? ' portfolio-card--coming-soon' : ''} reveal`;
     const metricsHtml = (isFeatured && proj.metrics && proj.metrics.length) ? `
       <div class="portfolio-metrics">
         ${proj.metrics.map(m => `
@@ -418,7 +423,7 @@ function renderPortfolio(t) {
         <div class="portfolio-tags">
           ${proj.tags.map(tag => `<span class="portfolio-tag">${tag}</span>`).join('')}
         </div>
-        ${!proj.comingSoon ? `<button class="case-study-btn" data-index="${i}">View Case Study →</button>` : ''}
+        ${!proj.comingSoon ? `<button class="case-study-btn" data-index="${i}">${t.portfolio.caseStudyBtn || 'View Case Study →'}</button>` : ''}
       </div>
       <div class="card-glare"></div>
     </div>
