@@ -2322,3 +2322,167 @@ button, input, select, textarea { font-family: inherit; font-size: inherit; }
   .case-ps { grid-template-columns: 1fr; }
   .case-modal__title { font-size: 1.25rem; }
 }
+
+/* ===== THEME TOGGLE BUTTON ===== */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--green-dim);
+  color: var(--green);
+  border-color: rgba(0, 230, 118, 0.2);
+}
+
+.theme-icon--sun { display: none; }
+.theme-icon--moon { display: block; }
+html.light-mode .theme-icon--sun { display: block; }
+html.light-mode .theme-icon--moon { display: none; }
+
+/* Smooth transition when toggling */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease !important;
+}
+
+/* ===== LIGHT MODE OVERRIDES ===== */
+
+/* Fix: --deep-dark is now near-white, so elements using it as TEXT color need override */
+html.light-mode .section-title,
+html.light-mode .section-title--light { color: #0D1117; }
+html.light-mode .process-content h3 { color: #0D1117; }
+html.light-mode .faq-question { color: #0D1117; }
+html.light-mode .faq-question:hover,
+html.light-mode .faq-question[aria-expanded="true"] { color: var(--emerald); }
+html.light-mode .process-num { background: #0D1117; }
+html.light-mode .process-num {
+  box-shadow: 0 0 0 8px var(--light-bg), 0 0 0 9px rgba(0, 0, 0, 0.1);
+}
+
+/* Fix: --white is now dark, form input backgrounds need to stay white */
+html.light-mode .form-group input,
+html.light-mode .form-group textarea,
+html.light-mode .form-group select { background: #FFFFFF; color: #0D1117; }
+
+/* Navbar */
+html.light-mode .navbar { background: rgba(246, 248, 252, 0.65); }
+html.light-mode .navbar.scrolled {
+  background: rgba(246, 248, 252, 0.97);
+  border-bottom-color: rgba(0, 0, 0, 0.09);
+}
+html.light-mode .lang-switcher {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+html.light-mode .lang-btn:not(.active):hover { color: #0D1117; }
+html.light-mode .theme-toggle {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Logo — invert white logo to black */
+html.light-mode .nav-logo-img {
+  mix-blend-mode: normal;
+  filter: brightness(0);
+}
+html.light-mode .footer-logo-img { filter: brightness(0); }
+
+/* Hero */
+html.light-mode .aurora-blob { opacity: 0.12; }
+html.light-mode .hero-grid {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.07) 1px, transparent 1px);
+}
+html.light-mode .hero-editor {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.06) inset;
+}
+
+/* Ghost button */
+html.light-mode .btn-ghost {
+  color: #64748B;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+html.light-mode .btn-ghost:hover {
+  color: #0D1117;
+  border-color: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Stack marquee */
+html.light-mode .stack-item {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.09);
+}
+html.light-mode .stack-item:hover {
+  background: rgba(0, 230, 118, 0.08);
+  border-color: rgba(0, 230, 118, 0.22);
+}
+html.light-mode .stack-item span { color: rgba(0, 0, 0, 0.65); }
+html.light-mode .stack-item img.icon-invert { filter: none; }
+
+/* Industry card top highlight */
+html.light-mode .industry-card::before {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.02) 0%, transparent 60%);
+}
+
+/* Testimonials */
+html.light-mode .testimonial-quote { color: rgba(0, 0, 0, 0.8); }
+html.light-mode .testimonial-name { color: #0D1117; }
+
+/* Social links */
+html.light-mode .social-link { background: rgba(0, 0, 0, 0.04); }
+
+/* Logo pills */
+html.light-mode .logo-pill:hover {
+  color: #0D1117;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Section dividers */
+html.light-mode .services::before,
+html.light-mode .portfolio::before,
+html.light-mode .contact::before {
+  background: linear-gradient(90deg, transparent, rgba(0, 230, 118, 0.25), transparent);
+}
+
+/* Mobile menu */
+html.light-mode .nav-links.mobile-open {
+  background: rgba(246, 248, 252, 0.99);
+}
+html.light-mode .nav-links.mobile-open a { color: #0D1117; }
+html.light-mode .mobile-overlay { background: rgba(200, 210, 230, 0.5); }
+
+/* Case study modal */
+html.light-mode .case-modal__backdrop {
+  background: rgba(100, 120, 160, 0.55);
+}
+html.light-mode .case-ps__block { background: rgba(0, 0, 0, 0.02); }
+html.light-mode .case-modal__close {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+html.light-mode .case-modal__close:hover { background: rgba(0, 0, 0, 0.1); }
+
+/* WhatsApp tooltip */
+html.light-mode .whatsapp-tooltip {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #0D1117;
+}

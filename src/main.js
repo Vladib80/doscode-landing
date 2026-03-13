@@ -1197,6 +1197,24 @@ function initLangSwitcher() {
   });
 }
 
+/* ===== THEME TOGGLE ===== */
+function initThemeToggle() {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    html.classList.add('theme-transition');
+    const isLight = html.classList.toggle('light-mode');
+    localStorage.setItem('doscode-theme', isLight ? 'light' : 'dark');
+
+    const meta = document.getElementById('themeColorMeta');
+    if (meta) meta.setAttribute('content', isLight ? '#F6F8FC' : '#0A0A0F');
+
+    setTimeout(() => html.classList.remove('theme-transition'), 350);
+  });
+}
+
 /* ===== INIT ===== */
 document.addEventListener('DOMContentLoaded', () => {
   applyTranslations(currentLang);
@@ -1206,6 +1224,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCustomCursor();
   initSpotlight();
   initLangSwitcher();
+  initThemeToggle();
   initHeroEditor();
   observeReveals();
 });
