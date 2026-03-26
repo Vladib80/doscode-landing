@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DosCode — Разработка приложений в Алматы | Веб, мобайл, AI</title>
+  <meta name="description" content="Разрабатываем веб и мобильные приложения в Алматы. Лендинг от 150К ₸ за 2 недели, MVP за 4–8 недель. Telegram-боты, AI-агенты, дашборды. Оценка бесплатно." />
+  <meta name="keywords" content="разработка приложений Алматы, веб разработка Казахстан, создание сайтов Алматы, мобильная разработка, Telegram бот разработка, AI агент разработка, MVP разработка Казахстан, дашборд разработка" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://doscode.kz/" />
+  <meta property="og:title" content="DosCode — Разработка приложений в Алматы" />
+  <meta property="og:description" content="Разрабатываем веб и мобильные приложения в Алматы. Лендинг от 150К ₸ за 2 недели, MVP за 4–8 недель. Оценка бесплатно." />
+  <meta property="og:image" content="https://doscode.kz/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DosCode — Разработка приложений в Алматы" />
+  <meta name="twitter:description" content="Разрабатываем веб и мобильные приложения в Алматы. Лендинг от 150К ₸ за 2 недели, MVP за 4–8 недель. Оценка бесплатно." />
+  <meta name="twitter:image" content="https://doscode.kz/og-image.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://doscode.kz" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:locale:alternate" content="kk_KZ" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <link rel="alternate" hreflang="ru" href="https://doscode.kz/?lang=ru" />
+  <link rel="alternate" hreflang="kk" href="https://doscode.kz/?lang=kk" />
+  <link rel="alternate" hreflang="en" href="https://doscode.kz/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://doscode.kz" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+  <meta name="theme-color" content="#09090E" id="themeColorMeta" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- Structured data: LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "DosCode",
+    "alternateName": "Дос Код",
+    "url": "https://doscode.kz",
+    "description": "Разработка веб- и мобильных приложений в Алматы. Веб-сервисы, дашборды, AI-агенты и MVP — от идеи до продукта за дни.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Алматы",
+      "addressRegion": "Алматы",
+      "addressCountry": "KZ"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "43.238949",
+      "longitude": "76.889709"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Алматы" },
+      { "@type": "Country", "name": "Kazakhstan" }
+    ],
+    "email": "hello@doscode.kz",
+    "priceRange": "₸₸",
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "founder": { "@type": "Person", "name": "Владимир Б." },
+    "knowsLanguage": ["ru", "kk", "en"],
+    "serviceType": ["Веб-разработка", "Мобильная разработка", "AI-разработка", "MVP", "Дашборды", "Telegram-боты"]
+  }
+  </script>
+  <!-- GSAP from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script type="module" src="/src/v7/main.js"></script>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="v7-nav" id="v7Nav">
+    <div class="v7-nav-inner">
+      <a href="#" class="v7-nav-logo">
+        <img src="/logo.png" alt="DosCode" class="v7-nav-logo-img" />
+      </a>
+      <div class="v7-nav-links" id="v7NavLinks">
+        <a href="#services" data-i18n="nav.services">Услуги</a>
+        <a href="#portfolio" data-i18n="nav.portfolio">Портфолио</a>
+        <a href="#process" data-i18n="nav.process">Как работаем</a>
+        <a href="#contact" data-i18n="nav.contact">Контакты</a>
+      </div>
+      <div class="v7-nav-right">
+        <div class="v7-lang-switcher" id="v7LangSwitcher">
+          <button class="v7-lang-btn active" data-lang="ru">RU</button>
+          <button class="v7-lang-btn" data-lang="kk">KZ</button>
+          <button class="v7-lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="#contact" class="v7-bracket-btn v7-nav-cta" data-i18n="nav.cta">Обсудить проект</a>
+      </div>
+      <button class="v7-nav-burger" id="v7NavBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="v7-hero" id="hero">
+    <div class="v7-hero-content">
+      <h1 class="v7-hero-headline" id="v7HeroHeadline" data-i18n="hero.headline_left">МЫ СТРОИМ ЦИФРОВЫЕ ПРОДУКТЫ ДЛЯ БИЗНЕСА.</h1>
+      <p class="v7-hero-subline" data-i18n="hero.subheadline">Веб-сервисы, мобильные приложения, AI-агенты. Команда в Алматы, проекты — по всему СНГ.</p>
+      <div class="v7-hero-cta">
+        <a class="v7-bracket-btn" href="#contact" data-i18n="hero.cta">ОБСУДИТЬ ПРОЕКТ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SERVICES
+       ============================================================ -->
+  <section class="v7-services" id="services">
+    <div class="v7-services-inner">
+      <span class="v7-section-label" data-i18n="nav.services">УСЛУГИ</span>
+      <h2 class="v7-services-headline v7-clip-reveal" data-i18n="services.title">ЧТО МЫ СТРОИМ</h2>
+
+      <div class="v7-services-grid">
+        <div class="v7-service-card">
+          <span class="v7-service-num">01</span>
+          <h3 class="v7-service-title" data-i18n="services.items.0.title">Веб и мобильные приложения</h3>
+          <p class="v7-service-desc" data-i18n="services.items.0.description">PWA, нативные и кросс-платформенные приложения — от заказа еды до маркетплейса.</p>
+        </div>
+        <div class="v7-service-card">
+          <span class="v7-service-num">02</span>
+          <h3 class="v7-service-title" data-i18n="services.items.1.title">Дашборды и инструменты</h3>
+          <p class="v7-service-desc" data-i18n="services.items.1.description">Визуализация данных, внутренние панели и CRM-системы, заточенные под вашу команду.</p>
+        </div>
+        <div class="v7-service-card">
+          <span class="v7-service-num">03</span>
+          <h3 class="v7-service-title" data-i18n="services.items.2.title">AI-агенты и автоматизация</h3>
+          <p class="v7-service-desc" data-i18n="services.items.2.description">Умные боты и автоматизация рутины — Telegram, WhatsApp, и интеграция с ChatGPT.</p>
+        </div>
+        <div class="v7-service-card">
+          <span class="v7-service-num">04</span>
+          <h3 class="v7-service-title" data-i18n="services.items.3.title">Лендинги и MVP</h3>
+          <p class="v7-service-desc" data-i18n="services.items.3.description">Быстрый выход на рынок: от идеи до рабочего продукта за 1–2 недели.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PORTFOLIO
+       ============================================================ -->
+  <section class="v7-portfolio" id="portfolio">
+    <div class="v7-portfolio-inner">
+      <div class="v7-portfolio-header">
+        <div class="v7-portfolio-header-left">
+          <span class="v7-section-label" data-i18n="nav.portfolio">ПОРТФОЛИО</span>
+          <h2 class="v7-portfolio-headline v7-clip-reveal" data-i18n="portfolio.title">Наши проекты</h2>
+        </div>
+        <div class="v7-portfolio-header-right">
+          <a class="v7-bracket-btn" href="#contact" data-i18n="hero.cta">ОБСУДИТЬ ПРОЕКТ</a>
+        </div>
+      </div>
+
+      <div class="v7-carousel" id="portfolioCarousel" role="region" aria-roledescription="carousel" aria-label="Portfolio projects">
+        <div class="v7-carousel-track">
+          <!-- DosPass -->
+          <div class="v7-carousel-card v7-portfolio-card" data-color="#4F6FFF">
+            <div class="v7-carousel-card-img">
+              <img src="/screenshots/dospass.png" alt="DosPass" loading="lazy" />
+            </div>
+            <div class="v7-carousel-card-info">
+              <h3 class="v7-carousel-card-name">DosPass</h3>
+              <p class="v7-carousel-card-desc" data-i18n="portfolio.dospass.description">Менеджер паролей с AES-256 шифрованием, биометрической авторизацией и облачной синхронизацией.</p>
+              <a class="v7-bracket-btn v7-bracket-btn--sm" href="https://dospass.kz" target="_blank" rel="noopener">САЙТ</a>
+            </div>
+          </div>
+
+          <!-- Chicago Pizza -->
+          <div class="v7-carousel-card v7-portfolio-card" data-color="#4F6FFF">
+            <div class="v7-carousel-card-img">
+              <img src="/screenshots/chicagopizza.jpg" alt="Chicago Pizza" loading="lazy" />
+            </div>
+            <div class="v7-carousel-card-info">
+              <h3 class="v7-carousel-card-name">Chicago Pizza</h3>
+              <p class="v7-carousel-card-desc" data-i18n="portfolio.chicago.description">Система онлайн-заказов для сети пиццерий: меню, корзина, оплата, отслеживание доставки.</p>
+              <a class="v7-bracket-btn v7-bracket-btn--sm" href="https://chicago.kz" target="_blank" rel="noopener">САЙТ</a>
+            </div>
+          </div>
+
+          <!-- MMG Group -->
+          <div class="v7-carousel-card v7-portfolio-card" data-color="#4F6FFF">
+            <div class="v7-carousel-card-img">
+              <img src="/screenshots/mmg.jpg" alt="MMG Group" loading="lazy" />
+            </div>
+            <div class="v7-carousel-card-info">
+              <h3 class="v7-carousel-card-name">MMG Group</h3>
+              <p class="v7-carousel-card-desc" data-i18n="portfolio.mmg.description">Корпоративный сайт строительной компании с каталогом объектов и CRM-интеграцией.</p>
+              <a class="v7-bracket-btn v7-bracket-btn--sm" href="https://mmg.kz" target="_blank" rel="noopener">САЙТ</a>
+            </div>
+          </div>
+
+          <!-- VoiceClaw -->
+          <div class="v7-carousel-card v7-portfolio-card" data-color="#4F6FFF">
+            <div class="v7-carousel-card-img">
+              <img src="/screenshots/voiceclaw.png" alt="VoiceClaw" loading="lazy" />
+            </div>
+            <div class="v7-carousel-card-info">
+              <h3 class="v7-carousel-card-name">VoiceClaw</h3>
+              <p class="v7-carousel-card-desc" data-i18n="portfolio.voiceclaw.description">AI-платформа для голосовых ассистентов: распознавание речи, синтез и интеграция с CRM.</p>
+              <a class="v7-bracket-btn v7-bracket-btn--sm" href="https://voiceclaw.com" target="_blank" rel="noopener">САЙТ</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="v7-carousel-controls">
+          <button class="v7-carousel-arrow v7-carousel-arrow--prev" aria-label="Previous project">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <span class="v7-carousel-counter">01 / 04</span>
+          <button class="v7-carousel-arrow v7-carousel-arrow--next" aria-label="Next project">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROCESS
+       ============================================================ -->
+  <section class="v7-process" id="process">
+    <div class="v7-process-inner">
+      <span class="v7-section-label">ЭТАПЫ</span>
+      <h2 class="v7-process-headline v7-clip-reveal" data-i18n="process.title">КАК МЫ РАБОТАЕМ</h2>
+
+      <div class="v7-process-steps">
+        <div class="v7-process-step">
+          <span class="v7-process-step-num">01</span>
+          <h3 class="v7-process-step-title" data-i18n="process.steps.0.title">Обсуждаем</h3>
+          <p class="v7-process-step-desc" data-i18n="process.steps.0.description">Бесплатный созвон, разбор задачи и оценка стоимости — в течение 24 часов.</p>
+        </div>
+        <div class="v7-process-step">
+          <span class="v7-process-step-num">02</span>
+          <h3 class="v7-process-step-title" data-i18n="process.steps.1.title">Проектируем</h3>
+          <p class="v7-process-step-desc" data-i18n="process.steps.1.description">Прототипируем интерфейс, выбираем стек, строим архитектуру.</p>
+        </div>
+        <div class="v7-process-step">
+          <span class="v7-process-step-num">03</span>
+          <h3 class="v7-process-step-title" data-i18n="process.steps.2.title">Строим</h3>
+          <p class="v7-process-step-desc" data-i18n="process.steps.2.description">Итерационная разработка с еженедельными демо. Вы видите прогресс на каждом шаге.</p>
+        </div>
+        <div class="v7-process-step">
+          <span class="v7-process-step-num">04</span>
+          <h3 class="v7-process-step-title" data-i18n="process.steps.3.title">Запускаем</h3>
+          <p class="v7-process-step-desc" data-i18n="process.steps.3.description">Деплой, обучение команды и поддержка. Мы с вами и после релиза.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+       ============================================================ -->
+  <section class="v7-contact" id="contact">
+    <div class="v7-contact-inner">
+      <div class="v7-cta-card">
+        <h2 class="v7-contact-headline v7-clip-reveal" data-i18n="contact.title">ДАВАЙТЕ ПОСТРОИМ ЧТО-ТО ВМЕСТЕ.</h2>
+        <p class="v7-contact-description" data-i18n="contact.description">
+          Расскажите о вашей задаче — мы ответим в течение 24 часов с предварительной оценкой
+          сроков и стоимости. Консультация бесплатна.
+        </p>
+        <a class="v7-bracket-btn" href="mailto:hello@doscode.kz" data-i18n="contact.email_cta">НАПИСАТЬ НА ПОЧТУ</a>
+
+        <div class="v7-testimonials-inline" id="v7TestimonialsInline">
+          <!-- Rendered by JS from i18n data (max 2) -->
+        </div>
+      </div>
+
+      <form class="v7-form" id="v7ContactForm" action="#" method="POST">
+        <div class="v7-form-group">
+          <label for="v7Name" data-i18n="contact.form.name">Имя</label>
+          <input class="v7-form-input" type="text" id="v7Name" name="name" required autocomplete="name" />
+        </div>
+        <div class="v7-form-group">
+          <label for="v7Email" data-i18n="contact.form.email">Email</label>
+          <input class="v7-form-input" type="email" id="v7Email" name="email" required autocomplete="email" />
+        </div>
+        <div class="v7-form-group v7-form-group--full">
+          <label for="v7ProjectType" data-i18n="contact.form.project_type">Тип проекта</label>
+          <select class="v7-form-input" id="v7ProjectType" name="project_type" required>
+            <option value="" disabled selected data-i18n="contact.form.select_placeholder">Выберите тип проекта</option>
+            <option value="web" data-i18n="contact.form.type_web">Веб-приложение</option>
+            <option value="mobile" data-i18n="contact.form.type_mobile">Мобильное приложение</option>
+            <option value="dashboard" data-i18n="contact.form.type_dashboard">Дашборд / CRM</option>
+            <option value="ai" data-i18n="contact.form.type_ai">AI-агент / Бот</option>
+            <option value="landing" data-i18n="contact.form.type_landing">Лендинг / MVP</option>
+            <option value="other" data-i18n="contact.form.type_other">Другое</option>
+          </select>
+        </div>
+        <div class="v7-form-group v7-form-group--full">
+          <label for="v7Message" data-i18n="contact.form.message">Сообщение</label>
+          <textarea class="v7-form-input" id="v7Message" name="message" rows="5" required></textarea>
+        </div>
+        <div class="v7-form-group v7-form-group--full">
+          <button type="submit" class="v7-bracket-btn v7-bracket-btn--submit" data-i18n="contact.form.submit">ОТПРАВИТЬ ЗАЯВКУ</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="v7-footer">
+    <div class="v7-footer-inner">
+      <div class="v7-footer-nav">
+        <a href="#services" data-i18n="nav.services">УСЛУГИ</a>
+        <a href="#portfolio" data-i18n="nav.portfolio">ПОРТФОЛИО</a>
+        <a href="#process" data-i18n="nav.process">ПРОЦЕСС</a>
+        <a href="#contact" data-i18n="nav.contact">КОНТАКТЫ</a>
+      </div>
+
+      <div class="v7-footer-bottom">
+        <div class="v7-footer-social">
+          <a href="https://t.me/doscode" target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
+          <a href="https://wa.me/77001234567" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
+          <a href="mailto:hello@doscode.kz" aria-label="Email">hello@doscode.kz</a>
+        </div>
+        <div class="v7-footer-legal">
+          <span>&copy; 2026 DosCode</span>
+          <a href="/privacy" data-i18n="footer.privacy">Политика конфиденциальности</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
