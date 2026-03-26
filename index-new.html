@@ -1,0 +1,3780 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO -->
+  <title>DosCode — Разработка приложений и MVP в Алматы | Веб, Мобайл, AI</title>
+  <meta name="description" content="DosCode — студия разработки из Алматы. Создаём веб-приложения, мобильные приложения, AI-агентов и Telegram-боты. MVP за 4–8 недель. 40+ проектов. Оценим идею за 24 часа — бесплатно.">
+  <meta name="keywords" content="разработка приложений Алматы, веб разработка Казахстан, MVP разработка, мобильное приложение Алматы, AI агент, Telegram бот, студия разработки">
+  <link rel="canonical" href="https://doscode.kz/">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="DosCode">
+  <meta name="geo.region" content="KZ-ALA">
+  <meta name="geo.placename" content="Almaty, Kazakhstan">
+
+  <!-- Open Graph (Facebook, Telegram, WhatsApp previews) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://doscode.kz/">
+  <meta property="og:title" content="DosCode — Разработка приложений в Алматы">
+  <meta property="og:description" content="MVP за 4–8 недель. Веб, мобайл, AI-агенты, Telegram-боты. 40+ проектов. Оценим идею за 24 часа — бесплатно.">
+  <meta property="og:image" content="https://doscode.kz/public/og-image.jpg">
+  <meta property="og:locale" content="ru_KZ">
+  <meta property="og:site_name" content="DosCode">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DosCode — Разработка приложений в Алматы">
+  <meta name="twitter:description" content="MVP за 4–8 недель. Веб, мобайл, AI. Оценим за 24 часа — бесплатно.">
+  <meta name="twitter:image" content="https://doscode.kz/public/og-image.jpg">
+
+  <link rel="icon" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@800;900&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #080808;
+      --bg-2: #111;
+      --text: #F0EBE1;
+      --text-muted: #aaa;
+      --accent: #C8FF00;
+      --font-display: 'Unbounded', sans-serif;
+      --font-body: 'Golos Text', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    @media (pointer: fine) {
+      .cursor-dot {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: difference;
+        transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                    height 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                    background 0.25s ease,
+                    border 0.25s ease;
+      }
+      .cursor-dot.expanded {
+        width: 40px;
+        height: 40px;
+        background: transparent;
+        border: 1.5px solid var(--accent);
+      }
+      body { cursor: none; }
+      a, button, [data-hover] { cursor: none; }
+    }
+
+    /* ── SELECTION ── */
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-inner {
+      width: 100%;
+      max-width: 1440px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 4vw, 60px);
+      height: 64px;
+      background: rgba(8, 8, 8, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(240, 235, 225, 0.06);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 22px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      color: rgba(240,235,225,0.75);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 8px 20px;
+      border: 1px solid var(--accent);
+      border-radius: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 85vh;
+      position: relative;
+      width: 100%;
+    }
+
+    .hero-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      width: 100%;
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(80px, 10vh, 120px) clamp(20px, 4vw, 60px) clamp(40px, 6vh, 60px);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      opacity: 0.85;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(56px, 9.5vw, 136px);
+      line-height: 0.93;
+      letter-spacing: -0.04em;
+      margin-bottom: 32px;
+    }
+
+    .hero-headline .line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero-headline .line-inner {
+      display: block;
+    }
+
+    .hero-headline .lime { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+      margin-bottom: 80px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      border: none;
+      border-radius: 0;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(200, 255, 0, 0.2);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: transparent;
+      color: var(--accent);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 15px;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      border-radius: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(200, 255, 0, 0.08);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 1px solid rgba(240, 235, 225, 0.12);
+      border-bottom: 1px solid rgba(240, 235, 225, 0.12);
+      padding: 16px 0;
+    }
+
+    .marquee-inner {
+      display: inline-block;
+      animation: marquee 20s linear infinite;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(14px, 2vw, 18px);
+      color: var(--text);
+      letter-spacing: 0.05em;
+      opacity: 0.65;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── STATS BAR ── */
+    .stats {
+      background: var(--bg-2);
+      border-bottom: 1px solid rgba(240, 235, 225, 0.06);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 48px 20px;
+      border-right: 1px solid rgba(240, 235, 225, 0.08);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(36px, 5vw, 56px);
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 600px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(2) { border-right: none; }
+      .stat { border-bottom: 1px solid rgba(240, 235, 225, 0.08); }
+      .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+    }
+
+    /* ── SECTION COMMON ── */
+    .section {
+      padding: clamp(80px, 10vw, 140px) clamp(20px, 4vw, 60px);
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(36px, 8vw, 120px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 60px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      max-width: 1360px;
+    }
+
+    @media (min-width: 1024px) {
+      .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .project-card {
+      position: relative;
+    }
+
+    /* Result headline */
+    .project-result {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(32px, 4vw, 52px);
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .project-result span {
+      font-size: 0.45em;
+      color: var(--text-muted);
+      font-weight: 500;
+      display: block;
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+    }
+
+    /* Metrics strip */
+    .project-metrics {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      padding: 12px 0;
+      border-top: 1px solid rgba(240,235,225,0.08);
+      border-bottom: 1px solid rgba(240,235,225,0.08);
+    }
+    .pm-item {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .pm-val {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .pm-sep {
+      color: rgba(240,235,225,0.2);
+      font-size: 14px;
+    }
+
+    .project-num {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      z-index: 2;
+    }
+
+    .project-info {
+      margin-top: 20px;
+    }
+
+    .project-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(22px, 3vw, 28px);
+      margin-bottom: 8px;
+    }
+
+    .project-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .project-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      padding: 4px 10px;
+      border: 1px solid rgba(200, 255, 0, 0.2);
+      border-radius: 2px;
+    }
+
+    /* ── SERVICES REDESIGN ── */
+    .services-section {
+      overflow: hidden;
+    }
+
+    .services-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* LEFT COLUMN */
+    .services-left {
+      position: sticky;
+      top: 100px;
+    }
+
+    .services-title {
+      font-size: clamp(36px, 5vw, 72px) !important;
+      margin-bottom: 28px !important;
+    }
+
+    .services-pitch {
+      font-family: var(--font-body);
+      font-size: clamp(15px, 1.3vw, 18px);
+      color: var(--text);
+      opacity: 0.75;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .services-stat-row {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(240,235,225,0.1);
+    }
+
+    .ss-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .ss-num {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 36px;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .ss-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .services-cta {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(200,255,0,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.3s, opacity 0.3s;
+    }
+    .services-cta:hover { border-color: var(--accent); opacity: 0.8; }
+
+    /* RIGHT COLUMN — 2x3 card grid */
+    .services-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .srv-card {
+      background: var(--bg-2);
+      padding: 28px;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .srv-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .srv-card:hover { background: rgba(200,255,0,0.04); }
+    .srv-card:hover::before { transform: scaleX(1); }
+
+    .srv-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .srv-icon {
+      width: 40px; height: 40px;
+      color: var(--accent);
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+    .srv-card:hover .srv-icon { opacity: 1; }
+
+    .srv-icon svg {
+      width: 100%; height: 100%;
+    }
+
+    .srv-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(200,255,0,0.3);
+      letter-spacing: 0.1em;
+    }
+
+    .srv-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(16px, 1.5vw, 20px);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .srv-desc {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .srv-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .srv-list li {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(240,235,225,0.45);
+      padding-left: 14px;
+      position: relative;
+      letter-spacing: 0.03em;
+    }
+
+    .srv-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .services-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .services-left { position: static; }
+      .services-right { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .services-right { grid-template-columns: 1fr; }
+      .srv-card { padding: 22px; }
+    }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      width: 100%;
+    }
+
+    .price-card {
+      background: var(--bg-2);
+      padding: clamp(32px, 4vw, 48px);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .price-card.featured {
+      border: 1px solid var(--accent);
+    }
+
+    .price-card.featured::before {
+      content: 'Популярное';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 4px 14px;
+    }
+
+    .price-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .price-amount {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(28px, 4vw, 36px);
+      color: var(--accent);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .price-duration {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .price-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+
+    .price-btn {
+      display: inline-block;
+      text-align: center;
+      padding: 14px 28px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      border: 1px solid rgba(240, 235, 225, 0.15);
+      color: var(--text);
+      background: transparent;
+      transition: border-color 0.3s, background 0.3s, color 0.3s;
+    }
+
+    .price-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .price-card.featured .price-btn {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .price-card.featured .price-btn:hover {
+      background: #d4ff33;
+    }
+
+    @media (max-width: 768px) {
+      .pricing-grid { grid-template-columns: 1fr; gap: 16px; }
+      .price-card.featured::before { top: 0; transform: translateX(-50%); }
+    }
+
+    /* ── CTA LIME ── */
+    .cta-lime {
+      background: var(--accent);
+      color: var(--bg);
+      text-align: center;
+      padding: clamp(80px, 12vw, 160px) clamp(20px, 4vw, 60px);
+    }
+
+    .cta-lime h2 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(48px, 10vw, 120px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      color: var(--bg);
+    }
+
+    .cta-lime p {
+      font-size: 18px;
+      color: rgba(8, 8, 8, 0.7);
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-lime .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 18px 40px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .cta-lime .btn-dark:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .cta-lime .cta-small {
+      display: block;
+      margin-top: 20px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: rgba(8, 8, 8, 0.5);
+    }
+
+    .cta-lime .cta-small a {
+      color: rgba(8, 8, 8, 0.7);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ── FAST LANDING OFFER ── */
+    .fast-offer {
+      position: relative;
+      overflow: hidden;
+      background: #0c0c0c;
+      border-top: 1px solid rgba(200,255,0,0.15);
+      border-bottom: 1px solid rgba(200,255,0,0.15);
+      padding: clamp(60px, 8vh, 100px) clamp(20px, 4vw, 80px);
+    }
+
+    /* Radial glow behind content */
+    .fast-offer::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120%;
+      height: 200%;
+      background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(200,255,0,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Decorative huge "48" background */
+    .fo-bg-num {
+      position: absolute;
+      right: -2%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(200px, 28vw, 420px);
+      color: rgba(200,255,0,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.05em;
+    }
+
+    .fo-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    /* ── Timeline strip ── */
+    .fo-timeline {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-bottom: clamp(40px, 6vh, 72px);
+      max-width: 600px;
+    }
+
+    .fo-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .fo-step-time {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      opacity: 0.7;
+    }
+
+    .fo-step-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: rgba(240,235,225,0.2);
+      border: 1.5px solid rgba(240,235,225,0.3);
+      flex-shrink: 0;
+    }
+
+    .fo-step-dot--accent {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(200,255,0,0.6);
+    }
+
+    .fo-step-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text);
+      opacity: 0.6;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    .fo-step-line {
+      flex: 1;
+      height: 1.5px;
+      background: rgba(240,235,225,0.1);
+      margin-top: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fo-step-line-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 100%;
+      background: linear-gradient(to right, var(--accent), rgba(200,255,0,0.3));
+      transform-origin: left;
+      animation: lineFill 2s ease-out forwards;
+    }
+
+    @keyframes lineFill {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    /* ── Main 2-col layout ── */
+    .fo-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: center;
+    }
+
+    /* LEFT */
+    .fo-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: #000;
+      background: var(--accent);
+      padding: 5px 14px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    .fo-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(44px, 6vw, 88px);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .fo-title-highlight {
+      color: var(--accent);
+      display: block;
+    }
+
+    .fo-sub {
+      font-family: var(--font-body);
+      font-size: clamp(15px, 1.3vw, 18px);
+      color: var(--text);
+      opacity: 0.7;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .fo-guarantee-inline {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent);
+      opacity: 0.65;
+      letter-spacing: 0.05em;
+    }
+
+    /* RIGHT */
+    .fo-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .fo-checklist li {
+      font-family: var(--font-body);
+      font-size: clamp(14px, 1.2vw, 17px);
+      color: var(--text);
+      opacity: 0.85;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      line-height: 1.5;
+    }
+
+    .fo-check {
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .fo-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .fo-price-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .fo-price {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(30px, 3.5vw, 52px);
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .fo-price-note {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      margin-top: 4px;
+    }
+
+    .fo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #000;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(14px, 1.2vw, 17px);
+      padding: 18px 36px;
+      border-radius: 2px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+
+    .fo-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(200,255,0,0.35);
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .fo-content { grid-template-columns: 1fr; gap: 40px; }
+      .fo-bg-num { font-size: 40vw; opacity: 0.03; right: -5%; top: 10%; transform: none; }
+      .fo-timeline { max-width: 100%; }
+    }
+
+    @media (max-width: 500px) {
+      .fo-timeline { display: none; }
+      .fo-cta-row { flex-direction: column; align-items: flex-start; }
+    }
+
+/* ── PROJECT GALLERY ── */
+.project-gallery {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  height: 380px;
+  background: var(--bg-2);
+  border: 1px solid rgba(200,255,0,0.1);
+  margin-bottom: 0;
+}
+
+.gallery-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.gallery-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  user-select: none;
+  pointer-events: all;
+  cursor: zoom-in;
+}
+
+.gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(8,8,8,0.75);
+  border: 1px solid rgba(200,255,0,0.25);
+  color: var(--accent);
+  width: 36px; height: 36px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s, background 0.2s;
+  z-index: 4;
+  line-height: 1;
+}
+
+.project-gallery:hover .gallery-btn { opacity: 1; }
+.gallery-btn:hover { background: rgba(200,255,0,0.15); }
+
+.gallery-btn--prev { left: 10px; }
+.gallery-btn--next { right: 10px; }
+
+.gallery-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 4;
+}
+
+.gallery-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(240,235,225,0.3);
+  transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.gallery-dot.active {
+  background: var(--accent);
+  transform: scale(1.3);
+}
+
+@media (max-width: 768px) {
+  .project-gallery { height: 260px; }
+  .gallery-btn { opacity: 1; width: 30px; height: 30px; font-size: 13px; }
+}
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .testi-card {
+      background: var(--bg-2);
+      padding: clamp(28px, 3vw, 40px);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: background 0.3s;
+      position: relative;
+    }
+
+    .testi-card:hover { background: rgba(200,255,0,0.03); }
+
+    .testi-card--featured {
+      background: rgba(200,255,0,0.05);
+      border: 1px solid rgba(200,255,0,0.2);
+    }
+
+    .testi-stars {
+      color: var(--accent);
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+
+    .testi-text {
+      font-family: var(--font-body);
+      font-size: clamp(14px, 1.2vw, 16px);
+      color: var(--text);
+      opacity: 0.85;
+      line-height: 1.75;
+      flex: 1;
+      font-style: italic;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(240,235,225,0.08);
+    }
+
+    .testi-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(200,255,0,0.12);
+      border: 1.5px solid rgba(200,255,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .testi-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .testi-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .testi-role {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 768px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── PROCESS ── */
+    .process-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 800px;
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 60px 40px 1fr;
+      gap: 0 24px;
+      align-items: start;
+    }
+
+    .ps-num {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      padding-top: 4px;
+      text-align: right;
+    }
+
+    .ps-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .ps-connector::before {
+      content: '';
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 5px;
+      box-shadow: 0 0 12px rgba(200,255,0,0.5);
+    }
+
+    .ps-connector::after {
+      content: '';
+      width: 1.5px;
+      flex: 1;
+      min-height: 60px;
+      background: linear-gradient(to bottom, rgba(200,255,0,0.4), rgba(200,255,0,0.05));
+      margin-top: 6px;
+    }
+
+    .ps-connector--last::after { display: none; }
+
+    .ps-content {
+      padding-bottom: 48px;
+    }
+
+    .ps-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(20px, 2vw, 26px);
+      margin-bottom: 10px;
+    }
+
+    .ps-desc {
+      font-family: var(--font-body);
+      font-size: clamp(14px, 1.1vw, 16px);
+      color: var(--text);
+      opacity: 0.72;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .ps-time {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      opacity: 0.7;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 600px) {
+      .process-step { grid-template-columns: 40px 28px 1fr; gap: 0 12px; }
+      .ps-num { font-size: 11px; }
+    }
+
+    /* ── TECH STACK ── */
+    .tech-section {
+      border-top: 1px solid rgba(240,235,225,0.08);
+      border-bottom: 1px solid rgba(240,235,225,0.08);
+      padding: 28px clamp(20px, 4vw, 60px);
+      background: rgba(255,255,255,0.01);
+    }
+
+    .tech-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .tech-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    .tech-strip {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .tech-item {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text);
+      opacity: 0.6;
+      transition: opacity 0.2s, color 0.2s;
+      cursor: default;
+    }
+
+    .tech-item:hover { opacity: 1; color: var(--accent); }
+
+    .tech-dot {
+      color: rgba(240,235,225,0.15);
+      font-size: 16px;
+    }
+
+    /* ── FAQ ── */
+    .faq-list {
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid rgba(240,235,225,0.1);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(240,235,225,0.1);
+    }
+
+    .faq-q {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(16px, 1.5vw, 20px);
+      color: var(--text);
+      transition: color 0.3s;
+    }
+
+    .faq-q:hover { color: var(--accent); }
+
+    .faq-icon {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform 0.3s;
+      line-height: 1;
+    }
+
+    .faq-q[aria-expanded="true"] .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s;
+    }
+
+    .faq-a.open {
+      max-height: 300px;
+      padding-bottom: 24px;
+    }
+
+    .faq-a p {
+      font-family: var(--font-body);
+      font-size: clamp(14px, 1.1vw, 16px);
+      color: var(--text);
+      opacity: 0.75;
+      line-height: 1.75;
+    }
+
+    /* ── PROJECT LINK BUTTON ── */
+    .project-link {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid rgba(200,255,0,0.3);
+      padding: 8px 16px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .project-link:hover {
+      background: rgba(200,255,0,0.08);
+      border-color: var(--accent);
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      backdrop-filter: blur(8px);
+    }
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lb-img-wrap {
+      max-width: 90vw;
+      max-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lb-img {
+      max-width: 90vw;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 0 80px rgba(0,0,0,0.8);
+      transition: opacity 0.2s;
+    }
+    .lb-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: none;
+      border: 1px solid rgba(240,235,225,0.2);
+      color: var(--text);
+      font-size: 18px;
+      width: 40px; height: 40px;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, color 0.2s;
+      z-index: 10;
+    }
+    .lb-close:hover { border-color: var(--accent); color: var(--accent); }
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(8,8,8,0.7);
+      border: 1px solid rgba(200,255,0,0.25);
+      color: var(--accent);
+      width: 48px; height: 48px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+    .lb-nav:hover { background: rgba(200,255,0,0.12); }
+    .lb-nav--prev { left: 20px; }
+    .lb-nav--next { right: 20px; }
+    .lb-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+    .lb-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(240,235,225,0.3);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lb-dot.active { background: var(--accent); transform: scale(1.3); }
+    .lb-counter {
+      position: absolute;
+      top: 20px; left: 24px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+    @media (max-width: 600px) {
+      .lb-nav--prev { left: 8px; }
+      .lb-nav--next { right: 8px; }
+      .lb-nav { width: 36px; height: 36px; font-size: 16px; }
+    }
+
+    /* ── STAR WARS CRAWL ── */
+    .sw-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+
+    .sw-section {
+      position: relative;
+      background: var(--bg);
+      height: 700px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-top: 1px solid rgba(200,255,0,0.1);
+      border-bottom: 1px solid rgba(200,255,0,0.1);
+    }
+
+    /* Aurora orbs — same as hero */
+    .sw-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .sw-orb-1 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(200,255,0,0.12) 0%, transparent 60%);
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+    }
+    .sw-orb-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(200,255,0,0.07) 0%, transparent 60%);
+      bottom: -100px; right: 10%;
+    }
+
+    /* Fade overlay top — gentle, less aggressive */
+    .sw-fade-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 22%;
+      background: linear-gradient(to bottom, var(--bg) 0%, transparent 100%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .sw-fade-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 10%;
+      background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Intro text */
+    .sw-intro {
+      position: absolute;
+      z-index: 5;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: clamp(20px, 2.5vw, 28px);
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      line-height: 1.9;
+      opacity: 0;
+    }
+
+    /* Perspective stage */
+    .sw-stage {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      perspective: 400px;
+      perspective-origin: 50% 80%;
+      opacity: 0;
+      z-index: 2;
+    }
+
+    /* The crawl — translateY happens INSIDE the rotated plane */
+    .sw-crawl {
+      width: min(860px, 90vw);
+      margin: 0 auto;
+      transform: rotateX(22deg) translateY(700px);
+    }
+
+    .sw-crawl.animating {
+      animation: swScroll var(--crawl-dur, 60s) linear forwards;
+    }
+
+    @keyframes swScroll {
+      from { transform: rotateX(22deg) translateY(700px); }
+      to   { transform: rotateX(22deg) translateY(-3500px); }
+    }
+
+    .sw-crawl-inner {
+      text-align: center;
+      padding: 0 20px 80px;
+    }
+
+    .sw-episode {
+      font-family: var(--font-mono);
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: var(--accent);
+      letter-spacing: 0.4em;
+      margin-bottom: 10px;
+      opacity: 0.7;
+    }
+
+    .sw-episode-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(32px, 5vw, 58px);
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 48px;
+    }
+
+    .sw-crawl-body p {
+      font-family: var(--font-body);
+      font-size: clamp(26px, 3.6vw, 42px);
+      color: var(--accent);
+      line-height: 1.85;
+      margin-bottom: 36px;
+      opacity: 0.88;
+    }
+
+    .sw-finale {
+      font-family: var(--font-display) !important;
+      font-weight: 900 !important;
+      font-size: clamp(34px, 4.8vw, 60px) !important;
+      letter-spacing: 0.08em;
+      margin-top: 48px !important;
+      opacity: 1 !important;
+    }
+
+    .sw-music-wrap {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sw-music-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(8,8,8,0.7);
+      border: 1px solid rgba(200,255,0,0.4);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 10px 20px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+    }
+
+    .sw-music-btn:hover {
+      background: rgba(200,255,0,0.1);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(200,255,0,0.2);
+    }
+
+    .sw-music-btn.playing {
+      border-color: var(--accent);
+      box-shadow: 0 0 24px rgba(200,255,0,0.3);
+      animation: swPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes swPulse {
+      0%, 100% { box-shadow: 0 0 16px rgba(200,255,0,0.25); }
+      50%       { box-shadow: 0 0 36px rgba(200,255,0,0.5); }
+    }
+
+    .sw-music-icon {
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+
+    .sw-music-sorry {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      opacity: 0.8;
+      letter-spacing: 0.05em;
+      font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      .sw-section { height: 560px; }
+      .sw-crawl { transform: rotateX(10deg) translateY(600px); }
+      .sw-music-btn { font-size: 11px; padding: 8px 14px; }
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--bg);
+      border-top: 1px solid rgba(240, 235, 225, 0.06);
+      padding: 40px clamp(20px, 4vw, 60px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── AURORA ORBS ── */
+    .aurora {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.18;
+      animation: drift linear infinite;
+    }
+    .orb-1 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, #C8FF00 0%, transparent 70%);
+      top: -200px; left: -100px;
+      animation-duration: 25s;
+      animation-name: drift1;
+    }
+    .orb-2 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, #00FFD1 0%, transparent 70%);
+      top: 20%; right: -150px;
+      animation-duration: 30s;
+      animation-name: drift2;
+      opacity: 0.13;
+    }
+    .orb-3 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #C8FF00 0%, transparent 70%);
+      bottom: 10%; left: 30%;
+      animation-duration: 20s;
+      animation-name: drift3;
+      opacity: 0.10;
+    }
+    @keyframes drift1 {
+      0%   { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(80px, 60px) scale(1.1); }
+      66%  { transform: translate(-40px, 100px) scale(0.9); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+    @keyframes drift2 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(-100px, 80px) scale(1.15); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+    @keyframes drift3 {
+      0%   { transform: translate(0, 0) scale(1); }
+      40%  { transform: translate(60px, -60px) scale(1.05); }
+      80%  { transform: translate(-30px, 40px) scale(0.95); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    /* ── CANVAS ── */
+    #particles {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      display: none;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-text, .hero-visual { position: relative; z-index: 2; }
+
+    .aurora { opacity: 1 !important; }
+
+    @media (max-width: 768px) {
+      .orb-1 { opacity: 0.10 !important; }
+      .orb-2 { opacity: 0.07 !important; }
+      .orb-3 { opacity: 0.08 !important; }
+    }
+
+    /* ── SPOTLIGHT ── */
+    .spotlight {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(circle 400px at -999px -999px, rgba(200,255,0,0.04) 0%, transparent 70%);
+      transition: background 0.1s;
+    }
+
+    /* ensure content is above bg layers */
+    .nav, section, footer { position: relative; z-index: 1; }
+
+    /* ── HERO TWO-COLUMN ── */
+    .hero-content {
+      display: block;
+    }
+
+    @media (min-width: 900px) {
+      .hero-content {
+        display: grid;
+        grid-template-columns: 52% 48%;
+        align-items: center;
+        gap: 60px;
+      }
+    }
+
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: visible;
+    }
+
+    .circuit-svg {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      overflow: visible;
+      margin-top: -20px;
+    }
+
+    /* Node breathing pulse (opacity only — safe with CSS) */
+    @keyframes node-breathe {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    .node-ring {
+      animation: node-breathe 3s ease-in-out infinite;
+    }
+
+    /* Stagger breathing per node */
+    .circuit-node:nth-child(5) .node-ring { animation-delay: 0s; }
+    .circuit-node:nth-child(6) .node-ring { animation-delay: 0.75s; }
+    .circuit-node:nth-child(7) .node-ring { animation-delay: 1.5s; }
+    .circuit-node:nth-child(8) .node-ring { animation-delay: 2.25s; }
+
+    @media (max-width: 900px) {
+      .hero-visual { display: none; }
+      .mobile-flow { display: flex !important; }
+    }
+
+    /* ── FALLBACK IMAGE ── */
+    img.broken {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-2);
+      border: 1px solid rgba(200, 255, 0, 0.15);
+    }
+
+    /* ── HERO SUB TOP (over right graphic) ── */
+    .hero-sub-top {
+      font-family: var(--font-body);
+      font-size: clamp(14px, 1.2vw, 18px);
+      color: var(--text);
+      opacity: 0.9;
+      line-height: 1.6;
+      text-align: center;
+      padding: 0 16px 28px;
+      border-bottom: 1px solid rgba(200,255,0,0.15);
+      margin-bottom: 20px;
+    }
+    @media (max-width: 900px) {
+      .hero-sub-top { display: none; }
+      .hero-sub-mobile { display: block !important; }
+    }
+    .hero-sub-mobile {
+      display: block;
+      font-family: var(--font-body);
+      font-size: clamp(15px, 1.1vw, 18px);
+      color: var(--text);
+      opacity: 0.85;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    /* ── MOBILE FLOW STRIP ── */
+    .mobile-flow {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 32px;
+      flex-wrap: nowrap;
+    }
+    .mf-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .mf-icon {
+      width: 44px; height: 44px;
+      border: 1.5px solid rgba(200,255,0,0.4);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(200,255,0,0.06);
+      color: var(--accent);
+    }
+    .mf-icon svg {
+      width: 22px; height: 22px;
+      color: var(--accent);
+    }
+    .mf-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      opacity: 0.8;
+    }
+    .mf-arrow {
+      color: rgba(200,255,0,0.4);
+      font-size: 14px;
+      margin-bottom: 14px;
+      flex: 1;
+      text-align: center;
+    }
+
+    /* ── HERO TRUST ── */
+    .hero-trust {
+      font-family: var(--font-mono);
+      font-size: clamp(13px, 1.2vw, 16px);
+      color: var(--accent);
+      margin-top: 20px;
+      opacity: 0.9;
+      line-height: 2;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── PRICE BADGE ── */
+    .price-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    /* ── LANG SWITCHER ── */
+    .lang-switcher { display:flex; align-items:center; gap:6px; margin-left:16px; }
+    .lang-btn { background:none; border:none; color:var(--text-muted); font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:0.1em; cursor:pointer; padding:4px 2px; transition:color 0.2s; }
+    .lang-btn:hover { color:var(--text); }
+    .lang-btn.active { color:var(--accent); }
+    .lang-sep { color:rgba(255,255,255,0.15); font-size:10px; }
+    @media (max-width:768px) { .lang-switcher { margin-left:8px; } }
+  </style>
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "DosCode",
+    "description": "Студия разработки веб-приложений, мобильных приложений, AI-агентов и Telegram-ботов в Алматы.",
+    "url": "https://doscode.kz",
+    "logo": "https://doscode.kz/public/logo.png",
+    "image": "https://doscode.kz/public/og-image.jpg",
+    "telephone": "+7-777-000-0000",
+    "email": "hello@doscode.kz",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Almaty",
+      "addressCountry": "KZ"
+    },
+    "areaServed": ["Kazakhstan", "Russia", "UAE"],
+    "serviceType": ["Web Development", "Mobile App Development", "AI Development", "Telegram Bot Development"],
+    "priceRange": "₸₸₸",
+    "foundingDate": "2020",
+    "numberOfEmployees": {"@type": "QuantitativeValue", "value": 5},
+    "sameAs": ["https://t.me/doscode"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Услуги разработки",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {"@type": "Service", "name": "Лендинг"},
+          "price": "150000",
+          "priceCurrency": "KZT",
+          "description": "Дизайн, разработка, деплой под ключ за 2 недели"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {"@type": "Service", "name": "MVP разработка"},
+          "price": "600000",
+          "priceCurrency": "KZT",
+          "description": "Полный цикл: дизайн + разработка + деплой за 4–8 недель"
+        }
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursor"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">DC</a>
+    <ul class="nav-links">
+      <li><a href="#services" data-i18n="nav.services">Услуги</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Проекты</a></li>
+      <li><a href="#process" data-i18n="nav.process">Процесс</a></li>
+      <li><a href="#pricing" data-i18n="nav.pricing">Цены</a></li>
+      <li><a href="#testimonials" data-i18n="nav.testimonials">Отзывы</a></li>
+      <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+    </ul>
+    <a href="https://t.me/doscode" class="nav-cta" target="_blank" data-i18n="nav.cta">Обсудить проект&nbsp;→</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="ru">RU</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="kz">ҚАЗ</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- AURORA ORBS -->
+<div class="aurora" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- CURSOR SPOTLIGHT -->
+<div class="spotlight" id="spotlight"></div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+  <div class="hero-content">
+    <div class="hero-text">
+      <span class="hero-label" data-i18n="hero.label">// Almaty &middot; 2020 &mdash; present</span>
+      <h1 class="hero-headline">
+        <span class="line"><span class="line-inner" data-i18n="hero.line1">ВАША</span></span>
+        <span class="line"><span class="line-inner" data-i18n="hero.line2">ИДЕЯ.</span></span>
+        <span class="line"><span class="line-inner lime" data-i18n="hero.line3">НАШ КОД.</span></span>
+      </h1>
+      <p class="hero-sub-mobile" data-i18n="hero.sub">Дизайн, разработка, деплой — под&nbsp;ключ. Веб, мобайл, AI за&nbsp;4–8&nbsp;недель.</p>
+      <div class="hero-ctas">
+        <a href="https://t.me/doscode" class="btn-primary" target="_blank" data-i18n="hero.cta1">Начать проект&nbsp;→</a>
+        <a href="#projects" class="btn-ghost" data-i18n="hero.cta2">Смотреть кейсы&nbsp;↓</a>
+      </div>
+      <p class="hero-trust" data-i18n="hero.trust">✓ Без предоплаты на старте&nbsp;&nbsp;✓ Оценка за 24ч&nbsp;&nbsp;✓ Фиксированная цена</p>
+
+      <!-- Mobile-only flow strip -->
+      <div class="mobile-flow">
+        <div class="mf-step">
+          <span class="mf-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="10" r="5"/><line x1="12" y1="15" x2="12" y2="17"/><line x1="9" y1="17" x2="15" y2="17"/><line x1="10" y1="19" x2="14" y2="19"/>
+            </svg>
+          </span>
+          <span class="mf-label" data-i18n="flow.idea">ИДЕЯ</span>
+        </div>
+        <div class="mf-arrow">→</div>
+        <div class="mf-step">
+          <span class="mf-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="12" y1="4" x2="10" y2="20"/>
+            </svg>
+          </span>
+          <span class="mf-label" data-i18n="flow.code">КОД</span>
+        </div>
+        <div class="mf-arrow">→</div>
+        <div class="mf-step">
+          <span class="mf-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C8 2 6 6 6 10c0 3 1 5 2 6H16c1-1 2-3 2-6 0-4-2-8-6-8z"/><line x1="9" y1="22" x2="15" y2="22"/><line x1="10" y1="19" x2="14" y2="19"/><circle cx="12" cy="9" r="1.5" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="mf-label" data-i18n="flow.launch">ЗАПУСК</span>
+        </div>
+        <div class="mf-arrow">→</div>
+        <div class="mf-step">
+          <span class="mf-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="9" cy="8" r="3"/><circle cx="17" cy="8" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M19 20c0-2.5-1.5-4.5-4-5.5"/>
+            </svg>
+          </span>
+          <span class="mf-label" data-i18n="flow.clients">КЛИЕНТЫ</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+
+      <svg class="circuit-svg" viewBox="-10 -10 520 530" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+
+    <!-- ── CONNECTION PATHS ── -->
+        <!-- ИДЕЯ → КОД (top-center to left-center) -->
+        <path id="path-ik" d="M 210 95 C 160 155 110 195 95 225" stroke="rgba(200,255,0,0.25)" stroke-width="2" fill="none"/>
+        <!-- ИДЕЯ → ЗАПУСК (top-center to right-center) -->
+        <path id="path-iz" d="M 290 95 C 340 155 390 195 405 225" stroke="rgba(200,255,0,0.25)" stroke-width="2" fill="none"/>
+        <!-- КОД → КЛИЕНТЫ (left-center to bottom-center) -->
+        <path id="path-kk" d="M 95 275 C 110 330 160 375 210 405" stroke="rgba(200,255,0,0.25)" stroke-width="2" fill="none"/>
+        <!-- ЗАПУСК → КЛИЕНТЫ (right-center to bottom-center) -->
+        <path id="path-zk" d="M 405 275 C 390 330 340 375 290 405" stroke="rgba(200,255,0,0.25)" stroke-width="2" fill="none"/>
+
+        <!-- ── ANIMATED PULSES ── -->
+        <!-- Pulse: ИДЕЯ → КОД -->
+        <circle r="4" fill="#C8FF00" opacity="0.9" filter="url(#glow)">
+          <animateMotion dur="2s" repeatCount="indefinite" begin="0s">
+            <mpath href="#path-ik"/>
+          </animateMotion>
+        </circle>
+        <!-- Pulse: ИДЕЯ → ЗАПУСК -->
+        <circle r="4" fill="#C8FF00" opacity="0.9" filter="url(#glow)">
+          <animateMotion dur="2s" repeatCount="indefinite" begin="0.5s">
+            <mpath href="#path-iz"/>
+          </animateMotion>
+        </circle>
+        <!-- Pulse: КОД → КЛИЕНТЫ -->
+        <circle r="4" fill="#C8FF00" opacity="0.9" filter="url(#glow)">
+          <animateMotion dur="2s" repeatCount="indefinite" begin="2s">
+            <mpath href="#path-kk"/>
+          </animateMotion>
+        </circle>
+        <!-- Pulse: ЗАПУСК → КЛИЕНТЫ -->
+        <circle r="4" fill="#C8FF00" opacity="0.9" filter="url(#glow)">
+          <animateMotion dur="2s" repeatCount="indefinite" begin="2.5s">
+            <mpath href="#path-zk"/>
+          </animateMotion>
+        </circle>
+
+        <!-- ── FILTERS ── -->
+        <defs>
+          <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="node-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="8" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- ── NODE: ИДЕЯ (top center) ── -->
+        <g class="circuit-node" transform="translate(250, 60)">
+          <circle r="58" stroke="#C8FF00" stroke-width="2.5" fill="rgba(200,255,0,0.08)" class="node-ring"/><circle r="68" stroke="#C8FF00" stroke-width="0.8" stroke-dasharray="6 4" fill="none" opacity="0.5"/>
+          <g transform="translate(-32,-36) scale(0.32)">
+            <circle cx="100" cy="92" r="58" stroke="#C8FF00" stroke-width="3.5" fill="none"/>
+            <path d="M88 92 Q94 82 100 92 Q106 102 112 92" stroke="#C8FF00" stroke-width="3" fill="none"/>
+            <path d="M74 148 L126 148" stroke="#C8FF00" stroke-width="3.5" fill="none"/>
+            <path d="M79 159 L121 159" stroke="#C8FF00" stroke-width="3.5" fill="none"/>
+            <path d="M85 170 L115 170" stroke="#C8FF00" stroke-width="3.5" fill="none"/>
+            <line x1="100" y1="20" x2="100" y2="8" stroke="#C8FF00" stroke-width="3" fill="none"/>
+            <line x1="156" y1="46" x2="164" y2="38" stroke="#C8FF00" stroke-width="3" fill="none"/>
+            <line x1="175" y1="100" x2="187" y2="100" stroke="#C8FF00" stroke-width="3" fill="none"/>
+            <line x1="44" y1="46" x2="36" y2="38" stroke="#C8FF00" stroke-width="3" fill="none"/>
+            <line x1="25" y1="100" x2="13" y2="100" stroke="#C8FF00" stroke-width="3" fill="none"/>
+          </g>
+          <text y="70" text-anchor="middle" font-family="monospace" font-size="11" fill="#C8FF00" letter-spacing="3" opacity="0.9" data-i18n="flow.idea">ИДЕЯ</text>
+        </g>
+
+        <!-- ── NODE: КОД (left center) ── -->
+        <g class="circuit-node" transform="translate(80, 250)">
+          <circle r="58" stroke="#C8FF00" stroke-width="2.5" fill="rgba(200,255,0,0.08)" class="node-ring"/><circle r="68" stroke="#C8FF00" stroke-width="0.8" stroke-dasharray="6 4" fill="none" opacity="0.5"/>
+          <g transform="translate(-35,-35) scale(0.35)">
+            <path d="M62 60 L20 100 L62 140" stroke="#C8FF00" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <line x1="125" y1="50" x2="75" y2="150" stroke="#C8FF00" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            <path d="M138 60 L180 100 L138 140" stroke="#C8FF00" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </g>
+          <text y="70" text-anchor="middle" font-family="monospace" font-size="11" fill="#C8FF00" letter-spacing="3" opacity="0.9" data-i18n="flow.code">КОД</text>
+        </g>
+
+        <!-- ── NODE: ЗАПУСК (right center) ── -->
+        <g class="circuit-node" transform="translate(420, 250)">
+          <circle r="58" stroke="#C8FF00" stroke-width="2.5" fill="rgba(200,255,0,0.08)" class="node-ring"/><circle r="68" stroke="#C8FF00" stroke-width="0.8" stroke-dasharray="6 4" fill="none" opacity="0.5"/>
+          <g transform="translate(-30,-40) scale(0.28)">
+            <path d="M100 20 C70 50 62 100 62 140 L138 140 C138 100 130 50 100 20Z" stroke="#C8FF00" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
+            <circle cx="100" cy="95" r="14" stroke="#C8FF00" stroke-width="3" fill="none"/>
+            <path d="M62 130 L30 170 L62 155" stroke="#C8FF00" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M138 130 L170 170 L138 155" stroke="#C8FF00" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M80 142 Q88 175 100 185 Q112 175 120 142" stroke="#C8FF00" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          </g>
+          <text y="70" text-anchor="middle" font-family="monospace" font-size="11" fill="#C8FF00" letter-spacing="3" opacity="0.9" data-i18n="flow.launch">ЗАПУСК</text>
+        </g>
+
+        <!-- ── NODE: КЛИЕНТЫ (bottom center) ── -->
+        <g class="circuit-node" transform="translate(250, 440)">
+          <circle r="58" stroke="#C8FF00" stroke-width="2.5" fill="rgba(200,255,0,0.08)" class="node-ring"/><circle r="68" stroke="#C8FF00" stroke-width="0.8" stroke-dasharray="6 4" fill="none" opacity="0.5"/>
+          <g transform="translate(-38,-32) scale(0.35)">
+            <circle cx="60" cy="60" r="22" stroke="#C8FF00" stroke-width="3.5" fill="none"/>
+            <path d="M20 140 C20 108 38 92 60 92 C82 92 100 108 100 140" stroke="#C8FF00" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <circle cx="160" cy="60" r="22" stroke="#C8FF00" stroke-width="3.5" fill="none"/>
+            <path d="M120 140 C120 108 138 92 160 92 C182 92 200 108 200 140" stroke="#C8FF00" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <circle cx="110" cy="38" r="16" stroke="#C8FF00" stroke-width="2.5" stroke-dasharray="5 3" fill="none"/>
+          </g>
+          <text y="70" text-anchor="middle" font-family="monospace" font-size="11" fill="#C8FF00" letter-spacing="3" opacity="0.9" data-i18n="flow.clients">КЛИЕНТЫ</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+  </div><!-- /hero-inner -->
+  <div class="marquee">
+    <div class="marquee-inner" data-i18n="marquee.text">ДИЗАЙН&nbsp;&middot;&nbsp;РАЗРАБОТКА&nbsp;&middot;&nbsp;AI&nbsp;&middot;&nbsp;МОБАЙЛ&nbsp;&middot;&nbsp;TELEGRAM-БОТЫ&nbsp;&middot;&nbsp;ДАШБОРДЫ&nbsp;&middot;&nbsp;E-COMMERCE&nbsp;&nbsp;&middot;&nbsp;&nbsp;UI/UX&nbsp;&middot;&nbsp;ДИЗАЙН&nbsp;&middot;&nbsp;РАЗРАБОТКА&nbsp;&middot;&nbsp;AI&nbsp;&middot;&nbsp;МОБАЙЛ&nbsp;&middot;&nbsp;TELEGRAM-БОТЫ&nbsp;&middot;&nbsp;ДАШБОРДЫ&nbsp;&middot;&nbsp;E-COMMERCE&nbsp;&nbsp;&middot;&nbsp;&nbsp;UI/UX&nbsp;&middot;&nbsp;ДИЗАЙН&nbsp;&middot;&nbsp;РАЗРАБОТКА&nbsp;&middot;&nbsp;AI&nbsp;&middot;&nbsp;МОБАЙЛ&nbsp;&middot;&nbsp;TELEGRAM-БОТЫ&nbsp;&middot;&nbsp;ДАШБОРДЫ&nbsp;&middot;&nbsp;E-COMMERCE&nbsp;&nbsp;&middot;&nbsp;&nbsp;UI/UX&nbsp;&middot;&nbsp;ДИЗАЙН&nbsp;&middot;&nbsp;РАЗРАБОТКА&nbsp;&middot;&nbsp;AI&nbsp;&middot;&nbsp;МОБАЙЛ&nbsp;&middot;&nbsp;TELEGRAM-БОТЫ&nbsp;&middot;&nbsp;ДАШБОРДЫ&nbsp;&middot;&nbsp;E-COMMERCE&nbsp;&nbsp;&middot;&nbsp;&nbsp;UI/UX&nbsp;&middot;&nbsp;</div>
+  </div>
+</section>
+
+<!-- FAST LANDING OFFER -->
+<section class="fast-offer">
+
+  <!-- Big decorative background number -->
+  <div class="fo-bg-num">48</div>
+
+  <div class="fo-inner">
+
+    <!-- Top timeline strip -->
+    <div class="fo-timeline">
+      <div class="fo-step">
+        <span class="fo-step-time">00:00</span>
+        <div class="fo-step-dot"></div>
+        <span class="fo-step-label" data-i18n="offer.step1">Пишете нам</span>
+      </div>
+      <div class="fo-step-line">
+        <div class="fo-step-line-fill"></div>
+      </div>
+      <div class="fo-step">
+        <span class="fo-step-time" data-i18n="offer.time1">3–4 ч</span>
+        <div class="fo-step-dot fo-step-dot--accent"></div>
+        <span class="fo-step-label" data-i18n="offer.step2">Первый макет</span>
+      </div>
+      <div class="fo-step-line">
+        <div class="fo-step-line-fill"></div>
+      </div>
+      <div class="fo-step">
+        <span class="fo-step-time" data-i18n="offer.time2">48 ч</span>
+        <div class="fo-step-dot fo-step-dot--accent"></div>
+        <span class="fo-step-label" data-i18n="offer.step3">Сайт в продакшн</span>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="fo-content">
+      <div class="fo-left">
+        <div class="fo-badge" data-i18n="offer.badge">⚡ СРОЧНЫЙ ЛЕНДИНГ</div>
+        <h2 class="fo-title"><span data-i18n="offer.title1">Лендинг</span><br>за <span class="fo-title-highlight" data-i18n="offer.title2">48 часов</span></h2>
+        <p class="fo-sub" data-i18n="offer.sub">Первый макет — через 3–4 часа после обращения. Бесплатно. Просто посмотрите.</p>
+        <p class="fo-guarantee-inline" data-i18n="offer.guarantee">Не понравится — не платите.</p>
+      </div>
+
+      <div class="fo-right">
+        <ul class="fo-checklist">
+          <li data-i18n="offer.check1"><span class="fo-check">✓</span>Макет за 3–4 часа — смотрите до оплаты</li>
+          <li data-i18n="offer.check2"><span class="fo-check">✓</span>Готов к запуску за 1–2 дня</li>
+          <li data-i18n="offer.check3"><span class="fo-check">✓</span>2 раунда правок включено</li>
+          <li data-i18n="offer.check4"><span class="fo-check">✓</span>Деплой включён (домен оплачивается отдельно)</li>
+        </ul>
+
+        <div class="fo-cta-row">
+          <div class="fo-price-block">
+            <span class="fo-price">100 000 ₸</span>
+            <span class="fo-price-note" data-i18n="offer.priceNote">под ключ</span>
+          </div>
+          <a href="https://t.me/doscode" class="fo-btn" target="_blank">
+            <span data-i18n="offer.btn">Хочу лендинг</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-number" data-target="40" data-suffix="+">40+</div>
+      <div class="stat-label" data-i18n="stats.projects">Проектов запущено</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-target="5" data-suffix="">5</div>
+      <div class="stat-label" data-i18n="stats.years">Лет опыта</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-target="4" data-suffix=" нед">4 нед</div>
+      <div class="stat-label" data-i18n="stats.mvp">Средний MVP</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-target="24" data-suffix="ч">24ч</div>
+      <div class="stat-label" data-i18n="stats.free">Оценка бесплатно</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <h2 class="section-title" data-i18n="projects.title">КЕЙСЫ</h2>
+  <div class="projects-grid">
+
+    <!-- DOSPASS -->
+    <article class="project-card">
+      <div class="project-gallery" data-gallery>
+        <div class="gallery-track">
+          <img src="/public/screenshots/dospass.jpg" alt="DosPass" loading="lazy">
+          <img src="/public/screenshots/Dosspas2.png" alt="DosPass 2" loading="lazy">
+          <img src="/public/screenshots/dospass3.png" alt="DosPass 3" loading="lazy">
+          <img src="/public/screenshots/dospass4.png" alt="DosPass 4" loading="lazy">
+          <img src="/public/screenshots/dosspass1.png" alt="DosPass 5" loading="lazy">
+        </div>
+        <button class="gallery-btn gallery-btn--prev" aria-label="Назад">&#8592;</button>
+        <button class="gallery-btn gallery-btn--next" aria-label="Вперёд">&#8594;</button>
+        <div class="gallery-dots"></div>
+        <span class="project-num">01</span>
+      </div>
+      <div class="project-info">
+        <h3 class="project-name">DosPass</h3>
+        <p class="project-desc" data-i18n="projects.dospass.desc">SaaS-платформа лояльности — punch cards, подарочные карты, реферальная система и AI-маркетинг для малого бизнеса</p>
+        <div class="project-metrics">
+          <span class="pm-item"><span class="pm-val">$20</span>/мес</span>
+          <span class="pm-sep">·</span>
+          <span class="pm-item"><span class="pm-val">SaaS</span></span>
+          <span class="pm-sep">·</span>
+          <span class="pm-item"><span class="pm-val">UAE</span> рынок</span>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">React</span>
+          <span class="project-tag">Node.js</span>
+          <span class="project-tag">AI</span>
+        </div>
+        <a href="https://dospass.com" class="project-link" target="_blank" rel="noopener" data-i18n="projects.openSite">Открыть сайт →</a>
+      </div>
+    </article>
+
+    <!-- WHATSAPP MULTI -->
+    <article class="project-card">
+      <div class="project-gallery" data-gallery>
+        <div class="gallery-track">
+          <img src="/public/screenshots/voiceclaw.png" alt="WhatsApp Multi" loading="lazy">
+          <img src="/public/screenshots/voiceclaw2.png" alt="WhatsApp Multi 2" loading="lazy">
+          <img src="/public/screenshots/voiceclaw3.png" alt="WhatsApp Multi 3" loading="lazy">
+        </div>
+        <button class="gallery-btn gallery-btn--prev" aria-label="Назад">&#8592;</button>
+        <button class="gallery-btn gallery-btn--next" aria-label="Вперёд">&#8594;</button>
+        <div class="gallery-dots"></div>
+        <span class="project-num">02</span>
+      </div>
+      <div class="project-info">
+        <h3 class="project-name">DosChat</h3>
+        <p class="project-desc" data-i18n="projects.doschat.desc">Интегрируем в отделы продаж и поддержки наших клиентов. Команда видит AI-подсказки к каждому сообщению — и отвечает в один клик. Полный контроль чата, втрое быстрее.</p>
+        <div class="project-metrics">
+          <span class="pm-item"><span class="pm-val">AI</span> подсказки</span>
+          <span class="pm-sep">·</span>
+          <span class="pm-item"><span class="pm-val">Multi</span>-аккаунт</span>
+          <span class="pm-sep">·</span>
+          <span class="pm-item"><span class="pm-val">Продажи</span> и саппорт</span>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Electron</span>
+          <span class="project-tag">AI</span>
+          <span class="project-tag">WhatsApp</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- CHICAGO PIZZA -->
+    <article class="project-card">
+      <div class="project-gallery" data-gallery>
+        <div class="gallery-track">
+          <img src="/public/screenshots/chicagopizza.jpg" alt="Chicago Pizza" loading="lazy">
+          <img src="/public/screenshots/voiceclaw4.png" alt="Chicago Pizza 2" loading="lazy">
+          <img src="/public/screenshots/voiceclaw5.png" alt="Chicago Pizza 3" loading="lazy">
+        </div>
+        <button class="gallery-btn gallery-btn--prev" aria-label="Назад">&#8592;</button>
+        <button class="gallery-btn gallery-btn--next" aria-label="Вперёд">&#8594;</button>
+        <div class="gallery-dots"></div>
+        <span class="project-num">03</span>
+      </div>
+      <div class="project-info">
+        <h3 class="project-name">Chicago Pizza</h3>
+        <p class="project-desc" data-i18n="projects.chicago.desc">Полная автоматизация ресторана — интеграция iiko с WhatsApp, приём заказов, программа лояльности и аналитика в реальном времени</p>
+        <div class="project-metrics">
+          <span class="pm-item"><span class="pm-val">40%</span> авто-заказы</span>
+          <span class="pm-sep">·</span>
+          <span class="pm-item"><span class="pm-val">iiko</span> интеграция</span>
+          <span class="pm-sep">·</span>
+          <span class="pm-item"><span class="pm-val">WhatsApp</span></span>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Node.js</span>
+          <span class="project-tag">iiko</span>
+          <span class="project-tag">WhatsApp</span>
+        </div>
+        <a href="https://chicagopizza.kz" class="project-link" target="_blank" rel="noopener" data-i18n="projects.openSite">Открыть сайт →</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <h2 class="section-title" data-i18n="testi.title">ЧТО<br>ГОВОРЯТ</h2>
+  <div class="testimonials-grid">
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text" data-i18n="testi.1">«Запустили DosPass с нуля до рабочего продукта за 6 недель. Команда реально вникла в задачу — не просто написали код, а предложили несколько решений которые мы сами не додумались. Теперь платформа работает в трёх странах.»</p>
+      <div class="testi-author">
+        <div class="testi-avatar">ВБ</div>
+        <div class="testi-info">
+          <span class="testi-name" data-i18n="testi.name1">Владимир Б.</span>
+          <span class="testi-role" data-i18n="testi.role1">Основатель, DosPass</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text" data-i18n="testi.2">«Нужен был Telegram-бот для приёма заказов и интеграция с нашей POS-системой. Сделали за 2 недели, всё работает без сбоев уже больше года. Поддержка отвечает быстро — это редкость среди разработчиков.»</p>
+      <div class="testi-author">
+        <div class="testi-avatar">АС</div>
+        <div class="testi-info">
+          <span class="testi-name" data-i18n="testi.name2">Асель С.</span>
+          <span class="testi-role" data-i18n="testi.role2">Директор, Chicago Pizza</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card testi-card--featured">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text" data-i18n="testi.3">«Первый макет получили через 4 часа после звонка. Это честно шокировало. Финальный сайт запустили на следующий день — конверсия выросла втрое по сравнению со старым.»</p>
+      <div class="testi-author">
+        <div class="testi-avatar">МА</div>
+        <div class="testi-info">
+          <span class="testi-name" data-i18n="testi.name3">Максим А.</span>
+          <span class="testi-role" data-i18n="testi.role3">CEO, IT-стартап, Алматы</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services-section" id="services">
+  <div class="services-layout">
+
+    <!-- LEFT: sticky context column -->
+    <div class="services-left">
+      <h2 class="section-title services-title" data-i18n="srv.title">ЧТО МЫ<br><span class="lime">ДЕЛАЕМ</span></h2>
+      <p class="services-pitch" data-i18n="srv.pitch">Берём проект целиком — от первого скетча до живого продукта. Без субподрядчиков, без сюрпризов.</p>
+      <div class="services-stat-row">
+        <div class="ss-item"><span class="ss-num">6</span><span class="ss-label">направлений</span></div>
+        <div class="ss-item"><span class="ss-num">1</span><span class="ss-label">команда</span></div>
+        <div class="ss-item"><span class="ss-num">∞</span><span class="ss-label">масштаб</span></div>
+      </div>
+      <a href="https://t.me/doscode" class="services-cta" target="_blank" data-i18n="srv.cta">Обсудить проект →</a>
+    </div>
+
+    <!-- RIGHT: service cards grid -->
+    <div class="services-right">
+      <div class="srv-card">
+        <div class="srv-card-top">
+          <div class="srv-icon">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="24" height="18" rx="2"/>
+              <line x1="4" y1="12" x2="28" y2="12"/>
+              <circle cx="8" cy="8" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="12" cy="8" r="1" fill="currentColor" stroke="none"/>
+              <path d="M10 18 L14 16 L18 20 L22 15"/>
+            </svg>
+          </div>
+          <span class="srv-num">01</span>
+        </div>
+        <h3 class="srv-name" data-i18n="srv.01.name">UI/UX Дизайн</h3>
+        <p class="srv-desc" data-i18n="srv.01.desc">Исследуем пользователей, строим прототипы, создаём дизайн-систему. Результат — интерфейс который конвертирует.</p>
+        <ul class="srv-list">
+          <li data-i18n="srv.01.li1">Пользовательское исследование</li>
+          <li data-i18n="srv.01.li2">Wireframes и прототипы</li>
+          <li data-i18n="srv.01.li3">Готовые макеты под ключ</li>
+        </ul>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-card-top">
+          <div class="srv-icon">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="6" width="26" height="20" rx="2"/>
+              <path d="M12 12 L8 16 L12 20M20 12 L24 16 L20 20"/>
+              <line x1="15" y1="10" x2="17" y2="22"/>
+            </svg>
+          </div>
+          <span class="srv-num">02</span>
+        </div>
+        <h3 class="srv-name" data-i18n="srv.02.name">Веб-приложения</h3>
+        <p class="srv-desc" data-i18n="srv.02.desc">SaaS, корпоративные порталы, маркетплейсы. Строим на современном стеке — быстро, надёжно, с нуля до прода.</p>
+        <ul class="srv-list">
+          <li data-i18n="srv.02.li1">React / Next.js фронтенд</li>
+          <li data-i18n="srv.02.li2">Node.js / Python бэкенд</li>
+          <li data-i18n="srv.02.li3">PostgreSQL, Redis, деплой</li>
+        </ul>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-card-top">
+          <div class="srv-icon">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="10" y="2" width="12" height="28" rx="3"/>
+              <line x1="14" y1="26" x2="18" y2="26"/>
+              <line x1="13" y1="6" x2="19" y2="6"/>
+            </svg>
+          </div>
+          <span class="srv-num">03</span>
+        </div>
+        <h3 class="srv-name" data-i18n="srv.03.name">Мобайл</h3>
+        <p class="srv-desc" data-i18n="srv.03.desc">iOS и Android из одной кодовой базы. React Native — нативный UX, один бюджет, двойной охват.</p>
+        <ul class="srv-list">
+          <li data-i18n="srv.03.li1">React Native / Expo</li>
+          <li data-i18n="srv.03.li2">App Store + Google Play</li>
+          <li data-i18n="srv.03.li3">Push, геолокация, камера</li>
+        </ul>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-card-top">
+          <div class="srv-icon">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="16" cy="16" r="5"/>
+              <path d="M16 4 C10 4 4 10 4 16"/>
+              <path d="M28 16 C28 22 22 28 16 28"/>
+              <path d="M16 4 C22 4 28 10 28 16"/>
+              <path d="M4 16 C4 22 10 28 16 28"/>
+              <circle cx="16" cy="4" r="2" fill="currentColor" stroke="none"/>
+              <circle cx="28" cy="16" r="2" fill="currentColor" stroke="none"/>
+              <circle cx="16" cy="28" r="2" fill="currentColor" stroke="none"/>
+              <circle cx="4" cy="16" r="2" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <span class="srv-num">04</span>
+        </div>
+        <h3 class="srv-name" data-i18n="srv.04.name">AI-агенты</h3>
+        <p class="srv-desc" data-i18n="srv.04.desc">Автоматизируем процессы с помощью LLM. Claude, GPT, кастомные пайплайны — AI который реально работает на бизнес.</p>
+        <ul class="srv-list">
+          <li data-i18n="srv.04.li1">Claude / GPT интеграции</li>
+          <li data-i18n="srv.04.li2">RAG и векторные базы</li>
+          <li data-i18n="srv.04.li3">Автоматизация рутины</li>
+        </ul>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-card-top">
+          <div class="srv-icon">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M26 4 L6 4 C4.9 4 4 4.9 4 6 L4 20 C4 21.1 4.9 22 6 22 L14 22 L14 26 L10 28 L22 28 L18 26 L18 22 L26 22 C27.1 22 28 21.1 28 20 L28 6 C28 4.9 27.1 4 26 4Z"/>
+              <line x1="10" y1="13" x2="22" y2="13"/>
+              <line x1="10" y1="17" x2="17" y2="17"/>
+            </svg>
+          </div>
+          <span class="srv-num">05</span>
+        </div>
+        <h3 class="srv-name" data-i18n="srv.05.name">Telegram-боты</h3>
+        <p class="srv-desc" data-i18n="srv.05.desc">Боты которые продают, уведомляют и поддерживают клиентов 24/7. Интеграция с CRM, iiko, платёжками.</p>
+        <ul class="srv-list">
+          <li data-i18n="srv.05.li1">Приём заказов и оплат</li>
+          <li data-i18n="srv.05.li2">CRM и iiko интеграция</li>
+          <li data-i18n="srv.05.li3">Рассылки и воронки</li>
+        </ul>
+      </div>
+
+      <div class="srv-card">
+        <div class="srv-card-top">
+          <div class="srv-icon">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="26" height="26" rx="2"/>
+              <line x1="3" y1="11" x2="29" y2="11"/>
+              <line x1="11" y1="11" x2="11" y2="29"/>
+              <path d="M17 20 L20 16 L23 20" stroke-width="1.5"/>
+              <path d="M14 24 L17 18 L20 22 L23 18 L26 22"/>
+            </svg>
+          </div>
+          <span class="srv-num">06</span>
+        </div>
+        <h3 class="srv-name" data-i18n="srv.06.name">Дашборды</h3>
+        <p class="srv-desc" data-i18n="srv.06.desc">Аналитика в реальном времени — видите всё что важно, когда важно. BI-системы, отчёты, KPI на одном экране.</p>
+        <ul class="srv-list">
+          <li data-i18n="srv.06.li1">Real-time метрики</li>
+          <li data-i18n="srv.06.li2">Кастомные графики и KPI</li>
+          <li data-i18n="srv.06.li3">Интеграция с любым источником</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <h2 class="section-title" data-i18n="proc.title">КАК МЫ<br><span class="lime">РАБОТАЕМ</span></h2>
+  <div class="process-grid">
+
+    <div class="process-step">
+      <div class="ps-num">01</div>
+      <div class="ps-connector"></div>
+      <div class="ps-content">
+        <h3 class="ps-title" data-i18n="proc.01.title">Заявка</h3>
+        <p class="ps-desc" data-i18n="proc.01.desc">Пишете в Telegram или на почту. Рассказываете задачу — в любом формате, даже голосом. Отвечаем в течение часа в рабочее время.</p>
+        <span class="ps-time">// 1 час</span>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <div class="ps-num">02</div>
+      <div class="ps-connector"></div>
+      <div class="ps-content">
+        <h3 class="ps-title" data-i18n="proc.02.title">Бриф и оценка</h3>
+        <p class="ps-desc" data-i18n="proc.02.desc">Задаём нужные вопросы, уточняем цели и аудиторию. Даём честную смету с фиксированной ценой — без скрытых доплат.</p>
+        <span class="ps-time">// 1 день</span>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <div class="ps-num">03</div>
+      <div class="ps-connector"></div>
+      <div class="ps-content">
+        <h3 class="ps-title" data-i18n="proc.03.title">Дизайн</h3>
+        <p class="ps-desc" data-i18n="proc.03.desc">Создаём прототипы и макеты. Показываем первую версию и собираем правки до момента пока не скажете "да, это оно".</p>
+        <span class="ps-time">// 2–5 дней</span>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <div class="ps-num">04</div>
+      <div class="ps-connector"></div>
+      <div class="ps-content">
+        <h3 class="ps-title" data-i18n="proc.04.title">Разработка</h3>
+        <p class="ps-desc" data-i18n="proc.04.desc">Пишем код по утверждённому дизайну. Еженедельные апдейты, доступ к dev-версии с первого дня. Никаких "готово через месяц".</p>
+        <span class="ps-time">// Зависит от проекта</span>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <div class="ps-num">05</div>
+      <div class="ps-connector ps-connector--last"></div>
+      <div class="ps-content">
+        <h3 class="ps-title" data-i18n="proc.05.title">Запуск и поддержка</h3>
+        <p class="ps-desc" data-i18n="proc.05.desc">Деплоим, настраиваем домен, проверяем всё до запуска. После — на связи для быстрых фиксов и обновлений.</p>
+        <span class="ps-time">// Готово</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="tech-section">
+  <div class="tech-inner">
+    <span class="tech-label">Технологии</span>
+    <div class="tech-strip">
+      <span class="tech-item">React</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">Next.js</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">Node.js</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">Python</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">PostgreSQL</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">Claude AI</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">GPT-4</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">React Native</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">Telegram API</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">Redis</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">Docker</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">Render</span>
+      <span class="tech-dot">·</span>
+      <span class="tech-item">Vercel</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <h2 class="section-title">СТОИМОСТЬ</h2>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <h3 class="price-name">Лендинг</h3>
+      <div class="price-amount">от 150 000 ₸</div>
+      <div class="price-duration">2 нед.</div>
+      <p class="price-desc">Дизайн, разработка, деплой под ключ</p>
+      <a href="https://t.me/doscode" class="price-btn" target="_blank">Заказать</a>
+    </div>
+    <div class="price-card featured">
+      <h3 class="price-name">MVP</h3>
+      <div class="price-badge">Популярный выбор</div>
+      <div class="price-amount">от 600 000 ₸</div>
+      <div class="price-duration">4–8 нед.</div>
+      <p class="price-desc">Полный цикл: дизайн + разработка + деплой</p>
+      <a href="https://t.me/doscode" class="price-btn" target="_blank">Заказать</a>
+    </div>
+    <div class="price-card">
+      <h3 class="price-name">Кастом</h3>
+      <div class="price-amount">По запросу</div>
+      <div class="price-duration">Индивидуально</div>
+      <p class="price-desc">Команда и SLA под ваш проект</p>
+      <a href="https://t.me/doscode" class="price-btn" target="_blank">Обсудить</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <h2 class="section-title">ВОПРОСЫ</h2>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>Сколько будет стоить мой проект?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Зависит от сложности. Лендинг — от 100,000 ₸. MVP приложение — от 600,000 ₸. После первого звонка даём точную смету с фиксированной ценой — без "выяснилось в процессе".</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>Что нужно для старта?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Только идея. Не нужно готовить ТЗ, макеты или описание — просто расскажите задачу в свободной форме. Мы сами зададим нужные вопросы и структурируем проект.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>Работаете ли вы с зарубежными клиентами?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Да. Работаем с клиентами из Казахстана, России, ОАЭ и других стран. Принимаем оплату в KZT, USD и USDT. Всё общение в Telegram, время не помеха.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>Как выглядит процесс после оплаты?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Еженедельные апдейты, доступ к dev-версии с первого дня. Вы видите прогресс в реальном времени — не ждёте месяц до показа. Правки вносим итерационно.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>Даёте ли гарантию на готовый продукт?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Да. 30 дней бесплатной поддержки после запуска — исправляем любые баги без вопросов. После — гибкие тарифы на сопровождение или поддержка по запросу.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>Можно ли сначала увидеть результат, потом платить?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Для лендингов — да. Первый макет через 3–4 часа бесплатно. Платите только когда понравится. Для крупных проектов — поэтапная оплата по милстоунам.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STAR WARS CRAWL -->
+<section class="sw-section">
+  <canvas class="sw-canvas" id="swCanvas"></canvas>
+  <div class="sw-orb sw-orb-1"></div>
+  <div class="sw-orb sw-orb-2"></div>
+  <div class="sw-fade-top"></div>
+  <div class="sw-intro" id="swIntro">
+    <p>Давным-давно,<br>в далёком Алматы...</p>
+  </div>
+  <div class="sw-stage" id="swStage">
+    <div class="sw-crawl" id="swCrawl">
+      <div class="sw-crawl-inner">
+        <p class="sw-episode">ЭПИЗОД I</p>
+        <p class="sw-episode-title">НАЧАЛО</p>
+        <div class="sw-crawl-body">
+          <p>Мир бизнеса переживал тёмные времена.</p>
+          <p>Агентства брали предоплату и пропадали. Разработчики обещали «через месяц» — и пропадали на три. Сайты стоили как квартира и выглядели как 2009 год.</p>
+          <p>Клиенты устали ждать. Бизнес устал платить за воздух.</p>
+          <p>Небольшая группа разработчиков из Алматы решила это изменить. Без офиса. Без субподрядчиков. Без буллшита.</p>
+          <p>Только код, который работает. Только дедлайны, которые держатся. Только продукты, которыми гордятся.</p>
+          <p>Так в 2020 году появился DosCode.</p>
+          <p>С тех пор мы создали платформы, которые работают в трёх странах, боты которые продают круглосуточно, и приложения которыми пользуются тысячи людей каждый день.</p>
+          <p>Мы строим программное обеспечение которое меняет то как бизнес работает — в Казахстане и за его пределами.</p>
+          <p>Если у вас есть идея — мы дадим ей жизнь.</p>
+          <p class="sw-finale">Присоединяйтесь.<br>Сила — с нами. И с вами.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sw-fade-bottom"></div>
+
+  <!-- Music button -->
+  <div class="sw-music-wrap">
+    <button class="sw-music-btn" id="swMusicBtn">
+      <span class="sw-music-icon">▶</span>
+      <span class="sw-music-text">Для полного эффекта — нажмите сюда (со звуком)</span>
+    </button>
+    <p class="sw-music-sorry">...простите, мы не удержались</p>
+  </div>
+  <audio id="swAudio" src="https://soundfxcenter.com/movies/star-wars/8d82b5_Star_Wars_Main_Theme_Song.mp3" preload="none"></audio>
+
+</section>
+
+<!-- CTA LIME SHOCK -->
+<section class="cta-lime">
+  <h2 data-i18n="cta.title">Есть идея?</h2>
+  <p data-i18n="cta.sub">Расскажите задачу — через 24 часа у вас будет смета и план. Без обязательств.</p>
+  <a href="https://t.me/doscode" class="btn-dark" target="_blank" data-i18n="cta.btn">Обсудить проект в Telegram →</a>
+  <span class="cta-small">или напишите на <a href="mailto:hello@doscode.kz">hello@doscode.kz</a></span>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left" data-i18n="footer.copy">DosCode · Алматы · 2020–2026</div>
+  <div class="footer-links">
+    <a href="#services" data-i18n="nav.services">Услуги</a>
+    <a href="#projects" data-i18n="nav.projects">Проекты</a>
+    <a href="https://t.me/doscode" target="_blank">Telegram</a>
+  </div>
+</footer>
+
+<!-- GSAP CDN -->
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр изображения">
+  <button class="lb-close" id="lbClose" aria-label="Закрыть">✕</button>
+  <button class="lb-nav lb-nav--prev" id="lbPrev" aria-label="Назад">&#8592;</button>
+  <button class="lb-nav lb-nav--next" id="lbNext" aria-label="Вперёд">&#8594;</button>
+  <div class="lb-img-wrap">
+    <img class="lb-img" id="lbImg" src="" alt="">
+  </div>
+  <div class="lb-dots" id="lbDots"></div>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+  /* ── CUSTOM CURSOR ── */
+  (function() {
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    const cursor = document.getElementById('cursor');
+    if (!cursor) return;
+
+    let mx = -100, my = -100;
+    document.addEventListener('mousemove', function(e) {
+      mx = e.clientX;
+      my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    const hoverEls = document.querySelectorAll('a, button, [data-hover]');
+    hoverEls.forEach(function(el) {
+      el.addEventListener('mouseenter', function() { cursor.classList.add('expanded'); });
+      el.addEventListener('mouseleave', function() { cursor.classList.remove('expanded'); });
+    });
+  })();
+
+  /* ── GSAP ANIMATIONS ── */
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof gsap === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* Hero lines — clip-path reveal + y translate */
+    gsap.from('.hero-label', { opacity: 0, y: 20, duration: 0.8, delay: 0.2 });
+
+    gsap.from('.hero-headline .line-inner', {
+      y: 120,
+      clipPath: 'inset(100% 0 0 0)',
+      duration: 1,
+      ease: 'power4.out',
+      stagger: 0.12,
+      delay: 0.3
+    });
+
+    gsap.from('.hero-sub', { opacity: 0, y: 30, duration: 0.8, delay: 1 });
+    gsap.from('.hero-ctas', { opacity: 0, y: 30, duration: 0.8, delay: 1.15 });
+
+    /* Stats — count up */
+    document.querySelectorAll('.stat-number').forEach(function(el) {
+      var target = parseInt(el.getAttribute('data-target'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      var obj = { val: 0 };
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 100%',
+        once: true,
+        onEnter: function() {
+          gsap.to(obj, {
+            val: target,
+            duration: 1.5,
+            ease: 'power2.out',
+            onUpdate: function() {
+              el.textContent = Math.round(obj.val) + suffix;
+            }
+          });
+        }
+      });
+    });
+
+    /* Project cards — fade in from bottom */
+    gsap.from('.project-card', {
+      y: 60,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: '.projects-grid',
+        start: 'top 100%'
+      }
+    });
+
+    /* Service cards — fade in up */
+    gsap.from('.srv-card', {
+      y: 30,
+      opacity: 0,
+      duration: 0.6,
+      ease: 'power3.out',
+      stagger: 0.07,
+      scrollTrigger: {
+        trigger: '.services-right',
+        start: 'top 90%'
+      }
+    });
+
+    /* Pricing cards */
+    gsap.from('.price-card', {
+      y: 40,
+      opacity: 0,
+      duration: 0.7,
+      ease: 'power3.out',
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: '.pricing-grid',
+        start: 'top 100%'
+      }
+    });
+
+    /* CTA lime — scale up */
+    gsap.from('.cta-lime', {
+      scale: 0.97,
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.cta-lime',
+        start: 'top 100%'
+      }
+    });
+  });
+
+  /* ── SW STARFIELD CANVAS ── */
+  (function() {
+    var canvas = document.getElementById('swCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var stars = [];
+    var NUM = 350;
+
+    function resize() {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    for (var i = 0; i < NUM; i++) {
+      stars.push({
+        x: Math.random(),
+        y: Math.random(),
+        r: Math.random() * 1.4 + 0.3,
+        o: Math.random() * 0.6 + 0.2,
+        speed: Math.random() * 0.0003 + 0.0001,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+
+    function drawStars(t) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(function(s) {
+        var opacity = s.o * (0.6 + 0.4 * Math.sin(t * 0.001 * s.speed * 3000 + s.phase));
+        ctx.beginPath();
+        ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(200,255,0,' + opacity + ')';
+        ctx.fill();
+      });
+      requestAnimationFrame(drawStars);
+    }
+    requestAnimationFrame(drawStars);
+  })();
+
+  /* ── SW MUSIC BUTTON ── */
+  (function() {
+    var btn = document.getElementById('swMusicBtn');
+    var audio = document.getElementById('swAudio');
+    if (!btn || !audio) return;
+    var playing = false;
+
+    btn.addEventListener('click', function() {
+      if (!playing) {
+        audio.volume = 0.6;
+        audio.play().then(function() {
+          playing = true;
+          btn.classList.add('playing');
+          btn.querySelector('.sw-music-icon').textContent = '■';
+          btn.querySelector('.sw-music-text').textContent = 'Остановить музыку';
+        }).catch(function() {});
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+        playing = false;
+        btn.classList.remove('playing');
+        btn.querySelector('.sw-music-icon').textContent = '▶';
+        btn.querySelector('.sw-music-text').textContent = 'Для полного эффекта — нажмите сюда';
+      }
+    });
+
+    audio.addEventListener('ended', function() {
+      playing = false;
+      btn.classList.remove('playing');
+      btn.querySelector('.sw-music-icon').textContent = '▶';
+      btn.querySelector('.sw-music-text').textContent = 'Для полного эффекта — нажмите сюда';
+    });
+  })();
+
+  /* ── STAR WARS CRAWL REPLAY ── */
+  (function() {
+    var intro = document.getElementById('swIntro');
+    var stage = document.getElementById('swStage');
+    var crawl = document.getElementById('swCrawl');
+    if (!intro || !stage || !crawl) return;
+
+    var INTRO_DUR  = 5000;   // ms intro shows
+    var CRAWL_DUR  = 60000;  // ms crawl runs
+    var PAUSE_DUR  = 100;    // ms pause before replay
+
+    function runCrawl() {
+      // Reset everything
+      intro.style.transition = 'none';
+      intro.style.opacity = '0';
+      stage.style.transition = 'none';
+      stage.style.opacity = '0';
+      crawl.classList.remove('animating');
+      crawl.style.setProperty('--crawl-dur', CRAWL_DUR + 'ms');
+      void crawl.offsetWidth; // force reflow
+
+      // Phase 1: intro fade in
+      setTimeout(function() {
+        intro.style.transition = 'opacity 0.8s ease';
+        intro.style.opacity = '1';
+      }, 80);
+
+      // Fade out intro
+      setTimeout(function() {
+        intro.style.transition = 'opacity 1.2s ease';
+        intro.style.opacity = '0';
+      }, INTRO_DUR - 1200);
+
+      // Phase 2: show stage + start crawl animation
+      setTimeout(function() {
+        stage.style.transition = 'opacity 0.8s ease';
+        stage.style.opacity = '1';
+        void crawl.offsetWidth;
+        crawl.classList.add('animating');
+      }, INTRO_DUR);
+
+      // Phase 3: fade out + replay
+      setTimeout(function() {
+        stage.style.transition = 'opacity 0.8s ease';
+        stage.style.opacity = '0';
+        setTimeout(runCrawl, PAUSE_DUR);
+      }, INTRO_DUR + CRAWL_DUR - 800);
+    }
+
+    // Only run when section is in view
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          runCrawl();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(document.querySelector('.sw-section'));
+  })();
+
+  /* ── FAQ ACCORDION ── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling;
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      // Close all
+      document.querySelectorAll('.faq-q').forEach(b => {
+        b.setAttribute('aria-expanded', 'false');
+        b.nextElementSibling.classList.remove('open');
+      });
+      // Open clicked if was closed
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        answer.classList.add('open');
+      }
+    });
+  });
+</script>
+
+<script>
+/* ── CANVAS PARTICLES ── */
+(function() {
+  const canvas = document.getElementById('particles');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, dots = [], mouse = {x: -999, y: -999};
+  const COUNT = Math.floor((window.innerWidth * window.innerHeight) / 12000), CONNECT = 160, DOT_COLOR = 'rgba(200,255,0,';
+
+  function resize() {
+    const hero = document.getElementById('hero');
+    W = canvas.width = hero ? hero.offsetWidth : window.innerWidth;
+    H = canvas.height = hero ? hero.offsetHeight : window.innerHeight;
+  }
+
+  function init() {
+    dots = [];
+    for (let i = 0; i < COUNT; i++) {
+      dots.push({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 2 + 1
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    dots.forEach(d => {
+      d.x += d.vx; d.y += d.vy;
+      if (d.x < 0 || d.x > W) d.vx *= -1;
+      if (d.y < 0 || d.y > H) d.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.fillStyle = DOT_COLOR + '0.8)';
+      ctx.fill();
+    });
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = i + 1; j < dots.length; j++) {
+        const dx = dots[i].x - dots[j].x;
+        const dy = dots[i].y - dots[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < CONNECT) {
+          ctx.beginPath();
+          ctx.moveTo(dots[i].x, dots[i].y);
+          ctx.lineTo(dots[j].x, dots[j].y);
+          ctx.strokeStyle = DOT_COLOR + (1 - dist/CONNECT) * 0.5 + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+      // connect to mouse
+      const mdx = dots[i].x - mouse.x;
+      const mdy = dots[i].y - mouse.y;
+      const mdist = Math.sqrt(mdx*mdx + mdy*mdy);
+      if (mdist < CONNECT * 1.5) {
+        ctx.beginPath();
+        ctx.moveTo(dots[i].x, dots[i].y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.strokeStyle = DOT_COLOR + (1 - mdist/(CONNECT*1.5)) * 0.4 + ')';
+        ctx.lineWidth = 0.7;
+        ctx.stroke();
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize(); init(); draw();
+})();
+
+/* ── CURSOR SPOTLIGHT ── */
+(function() {
+  const spotlight = document.getElementById('spotlight');
+  if (!spotlight) return;
+  window.addEventListener('mousemove', e => {
+    spotlight.style.background = `radial-gradient(circle 500px at ${e.clientX}px ${e.clientY}px, rgba(200,255,0,0.05) 0%, transparent 70%)`;
+  });
+})();
+
+/* ── GSAP VISIBILITY SAFETY NET ── */
+setTimeout(() => {
+  document.querySelectorAll('.project-card, .srv-card, .stat, .pricing-card, .step, .cta-lime, .hero-label, .hero-headline, .hero-sub, .hero-ctas').forEach(el => {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
+}, 2000);
+
+/* ── TEXT SCRAMBLE ── */
+(function() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
+  function scramble(el) {
+    const original = el.textContent;
+    let frame = 0;
+    const totalFrames = 18;
+    const interval = setInterval(() => {
+      el.textContent = original.split('').map((ch, i) => {
+        if (ch === ' ') return ' ';
+        if (frame / totalFrames > i / original.length) return ch;
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join('');
+      if (frame >= totalFrames) {
+        el.textContent = original;
+        clearInterval(interval);
+      }
+      frame++;
+    }, 40);
+  }
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.line-inner').forEach((el, i) => {
+        setTimeout(() => scramble(el), i * 180);
+      });
+    }, 400);
+  });
+})();
+
+
+/* ── MAGNETIC BUTTONS ── */
+(function() {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+  document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) * 0.35;
+      const dy = (e.clientY - cy) * 0.35;
+      btn.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0,0)';
+      btn.style.transition = 'transform 0.4s cubic-bezier(0.23,1,0.32,1)';
+      setTimeout(() => btn.style.transition = '', 400);
+    });
+    btn.addEventListener('mouseenter', () => {
+      btn.style.transition = 'transform 0.1s ease';
+    });
+  });
+})();
+
+/* ── GALLERY CAROUSEL ── */
+document.querySelectorAll('[data-gallery]').forEach(function(gallery) {
+  var track = gallery.querySelector('.gallery-track');
+  var imgs = track.querySelectorAll('img');
+  var dotsContainer = gallery.querySelector('.gallery-dots');
+  var prevBtn = gallery.querySelector('.gallery-btn--prev');
+  var nextBtn = gallery.querySelector('.gallery-btn--next');
+  var total = imgs.length;
+  var current = 0;
+
+  if (total <= 1) {
+    prevBtn.style.display = 'none';
+    nextBtn.style.display = 'none';
+    return;
+  }
+
+  // Build dots
+  imgs.forEach(function(_, i) {
+    var dot = document.createElement('div');
+    dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', function() { goTo(i); });
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    current = (n + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dotsContainer.querySelectorAll('.gallery-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  prevBtn.addEventListener('click', function() { goTo(current - 1); });
+  nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+  // Touch/swipe support
+  var startX = 0;
+  gallery.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+  gallery.addEventListener('touchend', function(e) {
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+  });
+});
+
+/* ── LIGHTBOX JS ── */
+(function() {
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbClose = document.getElementById('lbClose');
+  var lbPrev = document.getElementById('lbPrev');
+  var lbNext = document.getElementById('lbNext');
+  var lbDots = document.getElementById('lbDots');
+  var lbCounter = document.getElementById('lbCounter');
+
+  var allGalleries = [];
+  var activeGallery = null;
+  var activeIndex = 0;
+
+  // Build gallery image arrays
+  document.querySelectorAll('[data-gallery]').forEach(function(gallery, gi) {
+    var imgs = Array.from(gallery.querySelectorAll('.gallery-track img'));
+    var srcs = imgs.map(function(img) { return img.src; });
+    var alts = imgs.map(function(img) { return img.alt; });
+    allGalleries.push({ srcs: srcs, alts: alts });
+
+    // Make images clickable — also attach to track itself for reliability
+    imgs.forEach(function(img, ii) {
+      img.style.cursor = 'zoom-in';
+    });
+
+    // Track click — figure out which image is active from transform
+    var track = gallery.querySelector('.gallery-track');
+    track.style.cursor = 'zoom-in';
+    track.addEventListener('click', function(e) {
+      // Don't fire if clicking prev/next buttons
+      if (e.target.closest('.gallery-btn')) return;
+      // Get current slide index from transform
+      var transform = track.style.transform || 'translateX(0%)';
+      var match = transform.match(/-(\d+)/);
+      var currentSlide = match ? (parseInt(match[1]) / 100) : 0;
+      openLightbox(gi, currentSlide);
+    });
+  });
+
+  function openLightbox(gi, index) {
+    activeGallery = gi;
+    activeIndex = index;
+    renderLightbox();
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderLightbox() {
+    var gallery = allGalleries[activeGallery];
+    lbImg.src = gallery.srcs[activeIndex];
+    lbImg.alt = gallery.alts[activeIndex];
+    lbCounter.textContent = (activeIndex + 1) + ' / ' + gallery.srcs.length;
+
+    // Dots
+    lbDots.innerHTML = '';
+    gallery.srcs.forEach(function(_, i) {
+      var dot = document.createElement('div');
+      dot.className = 'lb-dot' + (i === activeIndex ? ' active' : '');
+      dot.addEventListener('click', function() { activeIndex = i; renderLightbox(); });
+      lbDots.appendChild(dot);
+    });
+
+    // Hide nav if single image
+    var single = gallery.srcs.length <= 1;
+    lbPrev.style.display = single ? 'none' : '';
+    lbNext.style.display = single ? 'none' : '';
+    lbDots.style.display = single ? 'none' : '';
+  }
+
+  function navLightbox(dir) {
+    var total = allGalleries[activeGallery].srcs.length;
+    activeIndex = (activeIndex + dir + total) % total;
+    renderLightbox();
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', function() { navLightbox(-1); });
+  lbNext.addEventListener('click', function() { navLightbox(1); });
+  lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
+
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navLightbox(-1);
+    if (e.key === 'ArrowRight') navLightbox(1);
+  });
+})();
+
+</script>
+
+<script>
+/* ── I18N LANGUAGE SWITCHER ── */
+(function() {
+var MARQUEE_BASE = {
+  ru: 'ДИЗАЙН\u00a0·\u00a0РАЗРАБОТКА\u00a0·\u00a0AI\u00a0·\u00a0МОБАЙЛ\u00a0·\u00a0TELEGRAM-БОТЫ\u00a0·\u00a0ДАШБОРДЫ\u00a0·\u00a0E-COMMERCE\u00a0\u00a0·\u00a0\u00a0UI/UX\u00a0·\u00a0',
+  kz: 'ДИЗАЙН\u00a0·\u00a0ӘЗІРЛЕУ\u00a0·\u00a0AI\u00a0·\u00a0МОБАЙЛ\u00a0·\u00a0TELEGRAM-БОТТАР\u00a0·\u00a0ДАШБОРДТАР\u00a0·\u00a0E-COMMERCE\u00a0\u00a0·\u00a0\u00a0UI/UX\u00a0·\u00a0',
+  en: 'DESIGN\u00a0·\u00a0DEVELOPMENT\u00a0·\u00a0AI\u00a0·\u00a0MOBILE\u00a0·\u00a0TELEGRAM BOTS\u00a0·\u00a0DASHBOARDS\u00a0·\u00a0E-COMMERCE\u00a0\u00a0·\u00a0\u00a0UI/UX\u00a0·\u00a0'
+};
+
+var TRANSLATIONS = {
+  ru: {
+    nav: { cta: 'Обсудить проект\u00a0\u2192', services: 'Услуги', projects: 'Проекты', process: 'Процесс', pricing: 'Цены', testimonials: 'Отзывы', faq: 'FAQ' },
+    hero: {
+      label: '// Almaty \u00b7 2020 \u2014 present',
+      line1: 'ВАША', line2: 'ИДЕЯ.', line3: 'НАШ КОД.',
+      sub: 'Дизайн, разработка, деплой \u2014 под\u00a0ключ. Веб, мобайл, AI за\u00a04\u20138\u00a0недель.',
+      cta1: 'Начать проект\u00a0\u2192', cta2: 'Смотреть кейсы\u00a0\u2193',
+      trust: '\u2713 Без предоплаты на старте  \u2713 Оценка за 24ч  \u2713 Фиксированная цена'
+    },
+    flow: { idea: 'ИДЕЯ', code: 'КОД', launch: 'ЗАПУСК', clients: 'КЛИЕНТЫ' },
+    offer: {
+      badge: '\u26a1 СРОЧНЫЙ ЛЕНДИНГ', title1: 'Лендинг', title2: '48 часов',
+      sub: 'Первый макет \u2014 через 3\u20134 часа после обращения. Бесплатно. Просто посмотрите.',
+      guarantee: 'Не понравится \u2014 не платите.',
+      step1: 'Пишете нам', step2: 'Первый макет', step3: 'Сайт в продакшн',
+      time1: '3\u20134 ч', time2: '48 ч',
+      check1: 'Макет за 3\u20134 часа \u2014 смотрите до оплаты',
+      check2: 'Готов к запуску за 1\u20132 дня',
+      check3: '2 раунда правок включено',
+      check4: 'Деплой включён (домен оплачивается отдельно)',
+      priceNote: 'под ключ', btn: 'Хочу лендинг'
+    },
+    stats: { projects: 'Проектов запущено', years: 'Лет опыта', mvp: 'Средний MVP', free: 'Оценка бесплатно' },
+    projects: {
+      title: 'КЕЙСЫ', openSite: 'Открыть сайт \u2192',
+      dospass: { desc: 'SaaS-платформа лояльности \u2014 punch cards, подарочные карты, реферальная система и AI-маркетинг для малого бизнеса' },
+      doschat: { desc: 'Интегрируем в отделы продаж и поддержки наших клиентов. Команда видит AI-подсказки к каждому сообщению \u2014 и отвечает в один клик. Полный контроль чата, втрое быстрее.' },
+      chicago: { desc: 'Полная автоматизация ресторана \u2014 интеграция iiko с WhatsApp, приём заказов, программа лояльности и аналитика в реальном времени' }
+    },
+    testi: {
+      title: 'ЧТО<br>ГОВОРЯТ',
+      1: '\u00abЗапустили DosPass с нуля до рабочего продукта за 6 недель. Команда реально вникла в задачу \u2014 не просто написали код, а предложили несколько решений которые мы сами не додумались. Теперь платформа работает в трёх странах.\u00bb',
+      2: '\u00abНужен был Telegram-бот для приёма заказов и интеграция с нашей POS-системой. Сделали за 2 недели, всё работает без сбоев уже больше года. Поддержка отвечает быстро \u2014 это редкость среди разработчиков.\u00bb',
+      3: '\u00abПервый макет получили через 4 часа после звонка. Это честно шокировало. Финальный сайт запустили на следующий день \u2014 конверсия выросла втрое по сравнению со старым.\u00bb',
+      name1: 'Владимир Б.', name2: 'Асель С.', name3: 'Максим А.',
+      role1: 'Основатель, DosPass', role2: 'Директор, Chicago Pizza', role3: 'CEO, IT-стартап, Алматы'
+    },
+    srv: {
+      title: 'ЧТО МЫ<br><span class="lime">ДЕЛАЕМ</span>',
+      pitch: 'Берём проект целиком \u2014 от первого скетча до живого продукта. Без субподрядчиков, без сюрпризов.',
+      cta: 'Обсудить проект \u2192',
+      '01': { name: 'UI/UX Дизайн', desc: 'Исследуем пользователей, строим прототипы, создаём дизайн-систему. Результат \u2014 интерфейс который конвертирует.', li1: 'Пользовательское исследование', li2: 'Wireframes и прототипы', li3: 'Готовые макеты под ключ' },
+      '02': { name: 'Веб-приложения', desc: 'SaaS, корпоративные порталы, маркетплейсы. Строим на современном стеке \u2014 быстро, надёжно, с нуля до прода.', li1: 'React / Next.js фронтенд', li2: 'Node.js / Python бэкенд', li3: 'PostgreSQL, Redis, деплой' },
+      '03': { name: 'Мобайл', desc: 'iOS и Android из одной кодовой базы. React Native \u2014 нативный UX, один бюджет, двойной охват.', li1: 'React Native / Expo', li2: 'App Store + Google Play', li3: 'Push, геолокация, камера' },
+      '04': { name: 'AI-агенты', desc: 'Автоматизируем процессы с помощью LLM. Claude, GPT, кастомные пайплайны \u2014 AI который реально работает на бизнес.', li1: 'Claude / GPT интеграции', li2: 'RAG и векторные базы', li3: 'Автоматизация рутины' },
+      '05': { name: 'Telegram-боты', desc: 'Боты которые продают, уведомляют и поддерживают клиентов 24/7. Интеграция с CRM, iiko, платёжками.', li1: 'Приём заказов и оплат', li2: 'CRM и iiko интеграция', li3: 'Рассылки и воронки' },
+      '06': { name: 'Дашборды', desc: 'Аналитика в реальном времени \u2014 видите всё что важно, когда важно. BI-системы, отчёты, KPI на одном экране.', li1: 'Real-time метрики', li2: 'Кастомные графики и KPI', li3: 'Интеграция с любым источником' }
+    },
+    proc: {
+      title: 'КАК МЫ<br><span class="lime">РАБОТАЕМ</span>',
+      '01': { title: 'Заявка', desc: 'Пишете в Telegram или на почту. Рассказываете задачу \u2014 в любом формате, даже голосом. Отвечаем в течение часа в рабочее время.' },
+      '02': { title: 'Бриф и оценка', desc: 'Задаём нужные вопросы, уточняем цели и аудиторию. Даём честную смету с фиксированной ценой \u2014 без скрытых доплат.' },
+      '03': { title: 'Дизайн', desc: 'Создаём прототипы и макеты. Показываем первую версию и собираем правки до момента пока не скажете "да, это оно".' },
+      '04': { title: 'Разработка', desc: 'Пишем код по утверждённому дизайну. Еженедельные апдейты, доступ к dev-версии с первого дня. Никаких "готово через месяц".' },
+      '05': { title: 'Запуск и поддержка', desc: 'Деплоим, настраиваем домен, проверяем всё до запуска. После \u2014 на связи для быстрых фиксов и обновлений.' }
+    },
+    cta: {
+      title: 'Есть идея?',
+      sub: 'Расскажите задачу \u2014 через\u00a024\u00a0часа у вас будет смета и план. Без обязательств.',
+      btn: 'Обсудить проект в Telegram\u00a0\u2192'
+    },
+    footer: { copy: 'DosCode \u00b7 Алматы \u00b7 2020\u20132026' }
+  },
+  kz: {
+    nav: { cta: 'Жоба талқылау\u00a0\u2192', services: 'Қызметтер', projects: 'Жобалар', process: 'Үдеріс', pricing: 'Бағалар', testimonials: 'Пікірлер', faq: 'FAQ' },
+    hero: {
+      label: '// Алматы \u00b7 2020 \u2014 қазіргі уақыт',
+      line1: 'СІЗДІҢ', line2: 'ИДЕЯ.', line3: 'БІЗДІҢ КОД.',
+      sub: 'Дизайн, әзірлеу, деплой \u2014 кілт\u00a0бойынша. Веб, мобайл, AI \u2014 4\u20138\u00a0аптада.',
+      cta1: 'Жобаны бастау\u00a0\u2192', cta2: 'Кейстерді көру\u00a0\u2193',
+      trust: '\u2713 Бастапқыда алдын ала төлемсіз  \u2713 24 сағаттық бағалау  \u2713 Тіркелген баға'
+    },
+    flow: { idea: 'ИДЕЯ', code: 'КОД', launch: 'ІСКЕ ҚОСУ', clients: 'КЛИЕНТТЕР' },
+    offer: {
+      badge: '\u26a1 ШҰҒЫЛ ЛЕНДИНГ', title1: 'Лендинг', title2: '48 сағат',
+      sub: 'Бірінші макет \u2014 өтініштен кейін 3\u20134 сағатта. Тегін. Жай қараңыз.',
+      guarantee: 'Ұнамаса \u2014 төлемейсіз.',
+      step1: 'Бізге жазыңыз', step2: 'Бірінші макет', step3: 'Сайт продакшнда',
+      time1: '3\u20134 с', time2: '48 с',
+      check1: 'Макет 3\u20134 сағатта \u2014 төлемес бұрын қараңыз',
+      check2: '1\u20132 күнде іске қосуға дайын',
+      check3: '2 раунд түзету кіреді',
+      check4: 'Деплой кіреді (домен бөлек төленеді)',
+      priceNote: 'кілт бойынша', btn: 'Лендинг қалаймын'
+    },
+    stats: { projects: 'Іске қосылған жобалар', years: 'Жыл тәжірибе', mvp: 'Орташа MVP', free: 'Тегін бағалау' },
+    projects: {
+      title: 'КЕЙСТЕР', openSite: 'Сайтты ашу \u2192',
+      dospass: { desc: 'Адалдық SaaS-платформасы \u2014 punch cards, сыйлық карталары, реферал жүйесі және шағын бизнес үшін AI-маркетинг' },
+      doschat: { desc: 'Клиенттеріміздің сату және қолдау бөлімдеріне енгіземіз. Команда әр хабарламаға AI-кеңестерін көреді \u2014 бір кликпен жауап береді. Чаттың толық бақылауы, үш есе жылдам.' },
+      chicago: { desc: 'Мейрамхананы толық автоматтандыру \u2014 iiko-ны WhatsApp-пен интеграциялау, тапсырыс қабылдау, адалдық бағдарламасы және нақты уақыттағы аналитика' }
+    },
+    testi: {
+      title: 'ПІКІРЛЕР',
+      1: '\u00abDosPass-ты нөлден жұмыс істейтін өнімге 6 аптада іске қостық. Команда тапсырмаға шынымен үңілді \u2014 жай код жазып қана қоймай, өздеріміз ойластырмаған бірнеше шешім ұсынды. Платформа қазір үш елде жұмыс істейді.\u00bb',
+      2: '\u00abТапсырыс қабылдауға арналған Telegram-бот және POS-жүйемізбен интеграция қажет болды. 2 аптада жасады, бәрі бір жылдан астам уақыт бойы үзіліссіз жұмыс істейді. Қолдау жылдам жауап береді \u2014 бұл әзірлеушілер арасында сирек кездеседі.\u00bb',
+      3: '\u00abҚоңыраудан кейін 4 сағатта бірінші макетті алдық. Бұл шынымен таң қалдырды. Келесі күні соңғы сайтты іске қостық \u2014 конверсия ескіге қарағанда үш есе өсті.\u00bb',
+      name1: 'Владимир Б.', name2: 'Асель С.', name3: 'Максим А.',
+      role1: 'Негізін қалаушы, DosPass', role2: 'Директор, Chicago Pizza', role3: 'CEO, IT-стартап, Алматы'
+    },
+    srv: {
+      title: 'НЕ\u00a0ІСТЕЙМІЗ<br><span class="lime">БІЗ</span>',
+      pitch: 'Жобаны толығымен аламыз \u2014 бірінші эскизден тірі өнімге дейін. Субмердігерлерсіз, сюрпризсіз.',
+      cta: 'Жобаны талқылау \u2192',
+      '01': { name: 'UI/UX Дизайн', desc: 'Пайдаланушыларды зерттейміз, прототиптер жасаймыз, дизайн-жүйе жасаймыз. Нәтиже \u2014 конверсия жасайтын интерфейс.', li1: 'Пайдаланушы зерттеуі', li2: 'Wireframes және прототиптер', li3: 'Кілт бойынша дайын макеттер' },
+      '02': { name: 'Веб-қосымшалар', desc: 'SaaS, корпоративтік порталдар, маркетплейстер. Заманауи стекте салатынбыз \u2014 жылдам, сенімді, нөлден продга дейін.', li1: 'React / Next.js фронтенд', li2: 'Node.js / Python бэкенд', li3: 'PostgreSQL, Redis, деплой' },
+      '03': { name: 'Мобайл', desc: 'Бір кодтық базадан iOS және Android. React Native \u2014 нативтік UX, бір бюджет, екі есе қамту.', li1: 'React Native / Expo', li2: 'App Store + Google Play', li3: 'Push, геолокация, камера' },
+      '04': { name: 'AI-агенттер', desc: 'LLM көмегімен процестерді автоматтандырамыз. Claude, GPT, кастомды пайплайндар \u2014 бизнеске шынымен жұмыс істейтін AI.', li1: 'Claude / GPT интеграциялар', li2: 'RAG және векторлық базалар', li3: 'Рутинаны автоматтандыру' },
+      '05': { name: 'Telegram-боттар', desc: '24/7 сататын, хабарлайтын және клиенттерге қолдау көрсететін боттар. CRM, iiko, төлем жүйелерімен интеграция.', li1: 'Тапсырыс пен төлемді қабылдау', li2: 'CRM және iiko интеграциясы', li3: 'Жіберілімдер және воронкалар' },
+      '06': { name: 'Дашбордтар', desc: 'Нақты уақыттағы аналитика \u2014 маңызды болғанда, маңыздысын көресіз. BI-жүйелер, есептер, KPI бір экранда.', li1: 'Нақты уақыт метрикалары', li2: 'Кастомды графиктер және KPI', li3: 'Кез келген көзбен интеграция' }
+    },
+    proc: {
+      title: 'ҚАЛАЙ<br><span class="lime">ЖҰМЫС ІСТЕЙМІЗ</span>',
+      '01': { title: 'Өтініш', desc: 'Telegram-ға немесе поштаға жазыңыз. Тапсырманы кез келген форматта айтыңыз, тіпті дауыспен де. Жұмыс уақытында бір сағат ішінде жауап береміз.' },
+      '02': { title: 'Бриф және бағалау', desc: 'Қажетті сұрақтар қоямыз, мақсаттар мен аудиторияны нақтылаймыз. Тіркелген бағамен адал смета береміз \u2014 жасырын қосымша төлемсіз.' },
+      '03': { title: 'Дизайн', desc: 'Прототиптер мен макеттер жасаймыз. Бірінші нұсқаны көрсетеміз және "иә, дәл осы" дегенше түзетулер жинаймыз.' },
+      '04': { title: 'Әзірлеу', desc: 'Бекітілген дизайн бойынша код жазамыз. Апта сайынғы жаңартулар, dev-нұсқаға бірінші күннен қолжетімділік. "Бір айдан кейін дайын" деген жоқ.' },
+      '05': { title: 'Іске қосу және қолдау', desc: 'Деплой жасаймыз, доменді баптаймыз, іске қосуға дейін бәрін тексереміз. Одан кейін \u2014 жылдам түзетулер мен жаңартулар үшін байланыстамыз.' }
+    },
+    cta: {
+      title: 'Идея бар ма?',
+      sub: 'Тапсырманы айтыңыз \u2014 24\u00a0сағатта смета мен жоспар аласыз. Міндеттемесіз.',
+      btn: 'Telegram-да жобаны талқылау\u00a0\u2192'
+    },
+    footer: { copy: 'DosCode \u00b7 Алматы \u00b7 2020\u20132026' }
+  },
+  en: {
+    nav: { cta: 'Discuss project\u00a0\u2192', services: 'Services', projects: 'Projects', process: 'Process', pricing: 'Pricing', testimonials: 'Reviews', faq: 'FAQ' },
+    hero: {
+      label: '// Almaty \u00b7 2020 \u2014 present',
+      line1: 'YOUR', line2: 'IDEA.', line3: 'OUR CODE.',
+      sub: 'Design, development, deploy \u2014 turnkey. Web, mobile, AI in 4\u20138 weeks.',
+      cta1: 'Start a project\u00a0\u2192', cta2: 'View cases\u00a0\u2193',
+      trust: '\u2713 No upfront payment  \u2713 Free estimate in 24h  \u2713 Fixed price'
+    },
+    flow: { idea: 'IDEA', code: 'CODE', launch: 'LAUNCH', clients: 'CLIENTS' },
+    offer: {
+      badge: '\u26a1 FAST LANDING PAGE', title1: 'Landing page', title2: '48 hours',
+      sub: 'First mockup \u2014 3\u20134 hours after your message. Free. Just take a look.',
+      guarantee: "Don\u2019t like it \u2014 don\u2019t pay.",
+      step1: 'You contact us', step2: 'First mockup', step3: 'Site in production',
+      time1: '3\u20134 h', time2: '48 h',
+      check1: 'Mockup in 3\u20134 hours \u2014 see it before paying',
+      check2: 'Ready to launch in 1\u20132 days',
+      check3: '2 rounds of revisions included',
+      check4: 'Deploy included (domain billed separately)',
+      priceNote: 'turnkey', btn: 'I want a landing page'
+    },
+    stats: { projects: 'Projects launched', years: 'Years of experience', mvp: 'Average MVP', free: 'Free estimate' },
+    projects: {
+      title: 'CASES', openSite: 'Open site \u2192',
+      dospass: { desc: 'Loyalty SaaS platform \u2014 punch cards, gift cards, referral system and AI marketing for small business' },
+      doschat: { desc: "We integrate into our clients' sales and support teams. The team sees AI suggestions for every message \u2014 and replies in one click. Full chat control, three times faster." },
+      chicago: { desc: 'Full restaurant automation \u2014 iiko integration with WhatsApp, order taking, loyalty program and real-time analytics' }
+    },
+    testi: {
+      title: 'WHAT CLIENTS<br>SAY',
+      1: '"We launched DosPass from zero to a working product in 6 weeks. The team really dug into the task \u2014 not just wrote code, but proposed several solutions we hadn\'t thought of ourselves. Now the platform operates in three countries."',
+      2: '"We needed a Telegram bot for order taking and integration with our POS system. Done in 2 weeks, everything has been working without issues for over a year. Support responds quickly \u2014 that\'s rare among developers."',
+      3: '"We got the first mockup 4 hours after the call. That honestly shocked us. The final site launched the next day \u2014 conversion tripled compared to the old one."',
+      name1: 'Vladimir B.', name2: 'Asel S.', name3: 'Maxim A.',
+      role1: 'Founder, DosPass', role2: 'Director, Chicago Pizza', role3: 'CEO, IT startup, Almaty'
+    },
+    srv: {
+      title: 'WHAT WE<br><span class="lime">BUILD</span>',
+      pitch: 'We take the full project \u2014 from first sketch to live product. No subcontractors, no surprises.',
+      cta: 'Discuss project \u2192',
+      '01': { name: 'UI/UX Design', desc: 'We research users, build prototypes, create design systems. Result \u2014 an interface that converts.', li1: 'User research', li2: 'Wireframes & prototypes', li3: 'Ready-to-ship designs' },
+      '02': { name: 'Web Apps', desc: 'SaaS, corporate portals, marketplaces. Built on modern stack \u2014 fast, reliable, zero to prod.', li1: 'React / Next.js frontend', li2: 'Node.js / Python backend', li3: 'PostgreSQL, Redis, deploy' },
+      '03': { name: 'Mobile', desc: 'iOS and Android from one codebase. React Native \u2014 native UX, one budget, double reach.', li1: 'React Native / Expo', li2: 'App Store + Google Play', li3: 'Push, geolocation, camera' },
+      '04': { name: 'AI Agents', desc: 'We automate processes with LLMs. Claude, GPT, custom pipelines \u2014 AI that actually works for business.', li1: 'Claude / GPT integrations', li2: 'RAG & vector databases', li3: 'Workflow automation' },
+      '05': { name: 'Telegram Bots', desc: 'Bots that sell, notify and support customers 24/7. CRM, iiko, payment integrations.', li1: 'Order & payment taking', li2: 'CRM & iiko integration', li3: 'Broadcasts & funnels' },
+      '06': { name: 'Dashboards', desc: 'Real-time analytics \u2014 see what matters, when it matters. BI systems, reports, KPIs on one screen.', li1: 'Real-time metrics', li2: 'Custom charts & KPIs', li3: 'Any data source integration' }
+    },
+    proc: {
+      title: 'HOW WE<br><span class="lime">WORK</span>',
+      '01': { title: 'Request', desc: 'Write to us on Telegram or email. Describe your task \u2014 in any format, even voice. We respond within an hour during business hours.' },
+      '02': { title: 'Brief & estimate', desc: 'We ask the right questions, clarify goals and audience. We give an honest estimate with a fixed price \u2014 no hidden charges.' },
+      '03': { title: 'Design', desc: 'We create prototypes and mockups. Show the first version and collect feedback until you say "yes, that\'s it".' },
+      '04': { title: 'Development', desc: 'We write code based on the approved design. Weekly updates, access to the dev version from day one. No "ready in a month".' },
+      '05': { title: 'Launch & support', desc: 'We deploy, set up the domain, check everything before launch. After \u2014 we stay in touch for quick fixes and updates.' }
+    },
+    cta: {
+      title: 'Got an idea?',
+      sub: 'Tell us about your project \u2014 in 24\u00a0hours you\'ll have an estimate and a plan. No obligations.',
+      btn: 'Discuss project on Telegram\u00a0\u2192'
+    },
+    footer: { copy: 'DosCode \u00b7 Almaty \u00b7 2020\u20132026' }
+  }
+};
+
+function setLang(lang) {
+  var t = TRANSLATIONS[lang];
+  if (!t) return;
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    // Skip marquee — handled separately
+    if (key === 'marquee.text') return;
+    var val = key.split('.').reduce(function(o, k) { return (o && o[k] !== undefined) ? o[k] : null; }, t);
+    if (val === null || val === undefined) return;
+    // For checklist items, preserve the ✓ span
+    if (key.indexOf('offer.check') === 0) {
+      var checkSpan = el.querySelector('.fo-check');
+      if (checkSpan) {
+        el.textContent = '';
+        el.appendChild(checkSpan);
+        el.appendChild(document.createTextNode(val));
+        return;
+      }
+    }
+    // Use innerHTML for keys with HTML content
+    if (typeof val === 'string' && val.indexOf('<') !== -1) {
+      el.innerHTML = val;
+    } else {
+      el.textContent = val;
+    }
+  });
+
+  // Marquee: generate repeated text from base string
+  var marqueeEl = document.querySelector('[data-i18n="marquee.text"]');
+  if (marqueeEl && MARQUEE_BASE[lang]) {
+    var base = MARQUEE_BASE[lang];
+    marqueeEl.textContent = base + base + base + base;
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  document.documentElement.lang = lang === 'kz' ? 'kk' : lang;
+  localStorage.setItem('doscode-lang', lang);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var saved = localStorage.getItem('doscode-lang') || 'ru';
+  // Always run setLang to initialize marquee
+  setLang(saved);
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { setLang(btn.dataset.lang); });
+  });
+});
+})();
+</script>
+</body>
+</html>
