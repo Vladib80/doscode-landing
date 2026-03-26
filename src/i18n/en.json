@@ -13,6 +13,8 @@
   },
   "hero": {
     "headline": "App development in Almaty that <span class=\"accent\">drives</span> your business",
+    "headline_left": "App Development in Almaty —",
+    "headline_right": "code that drives business",
     "subheadline": "Web apps, dashboards, AI agents & MVPs — from idea to product in days, not months.",
     "cta": "Get a Free Estimate",
     "secondary": "View Our Work"
@@ -101,6 +103,21 @@
   "industries": {
     "title": "We Know Your Business",
     "subtitle": "Industries we serve",
+    "label": "INDUSTRIES",
+    "horeca_desc": "Online ordering, POS & iiko integration, Telegram bots for guests and staff.",
+    "ecommerce_desc": "Online stores, catalogs, loyalty programs, and Kaspi payment integration.",
+    "fintech": "FINTECH",
+    "fintech_desc": "Payment integrations, crypto wallets, transaction analytics, and KYC systems.",
+    "logistics": "LOGISTICS",
+    "logistics_desc": "Fleet tracking, route dispatching, and customer delivery portals.",
+    "health": "HEALTH",
+    "health_desc": "Patient portals, appointment booking, CRM for medical suppliers.",
+    "education": "EDUCATION",
+    "education_desc": "LMS platforms, student dashboards, online courses and testing.",
+    "gov": "GOV TENDERS",
+    "gov_desc": "Real-time Goszakup monitoring, AI-powered tender pre-qualification.",
+    "realestate": "REAL ESTATE",
+    "realestate_desc": "Property listings, agent CRM, mortgage calculator and floor plans.",
     "items": [
       {
         "icon": "restaurant",
