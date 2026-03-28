@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DosCode — Разработка приложений в Алматы | Веб, мобайл, AI</title>
+  <meta name="description" content="Разрабатываем веб и мобильные приложения в Алматы. Лендинг от 150К ₸ за 2 недели, MVP за 4–8 недель. Telegram-боты, AI-агенты, дашборды. Оценка бесплатно." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    /* ═══════════════════════════════════════════════
+       DESIGN TOKENS
+       ═══════════════════════════════════════════════ */
+    :root {
+      --bg:       #0A0A0A;
+      --fg:       #F0F0EC;
+      --muted:    rgba(240, 240, 236, 0.42);
+      --border:   rgba(240, 240, 236, 0.09);
+      --accent:   #C8FF00;       /* electric lime — used sparingly */
+      --max:      1360px;
+      --pad:      clamp(20px, 5.5vw, 88px);
+      --f-head:   'Unbounded', sans-serif;
+      --f-body:   'Golos Text', sans-serif;
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESET
+       ═══════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--f-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ul, ol { list-style: none; }
+
+    /* Film grain */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 9000; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.55;
+    }
+
+    /* ═══════════════════════════════════════════════
+       NAV
+       ═══════════════════════════════════════════════ */
+    .nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      padding: 28px var(--pad);
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s, padding 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.stuck {
+      background: rgba(10, 10, 10, 0.93);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 18px var(--pad);
+      border-color: var(--border);
+    }
+    .nav-logo { height: 24px; width: auto; }
+    .nav-links { display: flex; gap: 40px; }
+    .nav-links a {
+      font-family: var(--f-head);
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.16em;
+      color: var(--muted);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-cta {
+      font-family: var(--f-head);
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--muted);
+      position: relative; padding: 10px 0;
+      transition: color 0.25s;
+    }
+    /* corner bracket button — 4 L-shaped corners */
+    .nav-cta, .bracket-btn { position: relative; display: inline-block; }
+    .bracket-btn {
+      font-family: var(--f-head);
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--fg);
+      padding: 14px 28px;
+      cursor: pointer; border: none; background: none;
+      transition: color 0.25s;
+    }
+    .bracket-btn::before, .bracket-btn::after,
+    .nav-cta::before, .nav-cta::after {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .bracket-btn::before, .nav-cta::before {
+      background:
+        linear-gradient(currentColor, currentColor) left top    / 10px 1.5px no-repeat,
+        linear-gradient(currentColor, currentColor) left top    / 1.5px 10px no-repeat,
+        linear-gradient(currentColor, currentColor) right bottom / 10px 1.5px no-repeat,
+        linear-gradient(currentColor, currentColor) right bottom / 1.5px 10px no-repeat;
+      transition: inset 0.25s ease;
+    }
+    .bracket-btn::after, .nav-cta::after {
+      background:
+        linear-gradient(currentColor, currentColor) right top    / 10px 1.5px no-repeat,
+        linear-gradient(currentColor, currentColor) right top    / 1.5px 10px no-repeat,
+        linear-gradient(currentColor, currentColor) left  bottom / 10px 1.5px no-repeat,
+        linear-gradient(currentColor, currentColor) left  bottom / 1.5px 10px no-repeat;
+      transition: inset 0.25s ease;
+    }
+    .bracket-btn:hover::before, .bracket-btn:hover::after,
+    .nav-cta:hover::before, .nav-cta:hover::after { inset: -4px; }
+    .bracket-btn:hover, .nav-cta:hover { color: var(--accent); }
+
+    /* ═══════════════════════════════════════════════
+       LAYOUT HELPERS
+       ═══════════════════════════════════════════════ */
+    .inner { max-width: var(--max); margin: 0 auto; }
+    section {
+      padding: clamp(80px, 11vh, 160px) var(--pad);
+      border-top: 1px solid var(--border);
+    }
+    .sec-tag {
+      font-family: var(--f-head);
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.22em;
+      color: var(--accent);
+      display: block; margin-bottom: 48px;
+    }
+    .sec-h2 {
+      font-family: var(--f-head); font-weight: 900;
+      font-size: clamp(2.2rem, 5.5vw, 5.5rem);
+      text-transform: uppercase;
+      line-height: 1.0; letter-spacing: -0.02em;
+      overflow: hidden;           /* needed for clipPath reveal */
+    }
+
+    /* ═══════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      padding: 0 var(--pad) clamp(60px, 8vh, 120px);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      border-top: none;
+    }
+    .hero-pre {
+      font-family: var(--f-head);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+    .hero-h1 {
+      font-family: var(--f-head); font-weight: 900;
+      font-size: clamp(3rem, 9.5vw, 10rem);
+      text-transform: uppercase;
+      line-height: 1.0; letter-spacing: -0.025em;
+      margin-bottom: 52px;
+    }
+    /* Each line wrapped by JS for split animation */
+    .hero-line { display: block; overflow: hidden; }
+    .hero-line-inner { display: block; }
+
+    .hero-foot {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; gap: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-sub {
+      font-size: clamp(0.9rem, 1.35vw, 1.1rem);
+      color: var(--muted); max-width: 460px; line-height: 1.8;
+    }
+    .hero-scroll {
+      font-family: var(--f-head); font-size: 10px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .hero-scroll::before {
+      content: ''; display: block; width: 44px; height: 1px;
+      background: var(--muted);
+      animation: scroll-line 2s ease-in-out infinite;
+    }
+    @keyframes scroll-line {
+      0%, 100% { width: 44px; opacity: 1; }
+      50% { width: 20px; opacity: 0.4; }
+    }
+
+    /* ═══════════════════════════════════════════════
+       ETHOS / ABOUT
+       ═══════════════════════════════════════════════ */
+    .ethos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: start;
+    }
+    .ethos-left .sec-h2 { font-size: clamp(2rem, 4vw, 4.2rem); }
+    .ethos-right p {
+      font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+      color: var(--muted); line-height: 1.85;
+      margin-bottom: 28px;
+    }
+    .arrow-link {
+      font-family: var(--f-head); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--fg); display: inline-flex; align-items: center; gap: 10px;
+      transition: color 0.25s;
+    }
+    .arrow-link span { transition: transform 0.25s; }
+    .arrow-link:hover { color: var(--accent); }
+    .arrow-link:hover span { transform: translateX(6px); }
+
+    /* ═══════════════════════════════════════════════
+       SERVICES — WQF list reveal
+       ═══════════════════════════════════════════════ */
+    .svc-list { margin-top: 64px; }
+    .svc-item {
+      display: grid;
+      grid-template-columns: 96px 1fr 1fr;
+      gap: 40px;
+      padding: 36px 0;
+      border-top: 1px solid var(--border);
+      will-change: clip-path;     /* GSAP target */
+    }
+    .svc-item:last-child { border-bottom: 1px solid var(--border); }
+    .svc-n {
+      font-family: var(--f-head); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); padding-top: 3px;
+    }
+    .svc-title {
+      font-family: var(--f-head); font-weight: 800;
+      font-size: clamp(1rem, 2vw, 1.75rem);
+      text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.1;
+    }
+    .svc-desc {
+      font-size: 14px; line-height: 1.8;
+      color: var(--muted); padding-top: 3px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       PORTFOLIO — minimal text list
+       ═══════════════════════════════════════════════ */
+    .port-list { margin-top: 64px; }
+    .port-item {
+      display: grid;
+      grid-template-columns: 96px 1fr 1.4fr auto;
+      gap: 40px;
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      align-items: center;
+      will-change: clip-path;
+    }
+    .port-item:last-child { border-bottom: 1px solid var(--border); }
+    .port-n {
+      font-family: var(--f-head); font-size: 10px;
+      color: var(--muted); letter-spacing: 0.12em;
+    }
+    .port-name {
+      font-family: var(--f-head); font-weight: 800;
+      font-size: clamp(1rem, 1.8vw, 1.5rem);
+      text-transform: uppercase; letter-spacing: -0.01em;
+    }
+    .port-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .port-link {
+      font-family: var(--f-head); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: color 0.25s;
+    }
+    .port-link::after { content: '↗'; }
+    .port-link:hover { color: var(--accent); }
+
+    /* ═══════════════════════════════════════════════
+       PROCESS
+       ═══════════════════════════════════════════════ */
+    .proc-list { margin-top: 64px; }
+    .proc-item {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 40px;
+      padding: 36px 0;
+      border-top: 1px solid var(--border);
+      will-change: clip-path;
+    }
+    .proc-item:last-child { border-bottom: 1px solid var(--border); }
+    .proc-n {
+      font-family: var(--f-head); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; color: var(--accent);
+      padding-top: 3px;
+    }
+    .proc-body { display: flex; gap: clamp(40px, 5vw, 100px); }
+    .proc-title {
+      font-family: var(--f-head); font-weight: 800;
+      font-size: clamp(1rem, 1.7vw, 1.4rem);
+      text-transform: uppercase; min-width: 180px; line-height: 1.2;
+    }
+    .proc-desc { font-size: 15px; color: var(--muted); line-height: 1.8; }
+
+    /* ═══════════════════════════════════════════════
+       CONTACT
+       ═══════════════════════════════════════════════ */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: start;
+    }
+    .contact-h2 {
+      font-family: var(--f-head); font-weight: 900;
+      font-size: clamp(2.2rem, 5vw, 5rem);
+      text-transform: uppercase;
+      line-height: 1.0; letter-spacing: -0.02em;
+      margin-bottom: 32px; overflow: hidden;
+    }
+    .contact-sub {
+      font-size: 15px; color: var(--muted); line-height: 1.8;
+      margin-bottom: 36px;
+    }
+    .contact-mail {
+      font-family: var(--f-head); font-size: clamp(0.8rem, 1.4vw, 1.1rem);
+      font-weight: 700; letter-spacing: 0.02em;
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--fg);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .contact-mail:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Form — borderless underline style */
+    .form { display: flex; flex-direction: column; gap: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .field { display: flex; flex-direction: column; gap: 10px; }
+    .field label {
+      font-family: var(--f-head); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    }
+    .field input, .field textarea, .field select {
+      background: transparent; border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      color: var(--fg); font-family: var(--f-body); font-size: 15px;
+      outline: none; width: 100%;
+      transition: border-color 0.3s;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: rgba(200, 255, 0, 0.5);
+    }
+    .field textarea { resize: vertical; min-height: 96px; }
+    .field select { cursor: pointer; appearance: none; }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(240,240,236,0.18); }
+    .submit-btn {
+      font-family: var(--f-head); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      background: var(--accent); color: #0A0A0A;
+      border: none; padding: 18px 44px;
+      cursor: pointer; align-self: flex-start;
+      transition: opacity 0.25s, transform 0.2s;
+    }
+    .submit-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════ */
+    .footer {
+      padding: 44px var(--pad);
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      max-width: var(--max); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-copy {
+      font-family: var(--f-head); font-size: 9px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a {
+      font-family: var(--f-head); font-size: 9px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); transition: color 0.25s;
+    }
+    .footer-links a:hover { color: var(--fg); }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .ethos-grid { grid-template-columns: 1fr; gap: 40px; }
+      .svc-item { grid-template-columns: 72px 1fr; gap: 20px; }
+      .svc-desc { grid-column: 2; }
+      .port-item { grid-template-columns: 72px 1fr; gap: 20px; }
+      .port-desc, .port-link { display: none; }
+      .proc-body { flex-direction: column; gap: 12px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero-h1 { font-size: clamp(2.4rem, 10vw, 4rem); }
+      .proc-item { grid-template-columns: 60px 1fr; gap: 16px; }
+      .svc-item { grid-template-columns: 60px 1fr; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <img src="/logo.png" alt="DosCode" class="nav-logo" onerror="this.outerHTML='<span style=\'font-family:var(--f-head);font-weight:900;font-size:18px;letter-spacing:-0.03em\'>DOS<span style=\'color:var(--accent)\'>CODE</span></span>'" />
+  <div class="nav-links">
+    <a href="#services">Услуги</a>
+    <a href="#portfolio">Портфолио</a>
+    <a href="#process">Процесс</a>
+    <a href="#contact">Контакты</a>
+  </div>
+  <a href="#contact" class="nav-cta">Обсудить проект</a>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────────────── -->
+<section class="hero" id="hero">
+  <div class="inner">
+    <p class="hero-pre" id="heroPre">DosCode · Алматы · 2021</p>
+    <h1 class="hero-h1" id="heroH1">МЫ СТРОИМ<br>ЦИФРОВЫЕ ПРОДУКТЫ<br>ДЛЯ БИЗНЕСА.</h1>
+    <div class="hero-foot">
+      <p class="hero-sub" id="heroSub">Веб-сервисы, дашборды, AI-агенты и MVP — от идеи до продукта за дни, а не месяцы.</p>
+      <span class="hero-scroll" id="heroScroll">Прокрутите вниз</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── ETHOS ──────────────────────────────────────────── -->
+<section id="about">
+  <div class="inner">
+    <span class="sec-tag">О нас</span>
+    <div class="ethos-grid">
+      <div>
+        <h2 class="sec-h2">СКОРОСТЬ.<br>КАЧЕСТВО.<br>РЕЗУЛЬТАТ.</h2>
+      </div>
+      <div>
+        <p>DosCode — студия разработки в Алматы. Создаём веб- и мобильные приложения, дашборды, AI-агентов и MVP. Чистый код, быстрая доставка, прозрачный процесс.</p>
+        <p>Каждый проект — партнёрство, а не конвейер. Мы вникаем в бизнес-задачу и строим решение, которое работает на результат.</p>
+        <a href="#contact" class="arrow-link">Начать проект <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ───────────────────────────────────────── -->
+<section id="services">
+  <div class="inner">
+    <span class="sec-tag">Что мы строим</span>
+    <h2 class="sec-h2">УСЛУГИ</h2>
+    <ul class="svc-list">
+      <li class="svc-item">
+        <span class="svc-n">01 / 04</span>
+        <h3 class="svc-title">Веб и мобильные приложения</h3>
+        <p class="svc-desc">PWA, нативные и кросс-платформенные приложения — от заказа еды до маркетплейса. React, Next.js, React Native.</p>
+      </li>
+      <li class="svc-item">
+        <span class="svc-n">02 / 04</span>
+        <h3 class="svc-title">Дашборды и инструменты</h3>
+        <p class="svc-desc">Визуализация данных, внутренние панели и CRM-системы, заточенные под вашу команду.</p>
+      </li>
+      <li class="svc-item">
+        <span class="svc-n">03 / 04</span>
+        <h3 class="svc-title">AI-агенты и автоматизация</h3>
+        <p class="svc-desc">Умные боты и автоматизация рутины — Telegram, WhatsApp, интеграция с ChatGPT и Claude.</p>
+      </li>
+      <li class="svc-item">
+        <span class="svc-n">04 / 04</span>
+        <h3 class="svc-title">Лендинги и MVP</h3>
+        <p class="svc-desc">Быстрый выход на рынок: от идеи до рабочего продукта за 1–2 недели.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── PORTFOLIO ──────────────────────────────────────── -->
+<section id="portfolio">
+  <div class="inner">
+    <span class="sec-tag">Портфолио</span>
+    <h2 class="sec-h2">ПРОЕКТЫ</h2>
+    <ul class="port-list">
+      <li class="port-item">
+        <span class="port-n">01</span>
+        <h3 class="port-name">DosPass</h3>
+        <p class="port-desc">Платформа лояльности для бизнеса — цифровые карты, подарочные сертификаты, реферальная программа.</p>
+        <a href="https://dospass.com" target="_blank" rel="noopener" class="port-link">dospass.com</a>
+      </li>
+      <li class="port-item">
+        <span class="port-n">02</span>
+        <h3 class="port-name">Chicago Pizza</h3>
+        <p class="port-desc">Система онлайн-заказов, QR-меню, аналитика и Telegram-уведомления для сети пиццерий.</p>
+        <a href="https://chicagopizza.kz" target="_blank" rel="noopener" class="port-link">chicagopizza.kz</a>
+      </li>
+      <li class="port-item">
+        <span class="port-n">03</span>
+        <h3 class="port-name">MMG Group</h3>
+        <p class="port-desc">Корпоративный сайт строительной компании с каталогом объектов и CRM-интеграцией.</p>
+        <a href="#" class="port-link">mmg.kz</a>
+      </li>
+      <li class="port-item">
+        <span class="port-n">04</span>
+        <h3 class="port-name">VoiceClaw</h3>
+        <p class="port-desc">AI-платформа для голосовых ассистентов: распознавание речи, синтез и интеграция с CRM.</p>
+        <a href="#" class="port-link">voiceclaw.com</a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── PROCESS ────────────────────────────────────────── -->
+<section id="process">
+  <div class="inner">
+    <span class="sec-tag">Как работаем</span>
+    <h2 class="sec-h2">ПРОЦЕСС</h2>
+    <ul class="proc-list">
+      <li class="proc-item">
+        <span class="proc-n">01</span>
+        <div class="proc-body">
+          <h3 class="proc-title">Обсуждаем</h3>
+          <p class="proc-desc">Бесплатный созвон, разбор задачи и оценка стоимости — в течение 24 часов.</p>
+        </div>
+      </li>
+      <li class="proc-item">
+        <span class="proc-n">02</span>
+        <div class="proc-body">
+          <h3 class="proc-title">Проектируем</h3>
+          <p class="proc-desc">Прототипируем интерфейс, выбираем стек, строим архитектуру.</p>
+        </div>
+      </li>
+      <li class="proc-item">
+        <span class="proc-n">03</span>
+        <div class="proc-body">
+          <h3 class="proc-title">Строим</h3>
+          <p class="proc-desc">Итерационная разработка с еженедельными демо. Вы видите прогресс на каждом шаге.</p>
+        </div>
+      </li>
+      <li class="proc-item">
+        <span class="proc-n">04</span>
+        <div class="proc-body">
+          <h3 class="proc-title">Запускаем</h3>
+          <p class="proc-desc">Деплой, обучение команды и поддержка. Мы с вами и после релиза.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────────────── -->
+<section id="contact">
+  <div class="inner">
+    <span class="sec-tag">Контакты</span>
+    <div class="contact-grid">
+      <div>
+        <h2 class="contact-h2">ДАВАЙТЕ ПОСТРОИМ ЧТО-ТО ВМЕСТЕ.</h2>
+        <p class="contact-sub">Расскажите о вашей задаче — ответим в течение 24 часов с предварительной оценкой сроков и стоимости. Консультация бесплатна.</p>
+        <a href="mailto:hello@doscode.kz" class="contact-mail">hello@doscode.kz →</a>
+      </div>
+      <form class="form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label>Имя</label>
+            <input type="text" name="name" placeholder="Алибек" required />
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="ali@company.kz" required />
+          </div>
+        </div>
+        <div class="field">
+          <label>Тип проекта</label>
+          <select name="type" required>
+            <option value="" disabled selected>— выберите —</option>
+            <option>Веб-приложение</option>
+            <option>Мобильное приложение</option>
+            <option>Дашборд / CRM</option>
+            <option>AI-агент / Бот</option>
+            <option>Лендинг / MVP</option>
+            <option>Другое</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Сообщение</label>
+          <textarea name="message" placeholder="Расскажите о вашем проекте…" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Отправить заявку →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-copy">&copy; 2026 DosCode · Алматы, Казахстан</span>
+    <div class="footer-links">
+      <a href="#services">Услуги</a>
+      <a href="#portfolio">Портфолио</a>
+      <a href="mailto:hello@doscode.kz">Email</a>
+      <a href="https://t.me/doscode" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── Nav sticky ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('stuck', window.scrollY > 50);
+  }, { passive: true });
+
+  /* ── Hero: split h1 into lines, animate each line up ── */
+  const h1 = document.getElementById('heroH1');
+  h1.innerHTML = h1.innerHTML
+    .split('<br>')
+    .map(line =>
+      `<span class="hero-line"><span class="hero-line-inner">${line}</span></span>`
+    ).join('');
+
+  gsap.from('.hero-line-inner', {
+    yPercent: 110,
+    duration: 1.1,
+    ease: 'power4.out',
+    stagger: 0.1,
+    delay: 0.15,
+  });
+
+  gsap.from(['#heroPre', '#heroSub', '#heroScroll'], {
+    opacity: 0, y: 18,
+    duration: 0.9, ease: 'power3.out',
+    stagger: 0.1, delay: 0.55,
+  });
+
+  /* ── Section headlines: clipPath reveal from bottom ── */
+  document.querySelectorAll('.sec-h2, .contact-h2').forEach(el => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: 'top 88%' },
+      clipPath: 'inset(0 0 100% 0)',
+      duration: 0.9, ease: 'power3.inOut',
+    });
+  });
+
+  /* ── Ethos ── */
+  gsap.from('.ethos-grid > div:first-child .sec-h2', {
+    scrollTrigger: { trigger: '.ethos-grid', start: 'top 82%' },
+    clipPath: 'inset(0 0 100% 0)',
+    duration: 1.0, ease: 'power3.inOut',
+  });
+  gsap.from('.ethos-grid > div:last-child > *', {
+    scrollTrigger: { trigger: '.ethos-grid', start: 'top 80%' },
+    opacity: 0, y: 24, duration: 0.8, ease: 'power3.out', stagger: 0.12,
+  });
+
+  /* ── WQF-style: each list item slides in from bottom via clipPath ── */
+  gsap.utils.toArray('.svc-item, .port-item, .proc-item').forEach(item => {
+    gsap.from(item, {
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 82%',
+        end: 'bottom bottom',
+      },
+      clipPath: 'inset(0 0 100% 0)',
+      duration: 0.65,
+      ease: 'power3.inOut',
+    });
+  });
+
+  /* ── Contact left column ── */
+  gsap.from('.contact-grid > div:first-child > *', {
+    scrollTrigger: { trigger: '#contact', start: 'top 80%' },
+    opacity: 0, y: 20, duration: 0.75, ease: 'power3.out', stagger: 0.12,
+  });
+
+  /* ── Form fields subtle fade ── */
+  gsap.from('.field', {
+    scrollTrigger: { trigger: '.form', start: 'top 80%' },
+    opacity: 0, y: 14, duration: 0.5, ease: 'power2.out', stagger: 0.08,
+  });
+</script>
+</body>
+</html>
