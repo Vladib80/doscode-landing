@@ -3,765 +3,914 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DosCode — Разработка приложений в Алматы</title>
-  <meta name="description" content="Разрабатываем веб и мобильные приложения в Алматы. MVP за 4–8 недель. Telegram-боты, AI-агенты, дашборды." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <style>
-    /* ══════════════════════════════════════════════════
-       TOKENS — exact WQF palette + easing
-    ══════════════════════════════════════════════════ */
-    :root {
-      --black:    #090909;   /* WQF core-black */
-      --carbon:   #111111;   /* WQF rich-carbon */
-      --smoke:    #1b1b1b;   /* WQF urban-smoke */
-      --fog:      #dadada;   /* WQF neural-fog — used for ethos section bg */
-      --off:      #e7e7e7;   /* WQF off-white — primary text */
-      --muted:    rgba(231,231,231,0.42);
-      --teal:     #5c939f;   /* WQF electric-teal — accent */
-      --infrared: #ed6d40;   /* WQF infrared — CTA accent */
-      --easing:   cubic-bezier(.62,.16,.13,1.01);  /* WQF signature easing */
-      --hdr:      4rem;
-      --pad:      clamp(16px, 4.5vw, 40px);
-      --max:      160rem;
-      --f-head:   'Space Grotesk', sans-serif;
-      --f-mono:   'Space Mono', monospace;
-    }
-    @media (min-width: 64rem) { :root { --hdr: 5rem; } }
+  <title>DosCode — Разработка продуктов в Алматы</title>
 
-    /* ══════════════════════════════════════════════════
-       RESET
-    ══════════════════════════════════════════════════ */
+  <style>
+    /* ══════ FONTS — WQF actual font files ══════ */
+    @font-face {
+      font-family: 'Roc Grotesk';
+      src: url('./assets/roc-grotesk-regular.woff2') format('woff2');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Roc Grotesk';
+      src: url('./assets/roc-grotesk-medium.woff2') format('woff2');
+      font-weight: 500; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Azeret Mono';
+      src: url('./assets/azeret-mono-regular.otf') format('opentype');
+      font-weight: 400; font-display: swap;
+    }
+
+    /* ══════ WQF EXACT TOKENS ══════ */
+    :root {
+      --color-core-black:    #090909;
+      --color-rich-carbon:   #111111;
+      --color-urban-smoke:   #1b1b1b;
+      --color-off-white:     #e7e7e7;
+      --color-neural-fog:    #dadada;
+      --color-electric-teal: #5c939f;
+      --color-infrared:      #ed6d40;
+      --easing: cubic-bezier(.62,.16,.13,1.01);
+      --header-height: 64px;
+    }
+    @media (min-width: 1024px) { :root { --header-height: 72px; } }
+
+    /* ══════ RESET ══════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: var(--hdr); }
+    html { scroll-behavior: auto; }
     body {
-      background: var(--black);
-      color: var(--off);
-      font-family: var(--f-head);
-      line-height: 1.5;
+      background: var(--color-rich-carbon);
+      color: var(--color-neural-fog);
+      font-family: 'Roc Grotesk', sans-serif;
+      font-weight: 400;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
-    ul, ol { list-style: none; }
-    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-    /* ══════════════════════════════════════════════════
-       LOADER — WQF-style page entry
-    ══════════════════════════════════════════════════ */
-    #loader {
-      position: fixed; inset: 0; z-index: 9999;
-      background: var(--black);
-      display: flex; align-items: center; justify-content: center;
-      pointer-events: none;
-    }
-    #loader .loader-logo {
-      font-family: var(--f-head);
-      font-weight: 500; font-size: clamp(1.5rem, 4vw, 3rem);
-      letter-spacing: -0.02em;
-      color: var(--off);
-    }
-    #loader .loader-logo span { color: var(--teal); }
+    /* ══════ SCROLLSMOOTHER WRAPPER ══════ */
+    #smooth-wrapper { overflow: hidden; height: 100vh; width: 100%; }
+    #smooth-content { overflow: hidden; }
 
-    /* ══════════════════════════════════════════════════
-       NAV
-    ══════════════════════════════════════════════════ */
-    .nav {
-      position: fixed; top: 0; left: 0; width: 100%; z-index: 500;
-      height: var(--hdr);
-      display: flex; align-items: center;
-      transition: transform 0.4s var(--easing), background 0.4s, border-color 0.4s;
-      border-bottom: 1px solid transparent;
-    }
-    .nav.-scrolled {
-      background: rgba(17,17,17, 0.94);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-color: rgba(231,231,231,0.08);
-    }
-    .nav.-hidden { transform: translateY(-100%); }
-    .nav-inner {
-      width: 100%; max-width: var(--max);
-      margin: 0 auto; padding: 0 var(--pad);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo {
-      font-family: var(--f-head); font-weight: 500;
-      font-size: 1.125rem; letter-spacing: -0.025em;
-      color: var(--off);
-    }
-    .nav-logo span { color: var(--teal); }
-    .nav-links { display: flex; gap: 2.5rem; }
-    .nav-links a {
-      font-family: var(--f-mono); font-size: 0.6875rem;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--muted); transition: color 0.3s;
-    }
-    .nav-links a:hover { color: var(--off); }
-    .nav-cta {
-      font-family: var(--f-mono); font-size: 0.6875rem;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--muted);
-      position: relative; padding: 8px 0;
-      transition: color 0.25s;
-    }
-    /* Corner brackets */
-    .nav-cta::before, .nav-cta::after { content: ''; position: absolute; inset: 0; pointer-events: none; }
-    .nav-cta::before {
-      background:
-        linear-gradient(currentColor,currentColor) left top /9px 1.5px no-repeat,
-        linear-gradient(currentColor,currentColor) left top /1.5px 9px no-repeat,
-        linear-gradient(currentColor,currentColor) right bottom/9px 1.5px no-repeat,
-        linear-gradient(currentColor,currentColor) right bottom/1.5px 9px no-repeat;
-      transition: inset 0.25s var(--easing);
-    }
-    .nav-cta::after {
-      background:
-        linear-gradient(currentColor,currentColor) right top /9px 1.5px no-repeat,
-        linear-gradient(currentColor,currentColor) right top /1.5px 9px no-repeat,
-        linear-gradient(currentColor,currentColor) left bottom/9px 1.5px no-repeat,
-        linear-gradient(currentColor,currentColor) left bottom/1.5px 9px no-repeat;
-      transition: inset 0.25s var(--easing);
-    }
-    .nav-cta:hover { color: var(--teal); }
-    .nav-cta:hover::before, .nav-cta:hover::after { inset: -5px; }
-
-    /* ══════════════════════════════════════════════════
-       HERO — WQF split-word layout
-    ══════════════════════════════════════════════════ */
-    .hero {
-      height: 100dvh; min-height: 550px;
-      display: flex; flex-direction: column;
-      justify-content: space-between;
-      padding-top: var(--hdr);
-      padding-bottom: clamp(40px, 6vh, 80px);
-      overflow: hidden;
-    }
-    .hero-top {
-      flex: 1; display: flex; align-items: center;
-      padding: 0 var(--pad); overflow: hidden;
-    }
-    .hero-h1 {
-      font-family: var(--f-head);
-      font-weight: 500;
-      font-size: clamp(3rem, 9.5vw, 9rem);
-      line-height: 0.92;
-      text-transform: uppercase;
-      letter-spacing: -0.03em;
-      width: 100%;
-      display: flex; flex-direction: column; gap: 0.04em;
-    }
-    /* Word rows — each row has left and right words */
-    .hw-row {
-      display: flex; justify-content: space-between;
-      align-items: baseline; overflow: hidden;
-    }
-    /* Each word clips in — WQF exact: inset(100% 0 0 0) + translateY: -48px */
-    .hw {
-      display: inline-block;
-      clip-path: inset(100% 0 0 0);
-      transform: translateY(-48px);
-    }
-    .hw-l { text-align: left; }
-    .hw-r { text-align: right; color: var(--teal); }
-
-    .hero-bottom {
-      padding: 0 var(--pad);
-      display: flex; align-items: flex-end; justify-content: space-between;
-      gap: 24px; opacity: 0;
-    }
-    .hero-sub {
-      font-size: clamp(0.875rem, 1.2vw, 1rem);
-      color: var(--muted); max-width: 400px; line-height: 1.7;
-    }
-    .hero-meta {
-      font-family: var(--f-mono); font-size: 0.6875rem;
-      text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--muted); text-align: right;
-      display: flex; flex-direction: column; gap: 4px;
-    }
-
-    /* ══════════════════════════════════════════════════
-       LAYOUT HELPERS
-    ══════════════════════════════════════════════════ */
-    .section {
-      padding: clamp(80px, 10vh, 140px) var(--pad);
-      border-top: 1px solid rgba(231,231,231,0.08);
-    }
-    .container { max-width: var(--max); margin: 0 auto; }
-    .mono-label {
-      font-family: var(--f-mono); font-size: 0.6875rem;
-      text-transform: uppercase; letter-spacing: 0.14em;
-      color: var(--teal); display: block; margin-bottom: 40px;
+    /* ══════ TYPOGRAPHY SCALE (exact WQF) ══════ */
+    .h1 {
+      font-weight: 500; font-size: clamp(2.5rem, 7vw, 6rem);
+      line-height: .9; text-transform: uppercase; letter-spacing: -0.02em;
     }
     .h2 {
-      font-family: var(--f-head); font-weight: 500;
-      font-size: clamp(2.25rem, 5vw, 3.75rem);
-      line-height: 0.95; text-transform: uppercase;
-      letter-spacing: -0.02em;
+      font-weight: 500; font-size: clamp(2.25rem, 5vw, 3.75rem);
+      line-height: .95; text-transform: uppercase; letter-spacing: -0.02em;
     }
-
-    /* ══════════════════════════════════════════════════
-       ETHOS — WQF LIGHT SECTION (key signature)
-    ══════════════════════════════════════════════════ */
-    .ethos {
-      background: var(--fog);      /* #dadada — light gray, WQF style */
-      color: var(--carbon);
-      border-top: none;
-      border-radius: 20px 20px 0 0;
-      padding: clamp(80px,12vh,160px) var(--pad);
-      /* clipPath reveal applied by GSAP: inset(0 100% 0 0) → inset(0 0 0 0) */
-      /* This whole section slides in from the RIGHT as you scroll */
+    .h3 {
+      font-weight: 500; font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+      line-height: 1.0; text-transform: uppercase; letter-spacing: -0.01em;
     }
-    .ethos-grid {
-      max-width: var(--max); margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(40px, 5vw, 80px);
-      align-items: start;
+    .h4 {
+      font-weight: 500; font-size: clamp(1.125rem, 2vw, 1.5rem);
+      text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.1;
     }
-    .ethos .mono-label { color: rgba(17,17,17,0.5); }
-    .ethos .h2 { color: var(--carbon); }
-    .ethos-right p {
-      font-size: clamp(0.875rem, 1.2vw, 1rem);
-      color: rgba(17,17,17,0.65);
-      line-height: 1.75; margin-bottom: 24px;
+    .h5 {
+      font-weight: 500; font-size: clamp(1rem, 1.5vw, 1.25rem);
+      text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.1;
     }
-    .ethos-link {
-      font-family: var(--f-mono); font-size: 0.6875rem;
+    .p1 { font-size: clamp(0.9375rem, 1.2vw, 1.0625rem); line-height: 1.65; }
+    .p2 { font-size: clamp(0.875rem, 1vw, 0.9375rem); line-height: 1.6; }
+    .p1-mono {
+      font-family: 'Azeret Mono', monospace; font-size: 0.6875rem;
       text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--carbon);
-      display: inline-flex; align-items: center; gap: 10px;
-      transition: color 0.25s;
     }
-    .ethos-link::after { content: '→'; transition: transform 0.25s; }
-    .ethos-link:hover { color: var(--infrared); }
-    .ethos-link:hover::after { transform: translateX(5px); }
-
-    /* ══════════════════════════════════════════════════
-       SERVICES — WQF list with clipPath reveals
-    ══════════════════════════════════════════════════ */
-    .svc-list { margin-top: 56px; }
-    .svc-item {
-      display: grid;
-      grid-template-columns: 80px 1fr 1fr;
-      gap: 32px;
-      padding: 32px 0;
-      border-top: 1px solid rgba(231,231,231,0.08);
-    }
-    .svc-item:last-child { border-bottom: 1px solid rgba(231,231,231,0.08); }
-    .svc-n {
-      font-family: var(--f-mono); font-size: 0.6875rem;
+    .p2-mono {
+      font-family: 'Azeret Mono', monospace; font-size: 0.625rem;
       text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--teal); padding-top: 2px;
-    }
-    .svc-title {
-      font-family: var(--f-head); font-weight: 500;
-      font-size: clamp(1rem, 1.8vw, 1.5rem);
-      text-transform: uppercase; line-height: 1.1;
-      letter-spacing: -0.01em;
-    }
-    .svc-desc {
-      font-size: 0.875rem; line-height: 1.75;
-      color: var(--muted); padding-top: 2px;
     }
 
-    /* ══════════════════════════════════════════════════
-       FOCUS STATEMENT — WQF full-height centered quote
-    ══════════════════════════════════════════════════ */
-    .focus {
-      min-height: 100dvh;
+    /* ══════ CONTAINER ══════ */
+    .container {
+      width: 100%; max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 4vw, 40px);
+    }
+
+    /* ══════ NAV (exact WQF) ══════ */
+    .layout--header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 50;
+      height: var(--header-height);
       display: flex; align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: var(--hdr) var(--pad);
-      border-top: 1px solid rgba(231,231,231,0.08);
+      transition: transform 0.4s var(--easing);
+    }
+    .layout--header.-translate-y-full { transform: translateY(-100%); }
+    .layout--header-inner {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between;
+      height: var(--header-height);
+      padding: 0 clamp(16px, 4vw, 40px);
+      background: transparent;
+      transition: background 0.6s var(--easing), border-radius 0.6s var(--easing),
+                  padding 0.6s var(--easing), width 0.6s var(--easing);
+    }
+    .layout--header.-scrolled .layout--header-inner {
+      background: rgba(27,27,27,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 8px;
+      width: auto; padding: 4px 12px;
+    }
+    .nav-logo-full { display: flex; align-items: center; height: 30px; overflow: hidden; }
+    .nav-logo-mark { transition: transform 0.6s var(--easing); }
+    .layout--header.-scrolled .nav-logo-full { width: 30px; }
+    .layout--header.-scrolled .nav-logo-mark { transform: translateX(-90px); }
+    .nav-logo-text {
+      font-weight: 500; font-size: 1.0625rem; letter-spacing: -0.02em;
+      color: var(--color-off-white);
+    }
+    .nav-links {
+      display: flex; gap: 2rem;
+    }
+    .nav-links a {
+      font-family: 'Azeret Mono', monospace; font-size: 0.6875rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: rgba(231,231,231,0.5);
+      transition: color 0.3s var(--easing);
+    }
+    .nav-links a:hover { color: var(--color-off-white); }
+
+    /* ══════ WQF BUTTON — exact style ══════ */
+    .btn {
+      position: relative; isolate: isolate; display: inline-flex; align-items: center;
+    }
+    .btn-inner {
+      display: flex; align-items: center; justify-content: center;
+      height: 40px; padding: 0 20px;
+    }
+    .btn-text-wrap {
+      font-family: 'Azeret Mono', monospace; font-size: 0.6875rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 0.4s var(--easing);
+    }
+    .btn-text-top, .btn-text-bot {
+      display: block; white-space: nowrap; transition: transform 0.4s var(--easing);
+    }
+    .btn-text-bot { position: absolute; inset: 0; transform: translateY(100%); }
+    .btn:hover .btn-text-top { transform: translateY(-100%); }
+    .btn:hover .btn-text-bot { transform: translateY(0); }
+    /* Corner SVGs */
+    .corner-accent {
+      position: absolute; width: 9px; height: 9px;
+      opacity: 0; transition: opacity 0.4s var(--easing), inset 0.4s var(--easing);
+    }
+    .corner-accent:nth-child(1) { top: -2px; left: -2px; }
+    .corner-accent:nth-child(2) { top: -2px; right: -2px; transform: rotate(90deg); }
+    .corner-accent:nth-child(3) { bottom: -2px; right: -2px; transform: rotate(180deg); }
+    .corner-accent:nth-child(4) { bottom: -2px; left: -2px; transform: rotate(270deg); }
+    .btn:hover .corner-accent { opacity: 1; }
+    /* Themes */
+    .btn[data-theme="light"] { color: var(--color-neural-fog); }
+    .btn[data-theme="dark"] { color: var(--color-rich-carbon); }
+    /* Dot */
+    .btn-dot {
+      position: absolute; left: 0; width: 10px; height: 10px; border-radius: 3px;
+      opacity: 0; filter: blur(20px); transform: translateX(-24px);
+      transition: all 0.4s var(--easing);
+    }
+    .btn[data-theme="light"] .btn-dot { background: var(--color-neural-fog); }
+    .btn[data-theme="dark"] .btn-dot { background: var(--color-rich-carbon); }
+    .btn:hover .btn-dot { opacity: 1; filter: blur(0); transform: translateX(-5px); }
+
+    /* ══════ HERO ══════ */
+    .hero-section { position: relative; overflow: hidden; }
+    .hero-container { height: 100dvh; min-height: 550px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
+    .hero-spacer { display: none; flex: 1; }
+    @media (min-width: 768px) { .hero-spacer { display: block; } }
+    .hero-title-wrap {
+      position: relative; isolation: isolate;
+      display: flex; width: 100%; flex-grow: 1; justify-content: center;
+      padding-top: var(--header-height);
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      .hero-title-wrap { flex-grow: 0; padding-top: 0; align-items: flex-start; }
+    }
+    .hero-h1 {
+      font-family: 'Roc Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: clamp(2.5rem, 8vw, 6.5rem);
+      line-height: 0.92; text-transform: uppercase; letter-spacing: -0.025em;
+      text-align: center; max-width: 900px;
+    }
+    /* Words — start hidden with clipPath + translateY, animated via JS */
+    .hero-title--left,
+    .hero-title--right {
+      display: inline-block;
+      clip-path: inset(100% 0 0 0);
+      will-change: transform, clip-path;
+    }
+    .hero-bottom {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: rgba(231,231,231,0.6);
+      padding-bottom: clamp(20px, 4vh, 30px);
+    }
+    .hero-bottom-inner {
+      border-top: 1px solid rgba(231,231,231,0.2);
+      padding-top: 20px;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .hero-bottom-inner { flex-direction: row; }
+    }
+    .hero-cta-wrap { display: flex; align-items: center; justify-content: space-between; }
+    @media (min-width: 768px) { .hero-cta-wrap { width: 30%; } }
+    @media (min-width: 1280px) { .hero-cta-wrap { width: 50%; } }
+    .hero-desc {
+      display: flex; align-items: flex-start; justify-content: space-between; flex-shrink: 0;
+    }
+    @media (min-width: 768px) { .hero-desc { width: 70%; } }
+    @media (min-width: 1280px) { .hero-desc { width: 50%; } }
+    .hero-desc p { max-width: 490px; }
+
+    /* ══════ ETHOS — LIGHT SECTION (WQF exact) ══════ */
+    .ethos-section {
+      background: var(--color-neural-fog);
+      color: var(--color-rich-carbon);
+      overflow: hidden;
+      border-radius: 20px 20px 0 0;
+      padding: clamp(80px, 12vh, 220px) 0;
+      /* JS sets initial: clip-path: inset(0 100% 0 0) */
+    }
+    .ethos-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 3vw, 24px);
+      margin-bottom: clamp(40px, 5vh, 60px);
+    }
+    .ethos-header-left { display: flex; flex-direction: column; gap: 12px; }
+    .ethos-header-right {
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .ethos-header-right p {
+      color: rgba(17,17,17,0.7);
+      border-top: 1px solid rgba(17,17,17,0.2);
+      padding-top: 20px;
+      margin-bottom: clamp(24px, 3vh, 32px);
+    }
+    .ethos-label { color: rgba(17,17,17,0.5); }
+
+    /* Ethos cards — WQF accordion */
+    .ethos-cards {
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .ethos-cards { flex-direction: row; gap: 0; }
+    }
+    .ethos-card {
+      width: 100%; flex-shrink: 0;
+      transition: width 0.5s var(--easing);
+    }
+    @media (min-width: 768px) {
+      .ethos-card { width: 25%; }
+      .ethos-cards:has(.ethos-card.-active) .ethos-card { width: 20%; }
+      .ethos-card.-active { width: 40% !important; }
+    }
+    .ethos-card-inner {
+      position: relative; width: 100%; height: 100%; overflow: hidden;
+      border-radius: 20px;
+      transition: all 0.5s var(--easing);
+      display: flex; justify-content: center;
+      padding: 40px 0 20px;
+    }
+    @media (min-width: 768px) {
+      .ethos-card-inner { width: 125%; padding: 40px 0; }
+      .ethos-cards:has(.ethos-card.-active) .ethos-card-inner { }
+      .ethos-card.-active .ethos-card-inner { width: 100% !important; }
+    }
+    .ethos-card-inner.-dark { background: var(--color-rich-carbon); color: var(--color-neural-fog); }
+    .ethos-card-inner.-teal { background: var(--color-electric-teal); color: var(--color-rich-carbon); }
+    .ethos-card-body {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 22px; padding: 0 20px; text-align: center;
+      width: 100%; max-width: 300px; flex-shrink: 0;
+    }
+    @media (min-width: 768px) { .ethos-card-body { gap: 44px; } }
+    .ethos-card-num {
+      font-family: 'Azeret Mono', monospace; font-size: 0.625rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .ethos-card-desc {
+      font-family: 'Azeret Mono', monospace; font-size: 0.625rem;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      line-height: 1.7; text-pretty: auto;
+    }
+    .ethos-card-icon {
+      font-size: clamp(2rem, 5vw, 4rem); line-height: 1;
+      max-height: 200px;
+    }
+
+    /* ══════ FOCUS (full-height pinned) ══════ */
+    .focus-section {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: var(--header-height) clamp(16px, 4vw, 40px);
     }
     .focus-inner { max-width: 860px; }
-    .focus-label {
-      font-family: var(--f-mono); font-size: 0.6875rem;
-      text-transform: uppercase; letter-spacing: 0.14em;
-      color: var(--teal); display: block; margin-bottom: 20px;
-    }
     .focus-h {
-      font-family: var(--f-head); font-weight: 500;
-      font-size: clamp(1.75rem, 4vw, 3.5rem);
-      text-transform: uppercase; line-height: 1.0;
-      letter-spacing: -0.02em; margin-bottom: 28px;
+      font-weight: 500;
+      font-size: clamp(1.875rem, 5vw, 4rem);
+      text-transform: uppercase; line-height: 0.95;
+      letter-spacing: -0.025em; margin-bottom: 28px;
     }
     .focus-p {
+      color: rgba(231,231,231,0.6);
       font-size: clamp(0.875rem, 1.1vw, 1rem);
-      color: var(--muted); line-height: 1.75; max-width: 480px;
+      line-height: 1.75; max-width: 480px;
       margin: 0 auto 36px;
     }
 
-    /* ══════════════════════════════════════════════════
-       PORTFOLIO
-    ══════════════════════════════════════════════════ */
-    .port-list { margin-top: 56px; }
-    .port-item {
-      display: grid;
-      grid-template-columns: 80px 1fr 1.2fr auto;
-      gap: 32px;
-      padding: 24px 0;
+    /* ══════ SECTION DIVIDERS ══════ */
+    .section-dark {
+      padding: clamp(80px, 10vh, 140px) 0;
       border-top: 1px solid rgba(231,231,231,0.08);
-      align-items: center;
     }
-    .port-item:last-child { border-bottom: 1px solid rgba(231,231,231,0.08); }
-    .port-n { font-family: var(--f-mono); font-size: 0.6875rem; color: var(--muted); }
-    .port-name {
-      font-family: var(--f-head); font-weight: 500;
-      font-size: clamp(0.875rem, 1.5vw, 1.25rem);
-      text-transform: uppercase; letter-spacing: -0.01em;
+    .section-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 56px; flex-wrap: wrap; gap: 16px;
     }
-    .port-desc { font-size: 0.8125rem; color: var(--muted); line-height: 1.6; }
-    .port-link {
-      font-family: var(--f-mono); font-size: 0.625rem;
-      text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--muted); white-space: nowrap;
-      display: inline-flex; align-items: center; gap: 4px;
-      transition: color 0.25s;
-    }
-    .port-link::after { content: '↗'; }
-    .port-link:hover { color: var(--teal); }
 
-    /* ══════════════════════════════════════════════════
-       PROCESS
-    ══════════════════════════════════════════════════ */
-    .proc-list { margin-top: 56px; }
-    .proc-item {
-      display: grid; grid-template-columns: 80px 1fr;
-      gap: 32px; padding: 32px 0;
+    /* ══════ LIST ITEMS (WQF style) ══════ */
+    .reveal-list { }
+    .reveal-item {
+      display: grid; gap: 24px;
+      padding: 28px 0;
       border-top: 1px solid rgba(231,231,231,0.08);
+      /* JS clipPath reveal on scroll */
     }
-    .proc-item:last-child { border-bottom: 1px solid rgba(231,231,231,0.08); }
-    .proc-n { font-family: var(--f-mono); font-size: 0.6875rem; color: var(--teal); padding-top: 2px; }
-    .proc-body { display: flex; gap: clamp(32px,4vw,80px); }
+    .reveal-item:last-child { border-bottom: 1px solid rgba(231,231,231,0.08); }
+    .item-num {
+      font-family: 'Azeret Mono', monospace; font-size: 0.6875rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--color-electric-teal);
+    }
+    .item-title {
+      font-weight: 500;
+      font-size: clamp(0.875rem, 1.8vw, 1.375rem);
+      text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.1;
+    }
+    .item-desc {
+      font-size: 0.875rem; line-height: 1.75;
+      color: rgba(231,231,231,0.5);
+    }
+
+    /* 3-col layout for services */
+    .svc-item { grid-template-columns: 80px 1fr 1fr; }
+    /* 4-col for portfolio */
+    .port-item { grid-template-columns: 80px 1fr 1.5fr auto; align-items: center; }
+    .port-link {
+      font-family: 'Azeret Mono', monospace; font-size: 0.625rem;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: rgba(231,231,231,0.4);
+      display: inline-flex; align-items: center; gap: 4px;
+      white-space: nowrap;
+      transition: color 0.25s var(--easing);
+    }
+    .port-link::after { content: ' ↗'; }
+    .port-link:hover { color: var(--color-electric-teal); }
+    /* 2-col for process */
+    .proc-item { grid-template-columns: 80px 1fr; }
+    .proc-body { display: flex; gap: clamp(32px, 5vw, 80px); }
     .proc-title {
-      font-family: var(--f-head); font-weight: 500;
-      font-size: clamp(0.875rem, 1.5vw, 1.25rem);
+      font-weight: 500; font-size: clamp(0.875rem, 1.5vw, 1.25rem);
       text-transform: uppercase; min-width: 160px; line-height: 1.2;
     }
-    .proc-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
 
-    /* ══════════════════════════════════════════════════
-       CONTACT
-    ══════════════════════════════════════════════════ */
+    /* ══════ CONTACT ══════ */
     .contact-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(40px,5vw,80px); align-items: start;
+      gap: clamp(40px, 5vw, 80px); align-items: start;
     }
     .contact-h {
-      font-family: var(--f-head); font-weight: 500;
-      font-size: clamp(2rem, 4.5vw, 4rem);
+      font-weight: 500;
+      font-size: clamp(2rem, 4.5vw, 3.75rem);
       text-transform: uppercase; line-height: 0.95;
-      letter-spacing: -0.02em; margin-bottom: 28px;
+      letter-spacing: -0.025em; margin-bottom: 24px;
     }
-    .contact-sub { font-size: 0.875rem; color: var(--muted); line-height: 1.75; margin-bottom: 32px; }
-    .contact-mail {
-      font-family: var(--f-mono); font-size: clamp(0.75rem, 1.1vw, 0.9375rem);
-      letter-spacing: 0.02em; color: var(--off);
-      display: inline-flex; align-items: center; gap: 10px;
-      border-bottom: 1px solid rgba(231,231,231,0.15);
-      padding-bottom: 12px; transition: border-color 0.3s, color 0.3s;
+    .contact-sub { color: rgba(231,231,231,0.5); line-height: 1.75; margin-bottom: 28px; }
+    .contact-email {
+      font-family: 'Azeret Mono', monospace; font-size: 0.875rem;
+      letter-spacing: 0.02em;
+      display: inline-flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid rgba(231,231,231,0.15); padding-bottom: 12px;
+      transition: border-color 0.3s, color 0.3s;
     }
-    .contact-mail:hover { border-color: var(--teal); color: var(--teal); }
+    .contact-email:hover { border-color: var(--color-electric-teal); color: var(--color-electric-teal); }
     /* Form */
-    .form { display: flex; flex-direction: column; gap: 24px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form { display: flex; flex-direction: column; gap: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .field { display: flex; flex-direction: column; gap: 8px; }
     .field label {
-      font-family: var(--f-mono); font-size: 0.625rem;
-      text-transform: uppercase; letter-spacing: 0.18em;
-      color: var(--muted);
+      font-family: 'Azeret Mono', monospace; font-size: 0.5625rem;
+      text-transform: uppercase; letter-spacing: 0.2em;
+      color: rgba(231,231,231,0.4);
     }
     .field input, .field textarea, .field select {
       background: transparent; border: none;
-      border-bottom: 1px solid rgba(231,231,231,0.12);
-      padding: 10px 0; color: var(--off);
-      font-family: var(--f-head); font-size: 0.9375rem;
-      font-weight: 400; outline: none; width: 100%;
-      transition: border-color 0.3s;
+      border-bottom: 1px solid rgba(231,231,231,0.1);
+      padding: 12px 0; color: var(--color-off-white);
+      font-family: 'Roc Grotesk', sans-serif; font-size: 0.9375rem;
+      outline: none; width: 100%;
+      transition: border-color 0.3s var(--easing);
     }
-    .field input:focus, .field textarea:focus, .field select:focus {
-      border-color: var(--teal);
-    }
-    .field textarea { resize: vertical; min-height: 88px; }
+    .field input:focus, .field textarea:focus { border-color: var(--color-electric-teal); }
+    .field textarea { resize: vertical; min-height: 80px; }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(231,231,231,0.15); }
     .field select { cursor: pointer; appearance: none; }
-    .field input::placeholder, .field textarea::placeholder { color: rgba(231,231,231,0.18); }
-    .submit-btn {
-      font-family: var(--f-mono); font-size: 0.6875rem;
+    .form-submit {
+      font-family: 'Azeret Mono', monospace; font-size: 0.6875rem;
       text-transform: uppercase; letter-spacing: 0.14em;
-      background: var(--off); color: var(--black);
-      padding: 16px 40px; cursor: pointer; align-self: flex-start;
+      background: var(--color-off-white); color: var(--color-rich-carbon);
+      padding: 14px 36px; cursor: pointer; align-self: flex-start;
       transition: background 0.25s, transform 0.2s;
+      position: relative;
     }
-    .submit-btn:hover { background: var(--fog); transform: translateY(-2px); }
+    .form-submit:hover { background: var(--color-neural-fog); transform: translateY(-2px); }
 
-    /* ══════════════════════════════════════════════════
-       FOOTER
-    ══════════════════════════════════════════════════ */
+    /* ══════ FOOTER ══════ */
     .footer {
-      padding: 40px var(--pad);
+      padding: 32px 0;
       border-top: 1px solid rgba(231,231,231,0.08);
     }
     .footer-inner {
-      max-width: var(--max); margin: 0 auto;
-      display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 16px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
     }
     .footer-copy {
-      font-family: var(--f-mono); font-size: 0.625rem;
+      font-family: 'Azeret Mono', monospace; font-size: 0.5625rem;
       text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--muted);
+      color: rgba(231,231,231,0.4);
     }
-    .footer-links { display: flex; gap: 24px; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
     .footer-links a {
-      font-family: var(--f-mono); font-size: 0.625rem;
+      font-family: 'Azeret Mono', monospace; font-size: 0.5625rem;
       text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--muted); transition: color 0.25s;
+      color: rgba(231,231,231,0.4);
+      transition: color 0.25s;
     }
-    .footer-links a:hover { color: var(--off); }
+    .footer-links a:hover { color: var(--color-off-white); }
 
-    /* ══════════════════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════════════════ */
+    /* ══════ MOBILE ══════ */
     @media (max-width: 900px) {
       .nav-links { display: none; }
-      .ethos-grid { grid-template-columns: 1fr; gap: 36px; }
-      .svc-item { grid-template-columns: 64px 1fr; gap: 16px; }
-      .svc-desc { grid-column: 2; }
-      .port-item { grid-template-columns: 64px 1fr; gap: 16px; }
-      .port-desc, .port-link { display: none; }
-      .proc-body { flex-direction: column; gap: 10px; }
+      .ethos-header { grid-template-columns: 1fr; }
+      .svc-item { grid-template-columns: 56px 1fr; }
+      .svc-item .item-desc { grid-column: 2; }
+      .port-item { grid-template-columns: 56px 1fr; }
+      .port-item .item-desc, .port-item .port-link { display: none; }
+      .proc-body { flex-direction: column; gap: 8px; }
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       .form-row { grid-template-columns: 1fr; }
-      .hero-meta { display: none; }
     }
     @media (max-width: 600px) {
-      .hero-h1 { font-size: clamp(2rem, 9vw, 3rem); }
-      .proc-item { grid-template-columns: 56px 1fr; }
-      .svc-item { grid-template-columns: 56px 1fr; }
+      .hero-h1 { font-size: clamp(2.2rem, 10vw, 3rem); }
+      .proc-item { grid-template-columns: 48px 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── LOADER ─────────────────────────────────── -->
-<div id="loader">
-  <p class="loader-logo">DOS<span>CODE</span></p>
-</div>
-
-<!-- ── NAV ────────────────────────────────────── -->
-<header class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">DOS<span>CODE</span></a>
+<!-- ══════ NAV ══════ -->
+<header class="layout--header" id="nav">
+  <div class="layout--header-inner container" id="nav-inner">
+    <a href="#" class="nav-logo-full" aria-label="DosCode">
+      <span class="nav-logo-text nav-logo-mark">DOSCODE</span>
+    </a>
     <nav class="nav-links">
+      <a href="#ethos">О нас</a>
       <a href="#services">Услуги</a>
       <a href="#portfolio">Портфолио</a>
-      <a href="#process">Процесс</a>
       <a href="#contact">Контакты</a>
     </nav>
-    <a href="#contact" class="nav-cta">Обсудить проект</a>
+    <button class="btn" data-theme="light" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+      <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+      <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+      <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+      <div class="btn-inner">
+        <span class="btn-dot"></span>
+        <div class="btn-text-wrap">
+          <span class="btn-text-top">Обсудить проект</span>
+          <span class="btn-text-bot">Обсудить проект</span>
+        </div>
+      </div>
+    </button>
   </div>
 </header>
 
-<!-- ── HERO ───────────────────────────────────── -->
-<section class="hero" id="hero">
-  <div class="hero-top" id="heroContainer">
-    <h1 class="hero-h1" id="heroH1">
-      <!-- Each row: left word + right word, WQF split pattern -->
-      <div class="hw-row">
-        <span class="hw hw-l">МЫ</span>
-        <span class="hw hw-r">СТРОИМ</span>
-      </div>
-      <div class="hw-row">
-        <span class="hw hw-l">ЦИФРОВЫЕ</span>
-        <span class="hw hw-r">ПРОДУКТЫ</span>
-      </div>
-      <div class="hw-row">
-        <span class="hw hw-l">ДЛЯ</span>
-        <span class="hw hw-r">БИЗНЕСА.</span>
-      </div>
-    </h1>
-  </div>
-  <div class="hero-bottom" id="heroBottom">
-    <p class="hero-sub">Веб-сервисы, мобильные приложения, AI-агенты и MVP — от идеи до продукта за дни, а не месяцы.</p>
-    <div class="hero-meta">
-      <span>DosCode</span>
-      <span>Алматы · 2021</span>
-    </div>
-  </div>
-</section>
+<!-- ══════ SMOOTH WRAPPER ══════ -->
+<div id="smooth-wrapper">
+  <div id="smooth-content">
 
-<!-- ── ETHOS — LIGHT SECTION (WQF signature) ──── -->
-<section class="ethos" id="about">
-  <div class="ethos-grid">
-    <div>
-      <span class="mono-label">О нас</span>
-      <h2 class="h2">Скорость.<br />Качество.<br />Результат.</h2>
-    </div>
-    <div class="ethos-right">
-      <p>DosCode — студия разработки в Алматы. Создаём веб- и мобильные приложения, дашборды, AI-агентов и MVP. Чистый код, быстрая доставка, прозрачный процесс.</p>
-      <p>Каждый проект — партнёрство, а не конвейер. Мы вникаем в бизнес-задачу и строим решение, которое работает на результат.</p>
-      <a href="#contact" class="ethos-link">Начать проект</a>
-    </div>
-  </div>
-</section>
+    <!-- ── HERO ── -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-container">
+          <div class="hero-spacer"></div>
 
-<!-- ── SERVICES ───────────────────────────────── -->
-<section class="section" id="services">
-  <div class="container">
-    <span class="mono-label">Что мы строим</span>
-    <h2 class="h2">Услуги</h2>
-    <ul class="svc-list">
-      <li class="svc-item">
-        <span class="svc-n">01 / 04</span>
-        <h3 class="svc-title">Веб и мобильные приложения</h3>
-        <p class="svc-desc">PWA, нативные и кросс-платформенные приложения — от заказа еды до маркетплейса. React, Next.js, React Native.</p>
-      </li>
-      <li class="svc-item">
-        <span class="svc-n">02 / 04</span>
-        <h3 class="svc-title">Дашборды и инструменты</h3>
-        <p class="svc-desc">Визуализация данных, внутренние панели и CRM-системы, заточенные под вашу команду.</p>
-      </li>
-      <li class="svc-item">
-        <span class="svc-n">03 / 04</span>
-        <h3 class="svc-title">AI-агенты и автоматизация</h3>
-        <p class="svc-desc">Умные боты и автоматизация рутины — Telegram, WhatsApp, интеграция с ChatGPT и Claude.</p>
-      </li>
-      <li class="svc-item">
-        <span class="svc-n">04 / 04</span>
-        <h3 class="svc-title">Лендинги и MVP</h3>
-        <p class="svc-desc">Быстрый выход на рынок: от идеи до рабочего продукта за 1–2 недели.</p>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- ── FOCUS STATEMENT — WQF full-height centered ─ -->
-<section class="focus" id="focus">
-  <div class="focus-inner">
-    <span class="focus-label">Наш подход</span>
-    <h2 class="focus-h" id="focusH">Быстрые технологии. Реальные результаты.</h2>
-    <p class="focus-p">Мы не делаем «красивых» проектов ради красоты. Каждая строка кода — ради роста вашего бизнеса.</p>
-    <a href="#contact" class="nav-cta" style="color: var(--off);">Обсудить проект</a>
-  </div>
-</section>
-
-<!-- ── PORTFOLIO ──────────────────────────────── -->
-<section class="section" id="portfolio">
-  <div class="container">
-    <span class="mono-label">Портфолио</span>
-    <h2 class="h2">Проекты</h2>
-    <ul class="port-list">
-      <li class="port-item">
-        <span class="port-n">01</span>
-        <h3 class="port-name">DosPass</h3>
-        <p class="port-desc">Платформа лояльности для бизнеса — цифровые карты, подарочные сертификаты, реферальная программа.</p>
-        <a href="https://dospass.com" target="_blank" rel="noopener" class="port-link">dospass.com</a>
-      </li>
-      <li class="port-item">
-        <span class="port-n">02</span>
-        <h3 class="port-name">Chicago Pizza</h3>
-        <p class="port-desc">Система онлайн-заказов, QR-меню, аналитика и Telegram-уведомления для сети пиццерий.</p>
-        <a href="https://chicagopizza.kz" target="_blank" rel="noopener" class="port-link">chicagopizza.kz</a>
-      </li>
-      <li class="port-item">
-        <span class="port-n">03</span>
-        <h3 class="port-name">MMG Group</h3>
-        <p class="port-desc">Корпоративный сайт строительной компании с каталогом объектов и CRM-интеграцией.</p>
-        <a href="#" class="port-link">mmg.kz</a>
-      </li>
-      <li class="port-item">
-        <span class="port-n">04</span>
-        <h3 class="port-name">YurikVoice</h3>
-        <p class="port-desc">AI-платформа для голосовых ассистентов: распознавание речи, синтез и интеграция с CRM.</p>
-        <a href="#" class="port-link">yurikvoice.com</a>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- ── PROCESS ────────────────────────────────── -->
-<section class="section" id="process">
-  <div class="container">
-    <span class="mono-label">Как работаем</span>
-    <h2 class="h2">Процесс</h2>
-    <ul class="proc-list">
-      <li class="proc-item">
-        <span class="proc-n">01</span>
-        <div class="proc-body">
-          <h3 class="proc-title">Обсуждаем</h3>
-          <p class="proc-desc">Бесплатный созвон, разбор задачи и оценка стоимости — в течение 24 часов.</p>
-        </div>
-      </li>
-      <li class="proc-item">
-        <span class="proc-n">02</span>
-        <div class="proc-body">
-          <h3 class="proc-title">Проектируем</h3>
-          <p class="proc-desc">Прототипируем интерфейс, выбираем стек, строим архитектуру.</p>
-        </div>
-      </li>
-      <li class="proc-item">
-        <span class="proc-n">03</span>
-        <div class="proc-body">
-          <h3 class="proc-title">Строим</h3>
-          <p class="proc-desc">Итерационная разработка с еженедельными демо. Вы видите прогресс на каждом шаге.</p>
-        </div>
-      </li>
-      <li class="proc-item">
-        <span class="proc-n">04</span>
-        <div class="proc-body">
-          <h3 class="proc-title">Запускаем</h3>
-          <p class="proc-desc">Деплой, обучение команды и поддержка. Мы с вами и после релиза.</p>
-        </div>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- ── CONTACT ────────────────────────────────── -->
-<section class="section" id="contact">
-  <div class="container">
-    <span class="mono-label">Контакты</span>
-    <div class="contact-grid">
-      <div>
-        <h2 class="contact-h">Давайте построим что-то вместе.</h2>
-        <p class="contact-sub">Расскажите о вашей задаче — ответим в течение 24 часов с оценкой сроков и стоимости. Консультация бесплатна.</p>
-        <a href="mailto:hello@doscode.kz" class="contact-mail">hello@doscode.kz →</a>
-      </div>
-      <form class="form" id="contactForm" novalidate>
-        <div class="form-row">
-          <div class="field">
-            <label>Имя</label>
-            <input type="text" name="name" placeholder="Алибек" required />
+          <div class="hero-title-wrap" id="heroContainer">
+            <h1 class="hero-h1" id="heroH1">
+              <span class="hero-title--left">Строим</span>
+              <span class="hero-title--left">цифровые</span>
+              <br />
+              <span class="hero-title--left">продукты</span>
+              <span class="hero-title--right">для</span>
+              <br />
+              <span class="hero-title--right">бизнеса.</span>
+            </h1>
           </div>
-          <div class="field">
-            <label>Email</label>
-            <input type="email" name="email" placeholder="ali@company.kz" required />
+
+          <div class="hero-bottom" id="heroBottom" style="opacity:0">
+            <div class="hero-bottom-inner">
+              <div class="hero-cta-wrap">
+                <button class="btn" data-theme="light" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                  <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                  <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                  <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                  <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                  <div class="btn-inner">
+                    <span class="btn-dot"></span>
+                    <div class="btn-text-wrap">
+                      <span class="btn-text-top">Начать проект</span>
+                      <span class="btn-text-bot">Начать проект</span>
+                    </div>
+                  </div>
+                </button>
+              </div>
+              <div class="hero-desc">
+                <p>DosCode — студия разработки в Алматы. Веб-сервисы, мобильные приложения, AI-агенты и MVP. От идеи до продукта за дни, не месяцы.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="field">
-          <label>Тип проекта</label>
-          <select name="type" required>
-            <option value="" disabled selected>— выберите —</option>
-            <option>Веб-приложение</option>
-            <option>Мобильное приложение</option>
-            <option>Дашборд / CRM</option>
-            <option>AI-агент / Бот</option>
-            <option>Лендинг / MVP</option>
-            <option>Другое</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Сообщение</label>
-          <textarea name="message" placeholder="Расскажите о вашем проекте…" rows="4" required></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Отправить заявку →</button>
-      </form>
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
 
-<!-- ── FOOTER ──────────────────────────────────── -->
-<footer class="footer">
-  <div class="footer-inner">
-    <span class="footer-copy">&copy; 2026 DosCode · Алматы</span>
-    <div class="footer-links">
-      <a href="#services">Услуги</a>
-      <a href="#portfolio">Портфолио</a>
-      <a href="mailto:hello@doscode.kz">Email</a>
-      <a href="https://t.me/doscode" target="_blank" rel="noopener">Telegram</a>
-    </div>
-  </div>
-</footer>
+    <!-- ── ETHOS — LIGHT SECTION ── -->
+    <section class="ethos-section" id="ethos" data-ethos>
+      <div class="container">
+        <div class="ethos-header">
+          <div class="ethos-header-left">
+            <h2 class="p2-mono ethos-label">О нас</h2>
+            <p class="h5 uppercase">Скорость.<br />Качество.<br />Результат.</p>
+          </div>
+          <div class="ethos-header-right">
+            <p class="p1">DosCode строит цифровые продукты для бизнеса. Наша платформа смещает баланс в пользу результата. Инфраструктура, которая работает. Команда, которая прошла этот путь. Это не агентство. Это полноценное строительство продукта на скорости, которую требует рынок.</p>
+            <button class="btn" data-theme="dark" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+              <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+              <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+              <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+              <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+              <div class="btn-inner">
+                <span class="btn-dot"></span>
+                <div class="btn-text-wrap">
+                  <span class="btn-text-top">Начать проект</span>
+                  <span class="btn-text-bot">Начать проект</span>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
 
+        <!-- Ethos cards — WQF accordion style -->
+        <ul class="ethos-cards" id="ethos-cards">
+          <li class="ethos-card" data-card="1" onmouseenter="setCard(1)" onmouseleave="setCard(null)">
+            <div class="ethos-card-inner -dark">
+              <div class="ethos-card-body">
+                <h3 class="h4">Веб-приложения</h3>
+                <div class="ethos-card-icon">⚡</div>
+                <div class="p2-mono">
+                  <p class="ethos-card-num">01 / 04</p>
+                  <p class="ethos-card-desc">Быстрые, надёжные PWA и сервисы. React, Next.js, Node.js. От лендинга до SaaS-платформы.</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="ethos-card" data-card="2" onmouseenter="setCard(2)" onmouseleave="setCard(null)">
+            <div class="ethos-card-inner -teal">
+              <div class="ethos-card-body">
+                <h3 class="h4">Мобильные приложения</h3>
+                <div class="ethos-card-icon">📱</div>
+                <div class="p2-mono">
+                  <p class="ethos-card-num">02 / 04</p>
+                  <p class="ethos-card-desc">iOS и Android за один цикл. React Native. Геолокация, push-уведомления, платежи.</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="ethos-card" data-card="3" onmouseenter="setCard(3)" onmouseleave="setCard(null)">
+            <div class="ethos-card-inner -dark">
+              <div class="ethos-card-body">
+                <h3 class="h4">AI-агенты и боты</h3>
+                <div class="ethos-card-icon">🤖</div>
+                <div class="p2-mono">
+                  <p class="ethos-card-num">03 / 04</p>
+                  <p class="ethos-card-desc">Telegram, WhatsApp, голосовые агенты. Интеграция с GPT, Claude. Автоматизация продаж и поддержки.</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="ethos-card" data-card="4" onmouseenter="setCard(4)" onmouseleave="setCard(null)">
+            <div class="ethos-card-inner -dark">
+              <div class="ethos-card-body">
+                <h3 class="h4">Дашборды и MVP</h3>
+                <div class="ethos-card-icon">📊</div>
+                <div class="p2-mono">
+                  <p class="ethos-card-num">04 / 04</p>
+                  <p class="ethos-card-desc">Аналитические панели, CRM, POS-системы. MVP за 1–2 недели без лишних итераций.</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── FOCUS STATEMENT ── -->
+    <section class="focus-section" id="focus">
+      <div class="focus-inner">
+        <p class="p1-mono" style="color:var(--color-electric-teal);margin-bottom:20px;">Наш подход</p>
+        <h2 class="focus-h">Быстрые технологии.<br />Реальные результаты.</h2>
+        <p class="p1 focus-p">Мы не делаем красивых проектов ради красоты. Каждая строка кода — ради роста вашего бизнеса.</p>
+        <button class="btn" data-theme="light" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+          <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+          <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+          <svg class="corner-accent" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+          <div class="btn-inner">
+            <span class="btn-dot"></span>
+            <div class="btn-text-wrap">
+              <span class="btn-text-top">Обсудить проект</span>
+              <span class="btn-text-bot">Обсудить проект</span>
+            </div>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ── SERVICES ── -->
+    <section class="section-dark" id="services">
+      <div class="container">
+        <div class="section-head">
+          <p class="p1-mono" style="color:var(--color-electric-teal)">Что мы строим</p>
+          <h2 class="h2">Услуги</h2>
+        </div>
+        <ul class="reveal-list" id="svcList">
+          <li class="reveal-item svc-item">
+            <span class="item-num">01 / 04</span>
+            <h3 class="item-title">Веб и мобильные приложения</h3>
+            <p class="item-desc">PWA, нативные и кросс-платформенные приложения. React, Next.js, React Native. От MVP до продакшн-системы за 4–8 недель.</p>
+          </li>
+          <li class="reveal-item svc-item">
+            <span class="item-num">02 / 04</span>
+            <h3 class="item-title">Дашборды и инструменты</h3>
+            <p class="item-desc">Визуализация данных, внутренние панели и CRM-системы, заточенные под вашу команду и бизнес-процессы.</p>
+          </li>
+          <li class="reveal-item svc-item">
+            <span class="item-num">03 / 04</span>
+            <h3 class="item-title">AI-агенты и автоматизация</h3>
+            <p class="item-desc">Умные боты и автоматизация рутины — Telegram, WhatsApp, интеграция с ChatGPT и Claude. Продажи без менеджера.</p>
+          </li>
+          <li class="reveal-item svc-item">
+            <span class="item-num">04 / 04</span>
+            <h3 class="item-title">Лендинги и MVP</h3>
+            <p class="item-desc">Быстрый выход на рынок. От брифинга до рабочего продукта за 1–2 недели. Итерационно, прозрачно.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── PORTFOLIO ── -->
+    <section class="section-dark" id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <p class="p1-mono" style="color:var(--color-electric-teal)">Портфолио</p>
+          <h2 class="h2">Проекты</h2>
+        </div>
+        <ul class="reveal-list" id="portList">
+          <li class="reveal-item port-item">
+            <span class="item-num">01</span>
+            <h3 class="item-title">DosPass</h3>
+            <p class="item-desc">Платформа лояльности для SMB — цифровые карты, подарочные сертификаты, реферальная программа, flash-распродажи, WhatsApp.</p>
+            <a href="https://dospass.com" target="_blank" rel="noopener" class="port-link">dospass.com</a>
+          </li>
+          <li class="reveal-item port-item">
+            <span class="item-num">02</span>
+            <h3 class="item-title">Chicago Pizza</h3>
+            <p class="item-desc">Система онлайн-заказов, QR-меню, финансовый дашборд и Telegram-бот для команды. iiko-интеграция.</p>
+            <a href="https://chicagopizza.kz" target="_blank" rel="noopener" class="port-link">chicagopizza.kz</a>
+          </li>
+          <li class="reveal-item port-item">
+            <span class="item-num">03</span>
+            <h3 class="item-title">MMG Group</h3>
+            <p class="item-desc">Корпоративный сайт строительной компании с каталогом объектов, фильтрами и CRM-интеграцией.</p>
+            <a href="#" class="port-link">mmg.kz</a>
+          </li>
+          <li class="reveal-item port-item">
+            <span class="item-num">04</span>
+            <h3 class="item-title">YurikVoice</h3>
+            <p class="item-desc">AI-платформа для голосовых ассистентов: распознавание, синтез речи, интеграция с CRM и Telegram.</p>
+            <a href="#" class="port-link">yurikvoice.com</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── PROCESS ── -->
+    <section class="section-dark" id="process">
+      <div class="container">
+        <div class="section-head">
+          <p class="p1-mono" style="color:var(--color-electric-teal)">Как работаем</p>
+          <h2 class="h2">Процесс</h2>
+        </div>
+        <ul class="reveal-list" id="procList">
+          <li class="reveal-item proc-item">
+            <span class="item-num">01</span>
+            <div class="proc-body"><h3 class="proc-title">Обсуждаем</h3><p class="item-desc">Бесплатный созвон, разбор задачи и оценка в течение 24 часов. Без лишних слов — сразу к делу.</p></div>
+          </li>
+          <li class="reveal-item proc-item">
+            <span class="item-num">02</span>
+            <div class="proc-body"><h3 class="proc-title">Проектируем</h3><p class="item-desc">Прототип интерфейса, выбор стека, архитектура. Вы утверждаете, мы строим.</p></div>
+          </li>
+          <li class="reveal-item proc-item">
+            <span class="item-num">03</span>
+            <div class="proc-body"><h3 class="proc-title">Строим</h3><p class="item-desc">Итерационная разработка с еженедельными демо. Вы видите прогресс на каждом шаге.</p></div>
+          </li>
+          <li class="reveal-item proc-item">
+            <span class="item-num">04</span>
+            <div class="proc-body"><h3 class="proc-title">Запускаем</h3><p class="item-desc">Деплой, обучение команды и поддержка. Мы с вами и после релиза.</p></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── CONTACT ── -->
+    <section class="section-dark" id="contact">
+      <div class="container">
+        <p class="p1-mono" style="color:var(--color-electric-teal);margin-bottom:40px">Контакты</p>
+        <div class="contact-grid">
+          <div>
+            <h2 class="contact-h">Давайте построим что-то вместе.</h2>
+            <p class="p1 contact-sub">Расскажите о вашей задаче — ответим с оценкой сроков и стоимости в течение 24 часов. Консультация бесплатна.</p>
+            <a href="mailto:hello@doscode.kz" class="contact-email">hello@doscode.kz →</a>
+          </div>
+          <form class="form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="field"><label>Имя</label><input type="text" name="name" placeholder="Алибек" /></div>
+              <div class="field"><label>Email</label><input type="email" name="email" placeholder="ali@company.kz" /></div>
+            </div>
+            <div class="field">
+              <label>Тип проекта</label>
+              <select name="type">
+                <option value="" disabled selected>— выберите —</option>
+                <option>Веб-приложение</option><option>Мобильное приложение</option>
+                <option>Дашборд / CRM</option><option>AI-агент / Бот</option>
+                <option>Лендинг / MVP</option><option>Другое</option>
+              </select>
+            </div>
+            <div class="field"><label>Сообщение</label><textarea name="message" placeholder="Расскажите о проекте…"></textarea></div>
+            <button type="submit" class="form-submit">Отправить заявку →</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <span class="footer-copy">&copy; 2026 DosCode · Алматы, Казахстан</span>
+          <div class="footer-links">
+            <a href="#ethos">О нас</a><a href="#services">Услуги</a>
+            <a href="#portfolio">Портфолио</a><a href="mailto:hello@doscode.kz">Email</a>
+            <a href="https://t.me/doscode" target="_blank" rel="noopener">Telegram</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /smooth-content -->
+</div><!-- /smooth-wrapper -->
+
+<!-- ══════ WQF's actual GSAP (includes ScrollSmoother + SplitText) ══════ -->
+<script src="./assets/gsap-wqf.min.js"></script>
 <script>
-  gsap.registerPlugin(ScrollTrigger);
-
   const EASE = 'cubic-bezier(.62,.16,.13,1.01)';
   const EASE_POWER3 = 'power3.inOut';
 
-  /* ── LENIS smooth scroll ── */
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
+  /* ── ScrollSmoother ── */
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+  const smoother = ScrollSmoother.create({
+    wrapper: '#smooth-wrapper',
+    content: '#smooth-content',
+    smooth: 1.4,
+    effects: true,
   });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(time => lenis.raf(time * 1000));
-  gsap.ticker.lagSmoothing(0);
 
-  /* ── LOADER ── */
-  const loader = document.getElementById('loader');
-  const loaderTl = gsap.timeline({ onComplete: () => { loader.style.display = 'none'; } });
-  loaderTl
-    .to('#loader .loader-logo', { clipPath: 'inset(0 0 100% 0)', duration: 0.7, ease: EASE, delay: 0.8 })
-    .to(loader, { clipPath: 'inset(0 0 100% 0)', duration: 0.8, ease: EASE }, '-=0.2');
-
-  /* ── NAV auto-hide ── */
+  /* ── NAV hide/show ── */
   const nav = document.getElementById('nav');
-  let lastY = 0;
-  let winH = window.innerHeight;
-  lenis.on('scroll', ({ scroll }) => {
-    const delta = scroll - lastY;
-    if (scroll > winH / 4) nav.classList.add('-scrolled');
-    else nav.classList.remove('-scrolled');
-    if (scroll > winH) {
-      if (delta > 50) nav.classList.add('-hidden');
-      else if (delta < -50) nav.classList.remove('-hidden');
-    } else {
-      nav.classList.remove('-hidden');
+  let lastY = 0, winH = window.innerHeight;
+  ScrollTrigger.create({
+    onUpdate: (self) => {
+      const y = self.scroll();
+      const delta = y - lastY;
+      const past = y > winH / 4;
+      const pastFull = y > winH;
+      if (past) nav.classList.add('-scrolled');
+      else nav.classList.remove('-scrolled');
+      if (pastFull) {
+        if (delta > 50) nav.classList.add('-translate-y-full');
+        else if (delta < -50) nav.classList.remove('-translate-y-full');
+      } else {
+        nav.classList.remove('-translate-y-full');
+      }
+      if (Math.abs(delta) > 50) lastY = y;
     }
-    if (Math.abs(delta) > 50) lastY = scroll;
   });
 
-  /* ── HERO — WQF exact animation ──
-     Words: clipPath inset(100% 0 0 0) + translateY(-48px)
-     Reveals DOWN while words are stationary in final positions
+  /* ── HERO word animation (WQF exact logic) ──
+     Left words: start from left edge of container → slide to natural position
+     Right words: start from right edge → slide to natural position
+     All: clipPath inset(100% 0 0 0) → inset(0% 0 0 0)
   ── */
-  const heroWords = document.querySelectorAll('.hw');
-  const heroBottom = document.getElementById('heroBottom');
+  function animateHero() {
+    const container = document.getElementById('heroContainer');
+    const leftWords = container.querySelectorAll('.hero-title--left');
+    const rightWords = container.querySelectorAll('.hero-title--right');
+    const cRect = container.getBoundingClientRect();
 
-  // Words are already set in CSS to inset(100% 0 0 0) + translateY(-48px)
-  // Now animate them to their final state after loader
-  gsap.to(heroWords, {
-    clipPath: 'inset(0% 0% 0% 0%)',
-    y: 0,
-    duration: 1.4,
-    ease: EASE_POWER3,
-    stagger: 0.08,
-    delay: 1.6,
-  });
+    const leftOffsets = [];
+    leftWords.forEach(w => {
+      const r = w.getBoundingClientRect();
+      leftOffsets.push(cRect.left - r.left);
+    });
 
-  gsap.to(heroBottom, {
-    opacity: 1,
-    y: 0,
-    duration: 1.0,
-    ease: EASE,
-    delay: 2.4,
-  });
+    const rightOffsets = [];
+    rightWords.forEach(w => {
+      const r = w.getBoundingClientRect();
+      rightOffsets.push(cRect.right - r.right);
+    });
 
-  /* ── ETHOS — WQF horizontal reveal (inset(0 100% 0 0) → inset(0 0 0 0)) ── */
-  gsap.from('.ethos', {
-    clipPath: 'inset(0 100% 0 0)',
-    duration: 1.2,
-    ease: EASE,
-    scrollTrigger: {
-      trigger: '.ethos',
-      start: 'top bottom-=10%',
-      end: 'top center',
-      scrub: 1,
-    }
-  });
+    // Set initial positions
+    leftWords.forEach((w, i) => gsap.set(w, { x: leftOffsets[i] }));
+    rightWords.forEach((w, i) => gsap.set(w, { x: rightOffsets[i] }));
 
-  /* ── Section h2 headings — clipPath bottom to top ── */
-  document.querySelectorAll('.h2, .focus-h, .contact-h').forEach(el => {
+    // Animate all words simultaneously
+    const tl = gsap.timeline({ delay: 0.4 });
+    tl.to([...leftWords, ...rightWords], {
+      clipPath: 'inset(0% 0% 0% 0%)',
+      x: 0,
+      y: 0,
+      duration: 1.4,
+      ease: EASE_POWER3,
+      stagger: 0.06,
+    });
+    tl.to('#heroBottom', {
+      opacity: 1,
+      duration: 0.8,
+      ease: EASE,
+    }, '-=0.6');
+  }
+
+  window.addEventListener('load', animateHero);
+
+  /* ── ETHOS horizontal clipPath wipe (WQF exact) ── */
+  const ethosEl = document.querySelector('[data-ethos]');
+  if (ethosEl) {
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ethosEl,
+        start: 'top bottom-=10%',
+        end: 'top center',
+        scrub: 1,
+      }
+    }).from(ethosEl, {
+      clipPath: 'inset(0 100% 0 0)',
+      duration: 1.2,
+    });
+  }
+
+  /* ── Ethos card accordion ── */
+  window.setCard = function(id) {
+    const cards = document.querySelectorAll('.ethos-card');
+    cards.forEach(c => {
+      if (id !== null && parseInt(c.dataset.card) === id) c.classList.add('-active');
+      else c.classList.remove('-active');
+    });
+  };
+
+  /* ── Heading clipPath reveals on scroll ── */
+  document.querySelectorAll('.h2, .contact-h, .focus-h').forEach(el => {
     gsap.from(el, {
       clipPath: 'inset(0 0 100% 0)',
       duration: 0.9, ease: EASE,
@@ -769,38 +918,37 @@
     });
   });
 
-  /* ── Focus section fade in ── */
-  gsap.from(['#focus .focus-label', '#focus .focus-h', '#focus .focus-p', '#focus .nav-cta'], {
-    opacity: 0, y: 64,
-    duration: 1.2, ease: EASE,
-    stagger: 0.1,
-    scrollTrigger: { trigger: '#focus', start: 'top 50%' },
-  });
-
-  /* ── List items — WQF clipPath vertical reveal ── */
-  document.querySelectorAll('.svc-item, .port-item, .proc-item').forEach(item => {
-    gsap.from(item, {
-      clipPath: 'inset(0 0 100% 0)',
-      duration: 0.6, ease: EASE,
-      scrollTrigger: {
-        trigger: item,
-        start: 'top 82%',
-        end: 'bottom bottom',
-      }
+  /* ── List item reveals (WQF exact) ── */
+  ['#svcList', '#portList', '#procList'].forEach(sel => {
+    const list = document.querySelector(sel);
+    if (!list) return;
+    list.querySelectorAll('.reveal-item').forEach(item => {
+      gsap.from(item, {
+        clipPath: 'inset(0 0 100% 0)',
+        duration: 0.6, ease: EASE_POWER3,
+        scrollTrigger: { trigger: item, start: 'top 82%' },
+      });
     });
   });
 
+  /* ── Focus section reveal ── */
+  gsap.from('#focus .focus-h, #focus .focus-p, #focus .btn', {
+    opacity: 0, y: 40,
+    duration: 1.0, ease: EASE,
+    stagger: 0.12,
+    scrollTrigger: { trigger: '#focus', start: 'top 60%' },
+  });
+
   /* ── Contact section ── */
-  gsap.from('.contact-grid > div:first-child > *', {
+  gsap.from('#contact .contact-h, #contact .contact-sub, #contact .contact-email', {
     opacity: 0, y: 20,
-    duration: 0.8, ease: EASE,
-    stagger: 0.1,
+    duration: 0.7, ease: EASE, stagger: 0.08,
     scrollTrigger: { trigger: '#contact', start: 'top 80%' },
   });
-  gsap.from('.field', {
+  gsap.from('#contact .field, #contact .form-submit', {
     opacity: 0, y: 12,
-    duration: 0.5, ease: EASE, stagger: 0.07,
-    scrollTrigger: { trigger: '.form', start: 'top 80%' },
+    duration: 0.5, ease: EASE, stagger: 0.06,
+    scrollTrigger: { trigger: '#contactForm', start: 'top 80%' },
   });
 </script>
 </body>
