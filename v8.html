@@ -3,469 +3,495 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DosCode — Разработка приложений в Алматы | Веб, мобайл, AI</title>
-  <meta name="description" content="Разрабатываем веб и мобильные приложения в Алматы. Лендинг от 150К ₸ за 2 недели, MVP за 4–8 недель. Telegram-боты, AI-агенты, дашборды. Оценка бесплатно." />
+  <title>DosCode — Разработка приложений в Алматы</title>
+  <meta name="description" content="Разрабатываем веб и мобильные приложения в Алматы. MVP за 4–8 недель. Telegram-боты, AI-агенты, дашборды." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
-    /* ═══════════════════════════════════════════════
-       DESIGN TOKENS
-       ═══════════════════════════════════════════════ */
+    /* ══════════════════════════════════════════════════
+       TOKENS — exact WQF palette + easing
+    ══════════════════════════════════════════════════ */
     :root {
-      --bg:       #0A0A0A;
-      --fg:       #F0F0EC;
-      --muted:    rgba(240, 240, 236, 0.42);
-      --border:   rgba(240, 240, 236, 0.09);
-      --accent:   #C8FF00;       /* electric lime — used sparingly */
-      --max:      1360px;
-      --pad:      clamp(20px, 5.5vw, 88px);
-      --f-head:   'Unbounded', sans-serif;
-      --f-body:   'Golos Text', sans-serif;
+      --black:    #090909;   /* WQF core-black */
+      --carbon:   #111111;   /* WQF rich-carbon */
+      --smoke:    #1b1b1b;   /* WQF urban-smoke */
+      --fog:      #dadada;   /* WQF neural-fog — used for ethos section bg */
+      --off:      #e7e7e7;   /* WQF off-white — primary text */
+      --muted:    rgba(231,231,231,0.42);
+      --teal:     #5c939f;   /* WQF electric-teal — accent */
+      --infrared: #ed6d40;   /* WQF infrared — CTA accent */
+      --easing:   cubic-bezier(.62,.16,.13,1.01);  /* WQF signature easing */
+      --hdr:      4rem;
+      --pad:      clamp(16px, 4.5vw, 40px);
+      --max:      160rem;
+      --f-head:   'Space Grotesk', sans-serif;
+      --f-mono:   'Space Mono', monospace;
     }
+    @media (min-width: 64rem) { :root { --hdr: 5rem; } }
 
-    /* ═══════════════════════════════════════════════
+    /* ══════════════════════════════════════════════════
        RESET
-       ═══════════════════════════════════════════════ */
+    ══════════════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--hdr); }
     body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: var(--f-body);
-      line-height: 1.6;
+      background: var(--black);
+      color: var(--off);
+      font-family: var(--f-head);
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
     ul, ol { list-style: none; }
+    img { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-    /* Film grain */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 9000; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      opacity: 0.55;
+    /* ══════════════════════════════════════════════════
+       LOADER — WQF-style page entry
+    ══════════════════════════════════════════════════ */
+    #loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--black);
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
     }
+    #loader .loader-logo {
+      font-family: var(--f-head);
+      font-weight: 500; font-size: clamp(1.5rem, 4vw, 3rem);
+      letter-spacing: -0.02em;
+      color: var(--off);
+    }
+    #loader .loader-logo span { color: var(--teal); }
 
-    /* ═══════════════════════════════════════════════
+    /* ══════════════════════════════════════════════════
        NAV
-       ═══════════════════════════════════════════════ */
+    ══════════════════════════════════════════════════ */
     .nav {
-      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-      padding: 28px var(--pad);
-      display: flex; align-items: center; justify-content: space-between;
-      transition: background 0.4s, padding 0.4s, border-color 0.4s;
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 500;
+      height: var(--hdr);
+      display: flex; align-items: center;
+      transition: transform 0.4s var(--easing), background 0.4s, border-color 0.4s;
       border-bottom: 1px solid transparent;
     }
-    .nav.stuck {
-      background: rgba(10, 10, 10, 0.93);
+    .nav.-scrolled {
+      background: rgba(17,17,17, 0.94);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      padding: 18px var(--pad);
-      border-color: var(--border);
+      border-color: rgba(231,231,231,0.08);
     }
-    .nav-logo { height: 24px; width: auto; }
-    .nav-links { display: flex; gap: 40px; }
+    .nav.-hidden { transform: translateY(-100%); }
+    .nav-inner {
+      width: 100%; max-width: var(--max);
+      margin: 0 auto; padding: 0 var(--pad);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--f-head); font-weight: 500;
+      font-size: 1.125rem; letter-spacing: -0.025em;
+      color: var(--off);
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 2.5rem; }
     .nav-links a {
-      font-family: var(--f-head);
-      font-size: 10px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.16em;
-      color: var(--muted);
-      transition: color 0.25s;
+      font-family: var(--f-mono); font-size: 0.6875rem;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--muted); transition: color 0.3s;
     }
-    .nav-links a:hover { color: var(--fg); }
+    .nav-links a:hover { color: var(--off); }
     .nav-cta {
-      font-family: var(--f-head);
-      font-size: 10px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.12em;
+      font-family: var(--f-mono); font-size: 0.6875rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
       color: var(--muted);
-      position: relative; padding: 10px 0;
+      position: relative; padding: 8px 0;
       transition: color 0.25s;
     }
-    /* corner bracket button — 4 L-shaped corners */
-    .nav-cta, .bracket-btn { position: relative; display: inline-block; }
-    .bracket-btn {
-      font-family: var(--f-head);
-      font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.14em;
-      color: var(--fg);
-      padding: 14px 28px;
-      cursor: pointer; border: none; background: none;
-      transition: color 0.25s;
-    }
-    .bracket-btn::before, .bracket-btn::after,
-    .nav-cta::before, .nav-cta::after {
-      content: '';
-      position: absolute; inset: 0; pointer-events: none;
-    }
-    .bracket-btn::before, .nav-cta::before {
+    /* Corner brackets */
+    .nav-cta::before, .nav-cta::after { content: ''; position: absolute; inset: 0; pointer-events: none; }
+    .nav-cta::before {
       background:
-        linear-gradient(currentColor, currentColor) left top    / 10px 1.5px no-repeat,
-        linear-gradient(currentColor, currentColor) left top    / 1.5px 10px no-repeat,
-        linear-gradient(currentColor, currentColor) right bottom / 10px 1.5px no-repeat,
-        linear-gradient(currentColor, currentColor) right bottom / 1.5px 10px no-repeat;
-      transition: inset 0.25s ease;
+        linear-gradient(currentColor,currentColor) left top /9px 1.5px no-repeat,
+        linear-gradient(currentColor,currentColor) left top /1.5px 9px no-repeat,
+        linear-gradient(currentColor,currentColor) right bottom/9px 1.5px no-repeat,
+        linear-gradient(currentColor,currentColor) right bottom/1.5px 9px no-repeat;
+      transition: inset 0.25s var(--easing);
     }
-    .bracket-btn::after, .nav-cta::after {
+    .nav-cta::after {
       background:
-        linear-gradient(currentColor, currentColor) right top    / 10px 1.5px no-repeat,
-        linear-gradient(currentColor, currentColor) right top    / 1.5px 10px no-repeat,
-        linear-gradient(currentColor, currentColor) left  bottom / 10px 1.5px no-repeat,
-        linear-gradient(currentColor, currentColor) left  bottom / 1.5px 10px no-repeat;
-      transition: inset 0.25s ease;
+        linear-gradient(currentColor,currentColor) right top /9px 1.5px no-repeat,
+        linear-gradient(currentColor,currentColor) right top /1.5px 9px no-repeat,
+        linear-gradient(currentColor,currentColor) left bottom/9px 1.5px no-repeat,
+        linear-gradient(currentColor,currentColor) left bottom/1.5px 9px no-repeat;
+      transition: inset 0.25s var(--easing);
     }
-    .bracket-btn:hover::before, .bracket-btn:hover::after,
-    .nav-cta:hover::before, .nav-cta:hover::after { inset: -4px; }
-    .bracket-btn:hover, .nav-cta:hover { color: var(--accent); }
+    .nav-cta:hover { color: var(--teal); }
+    .nav-cta:hover::before, .nav-cta:hover::after { inset: -5px; }
 
-    /* ═══════════════════════════════════════════════
-       LAYOUT HELPERS
-       ═══════════════════════════════════════════════ */
-    .inner { max-width: var(--max); margin: 0 auto; }
-    section {
-      padding: clamp(80px, 11vh, 160px) var(--pad);
-      border-top: 1px solid var(--border);
-    }
-    .sec-tag {
-      font-family: var(--f-head);
-      font-size: 10px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.22em;
-      color: var(--accent);
-      display: block; margin-bottom: 48px;
-    }
-    .sec-h2 {
-      font-family: var(--f-head); font-weight: 900;
-      font-size: clamp(2.2rem, 5.5vw, 5.5rem);
-      text-transform: uppercase;
-      line-height: 1.0; letter-spacing: -0.02em;
-      overflow: hidden;           /* needed for clipPath reveal */
-    }
-
-    /* ═══════════════════════════════════════════════
-       HERO
-       ═══════════════════════════════════════════════ */
+    /* ══════════════════════════════════════════════════
+       HERO — centered, WQF layout
+    ══════════════════════════════════════════════════ */
     .hero {
-      min-height: 100vh;
-      padding: 0 var(--pad) clamp(60px, 8vh, 120px);
-      display: flex; flex-direction: column; justify-content: flex-end;
-      border-top: none;
+      height: 100dvh; min-height: 550px;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding-top: var(--hdr);
+      padding-bottom: clamp(40px, 6vh, 80px);
+      overflow: hidden;
     }
-    .hero-pre {
-      font-family: var(--f-head);
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 28px;
-    }
+    .hero-top { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0 var(--pad); }
     .hero-h1 {
-      font-family: var(--f-head); font-weight: 900;
-      font-size: clamp(3rem, 9.5vw, 10rem);
+      font-family: var(--f-head);
+      font-weight: 500;
+      font-size: clamp(2.25rem, 7vw, 6.5rem);
+      line-height: 0.95;
       text-transform: uppercase;
-      line-height: 1.0; letter-spacing: -0.025em;
-      margin-bottom: 52px;
+      text-align: center;
+      letter-spacing: -0.02em;
+      max-width: 900px;
     }
-    /* Each line wrapped by JS for split animation */
-    .hero-line { display: block; overflow: hidden; }
-    .hero-line-inner { display: block; }
+    /* WQF-style split: left words come from left, right words from right */
+    .hero-word { display: inline-block; overflow: hidden; }
+    .hero-word-inner { display: inline-block; }
 
-    .hero-foot {
-      display: flex; align-items: flex-end;
-      justify-content: space-between; gap: 40px;
-      flex-wrap: wrap;
+    .hero-bottom {
+      padding: 0 var(--pad);
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 24px;
     }
     .hero-sub {
-      font-size: clamp(0.9rem, 1.35vw, 1.1rem);
-      color: var(--muted); max-width: 460px; line-height: 1.8;
+      font-size: clamp(0.875rem, 1.2vw, 1rem);
+      color: var(--muted); max-width: 400px; line-height: 1.7;
     }
-    .hero-scroll {
-      font-family: var(--f-head); font-size: 10px;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--muted); white-space: nowrap;
-      display: flex; align-items: center; gap: 14px;
-    }
-    .hero-scroll::before {
-      content: ''; display: block; width: 44px; height: 1px;
-      background: var(--muted);
-      animation: scroll-line 2s ease-in-out infinite;
-    }
-    @keyframes scroll-line {
-      0%, 100% { width: 44px; opacity: 1; }
-      50% { width: 20px; opacity: 0.4; }
+    .hero-meta {
+      font-family: var(--f-mono); font-size: 0.6875rem;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--muted); text-align: right;
+      display: flex; flex-direction: column; gap: 4px;
     }
 
-    /* ═══════════════════════════════════════════════
-       ETHOS / ABOUT
-       ═══════════════════════════════════════════════ */
+    /* ══════════════════════════════════════════════════
+       LAYOUT HELPERS
+    ══════════════════════════════════════════════════ */
+    .section {
+      padding: clamp(80px, 10vh, 140px) var(--pad);
+      border-top: 1px solid rgba(231,231,231,0.08);
+    }
+    .container { max-width: var(--max); margin: 0 auto; }
+    .mono-label {
+      font-family: var(--f-mono); font-size: 0.6875rem;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--teal); display: block; margin-bottom: 40px;
+    }
+    .h2 {
+      font-family: var(--f-head); font-weight: 500;
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      line-height: 0.95; text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    /* ══════════════════════════════════════════════════
+       ETHOS — WQF LIGHT SECTION (key signature)
+    ══════════════════════════════════════════════════ */
+    .ethos {
+      background: var(--fog);      /* #dadada — light gray, WQF style */
+      color: var(--carbon);
+      border-top: none;
+      border-radius: 20px 20px 0 0;
+      padding: clamp(80px,12vh,160px) var(--pad);
+      /* clipPath reveal applied by GSAP: inset(0 100% 0 0) → inset(0 0 0 0) */
+      /* This whole section slides in from the RIGHT as you scroll */
+    }
     .ethos-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(40px, 6vw, 100px);
+      max-width: var(--max); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 5vw, 80px);
       align-items: start;
     }
-    .ethos-left .sec-h2 { font-size: clamp(2rem, 4vw, 4.2rem); }
+    .ethos .mono-label { color: rgba(17,17,17,0.5); }
+    .ethos .h2 { color: var(--carbon); }
     .ethos-right p {
-      font-size: clamp(0.95rem, 1.3vw, 1.15rem);
-      color: var(--muted); line-height: 1.85;
-      margin-bottom: 28px;
+      font-size: clamp(0.875rem, 1.2vw, 1rem);
+      color: rgba(17,17,17,0.65);
+      line-height: 1.75; margin-bottom: 24px;
     }
-    .arrow-link {
-      font-family: var(--f-head); font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.15em;
-      color: var(--fg); display: inline-flex; align-items: center; gap: 10px;
+    .ethos-link {
+      font-family: var(--f-mono); font-size: 0.6875rem;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--carbon);
+      display: inline-flex; align-items: center; gap: 10px;
       transition: color 0.25s;
     }
-    .arrow-link span { transition: transform 0.25s; }
-    .arrow-link:hover { color: var(--accent); }
-    .arrow-link:hover span { transform: translateX(6px); }
+    .ethos-link::after { content: '→'; transition: transform 0.25s; }
+    .ethos-link:hover { color: var(--infrared); }
+    .ethos-link:hover::after { transform: translateX(5px); }
 
-    /* ═══════════════════════════════════════════════
-       SERVICES — WQF list reveal
-       ═══════════════════════════════════════════════ */
-    .svc-list { margin-top: 64px; }
+    /* ══════════════════════════════════════════════════
+       SERVICES — WQF list with clipPath reveals
+    ══════════════════════════════════════════════════ */
+    .svc-list { margin-top: 56px; }
     .svc-item {
       display: grid;
-      grid-template-columns: 96px 1fr 1fr;
-      gap: 40px;
-      padding: 36px 0;
-      border-top: 1px solid var(--border);
-      will-change: clip-path;     /* GSAP target */
+      grid-template-columns: 80px 1fr 1fr;
+      gap: 32px;
+      padding: 32px 0;
+      border-top: 1px solid rgba(231,231,231,0.08);
     }
-    .svc-item:last-child { border-bottom: 1px solid var(--border); }
+    .svc-item:last-child { border-bottom: 1px solid rgba(231,231,231,0.08); }
     .svc-n {
-      font-family: var(--f-head); font-size: 10px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--accent); padding-top: 3px;
+      font-family: var(--f-mono); font-size: 0.6875rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--teal); padding-top: 2px;
     }
     .svc-title {
-      font-family: var(--f-head); font-weight: 800;
-      font-size: clamp(1rem, 2vw, 1.75rem);
-      text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.1;
+      font-family: var(--f-head); font-weight: 500;
+      font-size: clamp(1rem, 1.8vw, 1.5rem);
+      text-transform: uppercase; line-height: 1.1;
+      letter-spacing: -0.01em;
     }
     .svc-desc {
-      font-size: 14px; line-height: 1.8;
-      color: var(--muted); padding-top: 3px;
+      font-size: 0.875rem; line-height: 1.75;
+      color: var(--muted); padding-top: 2px;
     }
 
-    /* ═══════════════════════════════════════════════
-       PORTFOLIO — minimal text list
-       ═══════════════════════════════════════════════ */
-    .port-list { margin-top: 64px; }
+    /* ══════════════════════════════════════════════════
+       FOCUS STATEMENT — WQF full-height centered quote
+    ══════════════════════════════════════════════════ */
+    .focus {
+      min-height: 100dvh;
+      display: flex; align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--hdr) var(--pad);
+      border-top: 1px solid rgba(231,231,231,0.08);
+    }
+    .focus-inner { max-width: 860px; }
+    .focus-label {
+      font-family: var(--f-mono); font-size: 0.6875rem;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--teal); display: block; margin-bottom: 20px;
+    }
+    .focus-h {
+      font-family: var(--f-head); font-weight: 500;
+      font-size: clamp(1.75rem, 4vw, 3.5rem);
+      text-transform: uppercase; line-height: 1.0;
+      letter-spacing: -0.02em; margin-bottom: 28px;
+    }
+    .focus-p {
+      font-size: clamp(0.875rem, 1.1vw, 1rem);
+      color: var(--muted); line-height: 1.75; max-width: 480px;
+      margin: 0 auto 36px;
+    }
+
+    /* ══════════════════════════════════════════════════
+       PORTFOLIO
+    ══════════════════════════════════════════════════ */
+    .port-list { margin-top: 56px; }
     .port-item {
       display: grid;
-      grid-template-columns: 96px 1fr 1.4fr auto;
-      gap: 40px;
-      padding: 28px 0;
-      border-top: 1px solid var(--border);
+      grid-template-columns: 80px 1fr 1.2fr auto;
+      gap: 32px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(231,231,231,0.08);
       align-items: center;
-      will-change: clip-path;
     }
-    .port-item:last-child { border-bottom: 1px solid var(--border); }
-    .port-n {
-      font-family: var(--f-head); font-size: 10px;
-      color: var(--muted); letter-spacing: 0.12em;
-    }
+    .port-item:last-child { border-bottom: 1px solid rgba(231,231,231,0.08); }
+    .port-n { font-family: var(--f-mono); font-size: 0.6875rem; color: var(--muted); }
     .port-name {
-      font-family: var(--f-head); font-weight: 800;
-      font-size: clamp(1rem, 1.8vw, 1.5rem);
+      font-family: var(--f-head); font-weight: 500;
+      font-size: clamp(0.875rem, 1.5vw, 1.25rem);
       text-transform: uppercase; letter-spacing: -0.01em;
     }
-    .port-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .port-desc { font-size: 0.8125rem; color: var(--muted); line-height: 1.6; }
     .port-link {
-      font-family: var(--f-head); font-size: 10px; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase;
+      font-family: var(--f-mono); font-size: 0.625rem;
+      text-transform: uppercase; letter-spacing: 0.12em;
       color: var(--muted); white-space: nowrap;
-      display: inline-flex; align-items: center; gap: 6px;
+      display: inline-flex; align-items: center; gap: 4px;
       transition: color 0.25s;
     }
     .port-link::after { content: '↗'; }
-    .port-link:hover { color: var(--accent); }
+    .port-link:hover { color: var(--teal); }
 
-    /* ═══════════════════════════════════════════════
+    /* ══════════════════════════════════════════════════
        PROCESS
-       ═══════════════════════════════════════════════ */
-    .proc-list { margin-top: 64px; }
+    ══════════════════════════════════════════════════ */
+    .proc-list { margin-top: 56px; }
     .proc-item {
-      display: grid;
-      grid-template-columns: 96px 1fr;
-      gap: 40px;
-      padding: 36px 0;
-      border-top: 1px solid var(--border);
-      will-change: clip-path;
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 32px; padding: 32px 0;
+      border-top: 1px solid rgba(231,231,231,0.08);
     }
-    .proc-item:last-child { border-bottom: 1px solid var(--border); }
-    .proc-n {
-      font-family: var(--f-head); font-size: 10px; font-weight: 700;
-      letter-spacing: 0.12em; color: var(--accent);
-      padding-top: 3px;
-    }
-    .proc-body { display: flex; gap: clamp(40px, 5vw, 100px); }
+    .proc-item:last-child { border-bottom: 1px solid rgba(231,231,231,0.08); }
+    .proc-n { font-family: var(--f-mono); font-size: 0.6875rem; color: var(--teal); padding-top: 2px; }
+    .proc-body { display: flex; gap: clamp(32px,4vw,80px); }
     .proc-title {
-      font-family: var(--f-head); font-weight: 800;
-      font-size: clamp(1rem, 1.7vw, 1.4rem);
-      text-transform: uppercase; min-width: 180px; line-height: 1.2;
+      font-family: var(--f-head); font-weight: 500;
+      font-size: clamp(0.875rem, 1.5vw, 1.25rem);
+      text-transform: uppercase; min-width: 160px; line-height: 1.2;
     }
-    .proc-desc { font-size: 15px; color: var(--muted); line-height: 1.8; }
+    .proc-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
 
-    /* ═══════════════════════════════════════════════
+    /* ══════════════════════════════════════════════════
        CONTACT
-       ═══════════════════════════════════════════════ */
+    ══════════════════════════════════════════════════ */
     .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(40px, 6vw, 100px);
-      align-items: start;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(40px,5vw,80px); align-items: start;
     }
-    .contact-h2 {
-      font-family: var(--f-head); font-weight: 900;
-      font-size: clamp(2.2rem, 5vw, 5rem);
-      text-transform: uppercase;
-      line-height: 1.0; letter-spacing: -0.02em;
-      margin-bottom: 32px; overflow: hidden;
+    .contact-h {
+      font-family: var(--f-head); font-weight: 500;
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      text-transform: uppercase; line-height: 0.95;
+      letter-spacing: -0.02em; margin-bottom: 28px;
     }
-    .contact-sub {
-      font-size: 15px; color: var(--muted); line-height: 1.8;
-      margin-bottom: 36px;
-    }
+    .contact-sub { font-size: 0.875rem; color: var(--muted); line-height: 1.75; margin-bottom: 32px; }
     .contact-mail {
-      font-family: var(--f-head); font-size: clamp(0.8rem, 1.4vw, 1.1rem);
-      font-weight: 700; letter-spacing: 0.02em;
+      font-family: var(--f-mono); font-size: clamp(0.75rem, 1.1vw, 0.9375rem);
+      letter-spacing: 0.02em; color: var(--off);
       display: inline-flex; align-items: center; gap: 10px;
-      color: var(--fg);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 14px;
-      transition: border-color 0.3s, color 0.3s;
+      border-bottom: 1px solid rgba(231,231,231,0.15);
+      padding-bottom: 12px; transition: border-color 0.3s, color 0.3s;
     }
-    .contact-mail:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* Form — borderless underline style */
-    .form { display: flex; flex-direction: column; gap: 28px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .field { display: flex; flex-direction: column; gap: 10px; }
+    .contact-mail:hover { border-color: var(--teal); color: var(--teal); }
+    /* Form */
+    .form { display: flex; flex-direction: column; gap: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: flex; flex-direction: column; gap: 8px; }
     .field label {
-      font-family: var(--f-head); font-size: 9px; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+      font-family: var(--f-mono); font-size: 0.625rem;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      color: var(--muted);
     }
     .field input, .field textarea, .field select {
       background: transparent; border: none;
-      border-bottom: 1px solid var(--border);
-      padding: 12px 0;
-      color: var(--fg); font-family: var(--f-body); font-size: 15px;
-      outline: none; width: 100%;
+      border-bottom: 1px solid rgba(231,231,231,0.12);
+      padding: 10px 0; color: var(--off);
+      font-family: var(--f-head); font-size: 0.9375rem;
+      font-weight: 400; outline: none; width: 100%;
       transition: border-color 0.3s;
     }
     .field input:focus, .field textarea:focus, .field select:focus {
-      border-color: rgba(200, 255, 0, 0.5);
+      border-color: var(--teal);
     }
-    .field textarea { resize: vertical; min-height: 96px; }
+    .field textarea { resize: vertical; min-height: 88px; }
     .field select { cursor: pointer; appearance: none; }
-    .field input::placeholder, .field textarea::placeholder { color: rgba(240,240,236,0.18); }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(231,231,231,0.18); }
     .submit-btn {
-      font-family: var(--f-head); font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.15em;
-      background: var(--accent); color: #0A0A0A;
-      border: none; padding: 18px 44px;
-      cursor: pointer; align-self: flex-start;
-      transition: opacity 0.25s, transform 0.2s;
+      font-family: var(--f-mono); font-size: 0.6875rem;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      background: var(--off); color: var(--black);
+      padding: 16px 40px; cursor: pointer; align-self: flex-start;
+      transition: background 0.25s, transform 0.2s;
     }
-    .submit-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+    .submit-btn:hover { background: var(--fog); transform: translateY(-2px); }
 
-    /* ═══════════════════════════════════════════════
+    /* ══════════════════════════════════════════════════
        FOOTER
-       ═══════════════════════════════════════════════ */
+    ══════════════════════════════════════════════════ */
     .footer {
-      padding: 44px var(--pad);
-      border-top: 1px solid var(--border);
+      padding: 40px var(--pad);
+      border-top: 1px solid rgba(231,231,231,0.08);
     }
     .footer-inner {
       max-width: var(--max); margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 20px;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
     }
     .footer-copy {
-      font-family: var(--f-head); font-size: 9px;
-      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+      font-family: var(--f-mono); font-size: 0.625rem;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--muted);
     }
-    .footer-links { display: flex; gap: 28px; }
+    .footer-links { display: flex; gap: 24px; }
     .footer-links a {
-      font-family: var(--f-head); font-size: 9px;
-      letter-spacing: 0.14em; text-transform: uppercase;
+      font-family: var(--f-mono); font-size: 0.625rem;
+      text-transform: uppercase; letter-spacing: 0.12em;
       color: var(--muted); transition: color 0.25s;
     }
-    .footer-links a:hover { color: var(--fg); }
+    .footer-links a:hover { color: var(--off); }
 
-    /* ═══════════════════════════════════════════════
+    /* ══════════════════════════════════════════════════
        RESPONSIVE
-       ═══════════════════════════════════════════════ */
+    ══════════════════════════════════════════════════ */
     @media (max-width: 900px) {
       .nav-links { display: none; }
-      .ethos-grid { grid-template-columns: 1fr; gap: 40px; }
-      .svc-item { grid-template-columns: 72px 1fr; gap: 20px; }
+      .ethos-grid { grid-template-columns: 1fr; gap: 36px; }
+      .svc-item { grid-template-columns: 64px 1fr; gap: 16px; }
       .svc-desc { grid-column: 2; }
-      .port-item { grid-template-columns: 72px 1fr; gap: 20px; }
+      .port-item { grid-template-columns: 64px 1fr; gap: 16px; }
       .port-desc, .port-link { display: none; }
-      .proc-body { flex-direction: column; gap: 12px; }
-      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .proc-body { flex-direction: column; gap: 10px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       .form-row { grid-template-columns: 1fr; }
+      .hero-meta { display: none; }
     }
     @media (max-width: 600px) {
-      .hero-h1 { font-size: clamp(2.4rem, 10vw, 4rem); }
-      .proc-item { grid-template-columns: 60px 1fr; gap: 16px; }
-      .svc-item { grid-template-columns: 60px 1fr; gap: 16px; }
+      .hero-h1 { font-size: clamp(2rem, 9vw, 3rem); }
+      .proc-item { grid-template-columns: 56px 1fr; }
+      .svc-item { grid-template-columns: 56px 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ────────────────────────────────────────────── -->
-<nav class="nav" id="nav">
-  <img src="/logo.png" alt="DosCode" class="nav-logo" onerror="this.outerHTML='<span style=\'font-family:var(--f-head);font-weight:900;font-size:18px;letter-spacing:-0.03em\'>DOS<span style=\'color:var(--accent)\'>CODE</span></span>'" />
-  <div class="nav-links">
-    <a href="#services">Услуги</a>
-    <a href="#portfolio">Портфолио</a>
-    <a href="#process">Процесс</a>
-    <a href="#contact">Контакты</a>
-  </div>
-  <a href="#contact" class="nav-cta">Обсудить проект</a>
-</nav>
+<!-- ── LOADER ─────────────────────────────────── -->
+<div id="loader">
+  <p class="loader-logo">DOS<span>CODE</span></p>
+</div>
 
-<!-- ── HERO ───────────────────────────────────────────── -->
+<!-- ── NAV ────────────────────────────────────── -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">DOS<span>CODE</span></a>
+    <nav class="nav-links">
+      <a href="#services">Услуги</a>
+      <a href="#portfolio">Портфолио</a>
+      <a href="#process">Процесс</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Обсудить проект</a>
+  </div>
+</header>
+
+<!-- ── HERO ───────────────────────────────────── -->
 <section class="hero" id="hero">
-  <div class="inner">
-    <p class="hero-pre" id="heroPre">DosCode · Алматы · 2021</p>
-    <h1 class="hero-h1" id="heroH1">МЫ СТРОИМ<br>ЦИФРОВЫЕ ПРОДУКТЫ<br>ДЛЯ БИЗНЕСА.</h1>
-    <div class="hero-foot">
-      <p class="hero-sub" id="heroSub">Веб-сервисы, дашборды, AI-агенты и MVP — от идеи до продукта за дни, а не месяцы.</p>
-      <span class="hero-scroll" id="heroScroll">Прокрутите вниз</span>
+  <div class="hero-top">
+    <h1 class="hero-h1" id="heroH1">
+      Мы строим<br />цифровые продукты<br />для бизнеса.
+    </h1>
+  </div>
+  <div class="hero-bottom">
+    <p class="hero-sub">Веб-сервисы, мобильные приложения, AI-агенты и MVP — от идеи до продукта за дни, а не месяцы.</p>
+    <div class="hero-meta">
+      <span>DosCode</span>
+      <span>Алматы · 2021</span>
     </div>
   </div>
 </section>
 
-<!-- ── ETHOS ──────────────────────────────────────────── -->
-<section id="about">
-  <div class="inner">
-    <span class="sec-tag">О нас</span>
-    <div class="ethos-grid">
-      <div>
-        <h2 class="sec-h2">СКОРОСТЬ.<br>КАЧЕСТВО.<br>РЕЗУЛЬТАТ.</h2>
-      </div>
-      <div>
-        <p>DosCode — студия разработки в Алматы. Создаём веб- и мобильные приложения, дашборды, AI-агентов и MVP. Чистый код, быстрая доставка, прозрачный процесс.</p>
-        <p>Каждый проект — партнёрство, а не конвейер. Мы вникаем в бизнес-задачу и строим решение, которое работает на результат.</p>
-        <a href="#contact" class="arrow-link">Начать проект <span>→</span></a>
-      </div>
+<!-- ── ETHOS — LIGHT SECTION (WQF signature) ──── -->
+<section class="ethos" id="about">
+  <div class="ethos-grid">
+    <div>
+      <span class="mono-label">О нас</span>
+      <h2 class="h2">Скорость.<br />Качество.<br />Результат.</h2>
+    </div>
+    <div class="ethos-right">
+      <p>DosCode — студия разработки в Алматы. Создаём веб- и мобильные приложения, дашборды, AI-агентов и MVP. Чистый код, быстрая доставка, прозрачный процесс.</p>
+      <p>Каждый проект — партнёрство, а не конвейер. Мы вникаем в бизнес-задачу и строим решение, которое работает на результат.</p>
+      <a href="#contact" class="ethos-link">Начать проект</a>
     </div>
   </div>
 </section>
 
-<!-- ── SERVICES ───────────────────────────────────────── -->
-<section id="services">
-  <div class="inner">
-    <span class="sec-tag">Что мы строим</span>
-    <h2 class="sec-h2">УСЛУГИ</h2>
+<!-- ── SERVICES ───────────────────────────────── -->
+<section class="section" id="services">
+  <div class="container">
+    <span class="mono-label">Что мы строим</span>
+    <h2 class="h2">Услуги</h2>
     <ul class="svc-list">
       <li class="svc-item">
         <span class="svc-n">01 / 04</span>
@@ -491,11 +517,21 @@
   </div>
 </section>
 
-<!-- ── PORTFOLIO ──────────────────────────────────────── -->
-<section id="portfolio">
-  <div class="inner">
-    <span class="sec-tag">Портфолио</span>
-    <h2 class="sec-h2">ПРОЕКТЫ</h2>
+<!-- ── FOCUS STATEMENT — WQF full-height centered ─ -->
+<section class="focus" id="focus">
+  <div class="focus-inner">
+    <span class="focus-label">Наш подход</span>
+    <h2 class="focus-h" id="focusH">Быстрые технологии. Реальные результаты.</h2>
+    <p class="focus-p">Мы не делаем «красивых» проектов ради красоты. Каждая строка кода — ради роста вашего бизнеса.</p>
+    <a href="#contact" class="nav-cta" style="color: var(--off);">Обсудить проект</a>
+  </div>
+</section>
+
+<!-- ── PORTFOLIO ──────────────────────────────── -->
+<section class="section" id="portfolio">
+  <div class="container">
+    <span class="mono-label">Портфолио</span>
+    <h2 class="h2">Проекты</h2>
     <ul class="port-list">
       <li class="port-item">
         <span class="port-n">01</span>
@@ -517,19 +553,19 @@
       </li>
       <li class="port-item">
         <span class="port-n">04</span>
-        <h3 class="port-name">VoiceClaw</h3>
+        <h3 class="port-name">YurikVoice</h3>
         <p class="port-desc">AI-платформа для голосовых ассистентов: распознавание речи, синтез и интеграция с CRM.</p>
-        <a href="#" class="port-link">voiceclaw.com</a>
+        <a href="#" class="port-link">yurikvoice.com</a>
       </li>
     </ul>
   </div>
 </section>
 
-<!-- ── PROCESS ────────────────────────────────────────── -->
-<section id="process">
-  <div class="inner">
-    <span class="sec-tag">Как работаем</span>
-    <h2 class="sec-h2">ПРОЦЕСС</h2>
+<!-- ── PROCESS ────────────────────────────────── -->
+<section class="section" id="process">
+  <div class="container">
+    <span class="mono-label">Как работаем</span>
+    <h2 class="h2">Процесс</h2>
     <ul class="proc-list">
       <li class="proc-item">
         <span class="proc-n">01</span>
@@ -563,14 +599,14 @@
   </div>
 </section>
 
-<!-- ── CONTACT ────────────────────────────────────────── -->
-<section id="contact">
-  <div class="inner">
-    <span class="sec-tag">Контакты</span>
+<!-- ── CONTACT ────────────────────────────────── -->
+<section class="section" id="contact">
+  <div class="container">
+    <span class="mono-label">Контакты</span>
     <div class="contact-grid">
       <div>
-        <h2 class="contact-h2">ДАВАЙТЕ ПОСТРОИМ ЧТО-ТО ВМЕСТЕ.</h2>
-        <p class="contact-sub">Расскажите о вашей задаче — ответим в течение 24 часов с предварительной оценкой сроков и стоимости. Консультация бесплатна.</p>
+        <h2 class="contact-h">Давайте построим что-то вместе.</h2>
+        <p class="contact-sub">Расскажите о вашей задаче — ответим в течение 24 часов с оценкой сроков и стоимости. Консультация бесплатна.</p>
         <a href="mailto:hello@doscode.kz" class="contact-mail">hello@doscode.kz →</a>
       </div>
       <form class="form" id="contactForm" novalidate>
@@ -606,10 +642,10 @@
   </div>
 </section>
 
-<!-- ── FOOTER ─────────────────────────────────────────── -->
+<!-- ── FOOTER ──────────────────────────────────── -->
 <footer class="footer">
   <div class="footer-inner">
-    <span class="footer-copy">&copy; 2026 DosCode · Алматы, Казахстан</span>
+    <span class="footer-copy">&copy; 2026 DosCode · Алматы</span>
     <div class="footer-links">
       <a href="#services">Услуги</a>
       <a href="#portfolio">Портфолио</a>
@@ -622,78 +658,150 @@
 <script>
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ── Nav sticky ── */
+  const EASE = 'cubic-bezier(.62,.16,.13,1.01)';
+
+  /* ── LOADER ── */
+  const loader = document.getElementById('loader');
+  const loaderTl = gsap.timeline({
+    onComplete: () => {
+      loader.style.display = 'none';
+    }
+  });
+  loaderTl
+    .to('#loader .loader-logo', {
+      clipPath: 'inset(0 0 100% 0)',
+      duration: 0.7,
+      ease: EASE,
+      delay: 0.8,
+    })
+    .to(loader, {
+      clipPath: 'inset(0 0 100% 0)',
+      duration: 0.8,
+      ease: EASE,
+    }, '-=0.2');
+
+  /* ── NAV auto-hide ── */
   const nav = document.getElementById('nav');
+  let lastY = 0;
+  let winH = window.innerHeight;
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('stuck', window.scrollY > 50);
+    const y = window.scrollY;
+    const pastQuarter = y > winH / 4;
+    const pastFull = y > winH;
+    const delta = y - lastY;
+    if (pastQuarter) nav.classList.add('-scrolled');
+    else nav.classList.remove('-scrolled');
+    if (pastFull) {
+      if (delta > 50) nav.classList.add('-hidden');
+      else if (delta < -50) nav.classList.remove('-hidden');
+    } else {
+      nav.classList.remove('-hidden');
+    }
+    if (Math.abs(delta) > 50) lastY = y;
   }, { passive: true });
 
-  /* ── Hero: split h1 into lines, animate each line up ── */
+  /* ── HERO — words fly in from left & right ── */
   const h1 = document.getElementById('heroH1');
-  h1.innerHTML = h1.innerHTML
-    .split('<br>')
-    .map(line =>
-      `<span class="hero-line"><span class="hero-line-inner">${line}</span></span>`
-    ).join('');
-
-  gsap.from('.hero-line-inner', {
-    yPercent: 110,
-    duration: 1.1,
-    ease: 'power4.out',
-    stagger: 0.1,
-    delay: 0.15,
+  const rawLines = h1.innerHTML.trim().split('<br>');
+  h1.innerHTML = '';
+  rawLines.forEach((line, lineIdx) => {
+    const lineEl = document.createElement('span');
+    lineEl.style.cssText = 'display:block;overflow:hidden;';
+    const words = line.trim().split(/\s+/);
+    const half = Math.floor(words.length / 2);
+    words.forEach((word, i) => {
+      const w = document.createElement('span');
+      w.className = 'hero-word';
+      const inner = document.createElement('span');
+      inner.className = 'hero-word-inner';
+      inner.textContent = word;
+      w.appendChild(inner);
+      if (i < words.length - 1) w.style.marginRight = '0.28em';
+      lineEl.appendChild(w);
+    });
+    if (lineIdx < rawLines.length - 1) lineEl.innerHTML += '<br style="display:none">';
+    h1.appendChild(lineEl);
   });
 
-  gsap.from(['#heroPre', '#heroSub', '#heroScroll'], {
-    opacity: 0, y: 18,
-    duration: 0.9, ease: 'power3.out',
-    stagger: 0.1, delay: 0.55,
+  // After loader finishes (~1.7s), animate hero words in
+  const leftWords  = [];
+  const rightWords = [];
+  const allInners = h1.querySelectorAll('.hero-word-inner');
+  allInners.forEach((el, i) => {
+    if (i % 2 === 0) leftWords.push(el);
+    else rightWords.push(el);
   });
 
-  /* ── Section headlines: clipPath reveal from bottom ── */
-  document.querySelectorAll('.sec-h2, .contact-h2').forEach(el => {
+  gsap.set(leftWords,  { x: '-80px', opacity: 0 });
+  gsap.set(rightWords, { x:  '80px', opacity: 0 });
+
+  gsap.to([...leftWords, ...rightWords], {
+    x: 0, opacity: 1,
+    duration: 1.5, ease: EASE,
+    stagger: 0.05,
+    delay: 1.8,
+  });
+
+  gsap.from('.hero-sub, .hero-meta', {
+    opacity: 0, y: 16,
+    duration: 1.0, ease: EASE,
+    stagger: 0.1, delay: 2.2,
+  });
+
+  /* ── ETHOS — WQF horizontal reveal (inset(0 100% 0 0) → inset(0 0 0 0)) ── */
+  gsap.from('.ethos', {
+    clipPath: 'inset(0 100% 0 0)',
+    duration: 1.2,
+    ease: EASE,
+    scrollTrigger: {
+      trigger: '.ethos',
+      start: 'top bottom-=10%',
+      end: 'top center',
+      scrub: 1,
+    }
+  });
+
+  /* ── Section h2 headings — clipPath bottom to top ── */
+  document.querySelectorAll('.h2, .focus-h, .contact-h').forEach(el => {
     gsap.from(el, {
-      scrollTrigger: { trigger: el, start: 'top 88%' },
       clipPath: 'inset(0 0 100% 0)',
-      duration: 0.9, ease: 'power3.inOut',
+      duration: 0.9, ease: EASE,
+      scrollTrigger: { trigger: el, start: 'top 88%' },
     });
   });
 
-  /* ── Ethos ── */
-  gsap.from('.ethos-grid > div:first-child .sec-h2', {
-    scrollTrigger: { trigger: '.ethos-grid', start: 'top 82%' },
-    clipPath: 'inset(0 0 100% 0)',
-    duration: 1.0, ease: 'power3.inOut',
-  });
-  gsap.from('.ethos-grid > div:last-child > *', {
-    scrollTrigger: { trigger: '.ethos-grid', start: 'top 80%' },
-    opacity: 0, y: 24, duration: 0.8, ease: 'power3.out', stagger: 0.12,
+  /* ── Focus section fade in ── */
+  gsap.from(['#focus .focus-label', '#focus .focus-h', '#focus .focus-p', '#focus .nav-cta'], {
+    opacity: 0, y: 64,
+    duration: 1.2, ease: EASE,
+    stagger: 0.1,
+    scrollTrigger: { trigger: '#focus', start: 'top 50%' },
   });
 
-  /* ── WQF-style: each list item slides in from bottom via clipPath ── */
-  gsap.utils.toArray('.svc-item, .port-item, .proc-item').forEach(item => {
+  /* ── List items — WQF clipPath vertical reveal ── */
+  document.querySelectorAll('.svc-item, .port-item, .proc-item').forEach(item => {
     gsap.from(item, {
+      clipPath: 'inset(0 0 100% 0)',
+      duration: 0.6, ease: EASE,
       scrollTrigger: {
         trigger: item,
         start: 'top 82%',
         end: 'bottom bottom',
-      },
-      clipPath: 'inset(0 0 100% 0)',
-      duration: 0.65,
-      ease: 'power3.inOut',
+      }
     });
   });
 
-  /* ── Contact left column ── */
+  /* ── Contact section ── */
   gsap.from('.contact-grid > div:first-child > *', {
+    opacity: 0, y: 20,
+    duration: 0.8, ease: EASE,
+    stagger: 0.1,
     scrollTrigger: { trigger: '#contact', start: 'top 80%' },
-    opacity: 0, y: 20, duration: 0.75, ease: 'power3.out', stagger: 0.12,
   });
-
-  /* ── Form fields subtle fade ── */
   gsap.from('.field', {
+    opacity: 0, y: 12,
+    duration: 0.5, ease: EASE, stagger: 0.07,
     scrollTrigger: { trigger: '.form', start: 'top 80%' },
-    opacity: 0, y: 14, duration: 0.5, ease: 'power2.out', stagger: 0.08,
   });
 </script>
 </body>
