@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <style>
     /* ══════════════════════════════════════════════════
        TOKENS — exact WQF palette + easing
@@ -131,7 +132,7 @@
     .nav-cta:hover::before, .nav-cta:hover::after { inset: -5px; }
 
     /* ══════════════════════════════════════════════════
-       HERO — centered, WQF layout
+       HERO — WQF split-word layout
     ══════════════════════════════════════════════════ */
     .hero {
       height: 100dvh; min-height: 550px;
@@ -141,25 +142,38 @@
       padding-bottom: clamp(40px, 6vh, 80px);
       overflow: hidden;
     }
-    .hero-top { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0 var(--pad); }
+    .hero-top {
+      flex: 1; display: flex; align-items: center;
+      padding: 0 var(--pad); overflow: hidden;
+    }
     .hero-h1 {
       font-family: var(--f-head);
       font-weight: 500;
-      font-size: clamp(2.25rem, 7vw, 6.5rem);
-      line-height: 0.95;
+      font-size: clamp(3rem, 9.5vw, 9rem);
+      line-height: 0.92;
       text-transform: uppercase;
-      text-align: center;
-      letter-spacing: -0.02em;
-      max-width: 900px;
+      letter-spacing: -0.03em;
+      width: 100%;
+      display: flex; flex-direction: column; gap: 0.04em;
     }
-    /* WQF-style split: left words come from left, right words from right */
-    .hero-word { display: inline-block; overflow: hidden; }
-    .hero-word-inner { display: inline-block; }
+    /* Word rows — each row has left and right words */
+    .hw-row {
+      display: flex; justify-content: space-between;
+      align-items: baseline; overflow: hidden;
+    }
+    /* Each word clips in — WQF exact: inset(100% 0 0 0) + translateY: -48px */
+    .hw {
+      display: inline-block;
+      clip-path: inset(100% 0 0 0);
+      transform: translateY(-48px);
+    }
+    .hw-l { text-align: left; }
+    .hw-r { text-align: right; color: var(--teal); }
 
     .hero-bottom {
       padding: 0 var(--pad);
       display: flex; align-items: flex-end; justify-content: space-between;
-      gap: 24px;
+      gap: 24px; opacity: 0;
     }
     .hero-sub {
       font-size: clamp(0.875rem, 1.2vw, 1rem);
@@ -458,12 +472,24 @@
 
 <!-- ── HERO ───────────────────────────────────── -->
 <section class="hero" id="hero">
-  <div class="hero-top">
+  <div class="hero-top" id="heroContainer">
     <h1 class="hero-h1" id="heroH1">
-      Мы строим<br />цифровые продукты<br />для бизнеса.
+      <!-- Each row: left word + right word, WQF split pattern -->
+      <div class="hw-row">
+        <span class="hw hw-l">МЫ</span>
+        <span class="hw hw-r">СТРОИМ</span>
+      </div>
+      <div class="hw-row">
+        <span class="hw hw-l">ЦИФРОВЫЕ</span>
+        <span class="hw hw-r">ПРОДУКТЫ</span>
+      </div>
+      <div class="hw-row">
+        <span class="hw hw-l">ДЛЯ</span>
+        <span class="hw hw-r">БИЗНЕСА.</span>
+      </div>
     </h1>
   </div>
-  <div class="hero-bottom">
+  <div class="hero-bottom" id="heroBottom">
     <p class="hero-sub">Веб-сервисы, мобильные приложения, AI-агенты и MVP — от идеи до продукта за дни, а не месяцы.</p>
     <div class="hero-meta">
       <span>DosCode</span>
@@ -659,93 +685,66 @@
   gsap.registerPlugin(ScrollTrigger);
 
   const EASE = 'cubic-bezier(.62,.16,.13,1.01)';
+  const EASE_POWER3 = 'power3.inOut';
+
+  /* ── LENIS smooth scroll ── */
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+  });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(time => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
 
   /* ── LOADER ── */
   const loader = document.getElementById('loader');
-  const loaderTl = gsap.timeline({
-    onComplete: () => {
-      loader.style.display = 'none';
-    }
-  });
+  const loaderTl = gsap.timeline({ onComplete: () => { loader.style.display = 'none'; } });
   loaderTl
-    .to('#loader .loader-logo', {
-      clipPath: 'inset(0 0 100% 0)',
-      duration: 0.7,
-      ease: EASE,
-      delay: 0.8,
-    })
-    .to(loader, {
-      clipPath: 'inset(0 0 100% 0)',
-      duration: 0.8,
-      ease: EASE,
-    }, '-=0.2');
+    .to('#loader .loader-logo', { clipPath: 'inset(0 0 100% 0)', duration: 0.7, ease: EASE, delay: 0.8 })
+    .to(loader, { clipPath: 'inset(0 0 100% 0)', duration: 0.8, ease: EASE }, '-=0.2');
 
   /* ── NAV auto-hide ── */
   const nav = document.getElementById('nav');
   let lastY = 0;
   let winH = window.innerHeight;
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    const pastQuarter = y > winH / 4;
-    const pastFull = y > winH;
-    const delta = y - lastY;
-    if (pastQuarter) nav.classList.add('-scrolled');
+  lenis.on('scroll', ({ scroll }) => {
+    const delta = scroll - lastY;
+    if (scroll > winH / 4) nav.classList.add('-scrolled');
     else nav.classList.remove('-scrolled');
-    if (pastFull) {
+    if (scroll > winH) {
       if (delta > 50) nav.classList.add('-hidden');
       else if (delta < -50) nav.classList.remove('-hidden');
     } else {
       nav.classList.remove('-hidden');
     }
-    if (Math.abs(delta) > 50) lastY = y;
-  }, { passive: true });
-
-  /* ── HERO — words fly in from left & right ── */
-  const h1 = document.getElementById('heroH1');
-  const rawLines = h1.innerHTML.trim().split('<br>');
-  h1.innerHTML = '';
-  rawLines.forEach((line, lineIdx) => {
-    const lineEl = document.createElement('span');
-    lineEl.style.cssText = 'display:block;overflow:hidden;';
-    const words = line.trim().split(/\s+/);
-    const half = Math.floor(words.length / 2);
-    words.forEach((word, i) => {
-      const w = document.createElement('span');
-      w.className = 'hero-word';
-      const inner = document.createElement('span');
-      inner.className = 'hero-word-inner';
-      inner.textContent = word;
-      w.appendChild(inner);
-      if (i < words.length - 1) w.style.marginRight = '0.28em';
-      lineEl.appendChild(w);
-    });
-    if (lineIdx < rawLines.length - 1) lineEl.innerHTML += '<br style="display:none">';
-    h1.appendChild(lineEl);
+    if (Math.abs(delta) > 50) lastY = scroll;
   });
 
-  // After loader finishes (~1.7s), animate hero words in
-  const leftWords  = [];
-  const rightWords = [];
-  const allInners = h1.querySelectorAll('.hero-word-inner');
-  allInners.forEach((el, i) => {
-    if (i % 2 === 0) leftWords.push(el);
-    else rightWords.push(el);
+  /* ── HERO — WQF exact animation ──
+     Words: clipPath inset(100% 0 0 0) + translateY(-48px)
+     Reveals DOWN while words are stationary in final positions
+  ── */
+  const heroWords = document.querySelectorAll('.hw');
+  const heroBottom = document.getElementById('heroBottom');
+
+  // Words are already set in CSS to inset(100% 0 0 0) + translateY(-48px)
+  // Now animate them to their final state after loader
+  gsap.to(heroWords, {
+    clipPath: 'inset(0% 0% 0% 0%)',
+    y: 0,
+    duration: 1.4,
+    ease: EASE_POWER3,
+    stagger: 0.08,
+    delay: 1.6,
   });
 
-  gsap.set(leftWords,  { x: '-80px', opacity: 0 });
-  gsap.set(rightWords, { x:  '80px', opacity: 0 });
-
-  gsap.to([...leftWords, ...rightWords], {
-    x: 0, opacity: 1,
-    duration: 1.5, ease: EASE,
-    stagger: 0.05,
-    delay: 1.8,
-  });
-
-  gsap.from('.hero-sub, .hero-meta', {
-    opacity: 0, y: 16,
-    duration: 1.0, ease: EASE,
-    stagger: 0.1, delay: 2.2,
+  gsap.to(heroBottom, {
+    opacity: 1,
+    y: 0,
+    duration: 1.0,
+    ease: EASE,
+    delay: 2.4,
   });
 
   /* ── ETHOS — WQF horizontal reveal (inset(0 100% 0 0) → inset(0 0 0 0)) ── */
