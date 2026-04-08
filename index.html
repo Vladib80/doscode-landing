@@ -1942,8 +1942,21 @@
     .circuit-node:nth-child(8) .node-ring { animation-delay: 2.25s; }
 
     @media (max-width: 900px) {
+      .hero { min-height: auto; }
+      .hero-inner {
+        min-height: auto;
+        padding-bottom: 24px;
+      }
       .hero-visual { display: none; }
-      .mobile-flow { display: flex !important; }
+      .mobile-flow {
+        display: flex !important;
+        margin-top: 24px;
+        margin-bottom: 12px;
+      }
+      .marquee {
+        position: relative;
+        margin-top: 20px;
+      }
     }
 
     /* ── FALLBACK IMAGE ── */
