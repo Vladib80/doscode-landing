@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DosCode v9 — Landing page that sells our build quality</title>
+  <meta
+    name="description"
+    content="DosCode проектирует и разрабатывает сайты, дашборды, MVP и AI-инструменты в Алматы. Эта версия показывает качество исполнения через сам build: композицию, motion, systems thinking и сильные sections."
+  />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/src/v9/styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "DosCode",
+    "url": "https://doscode.kz",
+    "description": "Разработка сайтов, dashboard-интерфейсов, MVP и AI-инструментов в Алматы. От арт-дирекшна и структуры до production-ready frontend.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Алматы",
+      "addressCountry": "KZ"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Алматы" },
+      { "@type": "Country", "name": "Kazakhstan" }
+    ],
+    "email": "hello@doscode.kz",
+    "knowsLanguage": ["ru", "kk", "en"],
+    "serviceType": ["Landing page", "Dashboard", "Web app", "MVP", "AI automation"]
+  }
+  </script>
+</head>
+<body>
+  <div class="v9-progress" aria-hidden="true"></div>
+  <div class="v9-noise" aria-hidden="true"></div>
+  <div class="v9-grid" aria-hidden="true"></div>
+
+  <header class="v9-header" id="top">
+    <div class="v9-shell v9-header-inner">
+      <a href="#top" class="v9-logo" aria-label="DosCode home">
+        <img src="/logo.png" alt="DosCode" />
+      </a>
+
+      <button
+        class="v9-menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="siteNav"
+        aria-label="Открыть меню"
+      >
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="v9-nav" id="siteNav" aria-label="Основная навигация">
+        <a href="#demos">Demo lab</a>
+        <a href="#systems">Sections</a>
+        <a href="#motion">Motion</a>
+        <a href="#contact">Контакты</a>
+        <a href="#contact" class="v9-button v9-button--nav">Обсудить проект</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="v9-hero">
+      <div class="v9-shell v9-hero-layout">
+        <div class="v9-hero-copy reveal">
+          <p class="v9-kicker">DOSCODE / FRONTEND ART DIRECTION / ALMATY</p>
+          <h1>
+            Хотите показать уровень
+            <span>через сам landing page?</span>
+          </h1>
+          <p class="v9-hero-lead">
+            Именно это и должен делать такой экран. Не рассказывать, что команда
+            умеет строить сильные digital-продукты, а доказывать это ритмом,
+            анимацией, section design, качеством деталей и ощущением собранности
+            уже с первых секунд.
+          </p>
+
+          <div class="v9-actions">
+            <a href="#contact" class="v9-button">Запросить концепт</a>
+            <a href="#demos" class="v9-button v9-button--ghost">Посмотреть demo lab</a>
+          </div>
+
+          <div class="v9-hero-note">
+            Здесь нет кейсов и логотипов клиентов. Вся ставка на исполнение: как
+            движется страница, как собраны поверхности, как читается иерархия и
+            насколько это ощущается современно и уверенно.
+          </div>
+
+          <ul class="v9-proof-list" aria-label="Approach">
+            <li>Art direction first</li>
+            <li>Responsive by design</li>
+            <li>Motion with restraint</li>
+            <li>Production-ready frontend</li>
+          </ul>
+
+          <div class="v9-metrics">
+            <article class="v9-metric">
+              <strong class="count-up" data-value="2" data-prefix="" data-suffix="s">2s</strong>
+              <span>на первое впечатление</span>
+            </article>
+            <article class="v9-metric">
+              <strong class="count-up" data-value="4" data-prefix="" data-suffix="">4</strong>
+              <span>режима experience в demo lab</span>
+            </article>
+            <article class="v9-metric">
+              <strong class="count-up" data-value="6" data-prefix="" data-suffix="+">6+</strong>
+              <span>типов section energy на странице</span>
+            </article>
+            <article class="v9-metric">
+              <strong class="count-up" data-value="24" data-prefix="" data-suffix="ч">24ч</strong>
+              <span>на маршрут и стартовый direction</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="v9-stage reveal" id="stageRoot">
+          <div class="v9-stage-orbit v9-stage-orbit--one"></div>
+          <div class="v9-stage-orbit v9-stage-orbit--two"></div>
+
+          <article class="v9-browser-card v9-float" data-depth="0.08">
+            <div class="v9-browser-chrome" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="v9-browser-meta">
+              <p>Hero system</p>
+              <strong>High-trust opening section</strong>
+            </div>
+            <div class="v9-sim-browser">
+              <div class="v9-sim-hero-copy">
+                <span class="v9-sim-pill">New build</span>
+                <strong>Built to feel expensive fast</strong>
+                <p>Contrast. hierarchy. response. momentum.</p>
+              </div>
+              <div class="v9-sim-visual">
+                <div class="v9-sim-card v9-sim-card--a"></div>
+                <div class="v9-sim-card v9-sim-card--b"></div>
+                <div class="v9-sim-card v9-sim-card--c"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="v9-dashboard-card v9-float" data-depth="0.18" aria-label="Synthetic dashboard preview">
+            <div class="v9-dashboard-top">
+              <div>
+                <p>System view</p>
+                <strong>Density without visual chaos</strong>
+              </div>
+              <span>Live</span>
+            </div>
+            <div class="v9-dashboard-graph" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="v9-dashboard-stats">
+              <div>
+                <strong>Fast scan</strong>
+                <span>layout leads the eye</span>
+              </div>
+              <div>
+                <strong>Quiet chrome</strong>
+                <span>signal over decoration</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="v9-phone-card v9-float" data-depth="0.14">
+            <div class="v9-phone-frame">
+              <div class="v9-phone-ui">
+                <span class="v9-phone-dot"></span>
+                <div class="v9-phone-row v9-phone-row--hero"></div>
+                <div class="v9-phone-stack">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="v9-phone-cta"></div>
+              </div>
+            </div>
+            <div class="v9-phone-meta">
+              <span>Mobile first feel</span>
+              <strong>Motion + clarity on touch</strong>
+            </div>
+          </article>
+
+          <div class="v9-stage-badge v9-stage-badge--top">composition + motion + trust</div>
+          <div class="v9-stage-badge v9-stage-badge--bottom">the page is the proof</div>
+          <div class="v9-stage-marquee" aria-hidden="true">
+            <span>landing pages</span>
+            <span>dashboard systems</span>
+            <span>launch sites</span>
+            <span>AI surfaces</span>
+            <span>conversion flows</span>
+            <span>design systems</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v9-rail">
+      <div class="v9-shell v9-rail-track">
+        <span>Memorable first screen</span>
+        <span>Modern platform tricks</span>
+        <span>Non-generic sections</span>
+        <span>Feels custom, not templated</span>
+      </div>
+    </section>
+
+    <section class="v9-demo-lab" id="demos">
+      <div class="v9-shell">
+        <div class="v9-section-head reveal">
+          <p class="v9-kicker">DEMO LAB / DIFFERENT FEELS FOR DIFFERENT JOBS</p>
+          <h2>Одна команда, но не один и тот же aesthetic для всех задач.</h2>
+          <p>
+            Landing page, dashboard, product launch и AI surface не должны выглядеть
+            одинаково. Хорошая студия меняет энергетику интерфейса под задачу,
+            сохраняя уровень исполнения.
+          </p>
+        </div>
+
+        <div class="v9-demo-layout">
+          <div class="v9-showcase-tabs" role="tablist" aria-label="Режим demo">
+            <button type="button" class="is-active" role="tab" aria-selected="true" data-showcase="landing">Landing</button>
+            <button type="button" role="tab" aria-selected="false" data-showcase="dashboard">Dashboard</button>
+            <button type="button" role="tab" aria-selected="false" data-showcase="launch">Launch</button>
+            <button type="button" role="tab" aria-selected="false" data-showcase="automation">AI Surface</button>
+          </div>
+
+          <div class="v9-demo-panel reveal" id="demoPanel" data-mode="landing">
+            <div class="v9-demo-visual">
+              <div class="v9-demo-window">
+                <div class="v9-demo-window-bar">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="v9-demo-surface">
+                  <div class="v9-demo-surface-left">
+                    <div class="v9-demo-token"></div>
+                    <div class="v9-demo-line v9-demo-line--xl"></div>
+                    <div class="v9-demo-line v9-demo-line--lg"></div>
+                    <div class="v9-demo-line v9-demo-line--md"></div>
+                    <div class="v9-demo-actions">
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>
+                  <div class="v9-demo-surface-right">
+                    <div class="v9-demo-orb"></div>
+                    <div class="v9-demo-stat-grid">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="v9-demo-float-card v9-demo-float-card--one"></div>
+              <div class="v9-demo-float-card v9-demo-float-card--two"></div>
+            </div>
+
+            <div class="v9-demo-copy">
+              <p class="v9-showcase-kicker" id="showcaseKicker">LANDING MODE / HIGH-CONTRAST PITCH</p>
+              <h3 id="showcaseTitle">Арт-дирекшн, который поднимает perceived value без кейсов.</h3>
+              <p id="showcaseDescription">
+                Здесь сила не в том, что сказано, а в том, как собраны контраст,
+                масса, ритм, воздух и CTA. Так создаётся ощущение, что команда умеет
+                делать сильные digital-first бренды и продукты.
+              </p>
+              <ul id="showcaseBullets">
+                <li>hero, который ведёт взгляд, а не просто занимает место</li>
+                <li>секции с разной плотностью вместо одинаковой сетки карточек</li>
+                <li>motion как часть hierarchy, а не как декоративный шум</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v9-systems" id="systems">
+      <div class="v9-shell">
+        <div class="v9-section-head reveal">
+          <p class="v9-kicker">SECTION THEATRE / THIS IS WHERE TASTE SHOWS</p>
+          <h2>Показывать уровень можно через section design, а не через logos wall.</h2>
+          <p>
+            Посетитель не думает терминами “grid” или “spacing system”. Он чувствует,
+            что страница собрана дороже, точнее и убедительнее. Ниже именно такие
+            sections: разные по темпу, но единые по качеству.
+          </p>
+        </div>
+
+        <div class="v9-theatre-grid">
+          <article class="v9-theatre-card v9-theatre-card--editorial reveal">
+            <div class="v9-theatre-visual">
+              <div class="v9-stack-lines">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="v9-theatre-copy">
+              <p class="v9-showcase-kicker">Editorial hero</p>
+              <h3>Большая типографика с уверенной паузой.</h3>
+              <p>Когда нужен premium signal, важен не только цвет, но и то, как страница держит пустоту.</p>
+            </div>
+          </article>
+
+          <article class="v9-theatre-card v9-theatre-card--comparison reveal">
+            <div class="v9-theatre-visual">
+              <div class="v9-split-compare">
+                <span></span><span></span>
+              </div>
+            </div>
+            <div class="v9-theatre-copy">
+              <p class="v9-showcase-kicker">Comparison slab</p>
+              <h3>Блок, который продаёт разницу, а не просто перечисляет фичи.</h3>
+              <p>Хороший compare-section помогает быстро понять, почему новый продукт ощущается сильнее старого.</p>
+            </div>
+          </article>
+
+          <article class="v9-theatre-card v9-theatre-card--metrics reveal">
+            <div class="v9-theatre-visual">
+              <div class="v9-metric-bars">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="v9-theatre-copy">
+              <p class="v9-showcase-kicker">Data section</p>
+              <h3>Информационный кусок, который не ломает aesthetic.</h3>
+              <p>Если даже аналитический блок выглядит clean и быстрым, доверие к команде растёт.</p>
+            </div>
+          </article>
+
+          <article class="v9-theatre-card v9-theatre-card--cta reveal">
+            <div class="v9-theatre-visual">
+              <div class="v9-cta-preview">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div class="v9-theatre-copy">
+              <p class="v9-showcase-kicker">Close section</p>
+              <h3>CTA, который завершает страницу с momentum, а не усталостью.</h3>
+              <p>Финальный блок должен ощущаться как сильный close, а не как ещё одна форма внизу.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="v9-motion" id="motion">
+      <div class="v9-shell v9-motion-layout">
+        <div class="v9-motion-copy reveal">
+          <p class="v9-kicker">MOTION SYSTEM / NEW TRICKS, USED PROPERLY</p>
+          <h2>Новые приёмы полезны, только когда они усиливают hierarchy.</h2>
+          <p>
+            Нам не нужен фейерверк ради фейерверка. Нужны движения, hover-состояния,
+            layered surfaces и micro-responses, которые делают продукт живым,
+            но не утомляют.
+          </p>
+        </div>
+
+        <div class="v9-motion-cards">
+          <article class="v9-motion-card reveal">
+            <strong>Layered depth</strong>
+            <p>Несколько глубин на экране дают ощущение кастомного build, а не flat-template страницы.</p>
+            <div class="v9-motion-preview v9-motion-preview--depth"></div>
+          </article>
+          <article class="v9-motion-card reveal">
+            <strong>Scroll rhythm</strong>
+            <p>Переходы между секциями должны менять плотность и настроение, а не просто продолжать один и тот же фон.</p>
+            <div class="v9-motion-preview v9-motion-preview--rhythm"></div>
+          </article>
+          <article class="v9-motion-card reveal">
+            <strong>Interactive confidence</strong>
+            <p>Кнопки, tabs и surfaces отвечают быстро и точно. Именно это создаёт ощущение polished frontend.</p>
+            <div class="v9-motion-preview v9-motion-preview--response"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="v9-foundation">
+      <div class="v9-shell">
+        <div class="v9-foundation-wrap reveal">
+          <div class="v9-foundation-copy">
+            <p class="v9-kicker">BUILD FOUNDATION / WHAT MAKES IT HOLD TOGETHER</p>
+            <h2>Вкус без системности не переживает реальный product build.</h2>
+            <p>
+              Поэтому за визуальной частью у нас всегда есть token thinking,
+              responsive logic, keyboard states, reduced-motion fallback и чистая
+              структура фронта, которую можно развивать дальше.
+            </p>
+          </div>
+          <div class="v9-foundation-tags">
+            <span>fluid type</span>
+            <span>container-aware sections</span>
+            <span>accessible contrast</span>
+            <span>reduced motion</span>
+            <span>production CSS</span>
+            <span>semantic structure</span>
+            <span>clean interaction states</span>
+            <span>no AI-slop section cloning</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v9-contact" id="contact">
+      <div class="v9-shell v9-contact-wrap">
+        <div class="v9-contact-copy reveal">
+          <p class="v9-kicker">NEXT MOVE / BUILD SOMETHING THAT FEELS ABOVE CATEGORY</p>
+          <h2>Если вы хотите, чтобы продукт сам продавал уровень команды, давайте сделаем это.</h2>
+          <p>
+            Пришлите задачу, нишу и желаемый эффект. Нужен ли вам landing page,
+            launch-сайт, dashboard surface или более сильный frontend direction для
+            продукта, мы соберём маршрут и концепцию без воды.
+          </p>
+
+          <div class="v9-contact-actions">
+            <a href="mailto:hello@doscode.kz" class="v9-button">hello@doscode.kz</a>
+            <a href="https://t.me/doscode_kz" class="v9-button v9-button--ghost" target="_blank" rel="noopener noreferrer">Telegram</a>
+            <a href="https://wa.me/77771234567" class="v9-button v9-button--ghost" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          </div>
+        </div>
+
+        <aside class="v9-brief reveal" aria-label="What to send">
+          <p class="v9-brief-label">Что отправить для старта</p>
+          <ul>
+            <li>1. Что именно нужно усилить: доверие, конверсию, launch feel, enterprise clarity.</li>
+            <li>2. Кто будет смотреть на страницу: клиент, инвестор, пользователь, команда.</li>
+            <li>3. Нужен ли вам только landing page или уже целая система экранов.</li>
+          </ul>
+          <div class="v9-brief-footer">
+            <span>Ответ в течение 24 часов</span>
+            <span>RU / EN / KZ</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="v9-footer">
+    <div class="v9-shell v9-footer-inner">
+      <span>© DosCode · Built in Almaty</span>
+      <div>
+        <a href="#demos">Demo lab</a>
+        <a href="#systems">Sections</a>
+        <a href="#contact">Контакты</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/v9/main.js"></script>
+</body>
+</html>

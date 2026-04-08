@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DosCode — Разработка приложений в Алматы | Веб, мобайл, AI</title>
+  <meta name="description" content="Разрабатываем веб и мобильные приложения в Алматы. Лендинг от 150К ₸ за 2 недели, MVP за 4–8 недель. Telegram-боты, AI-агенты, дашборды. Оценка бесплатно." />
+
+  <!-- Fonts: Clash Display + Space Mono + DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ─── VARIABLES ─── */
+    :root {
+      --bg: #07070a;
+      --bg-card: #0e0e14;
+      --bg-card-hover: #141420;
+      --text: #e8e6e3;
+      --text-muted: #6b6b7b;
+      --accent: #00ff88;
+      --accent-dim: rgba(0, 255, 136, 0.12);
+      --accent2: #7b61ff;
+      --accent2-dim: rgba(123, 97, 255, 0.12);
+      --border: rgba(255, 255, 255, 0.06);
+      --glow: 0 0 60px rgba(0, 255, 136, 0.15);
+      --display: 'Syne', 'DM Sans', system-ui, sans-serif;
+      --mono: 'Space Mono', monospace;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --max-w: 1200px;
+      --nav-h: 72px;
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; border: none; background: none; font: inherit; color: inherit; }
+
+    /* ─── CURSOR GLOW ─── */
+    .cursor-glow {
+      position: fixed;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,136,0.06) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform;
+    }
+
+    /* ─── GRAIN ─── */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ─── UTILITY ─── */
+    .container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 20px; }
+    @media (min-width: 768px) { .container { padding: 0 40px; } }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--accent);
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      background: rgba(7, 7, 10, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 20px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    @media (min-width: 768px) { .nav-inner { padding: 0 40px; } }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: none; gap: 32px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-muted); transition: color 0.3s; letter-spacing: 0.02em; }
+    .nav-links a:hover { color: var(--accent); }
+    @media (min-width: 900px) { .nav-links { display: flex; } }
+    .nav-cta {
+      display: none;
+      padding: 10px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: 6px;
+      transition: all 0.3s;
+      letter-spacing: 0.02em;
+    }
+    .nav-cta:hover { box-shadow: var(--glow); transform: translateY(-1px); }
+    @media (min-width: 768px) { .nav-cta { display: inline-flex; } }
+    .nav-burger { display: flex; flex-direction: column; gap: 5px; padding: 8px; }
+    .nav-burger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+    @media (min-width: 900px) { .nav-burger { display: none; } }
+
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+      background: var(--bg); z-index: 99;
+      display: flex; flex-direction: column; padding: 40px 24px; gap: 24px;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a { font-family: var(--display); font-size: 36px; font-weight: 600; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated grid */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 100%);
+    }
+
+    /* Glowing orbs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      will-change: transform;
+    }
+    .hero-orb--1 { width: 600px; height: 600px; top: -20%; right: -10%; background: rgba(0,255,136,0.08); }
+    .hero-orb--2 { width: 400px; height: 400px; bottom: -10%; left: -5%; background: rgba(123,97,255,0.06); }
+    .hero-orb--3 { width: 300px; height: 300px; top: 30%; left: 40%; background: rgba(0,255,136,0.04); }
+
+    .hero-content { position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(0,255,136,0.15);
+      border-radius: 100px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 32px;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,136,0.4); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,255,136,0); }
+    }
+
+    .hero-headline {
+      font-family: var(--display);
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 600;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 28px;
+      max-width: 850px;
+    }
+    .hero-headline .line { display: block; overflow: hidden; }
+    .hero-headline .line-inner { display: block; }
+    .hero-headline .accent { color: var(--accent); }
+    .hero-headline .accent2 { color: var(--accent2); }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--text-muted);
+      max-width: 500px;
+      margin-bottom: 44px;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 32px; font-size: 14px; font-weight: 600;
+      border-radius: 8px; transition: all 0.3s; cursor: pointer;
+      letter-spacing: 0.02em; position: relative; overflow: hidden;
+    }
+    .btn-primary {
+      background: var(--accent); color: var(--bg);
+    }
+    .btn-primary:hover { box-shadow: var(--glow); transform: translateY(-2px); }
+    .btn-primary::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transform: translateX(-100%) skewX(-15deg);
+      transition: transform 0.6s;
+    }
+    .btn-primary:hover::after { transform: translateX(200%) skewX(-15deg); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.03); }
+    .btn-arrow::after { content: '\2192'; transition: transform 0.3s; font-size: 16px; }
+    .btn-arrow:hover::after { transform: translateX(4px); }
+
+    /* Hero terminal */
+    .hero-terminal {
+      margin-top: 64px;
+      max-width: 620px;
+      background: rgba(14,14,20,0.8);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    .terminal-bar {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .terminal-dot--r { background: #ff5f57; }
+    .terminal-dot--y { background: #ffbd2e; }
+    .terminal-dot--g { background: #28ca41; }
+    .terminal-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: 8px;
+    }
+    .terminal-body {
+      padding: 20px;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.8;
+      min-height: 160px;
+    }
+    .terminal-line { opacity: 0; }
+    .terminal-prompt { color: var(--accent); }
+    .terminal-cmd { color: var(--text); }
+    .terminal-output { color: var(--text-muted); }
+    .terminal-success { color: var(--accent); }
+    .terminal-cursor {
+      display: inline-block;
+      width: 8px; height: 16px;
+      background: var(--accent);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ─── STATS ─── */
+    .stats {
+      padding: 0;
+      position: relative;
+      z-index: 2;
+    }
+    .stats-inner {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      background: var(--bg-card);
+    }
+    @media (min-width: 768px) {
+      .stats-inner { grid-template-columns: repeat(4, 1fr); gap: 0; padding: 56px 60px; }
+    }
+    .stat { text-align: center; position: relative; }
+    @media (min-width: 768px) {
+      .stat:not(:last-child)::after {
+        content: ''; position: absolute; right: 0; top: 15%; bottom: 15%;
+        width: 1px; background: var(--border);
+      }
+    }
+    .stat-value {
+      font-family: var(--display);
+      font-size: clamp(40px, 5vw, 56px);
+      font-weight: 600;
+      line-height: 1;
+      display: block;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ─── SERVICES ─── */
+    .services { padding: 140px 0; }
+    @media (max-width: 767px) { .services { padding: 80px 0; } }
+    .section-header { margin-bottom: 64px; }
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(36px, 5.5vw, 60px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    .services-grid { display: grid; gap: 16px; }
+    @media (min-width: 768px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: default;
+    }
+    .service-card:hover {
+      border-color: rgba(0,255,136,0.15);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(0,255,136,0.1);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .service-card:hover::before { opacity: 0.5; }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(0,255,136,0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+      font-size: 22px;
+    }
+    .service-card h3 {
+      font-family: var(--display);
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .service-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+    .service-card:hover .service-tag { border-color: rgba(0,255,136,0.15); color: var(--accent); }
+
+    /* ─── PORTFOLIO ─── */
+    .portfolio { padding: 140px 0; }
+    @media (max-width: 767px) { .portfolio { padding: 80px 0; } }
+    .portfolio-grid { display: grid; gap: 24px; }
+
+    .portfolio-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      transition: all 0.4s;
+    }
+    @media (min-width: 768px) {
+      .portfolio-card { grid-template-columns: 1fr 1fr; min-height: 380px; }
+      .portfolio-card:nth-child(even) .portfolio-visual { order: 2; }
+    }
+    .portfolio-card:hover {
+      border-color: rgba(0,255,136,0.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      transform: translateY(-4px);
+    }
+
+    .portfolio-visual {
+      background: linear-gradient(135deg, rgba(0,255,136,0.06), rgba(123,97,255,0.06));
+      display: flex; align-items: center; justify-content: center;
+      min-height: 240px;
+      position: relative;
+      overflow: hidden;
+    }
+    .portfolio-visual::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .portfolio-domain {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: rgba(255,255,255,0.15);
+      letter-spacing: 0.1em;
+      z-index: 1;
+    }
+
+    .portfolio-body { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+    .portfolio-type {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .portfolio-card h3 {
+      font-family: var(--display);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .portfolio-card h3 a {
+      color: var(--text);
+      transition: color 0.3s;
+    }
+    .portfolio-card h3 a:hover { color: var(--accent); }
+    .portfolio-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .portfolio-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .portfolio-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    /* ─── INDUSTRIES ─── */
+    .industries { padding: 140px 0; }
+    @media (max-width: 767px) { .industries { padding: 80px 0; } }
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (min-width: 768px) { .industries-grid { grid-template-columns: repeat(4, 1fr); } }
+    .industry-card {
+      padding: 28px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .industry-card:hover {
+      border-color: rgba(0,255,136,0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    }
+    .industry-emoji { font-size: 28px; margin-bottom: 10px; display: block; }
+    .industry-name {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    /* ─── PROCESS ─── */
+    .process { padding: 140px 0; }
+    @media (max-width: 767px) { .process { padding: 80px 0; } }
+    .process-grid { display: grid; gap: 24px; }
+    @media (min-width: 768px) { .process-grid { grid-template-columns: repeat(3, 1fr); } }
+    .process-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .process-step:hover {
+      border-color: rgba(0,255,136,0.12);
+      transform: translateY(-4px);
+    }
+    .process-step::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .process-step:hover::before { opacity: 1; }
+    .process-num {
+      font-family: var(--display);
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0.3;
+      margin-bottom: 20px;
+    }
+    .process-step h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .process-step p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* ─── TECH STACK ─── */
+    .stack { padding: 100px 0; overflow: hidden; }
+    .stack-header { text-align: center; margin-bottom: 48px; }
+    .stack-header .section-label { justify-content: center; }
+    .stack-row { display: flex; overflow: hidden; margin-bottom: 16px; }
+    .stack-track {
+      display: flex; gap: 16px;
+      animation: scroll-left 50s linear infinite;
+      flex-shrink: 0; padding-right: 16px;
+    }
+    .stack-row:nth-child(2) .stack-track { animation: scroll-right 55s linear infinite; }
+    @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+    @keyframes scroll-right { 0% { transform: translateX(-100%); } 100% { transform: translateX(0); } }
+    .stack-chip {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      flex-shrink: 0;
+      font-size: 13px;
+      font-weight: 500;
+      transition: border-color 0.3s;
+    }
+    .stack-chip:hover { border-color: rgba(0,255,136,0.2); }
+    .stack-chip img { width: 20px; height: 20px; object-fit: contain; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials { padding: 140px 0; }
+    @media (max-width: 767px) { .testimonials { padding: 80px 0; } }
+    .testimonials-grid { display: grid; gap: 20px; }
+    @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      transition: all 0.3s;
+    }
+    .testimonial-card:hover {
+      border-color: rgba(0,255,136,0.1);
+      transform: translateY(-4px);
+    }
+    .testimonial-stars { margin-bottom: 16px; color: #f5a623; font-size: 16px; letter-spacing: 2px; }
+    .testimonial-text {
+      font-size: 15px; line-height: 1.7; margin-bottom: 24px;
+      color: rgba(255,255,255,0.8);
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .testimonial-avatar {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-dim), var(--accent2-dim));
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--accent);
+    }
+    .testimonial-name { font-weight: 600; font-size: 14px; }
+    .testimonial-role { font-size: 12px; color: var(--text-muted); }
+
+    /* ─── FAQ ─── */
+    .faq { padding: 140px 0; }
+    @media (max-width: 767px) { .faq { padding: 80px 0; } }
+    .faq-list { max-width: 720px; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question {
+      width: 100%; padding: 24px 0;
+      display: flex; justify-content: space-between; align-items: center;
+      text-align: left; font-size: 16px; font-weight: 500; cursor: pointer;
+      transition: color 0.3s;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon {
+      font-family: var(--mono); font-size: 20px; color: var(--accent);
+      transition: transform 0.3s; flex-shrink: 0; margin-left: 16px;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--text-muted); font-size: 14px; line-height: 1.7;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 24px; }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      padding: 160px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 767px) { .cta-section { padding: 100px 0; } }
+    .cta-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,136,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-content { position: relative; z-index: 2; }
+    .cta-title {
+      font-family: var(--display);
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 20px;
+    }
+    .cta-title .accent { color: var(--accent); }
+    .cta-sub {
+      font-size: 17px; color: var(--text-muted);
+      margin-bottom: 40px; max-width: 440px; margin-left: auto; margin-right: auto;
+    }
+    .cta-buttons { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+    .cta-trust {
+      margin-top: 32px;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-muted); letter-spacing: 0.05em;
+    }
+    .cta-trust span { color: var(--accent); }
+
+    /* ─── FOOTER ─── */
+    .footer { padding: 64px 0 32px; border-top: 1px solid var(--border); }
+    .footer-top {
+      display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 48px;
+    }
+    @media (min-width: 768px) { .footer-top { grid-template-columns: 2fr 1fr 1fr; } }
+    .footer-brand p { color: var(--text-muted); font-size: 13px; margin-top: 8px; max-width: 300px; }
+    .footer-col h4 {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block; font-size: 13px; color: var(--text-muted);
+      margin-bottom: 10px; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 24px;
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+    .footer-copy a { color: var(--accent); }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cursor glow -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <!-- Grain -->
+  <div class="grain"></div>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">dos<span>code</span></a>
+      <div class="nav-links">
+        <a href="#services">Услуги</a>
+        <a href="#portfolio">Портфолио</a>
+        <a href="#process">Процесс</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a href="#contact" class="nav-cta">Обсудить проект</a>
+      <button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" class="mobile-link">Услуги</a>
+    <a href="#portfolio" class="mobile-link">Портфолио</a>
+    <a href="#process" class="mobile-link">Процесс</a>
+    <a href="#faq" class="mobile-link">FAQ</a>
+    <a href="#contact" class="btn btn-primary" style="text-align:center; margin-top: 24px;">Обсудить проект</a>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-orb hero-orb--1"></div>
+    <div class="hero-orb hero-orb--2"></div>
+    <div class="hero-orb hero-orb--3"></div>
+
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Алматы, Казахстан
+      </div>
+
+      <h1 class="hero-headline">
+        <span class="line"><span class="line-inner">Строим продукты,</span></span>
+        <span class="line"><span class="line-inner">которые <span class="accent">работают</span></span></span>
+      </h1>
+
+      <p class="hero-sub">
+        Веб-сервисы, дашборды, AI-агенты и MVP — от идеи до&nbsp;запуска за дни, а не месяцы.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary btn-magnetic">Обсудить проект <span style="font-size:18px">&rarr;</span></a>
+        <a href="#portfolio" class="btn btn-ghost">Посмотреть работы</a>
+      </div>
+
+      <!-- Terminal animation -->
+      <div class="hero-terminal">
+        <div class="terminal-bar">
+          <span class="terminal-dot terminal-dot--r"></span>
+          <span class="terminal-dot terminal-dot--y"></span>
+          <span class="terminal-dot terminal-dot--g"></span>
+          <span class="terminal-title">doscode ~ /projects</span>
+        </div>
+        <div class="terminal-body" id="terminalBody">
+          <div class="terminal-line" id="tl1"><span class="terminal-prompt">$</span> <span class="terminal-cmd">doscode init --project "your-app"</span></div>
+          <div class="terminal-line" id="tl2"><span class="terminal-output">&#9656; Анализ требований...</span></div>
+          <div class="terminal-line" id="tl3"><span class="terminal-output">&#9656; Дизайн и архитектура...</span></div>
+          <div class="terminal-line" id="tl4"><span class="terminal-output">&#9656; Разработка MVP...</span></div>
+          <div class="terminal-line" id="tl5"><span class="terminal-success">&#10003; Продукт запущен за 3 недели</span></div>
+          <div class="terminal-line" id="tl6"><span class="terminal-prompt">$</span> <span class="terminal-cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-inner" data-reveal>
+        <div class="stat">
+          <span class="stat-value" data-count="15" data-suffix="+">0</span>
+          <span class="stat-label">Проектов</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">3 нед</span>
+          <span class="stat-label">Средний срок</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" data-count="100" data-suffix="%">0</span>
+          <span class="stat-label">Рекомендуют</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">3 года</span>
+          <span class="stat-label">На рынке</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" data-reveal>Что мы создаём</span>
+        <h2 class="section-title" data-reveal>Полный цикл<br>разработки</h2>
+      </div>
+      <div class="services-grid stagger-group">
+        <div class="service-card">
+          <div class="service-icon">&#128241;</div>
+          <h3>Веб и мобильные приложения</h3>
+          <p>PWA, нативные и кросс-платформенные приложения. От заказа еды до маркетплейса — всё работает.</p>
+          <div class="service-tags">
+            <span class="service-tag">iOS</span><span class="service-tag">Android</span>
+            <span class="service-tag">PWA</span><span class="service-tag">React</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#128202;</div>
+          <h3>Дашборды и аналитика</h3>
+          <p>Визуализация данных в реальном времени, внутренние панели и CRM под вашу команду.</p>
+          <div class="service-tags">
+            <span class="service-tag">Real-time</span><span class="service-tag">REST API</span>
+            <span class="service-tag">Excel/PDF</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#129302;</div>
+          <h3>AI-агенты и автоматизация</h3>
+          <p>Боты для Telegram и WhatsApp. Интеграция с GPT-4. Автоматизация рутины вашего бизнеса.</p>
+          <div class="service-tags">
+            <span class="service-tag">Telegram</span><span class="service-tag">WhatsApp</span>
+            <span class="service-tag">GPT-4</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#128640;</div>
+          <h3>Лендинги и MVP</h3>
+          <p>Быстрый выход на рынок: от идеи до рабочего продукта за 1–2 недели. SEO из коробки.</p>
+          <div class="service-tags">
+            <span class="service-tag">SEO</span><span class="service-tag">CMS</span>
+            <span class="service-tag">1–2 нед</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PORTFOLIO ═══ -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" data-reveal>Наши проекты</span>
+        <h2 class="section-title" data-reveal>Портфолио</h2>
+      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-card" data-reveal>
+          <div class="portfolio-visual">
+            <span class="portfolio-domain">DOSPASS.COM</span>
+          </div>
+          <div class="portfolio-body">
+            <span class="portfolio-type">Платформа лояльности</span>
+            <h3><a href="https://dospass.com" target="_blank" rel="noopener noreferrer">DosPass</a></h3>
+            <p>Вирусная система лояльности через WhatsApp. Цифровые штамп-карты, реферальные программы, геймификация — без скачивания приложения.</p>
+            <div class="portfolio-tags">
+              <span class="portfolio-tag">PWA</span><span class="portfolio-tag">Vue.js</span><span class="portfolio-tag">Node.js</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-card" data-reveal>
+          <div class="portfolio-visual">
+            <span class="portfolio-domain">CHICAGOPIZZA.KZ</span>
+          </div>
+          <div class="portfolio-body">
+            <span class="portfolio-type">Экосистема ресторана</span>
+            <h3><a href="https://chicagopizza.kz" target="_blank" rel="noopener noreferrer">Chicago Pizza</a></h3>
+            <p>Полная платформа: заказы, кухня, логистика. Интеграция с iiko, Telegram-боты, Wolt Drive и Chocofood.</p>
+            <div class="portfolio-tags">
+              <span class="portfolio-tag">React</span><span class="portfolio-tag">Firebase</span><span class="portfolio-tag">PWA</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-card" data-reveal>
+          <div class="portfolio-visual">
+            <span class="portfolio-domain">В РАЗРАБОТКЕ</span>
+          </div>
+          <div class="portfolio-body">
+            <span class="portfolio-type">Тендерная платформа</span>
+            <h3>MMG Dashboard</h3>
+            <p>Автоматизированный мониторинг тендеров Goszakup. AI-преквалификация, воронка заявок и аналитика побед.</p>
+            <div class="portfolio-tags">
+              <span class="portfolio-tag">React</span><span class="portfolio-tag">Node.js</span><span class="portfolio-tag">AI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INDUSTRIES ═══ -->
+  <section class="industries" id="industries">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" data-reveal>Отрасли</span>
+        <h2 class="section-title" data-reveal>Мы знаем ваш бизнес</h2>
+      </div>
+      <div class="industries-grid stagger-group">
+        <div class="industry-card"><span class="industry-emoji">&#127860;</span><div class="industry-name">HoReCa</div></div>
+        <div class="industry-card"><span class="industry-emoji">&#128722;</span><div class="industry-name">Ритейл</div></div>
+        <div class="industry-card"><span class="industry-emoji">&#127973;</span><div class="industry-name">Медицина</div></div>
+        <div class="industry-card"><span class="industry-emoji">&#127891;</span><div class="industry-name">EdTech</div></div>
+        <div class="industry-card"><span class="industry-emoji">&#128200;</span><div class="industry-name">Маркетинг</div></div>
+        <div class="industry-card"><span class="industry-emoji">&#128666;</span><div class="industry-name">Логистика</div></div>
+        <div class="industry-card"><span class="industry-emoji">&#127970;</span><div class="industry-name">Госзакупки</div></div>
+        <div class="industry-card"><span class="industry-emoji">&#127969;</span><div class="industry-name">Недвижимость</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROCESS ═══ -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" data-reveal>Просто и прозрачно</span>
+        <h2 class="section-title" data-reveal>Как мы работаем</h2>
+      </div>
+      <div class="process-grid stagger-group">
+        <div class="process-step">
+          <div class="process-num">01</div>
+          <h3>Обсуждаем</h3>
+          <p>Бесплатный созвон, разбор задачи и оценка стоимости — в течение 24 часов.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">02</div>
+          <h3>Строим</h3>
+          <p>Итерационная разработка с еженедельными демо. Вы видите прогресс каждую неделю.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">03</div>
+          <h3>Запускаем</h3>
+          <p>Деплой, обучение команды и поддержка. Мы с вами и после релиза.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TECH STACK ═══ -->
+  <section class="stack">
+    <div class="container">
+      <div class="stack-header">
+        <span class="section-label" style="justify-content:center">Стек</span>
+        <h2 class="section-title" style="text-align:center">Строим на лучшем</h2>
+      </div>
+    </div>
+    <div class="stack-row">
+      <div class="stack-track">
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React">React</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" alt="Next.js" style="filter:invert(1)">Next.js</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="TypeScript">TypeScript</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" alt="Vue.js">Vue.js</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python">Python</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg" alt="Go">Go</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg" alt="Swift">Swift</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" alt="Kotlin">Kotlin</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg" alt="Flutter">Flutter</div>
+      </div>
+      <div class="stack-track" aria-hidden="true">
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="">React</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" alt="" style="filter:invert(1)">Next.js</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="">TypeScript</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" alt="">Vue.js</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="">Python</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg" alt="">Go</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg" alt="">Swift</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" alt="">Kotlin</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg" alt="">Flutter</div>
+      </div>
+    </div>
+    <div class="stack-row">
+      <div class="stack-track">
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js">Node.js</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">PostgreSQL</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" alt="MongoDB">MongoDB</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" alt="Redis">Redis</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker">Docker</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes">Kubernetes</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg" alt="GraphQL">GraphQL</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind">Tailwind</div>
+      </div>
+      <div class="stack-track" aria-hidden="true">
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="">Node.js</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="">PostgreSQL</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" alt="">MongoDB</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" alt="">Redis</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="">Docker</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" alt="">Kubernetes</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg" alt="">GraphQL</div>
+        <div class="stack-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="">Tailwind</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" data-reveal>Отзывы</span>
+        <h2 class="section-title" data-reveal>Говорят клиенты</h2>
+      </div>
+      <div class="testimonials-grid stagger-group">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text">Ребята сделали всю платформу — от заказов до логистики. Работали быстро, понимали специфику ресторана и не пропадали. Результатом довольны полностью.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">CP</div>
+            <div><div class="testimonial-name">Chicago Pizza</div><div class="testimonial-role">Ресторан, Алматы</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text">Наша система лояльности заработала через 3 недели. Без скачивания, всё через WhatsApp. Клиенты приводят друзей — и всё работает на автомате.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">DP</div>
+            <div><div class="testimonial-name">DosPass</div><div class="testimonial-role">Платформа лояльности</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" data-reveal>Вопросы</span>
+        <h2 class="section-title" data-reveal>Частые вопросы</h2>
+      </div>
+      <div class="faq-list" data-reveal>
+        <div class="faq-item">
+          <button class="faq-question">Сколько стоит разработка?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">Зависит от проекта. Лендинг — от 150К ₸, мобильное приложение или MVP — от 500К ₸. После короткого брифинга даём точную оценку бесплатно.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Как быстро вы работаете?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">Лендинг — 1–2 недели, мобильное приложение или дашборд — 4–8 недель. Работаем итерационно: каждую неделю вы видите работающий результат.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Подписываете ли NDA?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">Да, NDA подписываем до начала любых переговоров. Конфиденциальность — обязательное условие.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Кто будет работать над проектом?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">Наша команда: разработчик, дизайнер и менеджер проекта. Без аутсорса и субподрядчиков — только люди DosCode.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Что происходит после запуска?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">Поддержка и мелкие доработки входят в стандартный договор. Мы не бросаем проекты после деплоя.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Как происходит оплата?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">50% — до старта разработки, 50% — после сдачи. Всё фиксируется в договоре.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section" id="contact">
+    <div class="cta-glow"></div>
+    <div class="container cta-content">
+      <span class="section-label" data-reveal style="justify-content:center">Готовы начать?</span>
+      <h2 class="cta-title" data-reveal>Давайте построим<br><span class="accent">ваш продукт</span></h2>
+      <p class="cta-sub" data-reveal>Бесплатный созвон, разбор задачи и оценка стоимости — в течение 24 часов.</p>
+      <div class="cta-buttons" data-reveal>
+        <a href="https://wa.me/77072691991" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-magnetic">WhatsApp <span style="font-size:18px">&rarr;</span></a>
+        <a href="mailto:hello@doscode.kz" class="btn btn-ghost">hello@doscode.kz</a>
+      </div>
+      <p class="cta-trust" data-reveal><span>&#10003;</span> Оценка бесплатно &nbsp;&middot;&nbsp; <span>&#10003;</span> NDA с первого дня &nbsp;&middot;&nbsp; <span>&#10003;</span> Без субподрядчиков</p>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span style="font-family:var(--mono);font-size:18px;font-weight:700">dos<span style="color:var(--accent)">code</span></span>
+          <p>Разработка приложений в Алматы. Веб, мобайл, AI.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Навигация</h4>
+          <a href="#services">Услуги</a>
+          <a href="#portfolio">Портфолио</a>
+          <a href="#process">Процесс</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h4>Контакты</h4>
+          <a href="mailto:hello@doscode.kz">hello@doscode.kz</a>
+          <a href="https://wa.me/77072691991" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a href="https://t.me/doscode" target="_blank" rel="noopener noreferrer">Telegram</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 <a href="#">doscode</a>. Алматы, Казахстан.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ SCRIPTS ═══ -->
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ─── Cursor Glow ───
+    if (!prefersReducedMotion && window.innerWidth > 768) {
+      const glow = document.getElementById('cursorGlow');
+      document.addEventListener('mousemove', e => {
+        gsap.to(glow, { x: e.clientX, y: e.clientY, duration: 1, ease: 'power2.out' });
+      });
+    }
+
+    // ─── GSAP ───
+    if (!prefersReducedMotion) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero load sequence
+      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      heroTl
+        .from('.hero-badge', { opacity: 0, y: -15, duration: 0.6 })
+        .from('.hero-headline .line-inner', { yPercent: 100, opacity: 0, duration: 1, stagger: 0.12 }, '-=0.3')
+        .from('.hero-sub', { opacity: 0, y: 20, duration: 0.7 }, '-=0.6')
+        .from('.hero-actions', { opacity: 0, y: 15, duration: 0.5 }, '-=0.4')
+        .from('.hero-terminal', { opacity: 0, y: 30, duration: 0.8 }, '-=0.3');
+
+      // Terminal typing sequence
+      const termTl = gsap.timeline({ delay: 1.5 });
+      const lines = ['tl1','tl2','tl3','tl4','tl5','tl6'];
+      lines.forEach((id, i) => {
+        termTl.to(`#${id}`, { opacity: 1, duration: 0.05 }, `+=${i === 0 ? 0 : 0.5}`);
+      });
+
+      // Scroll reveals
+      gsap.utils.toArray('[data-reveal]').forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+          opacity: 0, y: 30, duration: 0.8, ease: 'power2.out'
+        });
+      });
+
+      // Staggered groups
+      gsap.utils.toArray('.stagger-group').forEach(group => {
+        gsap.from(group.children, {
+          scrollTrigger: { trigger: group, start: 'top 80%' },
+          opacity: 0, y: 40, duration: 0.6, stagger: 0.1, ease: 'power2.out'
+        });
+      });
+
+      // Counter
+      document.querySelectorAll('[data-count]').forEach(el => {
+        const target = parseFloat(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        ScrollTrigger.create({
+          trigger: el, start: 'top 80%',
+          onEnter: () => {
+            gsap.to({ val: 0 }, {
+              val: target, duration: 2, ease: 'power2.out',
+              onUpdate: function () { el.textContent = Math.round(this.targets()[0].val) + suffix; }
+            });
+          },
+          once: true
+        });
+      });
+
+      // Parallax orbs
+      gsap.to('.hero-orb--1', { yPercent: -40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+      gsap.to('.hero-orb--2', { yPercent: -25, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+      // Magnetic buttons
+      document.querySelectorAll('.btn-magnetic').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          gsap.to(btn, { x: x * 0.25, y: y * 0.25, duration: 0.3, ease: 'power2.out' });
+        });
+        btn.addEventListener('mouseleave', () => {
+          gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+        });
+      });
+
+      // 3D tilt on service cards
+      document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          gsap.to(card, { rotateY: x * 8, rotateX: -y * 8, transformPerspective: 1000, ease: 'power2.out', duration: 0.4 });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'power2.out' });
+        });
+      });
+    }
+
+    // ─── Mobile menu ───
+    const burger = document.getElementById('navBurger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+    // ─── FAQ ───
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+</body>
+</html>

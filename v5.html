@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DosCode — Digital Studio. Almaty.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+  <style>
+    /* ─── BASE ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0f;
+      --bg-2: #131316;
+      --text: #ebebeb;
+      --text-dim: #888890;
+      --text-faint: #3a3a44;
+      --green: #00ff88;
+      --green-dim: rgba(0,255,136,0.12);
+      --border: rgba(255,255,255,0.07);
+      --font-display: 'Unbounded', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    html {
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: none; border: none; }
+    ::selection { background: rgba(0,255,136,0.2); color: var(--green); }
+
+    /* ─── CURSOR ─────────────────────────────────────────────── */
+    .cur {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+    }
+    .cur-dot {
+      width: 8px; height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      position: fixed;
+      transform: translate(-50%,-50%);
+      transition: width .15s, height .15s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .cur-ring {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
+      position: fixed;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+      z-index: 9998;
+      transition: width .3s, height .3s, border-color .3s;
+    }
+    body:has(a:hover) .cur-dot,
+    body:has(button:hover) .cur-dot { width: 16px; height: 16px; }
+    body:has(a:hover) .cur-ring,
+    body:has(button:hover) .cur-ring { width: 60px; height: 60px; }
+    body:has(.work-item:hover) .cur-ring {
+      width: 80px; height: 80px;
+      border-color: var(--green);
+    }
+
+    /* ─── SCROLL CONTAINER ───────────────────────────────────── */
+    [data-scroll-container] { overflow: hidden; }
+
+    /* ─── NAV ────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      mix-blend-mode: difference;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .nav-cta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: #fff;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 2px;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: rgba(255,255,255,0.1); }
+    @media (max-width: 640px) { nav { padding: 20px 24px; } }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 48px 72px;
+      overflow: hidden;
+    }
+    @media (max-width: 640px) { #hero { padding: 0 24px 56px; } }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      opacity: 0;
+      animation: fadeIn 1s 0.2s ease forwards;
+    }
+    .hero-label::before {
+      content: '';
+      width: 32px; height: 1px;
+      background: var(--text-dim);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 13.5vw, 196px);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeIn 1s 0.4s ease forwards;
+    }
+    .hero-title .line-2 {
+      display: block;
+      color: var(--text-faint);
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      opacity: 0;
+      animation: fadeIn 1s 0.7s ease forwards;
+    }
+    @media (max-width: 640px) {
+      .hero-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 360px;
+      line-height: 1.6;
+    }
+    .hero-tagline strong { color: var(--text); font-weight: 400; }
+
+    .hero-scroll {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-faint);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--text-dim));
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── TICKER ──────────────────────────────────────────────── */
+    .ticker {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      overflow: hidden;
+      background: var(--bg-2);
+    }
+    .ticker-track {
+      display: flex;
+      gap: 0;
+      animation: tickerMove 24s linear infinite;
+      width: max-content;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes tickerMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 0 40px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      transition: color 0.2s;
+    }
+    .ticker-item::after {
+      content: '·';
+      color: var(--green);
+      font-size: 1.2rem;
+    }
+
+    /* ─── MANIFESTO ──────────────────────────────────────────── */
+    #manifesto {
+      padding: 140px 48px;
+    }
+    @media (max-width: 640px) { #manifesto { padding: 100px 24px; } }
+
+    .manifesto-text {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4.5vw, 64px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      max-width: 1100px;
+    }
+    .manifesto-text .word {
+      display: inline-block;
+      color: var(--text-faint);
+      transition: color 0.5s ease;
+    }
+    .manifesto-text .word.lit {
+      color: var(--text);
+    }
+    .manifesto-text .accent {
+      color: var(--green);
+    }
+
+    /* ─── WORK ───────────────────────────────────────────────── */
+    #work {
+      padding: 0 0 120px;
+    }
+
+    .work-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0 48px 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 640px) { .work-header { padding: 0 24px 48px; } }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .work-count {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-faint);
+      letter-spacing: 0.1em;
+    }
+
+    .work-list { list-style: none; }
+
+    .work-item {
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-item-inner {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      gap: 40px;
+      padding: 40px 48px;
+      transition: background 0.4s;
+    }
+    @media (max-width: 768px) {
+      .work-item-inner {
+        grid-template-columns: 40px 1fr;
+        gap: 20px;
+        padding: 28px 24px;
+      }
+      .work-item-meta { display: none; }
+    }
+
+    .work-item:hover .work-item-inner { background: var(--bg-2); }
+
+    .work-num {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-faint);
+      letter-spacing: 0.1em;
+    }
+
+    .work-info {}
+    .work-category {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .work-name {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--text);
+      transition: color 0.3s;
+    }
+    .work-item:hover .work-name { color: var(--green); }
+
+    .work-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-top: 8px;
+      max-width: 500px;
+    }
+
+    .work-meta {
+      text-align: right;
+    }
+    .work-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-end;
+    }
+    .work-tag {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-faint);
+      letter-spacing: 0.08em;
+    }
+    .work-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--text-dim);
+      font-size: 1rem;
+      margin-top: 20px;
+      transition: all 0.3s;
+    }
+    .work-item:hover .work-arrow {
+      border-color: var(--green);
+      color: var(--green);
+      transform: rotate(45deg);
+    }
+
+    /* Hover visual preview */
+    .work-preview {
+      position: absolute;
+      right: 200px;
+      top: 50%;
+      transform: translateY(-50%) scale(0.9);
+      width: 280px; height: 180px;
+      border-radius: 6px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s, transform 0.4s;
+      z-index: 10;
+    }
+    .work-item:hover .work-preview {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+    @media (max-width: 1024px) { .work-preview { display: none; } }
+
+    .preview-inner {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+    }
+    .preview-1 { background: linear-gradient(135deg, #0a1628, #0d2845); }
+    .preview-2 { background: linear-gradient(135deg, #1a0808, #2d1010); }
+    .preview-3 { background: linear-gradient(135deg, #06120a, #0d2015); }
+
+    /* ─── SERVICES ───────────────────────────────────────────── */
+    #services {
+      padding: 120px 48px;
+      border-top: 1px solid var(--border);
+    }
+    @media (max-width: 640px) { #services { padding: 80px 24px; } }
+
+    .services-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-bottom: 80px;
+      align-items: end;
+    }
+    @media (max-width: 768px) {
+      .services-top { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    .services-headline {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: var(--text);
+    }
+    .services-sub {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 420px;
+    }
+
+    .services-list { list-style: none; }
+    .services-list li {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      align-items: baseline;
+      gap: 32px;
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    @media (max-width: 640px) {
+      .services-list li { grid-template-columns: 32px 1fr; }
+      .srv-desc { display: none; }
+    }
+
+    .srv-num {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-faint);
+      letter-spacing: 0.1em;
+    }
+    .srv-name {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      transition: color 0.3s;
+    }
+    .services-list li:hover .srv-name { color: var(--green); }
+    .srv-desc {
+      font-size: 0.82rem;
+      color: var(--text-faint);
+      text-align: right;
+      max-width: 240px;
+      line-height: 1.5;
+    }
+
+    /* ─── NUMBERS ─────────────────────────────────────────────── */
+    #numbers {
+      padding: 0 0 120px;
+      overflow: hidden;
+    }
+
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-left: 1px solid var(--border);
+    }
+    @media (max-width: 768px) {
+      .numbers-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .number-item {
+      padding: 60px 48px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 640px) { .number-item { padding: 40px 24px; } }
+
+    .number-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--green-dim);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s ease;
+    }
+    .number-item.counted::before {
+      transform: scaleX(1);
+    }
+
+    .number-val {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 88px);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .number-suffix {
+      color: var(--green);
+    }
+    .number-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    /* ─── TECH ────────────────────────────────────────────────── */
+    #tech {
+      padding: 100px 48px;
+      border-top: 1px solid var(--border);
+    }
+    @media (max-width: 640px) { #tech { padding: 80px 24px; } }
+
+    .tech-inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .tech-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .tech-left {}
+    .tech-headline {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+    .tech-sub {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .tech-item {
+      background: var(--bg);
+      padding: 20px 20px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .tech-item:hover {
+      background: var(--bg-2);
+      color: var(--green);
+    }
+
+    /* ─── CONTACT ─────────────────────────────────────────────── */
+    #contact {
+      padding: 120px 48px;
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 640px) { #contact { padding: 80px 24px; } }
+
+    .contact-bg-text {
+      position: absolute;
+      bottom: -20px;
+      left: -10px;
+      font-family: var(--font-display);
+      font-size: clamp(80px, 14vw, 200px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: rgba(255,255,255,0.02);
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .contact-inner {
+      position: relative;
+      max-width: 800px;
+    }
+    .contact-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .contact-label::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--green);
+    }
+
+    .contact-headline {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 7vw, 100px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: var(--text);
+      margin-bottom: 56px;
+    }
+    .contact-headline em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-display);
+      font-size: clamp(16px, 2.2vw, 28px);
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: -0.02em;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.3s;
+    }
+    .contact-link:hover { color: var(--text); }
+    .contact-link .link-arrow {
+      font-size: 0.6em;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .contact-link:hover .link-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .contact-note {
+      margin-top: 48px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-faint);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .contact-note .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { footer { padding: 28px 24px; } }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-faint);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── REVEAL UTIL ────────────────────────────────────────── */
+    .reveal {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.off {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .reveal.off.fast {
+      transform: translateY(20px);
+      transition-duration: 0.5s;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cur-dot" id="curDot"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<div data-scroll-container id="scrollContainer">
+
+  <!-- ══ NAV ══════════════════════════════════════════════════ -->
+  <nav>
+    <span class="nav-logo">DosCode</span>
+    <a href="#contact" class="nav-cta">Start a project →</a>
+  </nav>
+
+  <!-- ══ HERO ═════════════════════════════════════════════════ -->
+  <section id="hero" data-scroll-section>
+    <canvas id="hero-canvas"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-label">Digital Studio · Almaty, Kazakhstan</div>
+      <h1 class="hero-title">
+        DosCode
+        <span class="line-2">Studio.</span>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-tagline">
+          <strong>Design. Development. Production.</strong><br>
+          We build the web products your business needs to compete — from brand identity to live code.
+        </p>
+        <div class="hero-scroll">
+          <div class="scroll-line"></div>
+          Scroll
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TICKER ════════════════════════════════════════════════ -->
+  <div class="ticker" data-scroll-section>
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">Web Apps</span>
+      <span class="ticker-item">Mobile</span>
+      <span class="ticker-item">Dashboards</span>
+      <span class="ticker-item">AI Automation</span>
+      <span class="ticker-item">Landing Pages</span>
+      <span class="ticker-item">MVP Development</span>
+      <span class="ticker-item">UI/UX Design</span>
+      <span class="ticker-item">Branding</span>
+      <span class="ticker-item">Web Apps</span>
+      <span class="ticker-item">Mobile</span>
+      <span class="ticker-item">Dashboards</span>
+      <span class="ticker-item">AI Automation</span>
+      <span class="ticker-item">Landing Pages</span>
+      <span class="ticker-item">MVP Development</span>
+      <span class="ticker-item">UI/UX Design</span>
+      <span class="ticker-item">Branding</span>
+    </div>
+  </div>
+
+  <!-- ══ MANIFESTO ═════════════════════════════════════════════ -->
+  <section id="manifesto" data-scroll-section>
+    <p class="manifesto-text" id="manifestoText">
+      <span class="word">We</span> <span class="word">are</span> <span class="word">a</span>
+      <span class="word">full-stack</span> <span class="word">digital</span>
+      <span class="word">studio</span> <span class="word">—</span>
+      <span class="word">combining</span> <span class="word">design</span>
+      <span class="word">and</span> <span class="word accent">engineering</span>
+      <span class="word">to</span> <span class="word">ship</span>
+      <span class="word">products</span> <span class="word">that</span>
+      <span class="word accent">actually</span> <span class="word">work.</span>
+      <span class="word">Based</span> <span class="word">in</span>
+      <span class="word">Almaty,</span> <span class="word">building</span>
+      <span class="word">for</span> <span class="word">anyone.</span>
+    </p>
+  </section>
+
+  <!-- ══ WORK ══════════════════════════════════════════════════ -->
+  <section id="work" data-scroll-section>
+    <div class="work-header reveal off">
+      <span class="section-label">Selected Work</span>
+      <span class="work-count">03 Projects</span>
+    </div>
+
+    <ul class="work-list">
+      <li class="work-item reveal off">
+        <div class="work-preview">
+          <div class="preview-inner preview-1">
+            <div style="text-align:center">
+              <div style="font-size:2rem;margin-bottom:6px">🪪</div>
+              <div>DosPass</div>
+            </div>
+          </div>
+        </div>
+        <div class="work-item-inner">
+          <span class="work-num">01</span>
+          <div class="work-info">
+            <div class="work-category">HoReCa · Loyalty Platform</div>
+            <div class="work-name">DosPass</div>
+            <div class="work-desc">PWA loyalty platform — QR-based punch cards, customer analytics, WhatsApp notifications. Replaces paper loyalty cards.</div>
+          </div>
+          <div class="work-meta">
+            <div class="work-tags">
+              <span class="work-tag">React Native</span>
+              <span class="work-tag">Node.js</span>
+              <span class="work-tag">PostgreSQL</span>
+            </div>
+            <div class="work-arrow">→</div>
+          </div>
+        </div>
+      </li>
+
+      <li class="work-item reveal off">
+        <div class="work-preview">
+          <div class="preview-inner preview-2">
+            <div style="text-align:center">
+              <div style="font-size:2rem;margin-bottom:6px">🍕</div>
+              <div>Chicago Pizza</div>
+            </div>
+          </div>
+        </div>
+        <div class="work-item-inner">
+          <span class="work-num">02</span>
+          <div class="work-info">
+            <div class="work-category">Restaurant · Full Ecosystem</div>
+            <div class="work-name">Chicago Pizza</div>
+            <div class="work-desc">Complete restaurant platform — customer app, kitchen POS, delivery tracking, loyalty system. One codebase, four products.</div>
+          </div>
+          <div class="work-meta">
+            <div class="work-tags">
+              <span class="work-tag">React Native</span>
+              <span class="work-tag">Go</span>
+              <span class="work-tag">Redis</span>
+            </div>
+            <div class="work-arrow">→</div>
+          </div>
+        </div>
+      </li>
+
+      <li class="work-item reveal off">
+        <div class="work-preview">
+          <div class="preview-inner preview-3">
+            <div style="text-align:center">
+              <div style="font-size:2rem;margin-bottom:6px">📈</div>
+              <div>MMG Dashboard</div>
+            </div>
+          </div>
+        </div>
+        <div class="work-item-inner">
+          <span class="work-num">03</span>
+          <div class="work-info">
+            <div class="work-category">Gov Procurement · B2G Analytics</div>
+            <div class="work-name">MMG Dashboard</div>
+            <div class="work-desc">Government tender monitoring platform — real-time procurement tracking, automated alerts, competitor analysis.</div>
+          </div>
+          <div class="work-meta">
+            <div class="work-tags">
+              <span class="work-tag">Next.js</span>
+              <span class="work-tag">Python</span>
+              <span class="work-tag">PostgreSQL</span>
+            </div>
+            <div class="work-arrow">→</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ══ SERVICES ══════════════════════════════════════════════ -->
+  <section id="services" data-scroll-section>
+    <div class="services-top">
+      <h2 class="services-headline reveal off">
+        What we<br>actually do
+      </h2>
+      <p class="services-sub reveal off">
+        From the first sketch to the last deploy — we cover the full stack. Design, engineering, and everything in between. No handoffs to other teams.
+      </p>
+    </div>
+    <ul class="services-list">
+      <li class="reveal off fast">
+        <span class="srv-num">01</span>
+        <span class="srv-name">Web & Mobile Apps</span>
+        <span class="srv-desc">React, Next.js, Flutter, Swift, Kotlin — for real traffic</span>
+      </li>
+      <li class="reveal off fast">
+        <span class="srv-num">02</span>
+        <span class="srv-name">Dashboards & Internal Tools</span>
+        <span class="srv-desc">Analytics, ERP, B2B platforms — beautiful and fast</span>
+      </li>
+      <li class="reveal off fast">
+        <span class="srv-num">03</span>
+        <span class="srv-name">AI Agents & Automation</span>
+        <span class="srv-desc">LLM integration, document processing, custom workflows</span>
+      </li>
+      <li class="reveal off fast">
+        <span class="srv-num">04</span>
+        <span class="srv-name">Landing Pages & MVPs</span>
+        <span class="srv-desc">Idea to launch in weeks, not months</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ══ NUMBERS ════════════════════════════════════════════════ -->
+  <section id="numbers" data-scroll-section>
+    <div class="numbers-grid">
+      <div class="number-item">
+        <div class="number-val"><span class="counter" data-target="15">0</span><span class="number-suffix">+</span></div>
+        <div class="number-label">Projects shipped</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val"><span class="counter" data-target="3">0</span></div>
+        <div class="number-label">Weeks to launch</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val"><span class="counter" data-target="100">0</span><span class="number-suffix">%</span></div>
+        <div class="number-label">Client retention</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val"><span class="counter" data-target="8">0</span><span class="number-suffix">+</span></div>
+        <div class="number-label">Industries covered</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TECH ═══════════════════════════════════════════════════ -->
+  <section id="tech" data-scroll-section>
+    <div class="tech-inner">
+      <div class="tech-left">
+        <h3 class="tech-headline reveal off">Our<br>Stack</h3>
+        <p class="tech-sub reveal off">
+          Modern, proven, and maintained. We pick tools that ship fast and scale far.
+        </p>
+      </div>
+      <div class="tech-grid reveal off">
+        <div class="tech-item">React</div>
+        <div class="tech-item">Next.js</div>
+        <div class="tech-item">TypeScript</div>
+        <div class="tech-item">Vue.js</div>
+        <div class="tech-item">Python</div>
+        <div class="tech-item">Go</div>
+        <div class="tech-item">Node.js</div>
+        <div class="tech-item">Swift</div>
+        <div class="tech-item">Kotlin</div>
+        <div class="tech-item">Flutter</div>
+        <div class="tech-item">PostgreSQL</div>
+        <div class="tech-item">MongoDB</div>
+        <div class="tech-item">Redis</div>
+        <div class="tech-item">Docker</div>
+        <div class="tech-item">AWS</div>
+        <div class="tech-item">OpenAI</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ════════════════════════════════════════════════ -->
+  <section id="contact" data-scroll-section>
+    <div class="contact-bg-text">DosCode</div>
+    <div class="contact-inner">
+      <div class="contact-label">Get in touch</div>
+      <h2 class="contact-headline reveal off">
+        Let's build<br>something <em>real.</em>
+      </h2>
+      <div class="contact-links reveal off">
+        <a href="mailto:hello@doscode.kz" class="contact-link">
+          hello@doscode.kz
+          <span class="link-arrow">↗</span>
+        </a>
+        <a href="https://t.me/doscode_kz" class="contact-link">
+          Telegram
+          <span class="link-arrow">↗</span>
+        </a>
+        <a href="https://wa.me/77771234567" class="contact-link">
+          WhatsApp
+          <span class="link-arrow">↗</span>
+        </a>
+      </div>
+      <div class="contact-note reveal off">
+        <div class="dot"></div>
+        Available for new projects · Almaty, Kazakhstan · 50/50 payment
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ═════════════════════════════════════════════════ -->
+  <footer data-scroll-section>
+    <span class="footer-logo">DosCode</span>
+    <span class="footer-copy">© 2024 · Built in Almaty</span>
+  </footer>
+
+</div><!-- /scroll-container -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+<script>
+// ── Custom cursor ────────────────────────────────────────────
+const curDot = document.getElementById('curDot');
+const curRing = document.getElementById('curRing');
+let mx = -200, my = -200, rx = -200, ry = -200;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  curDot.style.left = mx + 'px';
+  curDot.style.top = my + 'px';
+});
+(function lerpRing() {
+  rx += (mx - rx) * 0.1;
+  ry += (my - ry) * 0.1;
+  curRing.style.left = rx + 'px';
+  curRing.style.top = ry + 'px';
+  requestAnimationFrame(lerpRing);
+})();
+
+// ── Hero canvas — flowing mesh ────────────────────────────────
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+const COLS = 22, ROWS = 14;
+let pts = [], W, H, raf;
+let t = 0;
+
+function resize() {
+  W = canvas.width = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
+  buildPts();
+}
+
+function buildPts() {
+  pts = [];
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      pts.push({
+        bx: (c / (COLS - 1)) * W,
+        by: (r / (ROWS - 1)) * H,
+        ph: Math.random() * Math.PI * 2,
+        x: 0, y: 0
+      });
+    }
+  }
+}
+
+function drawMesh() {
+  t += 0.004;
+  ctx.clearRect(0, 0, W, H);
+
+  pts.forEach(p => {
+    const nx = p.bx / W, ny = p.by / H;
+    const wave = Math.sin(nx * 3 + t) * Math.cos(ny * 2.5 + t * 0.6);
+    p.x = p.bx + wave * 22;
+    p.y = p.by + Math.sin(ny * 4 + t * 0.7 + p.ph) * 14;
+  });
+
+  // Lines
+  ctx.lineWidth = 0.6;
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const p = pts[r * COLS + c];
+      const dist = Math.hypot(p.bx / W - 0.5, p.by / H - 0.5);
+      const alpha = Math.max(0.02, 0.1 - dist * 0.1);
+
+      if (c < COLS - 1) {
+        const right = pts[r * COLS + c + 1];
+        ctx.strokeStyle = `rgba(0,255,136,${alpha})`;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(right.x, right.y);
+        ctx.stroke();
+      }
+      if (r < ROWS - 1) {
+        const bot = pts[(r + 1) * COLS + c];
+        ctx.strokeStyle = `rgba(0,255,136,${alpha})`;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(bot.x, bot.y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Dots
+  pts.forEach(p => {
+    const dist = Math.hypot(p.bx / W - 0.5, p.by / H - 0.5);
+    const alpha = Math.max(0.05, 0.25 - dist * 0.3);
+    ctx.fillStyle = `rgba(0,255,136,${alpha})`;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  raf = requestAnimationFrame(drawMesh);
+}
+
+window.addEventListener('resize', resize);
+resize();
+drawMesh();
+
+// Stop canvas when not visible (performance)
+const heroObs = new IntersectionObserver(entries => {
+  if (!entries[0].isIntersecting) {
+    cancelAnimationFrame(raf);
+  } else {
+    drawMesh();
+  }
+});
+heroObs.observe(canvas);
+
+// ── Locomotive Scroll ────────────────────────────────────────
+gsap.registerPlugin(ScrollTrigger);
+
+const locoScroll = new LocomotiveScroll({
+  el: document.querySelector('[data-scroll-container]'),
+  smooth: true,
+  multiplier: 0.9,
+  lerp: 0.08
+});
+
+locoScroll.on('scroll', ScrollTrigger.update);
+
+ScrollTrigger.scrollerProxy('[data-scroll-container]', {
+  scrollTop(value) {
+    return arguments.length
+      ? locoScroll.scrollTo(value, 0, 0)
+      : locoScroll.scroll.instance.scroll.y;
+  },
+  getBoundingClientRect() {
+    return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+  },
+  pinType: document.querySelector('[data-scroll-container]').style.transform ? 'transform' : 'fixed'
+});
+
+ScrollTrigger.addEventListener('refresh', () => locoScroll.update());
+ScrollTrigger.refresh();
+
+// ── Reveal on scroll ─────────────────────────────────────────
+// Use IntersectionObserver for reliability — content always visible,
+// animations just enhance the entry
+const revealEls = document.querySelectorAll('.reveal.off');
+const revObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // Small stagger for sibling off elements
+      const parent = entry.target.parentElement;
+      const siblings = [...parent.querySelectorAll('.reveal.off')];
+      const idx = siblings.indexOf(entry.target);
+      setTimeout(() => {
+        entry.target.classList.remove('off');
+        revObs.unobserve(entry.target);
+      }, idx * 100);
+    }
+  });
+}, { threshold: 0.12 });
+
+revealEls.forEach(el => revObs.observe(el));
+
+// ── Manifesto word-by-word reveal ────────────────────────────
+const words = document.querySelectorAll('.manifesto-text .word');
+const manifestoSection = document.getElementById('manifesto');
+
+locoScroll.on('scroll', ({ scroll }) => {
+  if (!manifestoSection) return;
+  const sTop = manifestoSection.offsetTop;
+  const sH = manifestoSection.offsetHeight;
+  const progress = (scroll.y - sTop + window.innerHeight * 0.6) / sH;
+  const litCount = Math.floor(progress * words.length);
+  words.forEach((w, i) => {
+    if (w.classList.contains('accent')) return; // always green
+    w.classList.toggle('lit', i < litCount);
+  });
+});
+
+// ── Counter animation ─────────────────────────────────────────
+const counters = document.querySelectorAll('.counter[data-target]');
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = +el.dataset.target;
+    const suffix = el.nextElementSibling?.textContent || '';
+    let cur = 0;
+    const step = target / 40;
+    const timer = setInterval(() => {
+      cur = Math.min(cur + step, target);
+      el.textContent = Math.floor(cur);
+      if (cur >= target) { clearInterval(timer); el.parentElement.parentElement.classList.add('counted'); }
+    }, 30);
+    countObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+counters.forEach(el => countObs.observe(el));
+
+// ── GSAP parallax on hero title ───────────────────────────────
+gsap.to('.hero-title', {
+  y: -60,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '#hero',
+    start: 'top top',
+    end: 'bottom top',
+    scrub: 1,
+    scroller: '[data-scroll-container]'
+  }
+});
+
+// ── Nav transparent/solid ─────────────────────────────────────
+// nav uses mix-blend-mode: difference so no color change needed
+
+// ── Smooth scroll for anchor links ───────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) locoScroll.scrollTo(target);
+  });
+});
+</script>
+</body>
+</html>

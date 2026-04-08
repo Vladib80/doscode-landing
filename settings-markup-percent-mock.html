@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings Markup Percent Mock</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d1420;
+      --bg-2: #111b2a;
+      --sidebar: #1a2535;
+      --panel: #182335;
+      --card: #202d40;
+      --field: #33445a;
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #eef4ff;
+      --muted: #96a3b7;
+      --accent: #1fd1c8;
+      --accent-soft: rgba(31, 209, 200, 0.18);
+      --warning: #f3b25d;
+      --good: #4fd5a2;
+      --shadow: 0 22px 48px rgba(0, 0, 0, 0.22);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: linear-gradient(180deg, #0d1420 0%, #10192a 100%);
+      color: var(--text);
+      font: 14px/1.45 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 254px 1fr;
+    }
+
+    .sidebar {
+      background: #212d3e;
+      border-right: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: 66px;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--line);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .brand-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: rgba(31, 209, 200, 0.18);
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .nav {
+      padding: 12px 8px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .nav a.active {
+      background: rgba(31, 209, 200, 0.16);
+      color: var(--accent);
+      box-shadow: inset 0 0 0 1px rgba(31, 209, 200, 0.22);
+    }
+
+    .content {
+      background: #121b2d;
+    }
+
+    .content-inner {
+      width: min(980px, calc(100vw - 310px));
+      margin: 0 0 0 22px;
+      padding: 28px 0 48px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: 22px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .tabs {
+      width: fit-content;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 6px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+    }
+
+    .tab {
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .tab.active {
+      background: rgba(31, 209, 200, 0.14);
+      color: var(--accent);
+    }
+
+    .sub {
+      margin: 20px 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .page-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .switch {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .switch button {
+      min-height: 34px;
+      padding: 0 12px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .switch button.active {
+      background: rgba(31, 209, 200, 0.14);
+      color: var(--accent);
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px 132px;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      border-radius: 14px;
+      background: #243247;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .row-title {
+      min-width: 0;
+    }
+
+    .row-title strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .row-title span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+    }
+
+    .markup-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .field {
+      width: 100%;
+      min-width: 0;
+      min-height: 48px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--field);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .field small {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .stepper {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+    }
+
+    .stepper button {
+      width: 26px;
+      height: 21px;
+      border-radius: 7px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .derived {
+      display: grid;
+      justify-items: end;
+      gap: 4px;
+      text-align: right;
+    }
+
+    .derived strong {
+      font-size: 24px;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+    }
+
+    .derived span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .derived .mode {
+      display: inline-flex;
+      min-height: 24px;
+      padding: 0 8px;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line);
+      color: #c8d2de;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .floor {
+      border-color: rgba(243, 178, 93, 0.18);
+      background: linear-gradient(180deg, rgba(243, 178, 93, 0.06), rgba(255, 255, 255, 0.02));
+    }
+
+    .floor .derived strong { color: var(--warning); }
+
+    @media (max-width: 980px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .content-inner {
+        width: calc(100vw - 24px);
+        margin: 0 auto;
+      }
+      .row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .derived {
+        justify-items: start;
+        text-align: left;
+      }
+      .page-tools {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-badge">M</div>
+        <div>MMG Platform</div>
+      </div>
+      <nav class="nav">
+        <a href="#">Панель управления</a>
+        <a href="#">Товары</a>
+        <a href="#">Цены</a>
+        <a href="#">Клиенты</a>
+        <a href="#">Тендеры</a>
+        <a href="#">Коммерческие предложения</a>
+        <a href="#">Активность</a>
+        <a href="#">Отчёты</a>
+        <a href="#" class="active">Настройки</a>
+      </nav>
+    </aside>
+
+    <section class="content">
+      <div class="content-inner">
+        <h1>Настройки</h1>
+
+        <div class="tabs">
+          <button class="tab active">Ценовые категории</button>
+          <button class="tab">Пользователи</button>
+          <button class="tab">API и интеграции</button>
+        </div>
+
+        <p class="sub">
+          Наценка задаётся в процентах. Множитель рассчитывается автоматически, чтобы
+          команда работала в бизнес-логике, а не в коэффициентах.
+        </p>
+
+        <div class="page-tools">
+          <div class="hint">Основной режим ввода: <strong>% наценка</strong></div>
+          <div class="switch" aria-label="Режим ввода">
+            <button class="active">Проценты</button>
+            <button>Множители</button>
+          </div>
+        </div>
+
+        <div class="list">
+          <article class="row">
+            <div class="row-title">
+              <strong>Государственные закупки</strong>
+              <span>gov</span>
+            </div>
+            <div class="markup-box">
+              <div class="field">50<small>%</small></div>
+              <div class="stepper">
+                <button>+</button>
+                <button>-</button>
+              </div>
+            </div>
+            <div class="derived">
+              <strong>x 1,50</strong>
+              <span>итоговый множитель</span>
+              <span class="mode">основная категория</span>
+            </div>
+          </article>
+
+          <article class="row">
+            <div class="row-title">
+              <strong>Частные клиники</strong>
+              <span>private</span>
+            </div>
+            <div class="markup-box">
+              <div class="field">42<small>%</small></div>
+              <div class="stepper">
+                <button>+</button>
+                <button>-</button>
+              </div>
+            </div>
+            <div class="derived">
+              <strong>x 1,42</strong>
+              <span>итоговый множитель</span>
+              <span class="mode">стандарт</span>
+            </div>
+          </article>
+
+          <article class="row">
+            <div class="row-title">
+              <strong>VIP клиенты</strong>
+              <span>vip</span>
+            </div>
+            <div class="markup-box">
+              <div class="field">30<small>%</small></div>
+              <div class="stepper">
+                <button>+</button>
+                <button>-</button>
+              </div>
+            </div>
+            <div class="derived">
+              <strong>x 1,30</strong>
+              <span>итоговый множитель</span>
+              <span class="mode">ручная логика</span>
+            </div>
+          </article>
+
+          <article class="row floor">
+            <div class="row-title">
+              <strong>Минимальная цена</strong>
+              <span>floor</span>
+            </div>
+            <div class="markup-box">
+              <div class="field">20<small>%</small></div>
+              <div class="stepper">
+                <button>+</button>
+                <button>-</button>
+              </div>
+            </div>
+            <div class="derived">
+              <strong>x 1,20</strong>
+              <span>нижняя граница цены</span>
+              <span class="mode">защитное правило</span>
+            </div>
+          </article>
+
+          <article class="row">
+            <div class="row-title">
+              <strong>Субдистрибьюторы</strong>
+              <span>sub</span>
+            </div>
+            <div class="markup-box">
+              <div class="field">18<small>%</small></div>
+              <div class="stepper">
+                <button>+</button>
+                <button>-</button>
+              </div>
+            </div>
+            <div class="derived">
+              <strong>x 1,18</strong>
+              <span>итоговый множитель</span>
+              <span class="mode">низкая маржа</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="footer-note">
+          Формула: <strong>множитель = 1 + (наценка / 100)</strong>. В интерфейсе
+          пользователь меняет процент, а система прозрачно показывает связанный коэффициент.
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

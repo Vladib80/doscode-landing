@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compact Catalog Header Mock</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d1420;
+      --panel: #121c2a;
+      --panel-2: #172233;
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #eef4ff;
+      --muted: #8f9aab;
+      --accent: #36d2d0;
+      --warning: #f4b35d;
+      --danger: #ff6f7a;
+      --good: #4dd39d;
+      --chip: #1b283a;
+      --shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: linear-gradient(180deg, #0b121c 0%, var(--bg) 100%);
+      color: var(--text);
+      font: 14px/1.45 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .shell {
+      width: min(1240px, calc(100vw - 24px));
+      margin: 24px auto;
+    }
+
+    .board {
+      border: 1px solid var(--line);
+      background: rgba(14, 22, 34, 0.92);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .title-wrap h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .title-wrap p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .button {
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      color: var(--text);
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, #22c9c6, #3fe2c0);
+      color: #082224;
+      border-color: transparent;
+    }
+
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 12px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .status-row .meta {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .status-row .file {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: var(--chip);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .pill strong { color: var(--text); }
+    .pill.good strong { color: var(--good); }
+    .pill.warn strong { color: var(--warning); }
+    .pill.bad strong { color: var(--danger); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      padding: 12px 18px 10px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 12px 14px;
+      min-height: 72px;
+    }
+
+    .stat label {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px 18px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .chip {
+      min-height: 32px;
+      padding: 0 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--chip);
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .chip.active {
+      color: var(--text);
+      background: linear-gradient(180deg, rgba(54, 210, 208, 0.24), rgba(54, 210, 208, 0.12));
+      box-shadow: inset 0 0 0 1px rgba(54, 210, 208, 0.7);
+    }
+
+    .list-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .list {
+      padding: 0 18px 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 12px 14px;
+    }
+
+    .row h3 {
+      margin: 0 0 4px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .row p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .row aside {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .qty {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      min-height: 24px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: rgba(244, 179, 93, 0.14);
+      color: var(--warning);
+      border: 1px solid rgba(244, 179, 93, 0.16);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      display: block;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    @media (max-width: 880px) {
+      .stats { grid-template-columns: 1fr; }
+      .topbar,
+      .status-row,
+      .list-head,
+      .row { grid-template-columns: 1fr; }
+      .topbar,
+      .row,
+      .list-head {
+        display: grid;
+      }
+      .actions,
+      .pill-group {
+        justify-content: flex-start;
+        margin-left: 0;
+      }
+      .row aside { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="board">
+      <header class="topbar">
+        <div class="title-wrap">
+          <h1>Каталог товаров</h1>
+          <p>859 товаров в каталоге</p>
+        </div>
+        <div class="actions">
+          <button class="button">Импорт файла 1С</button>
+          <button class="button primary">Добавить товар</button>
+        </div>
+      </header>
+
+      <div class="status-row">
+        <span class="meta">Последний импорт: <strong>07 апр, 22:49</strong></span>
+        <span class="meta">Файл: <span class="file">ostatok.csv</span></span>
+
+        <div class="pill-group">
+          <span class="pill good">Импортировано <strong>859</strong></span>
+          <span class="pill warn">Предупреждения <strong>158</strong></span>
+          <span class="pill bad">Ошибки <strong>16</strong></span>
+        </div>
+      </div>
+
+      <div class="stats">
+        <article class="stat">
+          <label>Всего SKU</label>
+          <strong>859</strong>
+          <span>все товары в каталоге</span>
+        </article>
+        <article class="stat">
+          <label>Мало на складе</label>
+          <strong>344</strong>
+          <span>нуждаются в пополнении</span>
+        </article>
+        <article class="stat">
+          <label>Требует внимания</label>
+          <strong>14</strong>
+          <span>ошибки или ручная проверка</span>
+        </article>
+      </div>
+
+      <div class="filters">
+        <button class="chip">Все товары</button>
+        <button class="chip">Мало на складе</button>
+        <button class="chip">Требует внимания</button>
+        <button class="chip active">Дорогие товары</button>
+      </div>
+
+      <div class="list-head">
+        <span>Список для дозакупки</span>
+        <span>Быстро показывает позиции, которых осталось мало или которые требуют решения</span>
+      </div>
+
+      <div class="list">
+        <article class="row">
+          <div>
+            <h3>Генератор Rezum для терапии доброкачественной гиперплазии предстательной железы</h3>
+            <p>Medical Marketing Group · G2200-031</p>
+          </div>
+          <aside>
+            <span class="qty">1 шт</span>
+            <span class="price">25 746 500 ₸</span>
+          </aside>
+        </article>
+
+        <article class="row">
+          <div>
+            <h3>Intra Aortic balloon pump AutoCat2wave (USED)</h3>
+            <p>Medical Marketing Group · 1AP-050</p>
+          </div>
+          <aside>
+            <span class="qty">1 шт</span>
+            <span class="price">11 544 000 ₸</span>
+          </aside>
+        </article>
+
+        <article class="row">
+          <div>
+            <h3>Complete Pump Assy / Полный насос в сборе, для AutoCAT 2 Series</h3>
+            <p>Medical Marketing Group · 77-3200-001M</p>
+          </div>
+          <aside>
+            <span class="qty">1 шт</span>
+            <span class="price">5 022 240 ₸</span>
+          </aside>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
