@@ -303,10 +303,15 @@
     .hero-headline .line {
       display: block;
       overflow: hidden;
+      padding-right: 0.08em;
+      margin-right: -0.08em;
+      padding-bottom: 0.04em;
+      margin-bottom: -0.04em;
     }
 
     .hero-headline .line-inner {
       display: block;
+      padding-right: 0.02em;
     }
 
     .hero-headline .lime { color: var(--accent); }
@@ -3617,7 +3622,12 @@
       duration: 1,
       ease: 'power4.out',
       stagger: 0.12,
-      delay: 0.3
+      delay: 0.3,
+      onComplete: () => {
+        document.querySelectorAll('.hero-headline .line').forEach(el => {
+          el.style.overflow = 'visible';
+        });
+      }
     });
 
     gsap.from('.hero-sub-mobile', { opacity: 0, y: 30, duration: 0.8, delay: 1 });
@@ -3944,6 +3954,9 @@ setTimeout(() => {
   document.querySelectorAll('.project-card, .srv-card, .stat, .price-card, .process-step, .cta-lime, .hero-label, .hero-headline, .hero-sub-mobile, .hero-ctas').forEach(el => {
     el.style.opacity = '1';
     el.style.transform = 'none';
+  });
+  document.querySelectorAll('.hero-headline .line').forEach(el => {
+    el.style.overflow = 'visible';
   });
 }, 2000);
 
