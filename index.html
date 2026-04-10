@@ -2286,51 +2286,107 @@
     @media (min-width: 1024px) {
       .hero,
       .hero-inner {
-        min-height: min(74vh, 760px);
+        min-height: min(76vh, 860px);
       }
 
       .hero-inner {
-        padding-top: clamp(76px, 8vh, 108px);
-        padding-bottom: clamp(30px, 4vh, 48px);
+        padding-top: clamp(58px, 7vh, 92px);
+        padding-bottom: clamp(44px, 5vh, 68px);
       }
 
       .hero-content {
         display: grid;
-        grid-template-columns: minmax(0, 560px) minmax(280px, 360px);
+        grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.74fr);
         justify-content: space-between;
         align-items: center;
-        gap: clamp(36px, 4vw, 72px);
-        max-width: 1120px;
+        gap: clamp(30px, 3.6vw, 64px);
+        max-width: min(100%, 1320px);
         margin-left: auto;
         margin-right: auto;
       }
 
       .hero-text {
-        max-width: 35rem;
+        max-width: min(100%, 46rem);
+      }
+
+      .hero-headline {
+        font-size: clamp(60px, 5.6vw, 110px);
+        margin-bottom: clamp(22px, 2vw, 30px);
+      }
+
+      .hero-label {
+        margin-bottom: 30px;
+      }
+
+      .hero-sub,
+      .hero-sub-mobile {
+        max-width: 36rem;
+        font-size: clamp(16px, 1.04vw, 18px);
+        line-height: 1.62;
+        margin-bottom: 26px;
+      }
+
+      .hero-ctas {
+        gap: 14px 16px;
+        margin-top: 24px;
+        margin-bottom: 32px;
+      }
+
+      .hero-trust {
+        max-width: 36rem;
+        font-size: clamp(12px, 0.84vw, 14px);
+        line-height: 1.72;
+      }
+
+      .hero-visual {
+        width: min(100%, 400px);
+        justify-self: end;
+        transform: translateY(-14px);
+      }
+
+      .circuit-svg {
+        max-width: clamp(300px, 24vw, 390px);
+        margin-top: 0;
+      }
+    }
+
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      .hero-inner {
+        padding-top: clamp(52px, 6.2vh, 74px);
+      }
+
+      .hero-content {
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 0.76fr);
+        gap: clamp(22px, 2.8vw, 36px);
+        max-width: 100%;
+      }
+
+      .hero-text {
+        max-width: none;
+      }
+
+      .hero-headline {
+        font-size: clamp(58px, 5.4vw, 78px);
       }
 
       .hero-sub,
       .hero-sub-mobile {
         max-width: 32rem;
-        font-size: clamp(16px, 1.08vw, 18px);
-        line-height: 1.6;
+        font-size: 16px;
         margin-bottom: 24px;
       }
 
       .hero-trust {
-        max-width: 34rem;
-        font-size: clamp(12px, 0.9vw, 14px);
-        line-height: 1.7;
+        max-width: 30rem;
       }
 
       .hero-visual {
-        width: min(100%, 360px);
-        justify-self: end;
+        width: min(100%, 340px);
+        transform: translateY(-8px);
       }
 
       .circuit-svg {
-        max-width: 320px;
-        margin-top: 0;
+        max-width: clamp(270px, 30vw, 340px);
       }
     }
 
