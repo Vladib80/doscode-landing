@@ -1,5 +1,27 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="8" fill="#0A0A0F"/>
-  <text x="4" y="24" font-family="sans-serif" font-weight="700" font-size="14" fill="#FFFFFF">D</text>
-  <text x="15" y="24" font-family="sans-serif" font-weight="700" font-size="14" fill="#00E676">C</text>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>DosCode DC Favicon</title>
+  <desc>Square DC favicon badge for DosCode.</desc>
+  <defs>
+    <radialGradient id="bgGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 512) rotate(90) scale(430)">
+      <stop stop-color="#1C2911"/>
+      <stop offset="0.58" stop-color="#0A0D0B"/>
+      <stop offset="1" stop-color="#070807"/>
+    </radialGradient>
+    <linearGradient id="stroke" x1="222" y1="224" x2="814" y2="796" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D6FF4A"/>
+      <stop offset="0.55" stop-color="#A4FF61"/>
+      <stop offset="1" stop-color="#22D3A7"/>
+    </linearGradient>
+    <filter id="surfaceGlow" x="70" y="70" width="884" height="884" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="56" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0.95  0 0 1 0 0.45  0 0 0 0.26 0"/>
+      <feBlend in="SourceGraphic" in2="blur" mode="screen"/>
+    </filter>
+  </defs>
+  <rect x="48" y="48" width="928" height="928" rx="196" fill="url(#bgGlow)"/>
+  <g filter="url(#surfaceGlow)" stroke="url(#stroke)" stroke-width="92" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M216 232V792"/>
+    <path d="M216 232H396C535 232 606 327 606 512C606 697 535 792 396 792H216"/>
+    <path d="M814 292C765 248 705 224 634 224C479 224 374 345 374 512C374 679 479 800 634 800C705 800 765 776 814 732"/>
+  </g>
 </svg>
