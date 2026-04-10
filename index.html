@@ -2237,6 +2237,11 @@
 
     /* Narrow desktop / large tablet: tame headline + rail before 1024px layout */
     @media (min-width: 901px) and (max-width: 1023px) {
+      .hero,
+      .hero-inner {
+        min-height: min(82vh, 720px);
+      }
+
       .hero-headline {
         font-size: clamp(40px, 5.4vw, 76px);
         margin-bottom: 24px;
@@ -2247,7 +2252,6 @@
       }
 
       .hero-inner {
-        min-height: min(82vh, 720px);
         padding-top: clamp(68px, 8.5vh, 100px);
       }
 
