@@ -330,6 +330,89 @@
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
+
+      .nav-inner {
+        padding-left: 16px;
+        padding-right: 16px;
+        gap: 10px;
+      }
+
+      .nav-cta {
+        padding: 8px 14px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      .nav-utility {
+        margin-left: 8px;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav-inner {
+        padding-left: 12px;
+        padding-right: 12px;
+        gap: 8px;
+      }
+
+      .nav-logo {
+        font-size: 20px;
+      }
+
+      .nav-cta {
+        padding: 7px 10px;
+        font-size: 11px;
+      }
+
+      .nav-utility {
+        gap: 6px;
+        margin-left: 6px;
+      }
+
+      .theme-toggle {
+        width: 50px;
+        height: 28px;
+        padding: 0 6px;
+      }
+
+      .theme-toggle-thumb {
+        width: 20px;
+        height: 20px;
+      }
+
+      html[data-theme="light"] .theme-toggle-thumb {
+        transform: translateX(22px);
+      }
+
+      .lang-switcher {
+        gap: 4px;
+      }
+
+      .lang-btn,
+      .lang-sep {
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .nav-inner {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-utility {
+        margin-left: auto;
+      }
+
+      .lang-btn,
+      .lang-sep {
+        font-size: 9px;
+      }
     }
 
     @media (min-width: 1024px) and (max-width: 1279px) {
@@ -441,6 +524,68 @@
 
     .hero-headline .lime { color: var(--accent); }
 
+    @media (max-width: 520px) {
+      .hero-inner {
+        padding-top: clamp(48px, 7vh, 72px);
+        padding-bottom: 24px;
+      }
+
+      .hero-label {
+        margin-bottom: 24px;
+        font-size: 11px;
+      }
+
+      .hero-headline {
+        font-size: clamp(38px, 12vw, 52px);
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+        margin-bottom: 22px;
+        max-width: 100%;
+      }
+
+      .hero-headline .line {
+        overflow: visible;
+        padding-right: 0;
+        margin-right: 0;
+        padding-bottom: 0.02em;
+        margin-bottom: 0;
+      }
+
+      .hero-headline .line-inner {
+        padding-right: 0;
+      }
+
+      .hero-sub {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 28px;
+        max-width: 100%;
+      }
+
+      .hero-ctas {
+        gap: 12px;
+        margin-top: 18px;
+        margin-bottom: 28px;
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        width: 100%;
+        justify-content: center;
+        padding: 15px 18px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero-headline {
+        font-size: 34px;
+      }
+
+      .hero-sub {
+        font-size: 15px;
+      }
+    }
+
     .hero-sub {
       font-size: 18px;
       color: var(--text-muted);
@@ -528,110 +673,301 @@
 
     /* ── BRIDGE SECTION ── */
     .bridge-section {
-      padding: clamp(36px, 5vw, 64px) clamp(20px, 4vw, 60px);
+      position: relative;
+      overflow: hidden;
+      padding: clamp(44px, 6vw, 84px) clamp(20px, 4vw, 60px);
       border-top: 1px solid var(--border-soft);
       border-bottom: 1px solid var(--border-soft);
-      background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.05) 0%, rgba(var(--accent-rgb), 0.015) 100%);
+      background:
+        radial-gradient(circle at 8% 18%, rgba(var(--accent-rgb), 0.15), transparent 24%),
+        radial-gradient(circle at 88% 16%, rgba(var(--accent-rgb), 0.08), transparent 20%),
+        linear-gradient(180deg, rgba(var(--accent-rgb), 0.075) 0%, rgba(var(--accent-rgb), 0.02) 48%, rgba(var(--accent-rgb), 0.04) 100%);
+    }
+
+    .bridge-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(var(--accent-rgb), 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--accent-rgb), 0.06) 1px, transparent 1px);
+      background-size: 120px 120px;
+      opacity: 0.18;
+      pointer-events: none;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.75), transparent 100%);
+    }
+
+    .bridge-section::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      right: clamp(22px, 5vw, 56px);
+      top: clamp(20px, 3vw, 34px);
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 8px rgba(var(--accent-rgb), 0.1), 0 0 32px rgba(var(--accent-rgb), 0.28);
+      pointer-events: none;
     }
 
     .bridge-inner {
+      position: relative;
+      z-index: 1;
       max-width: 1360px;
       margin: 0 auto;
       display: grid;
       gap: 28px;
-      align-items: start;
+      align-items: stretch;
+    }
+
+    .bridge-left {
+      position: relative;
+      padding: clamp(26px, 3vw, 38px);
+      border: 1px solid var(--border-medium);
+      background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.08), rgba(var(--accent-rgb), 0.02));
+      box-shadow: var(--shadow-inverse);
+      isolation: isolate;
+    }
+
+    .bridge-left::before {
+      content: '';
+      position: absolute;
+      left: clamp(18px, 2vw, 28px);
+      top: clamp(18px, 2vw, 28px);
+      bottom: clamp(18px, 2vw, 28px);
+      width: 1px;
+      background: linear-gradient(180deg, var(--accent), transparent 85%);
+      opacity: 0.55;
+    }
+
+    .bridge-left > * {
+      position: relative;
+      z-index: 1;
+      margin-left: clamp(16px, 2vw, 26px);
     }
 
     .bridge-kicker {
-      display: inline-block;
-      margin-bottom: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
       font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent);
+      opacity: 0.92;
+    }
+
+    .bridge-kicker::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.7;
     }
 
     .bridge-title {
       font-family: var(--font-display);
       font-weight: 900;
-      font-size: clamp(30px, 4vw, 52px);
-      line-height: 0.96;
-      letter-spacing: -0.04em;
-      max-width: 10ch;
-      margin-bottom: 16px;
+      font-size: clamp(34px, 4.8vw, 64px);
+      line-height: 0.94;
+      letter-spacing: -0.045em;
+      max-width: 8.5ch;
+      margin-bottom: 18px;
     }
 
     .bridge-copy {
-      max-width: 58ch;
+      max-width: 54ch;
       color: var(--text-dim);
-      font-size: clamp(16px, 1.5vw, 19px);
-      line-height: 1.6;
+      font-size: clamp(16px, 1.45vw, 19px);
+      line-height: 1.72;
     }
 
     .bridge-right {
       display: grid;
-      gap: 18px;
+    }
+
+    .bridge-board {
+      position: relative;
+      display: grid;
+      gap: 20px;
+      min-height: 100%;
+      padding: clamp(22px, 2.2vw, 28px);
+      border: 1px solid var(--border-medium);
+      background:
+        linear-gradient(135deg, rgba(var(--accent-rgb), 0.08), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      box-shadow: var(--shadow-inverse);
+      isolation: isolate;
+    }
+
+    .bridge-board::before {
+      content: '';
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(var(--accent-rgb), 0.12);
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    .bridge-board-label {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .bridge-board-label::before {
+      content: '04';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 28px;
+      padding: 0 8px;
+      border: 1px solid rgba(var(--accent-rgb), 0.18);
+      color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.06);
     }
 
     .bridge-list {
+      counter-reset: bridge-items;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 14px;
       list-style: none;
+      position: relative;
+      z-index: 1;
     }
 
     .bridge-list li {
       position: relative;
       min-height: 100%;
-      padding: 18px 18px 18px 42px;
+      padding: 22px 18px 18px 68px;
       border: 1px solid var(--border-medium);
-      background: var(--surface-tint);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
       color: var(--text);
       font-size: 15px;
-      line-height: 1.5;
+      line-height: 1.55;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      cursor: pointer;
     }
 
     .bridge-list li::before {
-      content: '→';
+      counter-increment: bridge-items;
+      content: '0' counter(bridge-items);
       position: absolute;
-      left: 18px;
-      top: 18px;
+      left: 16px;
+      top: 16px;
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(var(--accent-rgb), 0.2);
+      background: rgba(var(--accent-rgb), 0.08);
       color: var(--accent);
-      font-family: var(--font-display);
-      font-size: 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
       line-height: 1;
+    }
+
+    .bridge-list li::after {
+      content: '';
+      position: absolute;
+      left: 68px;
+      right: 18px;
+      top: 16px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.22), transparent 72%);
+      opacity: 0.8;
+    }
+
+    .bridge-list li:hover {
+      border-color: rgba(var(--accent-rgb), 0.32);
+      background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.11), rgba(255,255,255,0.02));
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+    }
+
+    .bridge-actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      padding-top: 4px;
     }
 
     .bridge-cta {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       width: fit-content;
+      min-height: 52px;
       padding: 14px 22px;
       border: 1px solid var(--accent);
+      background: rgba(var(--accent-rgb), 0.06);
       color: var(--accent);
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-size: 13px;
-      transition: background 0.25s ease, color 0.25s ease;
+      transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
       cursor: pointer;
     }
 
     .bridge-cta:hover {
       background: var(--accent);
       color: var(--accent-contrast);
+      box-shadow: var(--shadow-raise);
     }
 
     @media (min-width: 900px) {
       .bridge-inner {
-        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-        gap: 40px;
+        grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
+        gap: 34px;
       }
 
       .bridge-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .bridge-left > * {
+        margin-left: 18px;
+      }
+
+      .bridge-board::before {
+        inset: 10px;
+      }
+
+      .bridge-list li {
+        padding: 20px 16px 16px 62px;
+      }
+
+      .bridge-list li::before {
+        left: 14px;
+        top: 14px;
+        width: 32px;
+        height: 32px;
+      }
+
+      .bridge-list li::after {
+        left: 62px;
+        right: 16px;
       }
     }
 
@@ -3556,18 +3892,23 @@
 <section class="bridge-section">
   <div class="bridge-inner">
     <div class="bridge-left">
-      <span class="bridge-kicker" data-i18n="bridge.kicker">Шұғыл іске қосудан бөлек</span>
+      <span class="bridge-kicker" data-i18n="bridge.kicker">Шұғыл жобалардан бөлек</span>
       <h2 class="bridge-title" data-i18n="bridge.title">Тек лендинг емес</h2>
-      <p class="bridge-copy" data-i18n="bridge.copy">Бізге тек тез іске қосу үшін ғана емес, басқа да күрделі жобалармен келеді. Telegram-боттар, AI-автоматтандыру, MVP және бизнеске арналған ішкі жүйелер жасаймыз. Егер сізге жай сайт емес, кеңірек шешім керек болса, ол да біздің жұмыс. Міндетті қарап, нәтижеге апаратын ең жылдам ақылға қонымды жолды айтамыз.</p>
+      <p class="bridge-copy" data-i18n="bridge.copy">Бізге тек тез іске қосу үшін ғана келмейді. Біз Telegram-боттар, AI-автоматтандыру, MVP және бизнеске арналған ішкі жүйелер де жасаймыз. Егер міндет кәдімгі сайттан күрделірек болса, ол да бізге келеді. Міндетке байыппен қарап, нәтижеге апаратын ең жылдам дұрыс жолды ұсынамыз.</p>
     </div>
     <div class="bridge-right">
-      <ul class="bridge-list">
-        <li data-i18n="bridge.item1">Сату, тапсырыс және қолдау үшін Telegram-боттар</li>
-        <li data-i18n="bridge.item2">Күнделікті жұмыс пен ішкі процестерді AI-автоматтандыру</li>
-        <li data-i18n="bridge.item3">Нөлден MVP және веб-қосымшалар</li>
-        <li data-i18n="bridge.item4">Кабинеттер, дашбордтар және ішкі жүйелер</li>
-      </ul>
-      <a href="https://t.me/doscode_kz" class="bridge-cta" target="_blank" rel="noopener noreferrer" data-i18n="bridge.cta">Міндетті талқылау →</a>
+      <div class="bridge-board">
+        <span class="bridge-board-label" data-i18n="bridge.boardLabel">Не іске қосамыз</span>
+        <ul class="bridge-list">
+          <li data-i18n="bridge.item1">Сату, тапсырыс және қолдау үшін Telegram-боттар</li>
+          <li data-i18n="bridge.item2">Күнделікті жұмыс пен ішкі процестерге AI-автоматтандыру</li>
+          <li data-i18n="bridge.item3">Нөлден MVP және веб-қосымшалар</li>
+          <li data-i18n="bridge.item4">Кабинеттер, дашбордтар және ішкі жүйелер</li>
+        </ul>
+        <div class="bridge-actions">
+          <a href="https://t.me/doscode_kz" class="bridge-cta" target="_blank" rel="noopener noreferrer" data-i18n="bridge.cta">Міндетті талқылау →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -4797,6 +5138,7 @@ var TRANSLATIONS = {
       kicker: 'Кроме срочных запусков',
       title: 'Не только лендинги',
       copy: 'К нам приходят не только за быстрым запуском. Мы также делаем Telegram-ботов, AI-автоматизацию, MVP и внутренние системы для бизнеса. Если задача сложнее обычного сайта, это тоже к нам. Смотрим на задачу трезво и предлагаем самый быстрый разумный путь к результату.',
+      boardLabel: 'Что запускаем',
       item1: 'Telegram-боты для продаж, заказов и поддержки',
       item2: 'AI-автоматизация рутины и внутренних процессов',
       item3: 'MVP и веб-приложения с нуля',
@@ -4882,11 +5224,12 @@ var TRANSLATIONS = {
       priceNote: 'бастапқы баға', btn: 'Лендингті талқылау'
     },
     bridge: {
-      kicker: 'Шұғыл іске қосудан бөлек',
+      kicker: 'Шұғыл жобалардан бөлек',
       title: 'Тек лендинг емес',
-      copy: 'Бізге тек тез іске қосу үшін ғана емес, басқа да күрделі жобалармен келеді. Telegram-боттар, AI-автоматтандыру, MVP және бизнеске арналған ішкі жүйелер жасаймыз. Егер сізге жай сайт емес, кеңірек шешім керек болса, ол да біздің жұмыс. Міндетті қарап, нәтижеге апаратын ең жылдам ақылға қонымды жолды айтамыз.',
+      copy: 'Бізге тек тез іске қосу үшін ғана келмейді. Біз Telegram-боттар, AI-автоматтандыру, MVP және бизнеске арналған ішкі жүйелер де жасаймыз. Егер міндет кәдімгі сайттан күрделірек болса, ол да бізге келеді. Міндетке байыппен қарап, нәтижеге апаратын ең жылдам дұрыс жолды ұсынамыз.',
+      boardLabel: 'Не іске қосамыз',
       item1: 'Сату, тапсырыс және қолдау үшін Telegram-боттар',
-      item2: 'Күнделікті жұмыс пен ішкі процестерді AI-автоматтандыру',
+      item2: 'Күнделікті жұмыс пен ішкі процестерге AI-автоматтандыру',
       item3: 'Нөлден MVP және веб-қосымшалар',
       item4: 'Кабинеттер, дашбордтар және ішкі жүйелер',
       cta: 'Міндетті талқылау →'
@@ -4972,12 +5315,13 @@ var TRANSLATIONS = {
     bridge: {
       kicker: 'Beyond urgent launches',
       title: 'Not just landing pages',
-      copy: 'Clients come to us not only for fast launches. We also build Telegram bots, AI automations, MVPs, and internal systems for business. If your project is bigger than a typical website, that is still our lane. We look at the task soberly and suggest the fastest sensible path to a real result.',
+      copy: 'Clients come to us not only for fast launches. We also build Telegram bots, AI automation, MVPs, and internal systems for business. If the task is more complex than a regular website, that is still our lane. We look at the problem soberly and suggest the fastest sensible path to a result.',
+      boardLabel: 'What we launch',
       item1: 'Telegram bots for sales, orders, and support',
-      item2: 'AI automation for repetitive work and internal operations',
-      item3: 'MVPs and web apps built from scratch',
-      item4: 'Portals, dashboards, and internal business systems',
-      cta: 'Discuss your project →'
+      item2: 'AI automation for repetitive work and internal processes',
+      item3: 'MVPs and web apps from scratch',
+      item4: 'Portals, dashboards, and internal systems',
+      cta: 'Discuss the task →'
     },
     stats: { projects: 'Projects launched', years: 'Years of experience', mvp: 'Average MVP', free: 'Free estimate' },
     projects: {
