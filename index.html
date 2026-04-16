@@ -66,7 +66,7 @@
       --bg: #080808;
       --bg-2: #111;
       --text: #F0EBE1;
-      --text-muted: #aaa;
+      --text-muted: #b5b8c2;
       --accent: #C8FF00;
       --accent-rgb: 200, 255, 0;
       --accent-contrast: #080808;
@@ -79,9 +79,13 @@
       --border-soft: rgba(240, 235, 225, 0.06);
       --border-medium: rgba(240, 235, 225, 0.08);
       --border-strong: rgba(240, 235, 225, 0.12);
-      --text-dim: rgba(240, 235, 225, 0.75);
-      --text-faint: rgba(240, 235, 225, 0.45);
+      --text-dim: rgba(240, 235, 225, 0.84);
+      --text-faint: rgba(240, 235, 225, 0.58);
       --text-hairline: rgba(240, 235, 225, 0.2);
+      --surface-1: rgba(255, 255, 255, 0.028);
+      --surface-2: rgba(255, 255, 255, 0.04);
+      --surface-border: rgba(240, 235, 225, 0.09);
+      --card-radius: 18px;
       --accent-soft: rgba(var(--accent-rgb), 0.08);
       --accent-soft-2: rgba(var(--accent-rgb), 0.05);
       --accent-soft-3: rgba(var(--accent-rgb), 0.04);
@@ -126,9 +130,12 @@
       --border-soft: rgba(23, 21, 16, 0.09);
       --border-medium: rgba(23, 21, 16, 0.14);
       --border-strong: rgba(23, 21, 16, 0.2);
-      --text-dim: rgba(23, 21, 16, 0.78);
-      --text-faint: rgba(23, 21, 16, 0.58);
+      --text-dim: rgba(23, 21, 16, 0.82);
+      --text-faint: rgba(23, 21, 16, 0.62);
       --text-hairline: rgba(23, 21, 16, 0.18);
+      --surface-1: rgba(255, 255, 255, 0.62);
+      --surface-2: rgba(255, 255, 255, 0.78);
+      --surface-border: rgba(23, 21, 16, 0.1);
       --accent-soft: rgba(var(--accent-rgb), 0.12);
       --accent-soft-2: rgba(var(--accent-rgb), 0.1);
       --accent-soft-3: rgba(var(--accent-rgb), 0.08);
@@ -1054,6 +1061,59 @@
       margin-bottom: clamp(28px, 3vw, 40px);
     }
 
+    .section-header {
+      display: grid;
+      gap: 16px;
+      margin-bottom: clamp(28px, 3vw, 42px);
+      align-items: end;
+    }
+
+    .section-header--split {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: clamp(20px, 3vw, 44px);
+    }
+
+    .section-header--center {
+      justify-items: center;
+      text-align: center;
+    }
+
+    .section-header .section-title {
+      margin-bottom: 0;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.86;
+    }
+
+    .section-kicker::before {
+      content: '';
+      width: 18px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.55;
+    }
+
+    .section-intro {
+      max-width: 46ch;
+      font-size: clamp(15px, 1.15vw, 18px);
+      line-height: 1.72;
+      color: var(--text-dim);
+    }
+
+    .section-header--center .section-intro {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     @media (min-width: 1024px) {
       .nav-inner,
       .hero-inner,
@@ -1090,18 +1150,24 @@
       }
     }
 
+    @media (max-width: 900px) {
+      .section-header--split {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ── PROJECTS ── */
     .projects-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 48px;
+      gap: 22px;
       max-width: 100%;
     }
 
     @media (min-width: 1024px) {
       .projects-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: clamp(22px, 2.2vw, 32px);
+        gap: clamp(18px, 1.7vw, 26px);
       }
 
       .project-info {
@@ -1124,58 +1190,62 @@
 
     .project-card {
       position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 100%;
+      padding: 18px;
+      border-radius: var(--card-radius);
+      border: 1px solid var(--surface-border);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)),
+        var(--bg-2);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .project-card--featured {
+      border-color: var(--accent-border-strong);
+      box-shadow: 0 18px 48px rgba(var(--accent-rgb), 0.12);
     }
 
     /* Result headline */
     .project-result {
       font-family: var(--font-display);
       font-weight: 900;
-      font-size: clamp(32px, 4vw, 52px);
+      font-size: clamp(30px, 3.4vw, 48px);
       color: var(--accent);
       line-height: 1;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
       letter-spacing: -0.02em;
     }
     .project-result span {
+      max-width: 24ch;
       font-size: 0.45em;
-      color: var(--text-muted);
+      color: var(--text-dim);
       font-weight: 500;
       display: block;
-      margin-top: 4px;
+      margin-top: 10px;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       font-family: var(--font-mono);
     }
 
-    /* Metrics strip */
-    .project-metrics {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-      padding: 12px 0;
-      border-top: 1px solid var(--border-medium);
-      border-bottom: 1px solid var(--border-medium);
-    }
-    .pm-item {
+    .project-meta {
       font-family: var(--font-mono);
       font-size: 12px;
       color: var(--text-muted);
-    }
-    .pm-val {
-      color: var(--accent);
-      font-weight: 700;
-    }
-    .pm-sep {
-      color: var(--text-hairline);
-      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.65;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border-medium);
     }
 
     .project-num {
       position: absolute;
       top: 16px;
-      right: 20px;
+      right: 18px;
       font-family: var(--font-mono);
       font-size: 13px;
       color: var(--text-muted);
@@ -1183,7 +1253,7 @@
     }
 
     .project-info {
-      margin-top: 20px;
+      margin-top: 0;
     }
 
     .project-name {
@@ -1194,8 +1264,10 @@
     }
 
     .project-desc {
+      max-width: 34ch;
       font-size: 15px;
-      color: var(--text-muted);
+      color: var(--text-dim);
+      line-height: 1.68;
       margin-bottom: 12px;
     }
 
@@ -1203,15 +1275,17 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
+      margin-bottom: 6px;
     }
 
     .project-tag {
       font-family: var(--font-mono);
       font-size: 11px;
-      color: var(--accent);
-      padding: 4px 10px;
-      border: 1px solid var(--accent-border);
-      border-radius: 2px;
+      color: var(--text-dim);
+      padding: 6px 10px;
+      border: 1px solid var(--border-medium);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
     }
 
     /* ── SERVICES REDESIGN ── */
@@ -1297,8 +1371,13 @@
     }
 
     .srv-card {
-      background: var(--bg-2);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.032), rgba(255, 255, 255, 0.015)),
+        var(--bg-2);
       padding: 28px;
+      border-radius: var(--card-radius);
+      border: 1px solid var(--surface-border);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.14);
       transition: background 0.3s;
       position: relative;
       overflow: hidden;
@@ -1317,6 +1396,13 @@
 
     .srv-card:hover { background: var(--accent-soft-3); }
     .srv-card:hover::before { transform: scaleX(1); }
+
+    .srv-card--featured {
+      border-color: var(--accent-border);
+      background:
+        linear-gradient(180deg, rgba(var(--accent-rgb), 0.08), rgba(255, 255, 255, 0.02) 45%),
+        var(--bg-2);
+    }
 
     .srv-card-top {
       display: flex;
@@ -1355,8 +1441,8 @@
     .srv-desc {
       font-family: var(--font-body);
       font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
+      color: var(--text-dim);
+      line-height: 1.68;
       margin-bottom: 16px;
     }
 
@@ -1370,10 +1456,11 @@
     .srv-list li {
       font-family: var(--font-mono);
       font-size: 11px;
-      color: var(--text-faint);
+      color: var(--text-dim);
       padding-left: 14px;
       position: relative;
       letter-spacing: 0.03em;
+      line-height: 1.55;
     }
 
     .srv-list li::before {
@@ -1476,7 +1563,7 @@
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
+      gap: 12px;
       width: 100%;
     }
 
@@ -1488,15 +1575,22 @@
     }
 
     .price-card {
-      background: var(--bg-2);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.032), rgba(255, 255, 255, 0.015)),
+        var(--bg-2);
       padding: clamp(32px, 4vw, 48px);
       display: flex;
       flex-direction: column;
       position: relative;
+      gap: 14px;
+      border-radius: var(--card-radius);
+      border: 1px solid var(--surface-border);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.14);
     }
 
     .price-card.featured {
       border: 1px solid var(--accent);
+      box-shadow: 0 22px 48px rgba(var(--accent-rgb), 0.14);
     }
 
     .price-name {
@@ -1519,15 +1613,41 @@
       font-family: var(--font-mono);
       font-size: 13px;
       color: var(--text-muted);
-      margin-bottom: 20px;
+      margin-bottom: 4px;
     }
 
     .price-desc {
       font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 32px;
+      color: var(--text-dim);
+      line-height: 1.68;
+      margin-bottom: 6px;
+    }
+
+    .price-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin: 2px 0 12px;
       flex: 1;
+    }
+
+    .price-list li {
+      position: relative;
+      padding-left: 18px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.55;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .price-list li::before {
+      content: '•';
+      position: absolute;
+      left: 4px;
+      top: 0;
+      color: var(--accent);
     }
 
     .price-btn {
@@ -1541,6 +1661,7 @@
       border: 1px solid var(--border-strong);
       color: var(--text);
       background: transparent;
+      border-radius: 999px;
       transition: border-color 0.3s, background 0.3s, color 0.3s;
     }
 
@@ -1561,6 +1682,16 @@
 
     @media (max-width: 768px) {
       .pricing-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
+
+    .pricing-note {
+      margin-top: 18px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.6;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
 
     /* ── CTA LIME ── */
@@ -1936,11 +2067,103 @@
       }
     }
 
+    /* ── CAPABILITY BRIDGE ── */
+    .bridge-section {
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+      padding: clamp(52px, 7vw, 84px) clamp(20px, 4vw, 60px);
+      background:
+        linear-gradient(180deg, rgba(var(--accent-rgb), 0.035), transparent 65%),
+        rgba(255, 255, 255, 0.01);
+    }
+
+    .bridge-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: clamp(28px, 4vw, 56px);
+      align-items: start;
+    }
+
+    .bridge-copy {
+      display: grid;
+      gap: 16px;
+    }
+
+    .bridge-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+    }
+
+    .bridge-sub {
+      max-width: 44ch;
+      font-size: clamp(15px, 1.15vw, 18px);
+      line-height: 1.75;
+      color: var(--text-dim);
+    }
+
+    .bridge-cta {
+      width: fit-content;
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--accent-border);
+    }
+
+    .bridge-cta:hover {
+      border-color: var(--accent);
+    }
+
+    .bridge-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .bridge-item {
+      min-height: 100%;
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--surface-border);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015)),
+        var(--bg-2);
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-dim);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .bridge-item::before {
+      content: '→';
+      display: inline-block;
+      margin-right: 10px;
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+
+    @media (max-width: 900px) {
+      .bridge-inner,
+      .bridge-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ── PROJECT GALLERY ── */
     .project-gallery {
       position: relative;
       overflow: hidden;
-      border-radius: 4px;
+      border-radius: 14px;
       height: 380px;
       background: var(--bg-2);
       border: 1px solid var(--accent-line-soft);
@@ -2029,7 +2252,7 @@
     .testimonials-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
+      gap: 12px;
     }
 
     @media (max-width: 1023px) and (min-width: 769px) {
@@ -2040,13 +2263,18 @@
     }
 
     .testi-card {
-      background: var(--bg-2);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.032), rgba(255, 255, 255, 0.015)),
+        var(--bg-2);
       padding: clamp(28px, 3vw, 40px);
       display: flex;
       flex-direction: column;
       gap: 20px;
       transition: background 0.3s;
       position: relative;
+      border: 1px solid var(--surface-border);
+      border-radius: var(--card-radius);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.14);
     }
 
     .testi-card:hover { background: var(--accent-soft-4); }
@@ -2054,6 +2282,15 @@
     .testi-card--featured {
       background: var(--accent-soft-2);
       border: 1px solid var(--accent-border);
+    }
+
+    .testi-kicker {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.9;
     }
 
     .testi-stars {
@@ -2299,22 +2536,30 @@
 
     /* ── FAQ ── */
     .faq-list {
-      max-width: 800px;
+      max-width: 820px;
       display: flex;
       flex-direction: column;
-      border-top: 1px solid var(--border-strong);
+      gap: 10px;
     }
 
     .faq-item {
-      border-bottom: 1px solid var(--border-strong);
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.026), rgba(255, 255, 255, 0.012)),
+        rgba(255, 255, 255, 0.01);
       display: grid;
       grid-template-rows: auto 0fr;
-      transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, background 0.3s ease;
     }
 
     .faq-item:has(.faq-a.open),
     .faq-item.faq-item--open {
       grid-template-rows: auto 1fr;
+      border-color: var(--accent-border);
+      background:
+        linear-gradient(180deg, rgba(var(--accent-rgb), 0.07), rgba(255, 255, 255, 0.015) 48%),
+        rgba(255, 255, 255, 0.015);
     }
 
     .faq-q {
@@ -2323,7 +2568,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 20px;
-      padding: 24px 0;
+      padding: 24px 24px 20px;
       background: none;
       border: none;
       cursor: pointer;
@@ -2358,34 +2603,34 @@
     }
 
     .faq-a.open {
-      padding-bottom: 24px;
+      padding: 0 24px 24px;
     }
 
     .faq-a p {
       font-family: var(--font-body);
       font-size: clamp(14px, 1.1vw, 16px);
-      color: var(--text);
-      opacity: 0.75;
-      line-height: 1.75;
+      color: var(--text-dim);
+      line-height: 1.8;
     }
 
     /* ── PROJECT LINK BUTTON ── */
     .project-link {
       display: inline-block;
-      margin-top: 16px;
+      margin-top: 4px;
       font-family: var(--font-mono);
       font-size: 12px;
-      color: var(--accent);
+      color: var(--text);
       text-decoration: none;
-      border: 1px solid var(--accent-border-strong);
-      padding: 8px 16px;
-      border-radius: 2px;
+      border: 1px solid var(--border-strong);
+      padding: 10px 16px;
+      border-radius: 999px;
       letter-spacing: 0.05em;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
     }
     .project-link:hover {
       background: var(--accent-soft);
       border-color: var(--accent);
+      color: var(--accent);
     }
 
     /* ── LIGHTBOX ── */
@@ -3062,6 +3307,63 @@
       }
     }
 
+    @media (max-width: 640px) {
+      .hero-inner {
+        padding-top: 92px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 24px;
+      }
+
+      .hero-label {
+        margin-bottom: 24px;
+        font-size: 11px;
+      }
+
+      .hero-headline {
+        max-width: 8.5ch;
+        font-size: clamp(38px, 13vw, 54px);
+        line-height: 0.92;
+        margin-bottom: 22px;
+      }
+
+      .hero-headline .line {
+        padding-right: 0;
+        margin-right: 0;
+      }
+
+      .hero-headline .line-inner {
+        padding-right: 0;
+      }
+
+      .hero-sub-mobile {
+        max-width: 19rem;
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 18px;
+      }
+
+      .hero-ctas {
+        gap: 10px;
+        margin-top: 18px;
+        margin-bottom: 26px;
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        width: 100%;
+        justify-content: center;
+        padding: 15px 18px;
+        font-size: 14px;
+      }
+
+      .hero-trust {
+        max-width: 22rem;
+        font-size: 12px;
+        line-height: 1.75;
+      }
+    }
+
     /* ── FALLBACK IMAGE ── */
     img.broken {
       display: block;
@@ -3248,6 +3550,40 @@
       .theme-toggle { width:52px; height:28px; padding:0 6px; }
       .theme-toggle-thumb { width:20px; height:20px; }
       html[data-theme="light"] .theme-toggle-thumb { transform: translateX(24px); }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        padding-left: 12px;
+        padding-right: 12px;
+        gap: 8px;
+      }
+
+      .nav-logo {
+        flex-shrink: 0;
+        font-size: 20px;
+      }
+
+      .nav-cta {
+        padding: 8px 12px;
+        font-size: 11px;
+        line-height: 1.2;
+        max-width: 142px;
+      }
+
+      .nav-utility {
+        margin-left: 0;
+        gap: 6px;
+      }
+
+      .lang-switcher {
+        gap: 4px;
+      }
+
+      .lang-btn {
+        font-size: 10px;
+        letter-spacing: 0.08em;
+      }
     }
 
     /* ── Desktop: pricing / FAQ / CTA / footer (Task 4) ── */
@@ -3613,7 +3949,7 @@
     </ul>
     <a href="https://t.me/doscode_kz" class="nav-cta" target="_blank" rel="noopener noreferrer" data-i18n="nav.cta">Обсудить проект&nbsp;→</a>
     <div class="nav-utility">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme" aria-pressed="false" title="Toggle color theme">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить на светлую тему" aria-pressed="false" title="Переключить на светлую тему">
         <span class="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true">
           <svg viewBox="0 0 16 16">
             <path d="M11.9 10.4A5.7 5.7 0 1 1 5.6 4.1 4.6 4.6 0 0 0 11.9 10.4Z"/>
@@ -3859,7 +4195,7 @@
     <div class="fo-content">
       <div class="fo-left">
         <div class="fo-badge" data-i18n="offer.badge">⚡ СРОЧНЫЙ ЛЕНДИНГ</div>
-        <h2 class="fo-title"><span data-i18n="offer.title1">Лендинг</span><br>за <span class="fo-title-highlight" data-i18n="offer.title2">48 часов</span></h2>
+        <h2 class="fo-title" data-i18n="offer.title">Лендинг<br><span class="fo-title-highlight">за 48 часов</span></h2>
         <p class="fo-sub" data-i18n="offer.sub">Первый макет через 3–4 часа после обращения. Запуск за 48 часов, если контент готов.</p>
         <p class="fo-guarantee-inline" data-i18n="offer.guarantee">Не понравится — не платите.</p>
       </div>
@@ -3917,19 +4253,19 @@
 <section class="stats">
   <div class="stats-grid">
     <div class="stat">
-      <div class="stat-number" data-target="40" data-suffix="+">40+</div>
+      <div class="stat-number" data-i18n="stats.projectsValue">40+</div>
       <div class="stat-label" data-i18n="stats.projects">Проектов запущено</div>
     </div>
     <div class="stat">
-      <div class="stat-number" data-target="5" data-suffix="">5</div>
+      <div class="stat-number" data-i18n="stats.yearsValue">5</div>
       <div class="stat-label" data-i18n="stats.years">Лет опыта</div>
     </div>
     <div class="stat">
-      <div class="stat-number" data-target="4" data-suffix=" нед">4 нед</div>
+      <div class="stat-number" data-i18n="stats.mvpValue">4 нед</div>
       <div class="stat-label" data-i18n="stats.mvp">Средний MVP</div>
     </div>
     <div class="stat">
-      <div class="stat-number" data-target="24" data-suffix="ч">24ч</div>
+      <div class="stat-number" data-i18n="stats.freeValue">24ч</div>
       <div class="stat-label" data-i18n="stats.free">Оценка бесплатно</div>
     </div>
   </div>
@@ -3937,11 +4273,17 @@
 
 <!-- PROJECTS -->
 <section class="section" id="projects">
-  <h2 class="section-title" data-i18n="projects.title">КЕЙСЫ</h2>
+  <div class="section-header section-header--split">
+    <div>
+      <span class="section-kicker" data-i18n="projects.kicker">Результаты и запуски</span>
+      <h2 class="section-title" data-i18n="projects.title">КЕЙСЫ</h2>
+    </div>
+    <p class="section-intro" data-i18n="projects.intro">Показываем не только интерфейс, а то, что удалось запустить и какой бизнес-эффект это дало.</p>
+  </div>
   <div class="projects-grid">
 
     <!-- DOSPASS -->
-    <article class="project-card">
+    <article class="project-card project-card--featured">
       <div class="project-gallery" data-gallery>
         <div class="gallery-track">
           <img src="/screenshots/dospass.jpg" alt="DosPass" loading="lazy">
@@ -3950,21 +4292,16 @@
           <img src="/screenshots/dospass4.png" alt="DosPass 4" loading="lazy">
           <img src="/screenshots/dosspass1.png" alt="DosPass 5" loading="lazy">
         </div>
-        <button class="gallery-btn gallery-btn--prev" aria-label="Назад">&#8592;</button>
-        <button class="gallery-btn gallery-btn--next" aria-label="Вперёд">&#8594;</button>
+        <button class="gallery-btn gallery-btn--prev" aria-label="Назад" data-i18n-aria-label="ui.prev">&#8592;</button>
+        <button class="gallery-btn gallery-btn--next" aria-label="Вперёд" data-i18n-aria-label="ui.next">&#8594;</button>
         <div class="gallery-dots"></div>
         <span class="project-num">01</span>
       </div>
       <div class="project-info">
+        <div class="project-result" data-i18n="projects.dospass.result">6 НЕД<span>от идеи до запуска SaaS в UAE</span></div>
         <h3 class="project-name">DosPass</h3>
         <p class="project-desc" data-i18n="projects.dospass.desc">Запустили SaaS-платформу лояльности для малого бизнеса: электронные карты, подарочные карты, реферальная механика и AI-маркетинг. От идеи до рабочего продукта и запусков на рынке ОАЭ.</p>
-        <div class="project-metrics">
-          <span class="pm-item" data-i18n="projects.dospass.metric1">6 нед до запуска</span>
-          <span class="pm-sep">·</span>
-          <span class="pm-item" data-i18n="projects.dospass.metric2">Loyalty SaaS</span>
-          <span class="pm-sep">·</span>
-          <span class="pm-item" data-i18n="projects.dospass.metric3">UAE рынок</span>
-        </div>
+        <p class="project-meta" data-i18n="projects.dospass.meta">Loyalty SaaS · UAE рынок · AI marketing</p>
         <div class="project-tags">
           <span class="project-tag">React</span>
           <span class="project-tag">Node.js</span>
@@ -3982,21 +4319,16 @@
           <img src="/screenshots/voiceclaw2.png" alt="VoiceClaw 2" loading="lazy">
           <img src="/screenshots/voiceclaw3.png" alt="VoiceClaw 3" loading="lazy">
         </div>
-        <button class="gallery-btn gallery-btn--prev" aria-label="Назад">&#8592;</button>
-        <button class="gallery-btn gallery-btn--next" aria-label="Вперёд">&#8594;</button>
+        <button class="gallery-btn gallery-btn--prev" aria-label="Назад" data-i18n-aria-label="ui.prev">&#8592;</button>
+        <button class="gallery-btn gallery-btn--next" aria-label="Вперёд" data-i18n-aria-label="ui.next">&#8594;</button>
         <div class="gallery-dots"></div>
         <span class="project-num">02</span>
       </div>
       <div class="project-info">
+        <div class="project-result" data-i18n="projects.doschat.result">NO APP<span>voice AI from phone and laptop</span></div>
         <h3 class="project-name">VoiceClaw</h3>
         <p class="project-desc" data-i18n="projects.doschat.desc">Собрали голосовой AI-интерфейс для Claude, GPT и локальных моделей. Пользователь может говорить с AI с телефона и ноутбука без отдельного приложения и сложной настройки.</p>
-        <div class="project-metrics">
-          <span class="pm-item" data-i18n="projects.doschat.metric1">Voice AI</span>
-          <span class="pm-sep">·</span>
-          <span class="pm-item" data-i18n="projects.doschat.metric2">Phone + laptop</span>
-          <span class="pm-sep">·</span>
-          <span class="pm-item" data-i18n="projects.doschat.metric3">No app</span>
-        </div>
+        <p class="project-meta" data-i18n="projects.doschat.meta">Voice AI · Phone + laptop · Claude / GPT</p>
         <div class="project-tags">
           <span class="project-tag">Voice</span>
           <span class="project-tag">AI</span>
@@ -4012,21 +4344,16 @@
         <div class="gallery-track">
           <img src="/screenshots/chicagopizza.jpg" alt="Chicago Pizza" loading="lazy">
         </div>
-        <button class="gallery-btn gallery-btn--prev" aria-label="Назад">&#8592;</button>
-        <button class="gallery-btn gallery-btn--next" aria-label="Вперёд">&#8594;</button>
+        <button class="gallery-btn gallery-btn--prev" aria-label="Назад" data-i18n-aria-label="ui.prev">&#8592;</button>
+        <button class="gallery-btn gallery-btn--next" aria-label="Вперёд" data-i18n-aria-label="ui.next">&#8594;</button>
         <div class="gallery-dots"></div>
         <span class="project-num">03</span>
       </div>
       <div class="project-info">
+        <div class="project-result" data-i18n="projects.chicago.result">40%<span>заказов проходят автоматически</span></div>
         <h3 class="project-name">Chicago Pizza</h3>
         <p class="project-desc" data-i18n="projects.chicago.desc">Автоматизировали ресторанный контур: заказы через WhatsApp, связка с iiko, программа лояльности и аналитика. В результате до 40% заказов проходят автоматически.</p>
-        <div class="project-metrics">
-          <span class="pm-item" data-i18n="projects.chicago.metric1">40% авто-заказов</span>
-          <span class="pm-sep">·</span>
-          <span class="pm-item" data-i18n="projects.chicago.metric2">iiko + WhatsApp</span>
-          <span class="pm-sep">·</span>
-          <span class="pm-item" data-i18n="projects.chicago.metric3">Live аналитика</span>
-        </div>
+        <p class="project-meta" data-i18n="projects.chicago.meta">iiko + WhatsApp · Live analytics · Loyalty flow</p>
         <div class="project-tags">
           <span class="project-tag">Node.js</span>
           <span class="project-tag">iiko</span>
@@ -4041,10 +4368,15 @@
 
 <!-- TESTIMONIALS -->
 <section class="section" id="testimonials">
-  <h2 class="section-title" data-i18n="testi.title">ЧТО<br>ГОВОРЯТ</h2>
+  <div class="section-header section-header--center">
+    <span class="section-kicker" data-i18n="testi.kicker">Отзывы после запуска</span>
+    <h2 class="section-title" data-i18n="testi.title">ЧТО<br>ГОВОРЯТ</h2>
+    <p class="section-intro" data-i18n="testi.intro">Отзывы ниже про скорость запуска, рост конверсии и работающие процессы, а не про абстрактное «приятно было работать».</p>
+  </div>
   <div class="testimonials-grid">
 
     <div class="testi-card">
+      <div class="testi-kicker" data-i18n="testi.kicker1">6 недель до запуска</div>
       <div class="testi-stars">★★★★★</div>
       <p class="testi-text" data-i18n="testi.1">«Запустили DosPass с нуля до рабочего продукта за 6 недель. Команда реально вникла в задачу — не просто написали код, а предложили несколько решений которые мы сами не додумались. Теперь платформа работает в трёх странах.»</p>
       <div class="testi-author">
@@ -4057,6 +4389,7 @@
     </div>
 
     <div class="testi-card">
+      <div class="testi-kicker" data-i18n="testi.kicker2">2 недели на bot + POS</div>
       <div class="testi-stars">★★★★★</div>
       <p class="testi-text" data-i18n="testi.2">«Нужен был Telegram-бот для приёма заказов и интеграция с нашей POS-системой. Сделали за 2 недели, всё работает без сбоев уже больше года. Поддержка отвечает быстро — это редкость среди разработчиков.»</p>
       <div class="testi-author">
@@ -4069,6 +4402,7 @@
     </div>
 
     <div class="testi-card testi-card--featured">
+      <div class="testi-kicker" data-i18n="testi.kicker3">x3 conversion after relaunch</div>
       <div class="testi-stars">★★★★★</div>
       <p class="testi-text" data-i18n="testi.3">«Первый макет получили через 4 часа после звонка. Это честно шокировало. Финальный сайт запустили на следующий день — конверсия выросла втрое по сравнению со старым.»</p>
       <div class="testi-author">
@@ -4092,16 +4426,16 @@
       <h2 class="section-title services-title" data-i18n="srv.title">ЧТО МЫ<br><span class="lime">ДЕЛАЕМ</span></h2>
       <p class="services-pitch" data-i18n="srv.pitch">Берём проект целиком — от первого скетча до живого продукта. Без субподрядчиков, без сюрпризов.</p>
       <div class="services-stat-row">
-        <div class="ss-item"><span class="ss-num">6</span><span class="ss-label">направлений</span></div>
-        <div class="ss-item"><span class="ss-num">1</span><span class="ss-label">команда</span></div>
-        <div class="ss-item"><span class="ss-num">∞</span><span class="ss-label">масштаб</span></div>
+        <div class="ss-item"><span class="ss-num">6</span><span class="ss-label" data-i18n="srv.stats1">направлений</span></div>
+        <div class="ss-item"><span class="ss-num">1</span><span class="ss-label" data-i18n="srv.stats2">команда</span></div>
+        <div class="ss-item"><span class="ss-num">∞</span><span class="ss-label" data-i18n="srv.stats3">масштаб</span></div>
       </div>
       <a href="https://t.me/doscode_kz" class="services-cta" target="_blank" rel="noopener noreferrer" data-i18n="srv.cta">Обсудить проект →</a>
     </div>
 
     <!-- RIGHT: service cards grid -->
     <div class="services-right">
-      <div class="srv-card">
+      <div class="srv-card srv-card--featured">
         <div class="srv-card-top">
           <div class="srv-icon">
             <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -4123,7 +4457,7 @@
         </ul>
       </div>
 
-      <div class="srv-card">
+      <div class="srv-card srv-card--featured">
         <div class="srv-card-top">
           <div class="srv-icon">
             <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -4237,7 +4571,13 @@
 
 <!-- PROCESS -->
 <section class="section" id="process">
-  <h2 class="section-title" data-i18n="proc.title">КАК МЫ<br><span class="lime">РАБОТАЕМ</span></h2>
+  <div class="section-header section-header--split">
+    <div>
+      <span class="section-kicker" data-i18n="proc.kicker">Как идёт работа</span>
+      <h2 class="section-title" data-i18n="proc.title">КАК МЫ<br><span class="lime">РАБОТАЕМ</span></h2>
+    </div>
+    <p class="section-intro" data-i18n="proc.intro">Процесс сделан так, чтобы вы быстро получили понятную смету, увидели первую версию рано и не ждали апдейта неделями.</p>
+  </div>
   <div class="process-grid">
 
     <div class="process-step">
@@ -4246,7 +4586,7 @@
       <div class="ps-content">
         <h3 class="ps-title" data-i18n="proc.01.title">Заявка</h3>
         <p class="ps-desc" data-i18n="proc.01.desc">Пишете в Telegram или на почту. Рассказываете задачу — в любом формате, даже голосом. Отвечаем в течение часа в рабочее время.</p>
-        <span class="ps-time">// 1 час</span>
+        <span class="ps-time" data-i18n="proc.01.time">// 1 час</span>
       </div>
     </div>
 
@@ -4256,7 +4596,7 @@
       <div class="ps-content">
         <h3 class="ps-title" data-i18n="proc.02.title">Бриф и оценка</h3>
         <p class="ps-desc" data-i18n="proc.02.desc">Задаём нужные вопросы, уточняем цели и аудиторию. Даём честную смету с фиксированной ценой — без скрытых доплат.</p>
-        <span class="ps-time">// 1 день</span>
+        <span class="ps-time" data-i18n="proc.02.time">// 1 день</span>
       </div>
     </div>
 
@@ -4266,7 +4606,7 @@
       <div class="ps-content">
         <h3 class="ps-title" data-i18n="proc.03.title">Дизайн</h3>
         <p class="ps-desc" data-i18n="proc.03.desc">Создаём прототипы и макеты. Показываем первую версию и собираем правки до момента пока не скажете "да, это оно".</p>
-        <span class="ps-time">// 2–5 дней</span>
+        <span class="ps-time" data-i18n="proc.03.time">// 2–5 дней</span>
       </div>
     </div>
 
@@ -4276,7 +4616,7 @@
       <div class="ps-content">
         <h3 class="ps-title" data-i18n="proc.04.title">Разработка</h3>
         <p class="ps-desc" data-i18n="proc.04.desc">Пишем код по утверждённому дизайну. Еженедельные апдейты, доступ к dev-версии с первого дня. Никаких "готово через месяц".</p>
-        <span class="ps-time">// Зависит от проекта</span>
+        <span class="ps-time" data-i18n="proc.04.time">// Зависит от проекта</span>
       </div>
     </div>
 
@@ -4286,7 +4626,7 @@
       <div class="ps-content">
         <h3 class="ps-title" data-i18n="proc.05.title">Запуск и поддержка</h3>
         <p class="ps-desc" data-i18n="proc.05.desc">Деплоим, настраиваем домен, проверяем всё до запуска. После — на связи для быстрых фиксов и обновлений.</p>
-        <span class="ps-time">// Готово</span>
+        <span class="ps-time" data-i18n="proc.05.time">// Готово</span>
       </div>
     </div>
 
@@ -4296,7 +4636,7 @@
 <!-- TECH STACK -->
 <section class="tech-section">
   <div class="tech-inner">
-    <span class="tech-label">Технологии</span>
+    <span class="tech-label" data-i18n="tech.label">Технологии</span>
     <div class="tech-strip">
       <span class="tech-item">React</span>
       <span class="tech-dot">·</span>
@@ -4329,95 +4669,123 @@
 
 <!-- PRICING -->
 <section class="section" id="pricing">
-  <h2 class="section-title">СТОИМОСТЬ</h2>
+  <div class="section-header section-header--split">
+    <div>
+      <span class="section-kicker" data-i18n="pricing.kicker">Фиксируем объём до старта</span>
+      <h2 class="section-title" data-i18n="pricing.title">СТОИМОСТЬ</h2>
+    </div>
+    <p class="section-intro" data-i18n="pricing.intro">Это стартовые ориентиры. После короткого разбора задачи даём точную смету, этапы и фиксированную цену без доплат по ходу.</p>
+  </div>
   <div class="pricing-grid">
     <div class="price-card">
-      <h3 class="price-name">Лендинг</h3>
-      <div class="price-amount">от 100 000 ₸</div>
-      <div class="price-duration">48 ч</div>
-      <p class="price-desc">Первый макет в день обращения, запуск под ключ</p>
-      <a href="https://t.me/doscode_kz" class="price-btn" target="_blank" rel="noopener noreferrer">Обсудить проект</a>
+      <h3 class="price-name" data-i18n="pricing.landing.name">Лендинг</h3>
+      <div class="price-amount" data-i18n="pricing.landing.amount">от 100 000 ₸</div>
+      <div class="price-duration" data-i18n="pricing.landing.duration">48 ч</div>
+      <p class="price-desc" data-i18n="pricing.landing.desc">Первый макет в день обращения, запуск под ключ</p>
+      <ul class="price-list">
+        <li data-i18n="pricing.landing.li1">Первый макет в день обращения</li>
+        <li data-i18n="pricing.landing.li2">2 раунда правок включено</li>
+        <li data-i18n="pricing.landing.li3">Деплой включён</li>
+      </ul>
+      <a href="https://t.me/doscode_kz" class="price-btn" target="_blank" rel="noopener noreferrer" data-i18n="pricing.landing.btn">Обсудить лендинг</a>
     </div>
     <div class="price-card featured">
-      <h3 class="price-name">MVP</h3>
-      <div class="price-badge">Популярный выбор</div>
-      <div class="price-amount">от 600 000 ₸</div>
-      <div class="price-duration">4–8 нед.</div>
-      <p class="price-desc">Полный цикл: дизайн + разработка + деплой</p>
-      <a href="https://t.me/doscode_kz" class="price-btn" target="_blank" rel="noopener noreferrer">Обсудить проект</a>
+      <h3 class="price-name" data-i18n="pricing.mvp.name">MVP</h3>
+      <div class="price-badge" data-i18n="pricing.mvp.badge">Популярный выбор</div>
+      <div class="price-amount" data-i18n="pricing.mvp.amount">от 600 000 ₸</div>
+      <div class="price-duration" data-i18n="pricing.mvp.duration">4–8 нед.</div>
+      <p class="price-desc" data-i18n="pricing.mvp.desc">Полный цикл: дизайн + разработка + деплой</p>
+      <ul class="price-list">
+        <li data-i18n="pricing.mvp.li1">Дизайн + разработка + релиз</li>
+        <li data-i18n="pricing.mvp.li2">Еженедельные демо и апдейты</li>
+        <li data-i18n="pricing.mvp.li3">Запуск и передача продукта</li>
+      </ul>
+      <a href="https://t.me/doscode_kz" class="price-btn" target="_blank" rel="noopener noreferrer" data-i18n="pricing.mvp.btn">Обсудить MVP</a>
     </div>
     <div class="price-card">
-      <h3 class="price-name">Кастом</h3>
-      <div class="price-amount">По запросу</div>
-      <div class="price-duration">Индивидуально</div>
-      <p class="price-desc">Команда и SLA под ваш проект</p>
-      <a href="https://t.me/doscode_kz" class="price-btn" target="_blank" rel="noopener noreferrer">Обсудить проект</a>
+      <h3 class="price-name" data-i18n="pricing.custom.name">Кастом</h3>
+      <div class="price-amount" data-i18n="pricing.custom.amount">По запросу</div>
+      <div class="price-duration" data-i18n="pricing.custom.duration">Индивидуально</div>
+      <p class="price-desc" data-i18n="pricing.custom.desc">Команда и SLA под ваш проект</p>
+      <ul class="price-list">
+        <li data-i18n="pricing.custom.li1">Архитектура и интеграции</li>
+        <li data-i18n="pricing.custom.li2">Выделенная команда / SLA</li>
+        <li data-i18n="pricing.custom.li3">Дорожная карта и сопровождение</li>
+      </ul>
+      <a href="https://t.me/doscode_kz" class="price-btn" target="_blank" rel="noopener noreferrer" data-i18n="pricing.custom.btn">Обсудить задачу</a>
     </div>
   </div>
+  <p class="pricing-note" data-i18n="pricing.note">Отвечаем в Telegram в течение часа в рабочее время.</p>
 </section>
 
 <!-- FAQ -->
 <section class="section" id="faq">
-  <h2 class="section-title">ВОПРОСЫ</h2>
+  <div class="section-header section-header--split">
+    <div>
+      <span class="section-kicker" data-i18n="faq.kicker">Сначала отвечаем на риски</span>
+      <h2 class="section-title" data-i18n="faq.title">ВОПРОСЫ</h2>
+    </div>
+    <p class="section-intro" data-i18n="faq.intro">Большинство клиентов приходят с задачей, а не с готовым ТЗ. Ниже ответы на вопросы, которые обычно мешают стартовать быстрее.</p>
+  </div>
   <div class="faq-list">
 
-    <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">
-        <span>Сколько будет стоить мой проект?</span>
+    <div class="faq-item faq-item--open">
+      <button class="faq-q" aria-expanded="true">
+        <span data-i18n="faq.q1">Сколько будет стоить мой проект?</span>
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-a">
-        <p>Зависит от сложности. Лендинг — от 100 000 ₸. MVP — от 600 000 ₸. После первого звонка даём точную смету с фиксированной ценой, без неприятных сюрпризов по ходу проекта.</p>
+      <div class="faq-a open">
+        <p data-i18n="faq.a1">Зависит от сложности. Лендинг — от 100 000 ₸. MVP — от 600 000 ₸. После первого звонка даём точную смету с фиксированной ценой, без неприятных сюрпризов по ходу проекта.</p>
       </div>
     </div>
 
     <div class="faq-item">
       <button class="faq-q" aria-expanded="false">
-        <span>Что нужно для старта?</span>
+        <span data-i18n="faq.q2">Что нужно для старта?</span>
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-a">
-        <p>Только идея. Не нужно готовить ТЗ, макеты или описание — просто расскажите задачу в свободной форме. Мы сами зададим нужные вопросы и структурируем проект.</p>
+        <p data-i18n="faq.a2">Только идея. Не нужно готовить ТЗ, макеты или описание — просто расскажите задачу в свободной форме. Мы сами зададим нужные вопросы и структурируем проект.</p>
       </div>
     </div>
 
     <div class="faq-item">
       <button class="faq-q" aria-expanded="false">
-        <span>Работаете ли вы с зарубежными клиентами?</span>
+        <span data-i18n="faq.q3">Работаете ли вы с зарубежными клиентами?</span>
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-a">
-        <p>Да. Работаем с клиентами из Казахстана, России, ОАЭ и других стран. Принимаем оплату в KZT, USD и USDT. Всё общение в Telegram, время не помеха.</p>
+        <p data-i18n="faq.a3">Да. Работаем с клиентами из Казахстана, России, ОАЭ и других стран. Принимаем оплату в KZT, USD и USDT. Всё общение в Telegram, время не помеха.</p>
       </div>
     </div>
 
     <div class="faq-item">
       <button class="faq-q" aria-expanded="false">
-        <span>Как выглядит процесс после оплаты?</span>
+        <span data-i18n="faq.q4">Как выглядит процесс после оплаты?</span>
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-a">
-        <p>Еженедельные апдейты, доступ к dev-версии с первого дня. Вы видите прогресс в реальном времени — не ждёте месяц до показа. Правки вносим итерационно.</p>
+        <p data-i18n="faq.a4">Еженедельные апдейты, доступ к dev-версии с первого дня. Вы видите прогресс в реальном времени — не ждёте месяц до показа. Правки вносим итерационно.</p>
       </div>
     </div>
 
     <div class="faq-item">
       <button class="faq-q" aria-expanded="false">
-        <span>Даёте ли гарантию на готовый продукт?</span>
+        <span data-i18n="faq.q5">Даёте ли гарантию на готовый продукт?</span>
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-a">
-        <p>Да. 30 дней бесплатной поддержки после запуска — исправляем любые баги без вопросов. После — гибкие тарифы на сопровождение или поддержка по запросу.</p>
+        <p data-i18n="faq.a5">Да. 30 дней бесплатной поддержки после запуска — исправляем любые баги без вопросов. После — гибкие тарифы на сопровождение или поддержка по запросу.</p>
       </div>
     </div>
 
     <div class="faq-item">
       <button class="faq-q" aria-expanded="false">
-        <span>Можно ли сначала увидеть результат, потом платить?</span>
+        <span data-i18n="faq.q6">Можно ли сначала увидеть результат, потом платить?</span>
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-a">
-        <p>Для лендингов — да. Первый макет через 3–4 часа бесплатно. Платите только когда понравится. Для крупных проектов — поэтапная оплата по милстоунам.</p>
+        <p data-i18n="faq.a6">Для лендингов — да. Первый макет через 3–4 часа бесплатно. Платите только когда понравится. Для крупных проектов — поэтапная оплата по милстоунам.</p>
       </div>
     </div>
 
@@ -4429,7 +4797,7 @@
   <h2 data-i18n="cta.title">Есть идея?</h2>
   <p data-i18n="cta.sub">Расскажите задачу — через 24 часа у вас будет смета и план. Без обязательств.</p>
   <a href="https://t.me/doscode_kz" class="btn-dark" target="_blank" rel="noopener noreferrer" data-i18n="cta.btn">Обсудить проект в Telegram →</a>
-  <span class="cta-small">или напишите на <a href="mailto:hello@doscode.kz">hello@doscode.kz</a></span>
+  <span class="cta-small" data-i18n="cta.small">или напишите на <a href="mailto:hello@doscode.kz">hello@doscode.kz</a></span>
 </section>
 
 <!-- FOOTER -->
@@ -4444,10 +4812,10 @@
 
 <!-- GSAP CDN -->
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр изображения">
-  <button class="lb-close" id="lbClose" aria-label="Закрыть">✕</button>
-  <button class="lb-nav lb-nav--prev" id="lbPrev" aria-label="Назад">&#8592;</button>
-  <button class="lb-nav lb-nav--next" id="lbNext" aria-label="Вперёд">&#8594;</button>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр изображения" data-i18n-aria-label="ui.viewer">
+  <button class="lb-close" id="lbClose" aria-label="Закрыть" data-i18n-aria-label="ui.close">✕</button>
+  <button class="lb-nav lb-nav--prev" id="lbPrev" aria-label="Назад" data-i18n-aria-label="ui.prev">&#8592;</button>
+  <button class="lb-nav lb-nav--next" id="lbNext" aria-label="Вперёд" data-i18n-aria-label="ui.next">&#8594;</button>
   <div class="lb-img-wrap">
     <img class="lb-img" id="lbImg" src="" alt="">
   </div>
@@ -4505,29 +4873,6 @@
 
     gsap.from('.hero-sub-mobile', { opacity: 0, y: 30, duration: 0.8, delay: 1 });
     gsap.from('.hero-ctas', { opacity: 0, y: 30, duration: 0.8, delay: 1.15 });
-
-    /* Stats — count up */
-    document.querySelectorAll('.stat-number').forEach(function(el) {
-      var target = parseInt(el.getAttribute('data-target'));
-      var suffix = el.getAttribute('data-suffix') || '';
-      var obj = { val: 0 };
-
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top 100%',
-        once: true,
-        onEnter: function() {
-          gsap.to(obj, {
-            val: target,
-            duration: 1.5,
-            ease: 'power2.out',
-            onUpdate: function() {
-              el.textContent = Math.round(obj.val) + suffix;
-            }
-          });
-        }
-      });
-    });
 
     /* Project cards — fade in from bottom */
     gsap.from('.project-card', {
@@ -4632,6 +4977,22 @@
     var audio = document.getElementById('swAudio');
     if (!btn || !audio) return;
     var playing = false;
+    var labels = {
+      ru: {
+        stop: 'Остановить музыку',
+        prompt: 'Для полного эффекта — нажмите сюда'
+      },
+      kz: {
+        stop: 'Музыканы тоқтату',
+        prompt: 'Толық эффект үшін — осы жерді басыңыз'
+      },
+      en: {
+        stop: 'Stop music',
+        prompt: 'For the full effect, press here'
+      }
+    };
+    var pageLang = typeof localeFromPathname === 'function' ? localeFromPathname(window.location.pathname) : 'ru';
+    var copy = labels[pageLang] || labels.ru;
 
     btn.addEventListener('click', function() {
       if (!playing) {
@@ -4640,7 +5001,7 @@
           playing = true;
           btn.classList.add('playing');
           btn.querySelector('.sw-music-icon').textContent = '■';
-          btn.querySelector('.sw-music-text').textContent = 'Остановить музыку';
+          btn.querySelector('.sw-music-text').textContent = copy.stop;
         }).catch(function() {});
       } else {
         audio.pause();
@@ -4648,7 +5009,7 @@
         playing = false;
         btn.classList.remove('playing');
         btn.querySelector('.sw-music-icon').textContent = '▶';
-        btn.querySelector('.sw-music-text').textContent = 'Для полного эффекта — нажмите сюда';
+        btn.querySelector('.sw-music-text').textContent = copy.prompt;
       }
     });
 
@@ -4656,7 +5017,7 @@
       playing = false;
       btn.classList.remove('playing');
       btn.querySelector('.sw-music-icon').textContent = '▶';
-      btn.querySelector('.sw-music-text').textContent = 'Для полного эффекта — нажмите сюда';
+      btn.querySelector('.sw-music-text').textContent = copy.prompt;
     });
   })();
 
@@ -4718,7 +5079,10 @@
         }
       });
     }, { threshold: 0.3 });
-    observer.observe(document.querySelector('.sw-section'));
+    var section = document.querySelector('.sw-section');
+    if (section) {
+      observer.observe(section);
+    }
   })();
 
   /* ── FAQ ACCORDION ── */
@@ -4851,7 +5215,11 @@
 
   function updateToggle(theme) {
     if (!toggle) return;
-    const nextLabel = theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme';
+    var lang = typeof localeFromPathname === 'function' ? localeFromPathname(window.location.pathname) : 'ru';
+    var ui = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang] && TRANSLATIONS[lang].ui) ? TRANSLATIONS[lang].ui : null;
+    const nextLabel = theme === 'light'
+      ? (ui && ui.themeToDark ? ui.themeToDark : 'Switch to dark theme')
+      : (ui && ui.themeToLight ? ui.themeToLight : 'Switch to light theme');
     toggle.setAttribute('aria-pressed', String(theme === 'light'));
     toggle.setAttribute('aria-label', nextLabel);
     toggle.setAttribute('title', nextLabel);
@@ -4908,59 +5276,6 @@ setTimeout(() => {
     el.style.overflow = 'visible';
   });
 }, 2000);
-
-/* ── TEXT SCRAMBLE ── */
-(function() {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
-  function scramble(el) {
-    const original = el.textContent;
-    let frame = 0;
-    const totalFrames = 18;
-    const interval = setInterval(() => {
-      el.textContent = original.split('').map((ch, i) => {
-        if (ch === ' ') return ' ';
-        if (frame / totalFrames > i / original.length) return ch;
-        return chars[Math.floor(Math.random() * chars.length)];
-      }).join('');
-      if (frame >= totalFrames) {
-        el.textContent = original;
-        clearInterval(interval);
-      }
-      frame++;
-    }, 40);
-  }
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.querySelectorAll('.line-inner').forEach((el, i) => {
-        setTimeout(() => scramble(el), i * 180);
-      });
-    }, 400);
-  });
-})();
-
-
-/* ── MAGNETIC BUTTONS ── */
-(function() {
-  if (window.matchMedia('(pointer: coarse)').matches) return;
-  document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-      const rect = btn.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) * 0.35;
-      const dy = (e.clientY - cy) * 0.35;
-      btn.style.transform = `translate(${dx}px, ${dy}px)`;
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = 'translate(0,0)';
-      btn.style.transition = 'transform 0.4s cubic-bezier(0.23,1,0.32,1)';
-      setTimeout(() => btn.style.transition = '', 400);
-    });
-    btn.addEventListener('mouseenter', () => {
-      btn.style.transition = 'transform 0.1s ease';
-    });
-  });
-})();
 
 /* ── GALLERY CAROUSEL ── */
 document.querySelectorAll('[data-gallery]').forEach(function(gallery) {
@@ -5123,7 +5438,8 @@ var TRANSLATIONS = {
     },
     flow: { idea: 'ИДЕЯ', code: 'КОД', launch: 'ЗАПУСК', clients: 'КЛИЕНТЫ' },
     offer: {
-      badge: '\u26a1 СРОЧНЫЙ ЛЕНДИНГ', title1: 'Лендинг', title2: '48 часов',
+      badge: '\u26a1 СРОЧНЫЙ ЛЕНДИНГ',
+      title: 'Лендинг<br><span class="fo-title-highlight">за 48 часов</span>',
       sub: 'Первый макет через 3\u20134 часа после обращения. Запуск за 48 часов, если контент готов.',
       guarantee: 'Не понравится \u2014 не платите.',
       step1: 'Пишете нам', step2: 'Первый макет', step3: 'Сайт в продакшн',
@@ -5145,30 +5461,44 @@ var TRANSLATIONS = {
       item4: 'Кабинеты, дашборды и внутренние системы',
       cta: 'Обсудить задачу →'
     },
-    stats: { projects: 'Проектов запущено', years: 'Лет опыта', mvp: 'Средний MVP', free: 'Оценка бесплатно' },
+    stats: {
+      projectsValue: '40+',
+      yearsValue: '5',
+      mvpValue: '4 нед',
+      freeValue: '24ч',
+      projects: 'Проектов запущено',
+      years: 'Лет опыта',
+      mvp: 'Средний MVP',
+      free: 'Оценка бесплатно'
+    },
     projects: {
-      title: 'КЕЙСЫ', openSite: 'Открыть сайт \u2192',
+      kicker: 'Результаты и запуски',
+      title: 'КЕЙСЫ',
+      intro: 'Показываем не только интерфейс, а то, что удалось запустить и какой бизнес-эффект это дало.',
+      openSite: 'Открыть сайт \u2192',
       dospass: {
+        result: '6 НЕД<span>от идеи до запуска SaaS в UAE</span>',
         desc: 'Запустили SaaS-платформу лояльности для малого бизнеса: электронные карты, подарочные карты, реферальная механика и AI-маркетинг. От идеи до рабочего продукта и запусков на рынке ОАЭ.',
-        metric1: '6 нед до запуска',
-        metric2: 'Loyalty SaaS',
-        metric3: 'UAE рынок'
+        meta: 'Loyalty SaaS \u00b7 UAE рынок \u00b7 AI marketing'
       },
       doschat: {
+        result: 'NO APP<span>голосовой AI с телефона и ноутбука</span>',
         desc: 'Собрали голосовой AI-интерфейс для Claude, GPT и локальных моделей. Пользователь может говорить с AI с телефона и ноутбука без отдельного приложения и сложной настройки.',
-        metric1: 'Voice AI',
-        metric2: 'Телефон + ноутбук',
-        metric3: 'Без приложения'
+        meta: 'Voice AI \u00b7 Phone + laptop \u00b7 Claude / GPT'
       },
       chicago: {
+        result: '40%<span>заказов проходят автоматически</span>',
         desc: 'Автоматизировали ресторанный контур: заказы через WhatsApp, связка с iiko, программа лояльности и аналитика. В результате до 40% заказов проходят автоматически.',
-        metric1: '40% авто-заказов',
-        metric2: 'iiko + WhatsApp',
-        metric3: 'Live аналитика'
+        meta: 'iiko + WhatsApp \u00b7 Live analytics \u00b7 Loyalty flow'
       }
     },
     testi: {
+      kicker: 'Отзывы после запуска',
       title: 'ЧТО<br>ГОВОРЯТ',
+      intro: 'Отзывы ниже про скорость запуска, рост конверсии и работающие процессы, а не про абстрактное «приятно было работать».',
+      kicker1: '6 недель до запуска',
+      kicker2: '2 недели на bot + POS',
+      kicker3: 'x3 конверсия после редизайна',
       1: '\u00abЗапустили DosPass с нуля до рабочего продукта за 6 недель. Команда реально вникла в задачу \u2014 не просто написали код, а предложили несколько решений которые мы сами не додумались. Теперь платформа работает в трёх странах.\u00bb',
       2: '\u00abНужен был Telegram-бот для приёма заказов и интеграция с нашей POS-системой. Сделали за 2 недели, всё работает без сбоев уже больше года. Поддержка отвечает быстро \u2014 это редкость среди разработчиков.\u00bb',
       3: '\u00abПервый макет получили через 4 часа после звонка. Это честно шокировало. Финальный сайт запустили на следующий день \u2014 конверсия выросла втрое по сравнению со старым.\u00bb',
@@ -5177,29 +5507,98 @@ var TRANSLATIONS = {
     },
     srv: {
       title: 'ЧТО МЫ<br><span class="lime">ДЕЛАЕМ</span>',
-      pitch: 'Берём проект целиком \u2014 от первого скетча до живого продукта. Без субподрядчиков, без сюрпризов.',
+      pitch: 'Берём проект целиком \u2014 от первого скетча до живого продукта. Фокус не на списке услуг, а на том, чтобы запустить понятный, работающий и коммерчески полезный результат.',
+      stats1: 'направлений',
+      stats2: 'команда',
+      stats3: 'масштаб',
       cta: 'Обсудить проект \u2192',
-      '01': { name: 'UI/UX Дизайн', desc: 'Исследуем пользователей, строим прототипы, создаём дизайн-систему. Результат \u2014 интерфейс который конвертирует.', li1: 'Пользовательское исследование', li2: 'Wireframes и прототипы', li3: 'Готовые макеты под ключ' },
-      '02': { name: 'Веб-приложения', desc: 'SaaS, корпоративные порталы, маркетплейсы. Строим на современном стеке \u2014 быстро, надёжно, с нуля до прода.', li1: 'React / Next.js фронтенд', li2: 'Node.js / Python бэкенд', li3: 'PostgreSQL, Redis, деплой' },
-      '03': { name: 'PWA и кабинеты', desc: 'Личные кабинеты, партнёрские порталы и PWA, которые удобно работают с телефона без App Store.', li1: 'Кабинеты и порталы', li2: 'PWA с установкой на экран', li3: 'Мобильный сценарий без нативной разработки' },
-      '04': { name: 'AI-агенты', desc: 'Автоматизируем процессы с помощью LLM. Claude, GPT, кастомные пайплайны \u2014 AI который реально работает на бизнес.', li1: 'Claude / GPT интеграции', li2: 'RAG и векторные базы', li3: 'Автоматизация рутины' },
-      '05': { name: 'Telegram-боты', desc: 'Боты которые продают, уведомляют и поддерживают клиентов 24/7. Интеграция с CRM, iiko, платёжками.', li1: 'Приём заказов и оплат', li2: 'CRM и iiko интеграция', li3: 'Рассылки и воронки' },
-      '06': { name: 'Дашборды', desc: 'Аналитика в реальном времени \u2014 видите всё что важно, когда важно. BI-системы, отчёты, KPI на одном экране.', li1: 'Real-time метрики', li2: 'Кастомные графики и KPI', li3: 'Интеграция с любым источником' }
+      '01': { name: 'UI/UX Дизайн', desc: 'Превращаем сырой запрос в понятный сценарий, структуру и интерфейс, который ведёт пользователя к заявке, оплате или нужному действию.', li1: 'Исследование и ключевые сценарии', li2: 'Прототипы и основные экраны', li3: 'UI kit для разработки' },
+      '02': { name: 'Веб-приложения', desc: 'Собираем MVP, SaaS и внутренние продукты, которые можно запускать, проверять и развивать без переписывания через месяц.', li1: 'MVP за 4–8 недель', li2: 'Кабинет, CRM, admin, backoffice', li3: 'Интеграции, платежи и деплой' },
+      '03': { name: 'PWA и кабинеты', desc: 'Делаем мобильный сценарий без затрат на нативную разработку, когда нужна скорость запуска и нормальный UX на телефоне.', li1: 'PWA и install flow', li2: 'Личные кабинеты и порталы', li3: 'Auth, push и mobile-first логика' },
+      '04': { name: 'AI-агенты', desc: 'Автоматизируем повторяемые задачи там, где это реально разгружает команду, ускоряет продажи или убирает рутину.', li1: 'LLM workflow design', li2: 'RAG и базы знаний', li3: 'Support, ops и sales automation' },
+      '05': { name: 'Telegram-боты', desc: 'Строим канал, где клиенту проще заказать, оплатить или получить статус, чем идти на сайт или в приложение.', li1: 'Orders, payments, notifications', li2: 'CRM, iiko и кастомные интеграции', li3: 'Воронки, рассылки и support flow' },
+      '06': { name: 'Дашборды', desc: 'Собираем управленческие панели, чтобы команда видела выручку, воронку, статусы и узкие места без ручных сводок.', li1: 'Realtime KPI', li2: 'Кастомные графики и фильтры', li3: 'Интеграция с любым источником' }
     },
     proc: {
+      kicker: 'Как идёт работа',
       title: 'КАК МЫ<br><span class="lime">РАБОТАЕМ</span>',
-      '01': { title: 'Заявка', desc: 'Пишете в Telegram или на почту. Рассказываете задачу \u2014 в любом формате, даже голосом. Отвечаем в течение часа в рабочее время.' },
-      '02': { title: 'Бриф и оценка', desc: 'Задаём нужные вопросы, уточняем цели и аудиторию. Даём честную смету с фиксированной ценой \u2014 без скрытых доплат.' },
-      '03': { title: 'Дизайн', desc: 'Создаём прототипы и макеты. Показываем первую версию и собираем правки до момента пока не скажете "да, это оно".' },
-      '04': { title: 'Разработка', desc: 'Пишем код по утверждённому дизайну. Еженедельные апдейты, доступ к dev-версии с первого дня. Никаких "готово через месяц".' },
-      '05': { title: 'Запуск и поддержка', desc: 'Деплоим, настраиваем домен, проверяем всё до запуска. После \u2014 на связи для быстрых фиксов и обновлений.' }
+      intro: 'Процесс сделан так, чтобы вы быстро получили понятную смету, увидели первую версию рано и не ждали апдейта неделями.',
+      '01': { title: 'Заявка', desc: 'Пишете в Telegram или на почту. Рассказываете задачу \u2014 в любом формате, даже голосом. Отвечаем в течение часа в рабочее время.', time: '// 1 час' },
+      '02': { title: 'Бриф и оценка', desc: 'Задаём нужные вопросы, уточняем цели и аудиторию. Даём честную смету с фиксированной ценой \u2014 без скрытых доплат.', time: '// 1 день' },
+      '03': { title: 'Дизайн', desc: 'Создаём прототипы и макеты. Показываем первую версию и собираем правки до момента, пока не скажете: «да, это оно».', time: '// 2\u20135 дней' },
+      '04': { title: 'Разработка', desc: 'Пишем код по утверждённому дизайну. Еженедельные апдейты, доступ к dev-версии с первого дня. Никаких «готово через месяц».', time: '// зависит от проекта' },
+      '05': { title: 'Запуск и поддержка', desc: 'Деплоим, настраиваем домен, проверяем всё до запуска. После \u2014 на связи для быстрых фиксов и обновлений.', time: '// готово' }
+    },
+    tech: { label: 'Технологии' },
+    pricing: {
+      kicker: 'Фиксируем объём до старта',
+      title: 'СТОИМОСТЬ',
+      intro: 'Это стартовые ориентиры. После короткого разбора задачи даём точную смету, этапы и фиксированную цену без доплат по ходу.',
+      landing: {
+        name: 'Лендинг',
+        amount: 'от 100 000 ₸',
+        duration: '48 ч',
+        desc: 'Быстрый запуск оффера, рекламы или первой воронки заявок.',
+        li1: 'Первый макет в день обращения',
+        li2: '2 раунда правок включено',
+        li3: 'Деплой включён',
+        btn: 'Обсудить лендинг'
+      },
+      mvp: {
+        name: 'MVP',
+        badge: 'Популярный выбор',
+        amount: 'от 600 000 ₸',
+        duration: '4\u20138 нед.',
+        desc: 'Полный цикл для первого работающего продукта: дизайн, разработка, релиз.',
+        li1: 'Дизайн + разработка + релиз',
+        li2: 'Еженедельные демо и апдейты',
+        li3: 'Запуск и передача продукта',
+        btn: 'Обсудить MVP'
+      },
+      custom: {
+        name: 'Кастом',
+        amount: 'По запросу',
+        duration: 'Индивидуально',
+        desc: 'Когда нужен сложный стек, интеграции, SLA или выделенная команда под продукт.',
+        li1: 'Архитектура и интеграции',
+        li2: 'Выделенная команда / SLA',
+        li3: 'Дорожная карта и сопровождение',
+        btn: 'Обсудить задачу'
+      },
+      note: 'Отвечаем в Telegram в течение часа в рабочее время.'
+    },
+    faq: {
+      kicker: 'Сначала отвечаем на риски',
+      title: 'ВОПРОСЫ',
+      intro: 'Большинство клиентов приходят с задачей, а не с готовым ТЗ. Ниже ответы на вопросы, которые обычно мешают стартовать быстрее.',
+      q1: 'Сколько будет стоить мой проект?',
+      a1: 'Зависит от сложности. Лендинг \u2014 от 100 000 ₸. MVP \u2014 от 600 000 ₸. После первого звонка даём точную смету с фиксированной ценой и понятными этапами.',
+      q2: 'Что нужно для старта?',
+      a2: 'Достаточно идеи или текущей проблемы. Не нужен готовый бриф, макеты или ТЗ \u2014 мы сами зададим нужные вопросы и соберём рабочий план.',
+      q3: 'Работаете ли вы с зарубежными клиентами?',
+      a3: 'Да. Работаем с клиентами из Казахстана, России, ОАЭ и других стран. Принимаем оплату в KZT, USD и USDT. Основной канал общения \u2014 Telegram.',
+      q4: 'Как выглядит процесс после оплаты?',
+      a4: 'Работа идёт по этапам с регулярными апдейтами. Вы видите прогресс рано, а не получаете «сюрприз» в конце месяца.',
+      q5: 'Даёте ли гарантию на готовый продукт?',
+      a5: 'Да. После запуска остаёмся на связи для быстрых фиксов и обновлений. При необходимости подключаем сопровождение или отдельный SLA.',
+      q6: 'Можно ли сначала увидеть результат, потом платить?',
+      a6: 'Для лендингов \u2014 да. Первый макет через 3\u20134 часа. Для больших задач работаем по этапам и милстоунам, чтобы вы понимали, за что платите на каждом шаге.'
     },
     cta: {
       title: 'Есть идея?',
       sub: 'Расскажите задачу \u2014 через\u00a024\u00a0часа у вас будет смета и план. Без обязательств.',
-      btn: 'Обсудить проект в Telegram\u00a0\u2192'
+      btn: 'Обсудить проект в Telegram\u00a0\u2192',
+      small: 'или напишите на <a href="mailto:hello@doscode.kz">hello@doscode.kz</a>'
     },
-    footer: { copy: 'DosCode \u00b7 Алматы \u00b7 2020\u20132026' }
+    footer: { copy: 'DosCode \u00b7 Алматы \u00b7 2020\u20132026' },
+    ui: {
+      prev: 'Назад',
+      next: 'Вперёд',
+      close: 'Закрыть',
+      viewer: 'Просмотр изображения',
+      themeToLight: 'Переключить на светлую тему',
+      themeToDark: 'Переключить на тёмную тему'
+    }
   },
   kz: {
     nav: { cta: 'Жоба талқылау\u00a0\u2192', services: 'Қызметтер', projects: 'Жобалар', process: 'Үдеріс', pricing: 'Бағалар', testimonials: 'Пікірлер', faq: 'FAQ' },
@@ -5212,11 +5611,12 @@ var TRANSLATIONS = {
     },
     flow: { idea: 'ИДЕЯ', code: 'КОД', launch: 'ІСКЕ ҚОСУ', clients: 'КЛИЕНТТЕР' },
     offer: {
-      badge: '\u26a1 ШҰҒЫЛ ЛЕНДИНГ', title1: 'Лендинг', title2: '48 сағат',
+      badge: '\u26a1 ШҰҒЫЛ ЛЕНДИНГ',
+      title: 'Лендинг<br><span class="fo-title-highlight">48 сағатта</span>',
       sub: 'Бірінші макет өтініштен кейін 3\u20134 сағатта. Контент дайын болса, 48 сағатта іске қосамыз.',
       guarantee: 'Ұнамаса \u2014 төлемейсіз.',
       step1: 'Бізге жазыңыз', step2: 'Бірінші макет', step3: 'Сайт продакшнда',
-      time1: '3\u20134 с', time2: '48 с',
+      time1: '3\u20134 сағ', time2: '48 сағ',
       check1: 'Макет 3\u20134 сағатта \u2014 төлемес бұрын қараңыз',
       check2: 'Контент дайын болса, 48 сағатта іске қосамыз',
       check3: '2 раунд түзету кіреді',
@@ -5224,40 +5624,54 @@ var TRANSLATIONS = {
       priceNote: 'бастапқы баға', btn: 'Лендингті талқылау'
     },
     bridge: {
-      kicker: 'Шұғыл жобалардан бөлек',
+      kicker: 'Шұғыл іске қосудан бөлек',
       title: 'Тек лендинг емес',
       copy: 'Бізге тек тез іске қосу үшін ғана келмейді. Біз Telegram-боттар, AI-автоматтандыру, MVP және бизнеске арналған ішкі жүйелер де жасаймыз. Егер міндет кәдімгі сайттан күрделірек болса, ол да бізге келеді. Міндетке байыппен қарап, нәтижеге апаратын ең жылдам дұрыс жолды ұсынамыз.',
       boardLabel: 'Не іске қосамыз',
       item1: 'Сату, тапсырыс және қолдау үшін Telegram-боттар',
-      item2: 'Күнделікті жұмыс пен ішкі процестерге AI-автоматтандыру',
+      item2: 'Рутина мен ішкі процестерге AI-автоматтандыру',
       item3: 'Нөлден MVP және веб-қосымшалар',
       item4: 'Кабинеттер, дашбордтар және ішкі жүйелер',
-      cta: 'Міндетті талқылау →'
+      cta: 'Тапсырманы талқылау →'
     },
-    stats: { projects: 'Іске қосылған жобалар', years: 'Жыл тәжірибе', mvp: 'Орташа MVP', free: 'Тегін бағалау' },
+    stats: {
+      projectsValue: '40+',
+      yearsValue: '5',
+      mvpValue: '4 апта',
+      freeValue: '24 сағ',
+      projects: 'Іске қосылған жобалар',
+      years: 'Жыл тәжірибе',
+      mvp: 'Орташа MVP',
+      free: 'Тегін бағалау'
+    },
     projects: {
-      title: 'КЕЙСТЕР', openSite: 'Сайтты ашу \u2192',
+      kicker: 'Нәтижелер мен іске қосулар',
+      title: 'КЕЙСТЕР',
+      intro: 'Мұнда жай интерфейс емес, іске қосылған өнім мен бизнеске берген нақты әсер көрсетілген.',
+      openSite: 'Сайтты ашу \u2192',
       dospass: {
-        desc: 'Шағын бизнеске арналған адалдық SaaS-платформасын іске қостық: электронды карталар, сыйлық карталары, реферал механикасы және AI-маркетинг. Идеядан жұмыс істейтін өнімге және БАӘ нарығындағы алғашқы іске қосуларға дейін жеткіздік.',
-        metric1: '6 апта іске қосуға',
-        metric2: 'Loyalty SaaS',
-        metric3: 'UAE нарығы'
+        result: '6 АПТА<span>идеядан ОАӘ нарығындағы SaaS іске қосуға дейін</span>',
+        desc: 'Шағын бизнеске арналған адалдық SaaS-платформасын іске қостық: электронды карталар, сыйлық карталары, реферал механикасы және AI-маркетинг. Идеядан жұмыс істейтін өнімге және ОАӘ нарығындағы іске қосуға дейін жеткіздік.',
+        meta: 'Loyalty SaaS \u00b7 ОАӘ нарығы \u00b7 AI маркетинг'
       },
       doschat: {
-        desc: 'Claude, GPT және жергілікті модельдерге арналған дауыстық AI-интерфейс жасадық. Пайдаланушы AI-мен телефоннан да, ноутбуктан да бөлек қосымшасыз және күрделі баптаусыз сөйлесе алады.',
-        metric1: 'Voice AI',
-        metric2: 'Телефон + ноутбук',
-        metric3: 'Қосымшасыз'
+        result: 'APP ЖОҚ<span>телефон мен ноутбуктан дауыстық AI</span>',
+        desc: 'Claude, GPT және жергілікті модельдерге арналған дауыстық AI-интерфейс жасадық. Пайдаланушы AI-мен телефоннан да, ноутбуктан да бөлек қолданбасыз және күрделі баптаусыз сөйлесе алады.',
+        meta: 'Voice AI \u00b7 Телефон + ноутбук \u00b7 Claude / GPT'
       },
       chicago: {
-        desc: 'Мейрамхана контурын автоматтандырдық: WhatsApp арқылы тапсырыс, iiko-мен байланыс, адалдық бағдарламасы және аналитика. Нәтижесінде тапсырыстардың 40%-ына дейін автоматты өтеді.',
-        metric1: '40% авто-тапсырыс',
-        metric2: 'iiko + WhatsApp',
-        metric3: 'Live аналитика'
+        result: '40%<span>тапсырыс автоматты өтеді</span>',
+        desc: 'Мейрамхана контурын автоматтандырдық: WhatsApp арқылы тапсырыс, iiko интеграциясы, адалдық бағдарламасы және аналитика. Нәтижесінде тапсырыстың 40%-ға дейіні автоматты өтеді.',
+        meta: 'iiko + WhatsApp \u00b7 Тікелей аналитика \u00b7 Адалдық механикасы'
       }
     },
     testi: {
+      kicker: 'Іске қосудан кейінгі пікірлер',
       title: 'ПІКІРЛЕР',
+      intro: 'Бұл пікірлер «жұмыс істеу ыңғайлы болды» деңгейінде емес, нақты іске қосу жылдамдығы, конверсия және жұмыс істейтін процестер туралы.',
+      kicker1: '6 аптада іске қосу',
+      kicker2: '2 аптада бот + POS',
+      kicker3: 'редизайннан кейін x3 конверсия',
       1: '\u00abDosPass-ты нөлден жұмыс істейтін өнімге 6 аптада іске қостық. Команда тапсырмаға шынымен үңілді \u2014 жай код жазып қана қоймай, өздеріміз ойластырмаған бірнеше шешім ұсынды. Платформа қазір үш елде жұмыс істейді.\u00bb',
       2: '\u00abТапсырыс қабылдауға арналған Telegram-бот және POS-жүйемізбен интеграция қажет болды. 2 аптада жасады, бәрі бір жылдан астам уақыт бойы үзіліссіз жұмыс істейді. Қолдау жылдам жауап береді \u2014 бұл әзірлеушілер арасында сирек кездеседі.\u00bb',
       3: '\u00abҚоңыраудан кейін 4 сағатта бірінші макетті алдық. Бұл шынымен таң қалдырды. Келесі күні соңғы сайтты іске қостық \u2014 конверсия ескіге қарағанда үш есе өсті.\u00bb',
@@ -5265,30 +5679,99 @@ var TRANSLATIONS = {
       role1: 'Негізін қалаушы, DosPass', role2: 'Директор, Chicago Pizza', role3: 'CEO, IT-стартап, Алматы'
     },
     srv: {
-      title: 'НЕ\u00a0ІСТЕЙМІЗ<br><span class="lime">БІЗ</span>',
-      pitch: 'Жобаны толығымен аламыз \u2014 бірінші эскизден тірі өнімге дейін. Субмердігерлерсіз, сюрпризсіз.',
+      title: 'НЕ\u00a0ҚҰРАМЫЗ<br><span class="lime">БІЗ</span>',
+      pitch: 'Жобаны толығымен аламыз \u2014 бірінші эскизден тірі өнімге дейін. Фокус қызметтер тізімінде емес, нақты іске қосылатын және бизнеске пайдасы бар нәтиже алуда.',
+      stats1: 'бағыттар',
+      stats2: 'команда',
+      stats3: 'масштаб',
       cta: 'Жобаны талқылау \u2192',
-      '01': { name: 'UI/UX Дизайн', desc: 'Пайдаланушыларды зерттейміз, прототиптер жасаймыз, дизайн-жүйе жасаймыз. Нәтиже \u2014 конверсия жасайтын интерфейс.', li1: 'Пайдаланушы зерттеуі', li2: 'Wireframes және прототиптер', li3: 'Кілт бойынша дайын макеттер' },
-      '02': { name: 'Веб-қосымшалар', desc: 'SaaS, корпоративтік порталдар, маркетплейстер. Заманауи стекте салатынбыз \u2014 жылдам, сенімді, нөлден продга дейін.', li1: 'React / Next.js фронтенд', li2: 'Node.js / Python бэкенд', li3: 'PostgreSQL, Redis, деплой' },
-      '03': { name: 'PWA және кабинеттер', desc: 'Телефоннан ыңғайлы жұмыс істейтін жеке кабинеттер, серіктес порталдары және App Store-сыз PWA.', li1: 'Кабинеттер мен порталдар', li2: 'Экранға орнатылатын PWA', li3: 'Нативсіз мобильді сценарий' },
-      '04': { name: 'AI-агенттер', desc: 'LLM көмегімен процестерді автоматтандырамыз. Claude, GPT, кастомды пайплайндар \u2014 бизнеске шынымен жұмыс істейтін AI.', li1: 'Claude / GPT интеграциялар', li2: 'RAG және векторлық базалар', li3: 'Рутинаны автоматтандыру' },
-      '05': { name: 'Telegram-боттар', desc: '24/7 сататын, хабарлайтын және клиенттерге қолдау көрсететін боттар. CRM, iiko, төлем жүйелерімен интеграция.', li1: 'Тапсырыс пен төлемді қабылдау', li2: 'CRM және iiko интеграциясы', li3: 'Жіберілімдер және воронкалар' },
-      '06': { name: 'Дашбордтар', desc: 'Нақты уақыттағы аналитика \u2014 маңызды болғанда, маңыздысын көресіз. BI-жүйелер, есептер, KPI бір экранда.', li1: 'Нақты уақыт метрикалары', li2: 'Кастомды графиктер және KPI', li3: 'Кез келген көзбен интеграция' }
+      '01': { name: 'UI/UX Дизайн', desc: 'Шикі сұранысты қолданушыны өтінімге, төлемге немесе маңызды әрекетке жеткізетін түсінікті сценарий мен интерфейске айналдырамыз.', li1: 'Зерттеу және негізгі сценарийлер', li2: 'Прототиптер мен басты экрандар', li3: 'Әзірлеуге дайын UI kit' },
+      '02': { name: 'Веб-қосымшалар', desc: 'Іске қосуға, тексеруге және бір айдан кейін қайта жазбай дамытуға болатын MVP, SaaS және ішкі өнімдер жасаймыз.', li1: 'MVP 4\u20138 аптада', li2: 'Кабинет, CRM, admin, backoffice', li3: 'Интеграциялар, төлемдер, деплой' },
+      '03': { name: 'PWA және кабинеттер', desc: 'Телефонда жақсы жұмыс істейтін mobile-first сценарийді нативті әзірлеусіз жасаймыз, егер жылдам іске қосу керек болса.', li1: 'PWA және орнату сценарийі', li2: 'Жеке кабинет пен порталдар', li3: 'Auth, push және мобиль логика' },
+      '04': { name: 'AI-агенттер', desc: 'Қайталанатын міндеттерді команда жүктемесін азайтатын, сатуды жылдамдататын немесе рутинаны алып тастайтын жерде автоматтандырамыз.', li1: 'LLM workflow design', li2: 'RAG және knowledge base', li3: 'Support, ops және sales automation' },
+      '05': { name: 'Telegram-боттар', desc: 'Клиентке сайтқа не қолданбаға кіргеннен гөрі тапсырыс беру, төлеу немесе статус алу оңай болатын арнаны құрамыз.', li1: 'Тапсырыс, төлем, хабарламалар', li2: 'CRM, iiko және кастом интеграциялар', li3: 'Воронка, жіберілім, қолдау сценарийі' },
+      '06': { name: 'Дашбордтар', desc: 'Команда қолмен есеп жинамай-ақ табысты, воронканы, статустарды және тар жерлерді көруі үшін басқару панельдерін құрамыз.', li1: 'Realtime KPI', li2: 'Кастом графиктер мен фильтрлер', li3: 'Кез келген дереккөзбен интеграция' }
     },
     proc: {
+      kicker: 'Жұмыс қалай жүреді',
       title: 'ҚАЛАЙ<br><span class="lime">ЖҰМЫС ІСТЕЙМІЗ</span>',
-      '01': { title: 'Өтініш', desc: 'Telegram-ға немесе поштаға жазыңыз. Тапсырманы кез келген форматта айтыңыз, тіпті дауыспен де. Жұмыс уақытында бір сағат ішінде жауап береміз.' },
-      '02': { title: 'Бриф және бағалау', desc: 'Қажетті сұрақтар қоямыз, мақсаттар мен аудиторияны нақтылаймыз. Тіркелген бағамен адал смета береміз \u2014 жасырын қосымша төлемсіз.' },
-      '03': { title: 'Дизайн', desc: 'Прототиптер мен макеттер жасаймыз. Бірінші нұсқаны көрсетеміз және "иә, дәл осы" дегенше түзетулер жинаймыз.' },
-      '04': { title: 'Әзірлеу', desc: 'Бекітілген дизайн бойынша код жазамыз. Апта сайынғы жаңартулар, dev-нұсқаға бірінші күннен қолжетімділік. "Бір айдан кейін дайын" деген жоқ.' },
-      '05': { title: 'Іске қосу және қолдау', desc: 'Деплой жасаймыз, доменді баптаймыз, іске қосуға дейін бәрін тексереміз. Одан кейін \u2014 жылдам түзетулер мен жаңартулар үшін байланыстамыз.' }
+      intro: 'Процесс сметаны тез алуға, алғашқы нұсқаны ерте көруге және апталап белгісіздікте отырмауға құрылған.',
+      '01': { title: 'Өтініш', desc: 'Telegram-ға немесе поштаға жазыңыз. Тапсырманы кез келген форматта айтыңыз, тіпті дауыспен де. Жұмыс уақытында бір сағат ішінде жауап береміз.', time: '// 1 сағат' },
+      '02': { title: 'Бриф және бағалау', desc: 'Қажетті сұрақтарды қойып, мақсаттар мен аудиторияны нақтылаймыз. Бекітілген бағамен адал смета береміз.', time: '// 1 күн' },
+      '03': { title: 'Дизайн', desc: 'Прототиптер мен макеттер жасаймыз. Бірінші нұсқаны көрсетіп, «иә, дәл осы» дегенше түзетулер жинаймыз.', time: '// 2\u20135 күн' },
+      '04': { title: 'Әзірлеу', desc: 'Бекітілген дизайн бойынша код жазамыз. Апта сайын апдейт, dev-нұсқаға бірінші күннен қолжетімділік. «Бір айдан кейін дайын» деген жоқ.', time: '// жобаға байланысты' },
+      '05': { title: 'Іске қосу және қолдау', desc: 'Деплой жасаймыз, доменді баптаймыз, іске қосуға дейін бәрін тексереміз. Кейін де жылдам түзетулер мен жаңартулар үшін байланыстамыз.', time: '// дайын' }
+    },
+    tech: { label: 'Технологиялар' },
+    pricing: {
+      kicker: 'Көлемді басталмай тұрып бекітеміз',
+      title: 'ҚҰНЫ',
+      intro: 'Бұл бастапқы бағалар. Міндетті қысқа талдаудан кейін нақты смета, кезеңдер және жол-жөнекей өзгермейтін бекітілген баға береміз.',
+      landing: {
+        name: 'Лендинг',
+        amount: '100 000 ₸ бастап',
+        duration: '48 сағ',
+        desc: 'Офферді, жарнаманы немесе алғашқы лид ағынын тез іске қосу.',
+        li1: 'Бірінші макет сол күні',
+        li2: '2 раунд түзету кіреді',
+        li3: 'Деплой кіреді',
+        btn: 'Лендингті талқылау'
+      },
+      mvp: {
+        name: 'MVP',
+        badge: 'Көбіне таңдалады',
+        amount: '600 000 ₸ бастап',
+        duration: '4\u20138 апта',
+        desc: 'Алғашқы жұмыс істейтін өнімге арналған толық цикл: дизайн, әзірлеу, релиз.',
+        li1: 'Дизайн + әзірлеу + релиз',
+        li2: 'Апта сайынғы демо және апдейт',
+        li3: 'Іске қосу және өнімді тапсыру',
+        btn: 'MVP талқылау'
+      },
+      custom: {
+        name: 'Кастом',
+        amount: 'Сұраныс бойынша',
+        duration: 'Жеке',
+        desc: 'Күрделі стек, интеграциялар, SLA немесе өнімге бөлек команда қажет болғанда.',
+        li1: 'Архитектура және интеграциялар',
+        li2: 'Бөлінген команда / SLA',
+        li3: 'Roadmap және қолдау',
+        btn: 'Тапсырманы талқылау'
+      },
+      note: 'Жұмыс уақытында Telegram-да бір сағат ішінде жауап береміз.'
+    },
+    faq: {
+      kicker: 'Алдымен тәуекелдерге жауап береміз',
+      title: 'СҰРАҚТАР',
+      intro: 'Көп клиенттер толық ТЗ емес, жай міндетпен келеді. Төменде жобаны тезірек бастауға кедергі болатын негізгі сұрақтарға жауап бар.',
+      q1: 'Менің жобам қанша тұрады?',
+      a1: 'Күрделілікке байланысты. Лендинг \u2014 100 000 ₸ бастап. MVP \u2014 600 000 ₸ бастап. Алғашқы қоңыраудан кейін нақты смета мен кезеңдер береміз.',
+      q2: 'Бастау үшін не керек?',
+      a2: 'Идея немесе ағымдағы мәселе жеткілікті. Дайын ТЗ, макет не толық сипаттама қажет емес \u2014 керек құрылымды өзіміз жинаймыз.',
+      q3: 'Шетелдік клиенттермен жұмыс істейсіздер ме?',
+      a3: 'Иә. Қазақстан, Ресей, БАӘ және басқа елдердегі клиенттермен жұмыс істейміз. Төлемді KZT, USD және USDT қабылдаймыз. Негізгі байланыс арнасы \u2014 Telegram.',
+      q4: 'Төлемнен кейін процесс қалай жүреді?',
+      a4: 'Жұмыс кезең-кезеңімен және тұрақты апдейтпен жүреді. Прогресті ерте көресіз, ай соңында ғана «сюрприз» алмайсыз.',
+      q5: 'Дайын өнімге кепілдік бересіздер ме?',
+      a5: 'Иә. Іске қосқаннан кейін де жылдам түзетулер мен жаңартулар үшін байланыста боламыз. Қажет болса, жеке қолдау не SLA қоса аламыз.',
+      q6: 'Алдымен нәтижені көріп, кейін төлеуге бола ма?',
+      a6: 'Лендингтер үшін \u2014 иә. Алғашқы макетті 3\u20134 сағатта көрсетеміз. Ірі жобаларда кезеңдер мен milestone бойынша жұмыс істейміз.'
     },
     cta: {
       title: 'Идея бар ма?',
       sub: 'Тапсырманы айтыңыз \u2014 24\u00a0сағатта смета мен жоспар аласыз. Міндеттемесіз.',
-      btn: 'Telegram-да жобаны талқылау\u00a0\u2192'
+      btn: 'Telegram-да жобаны талқылау\u00a0\u2192',
+      small: 'немесе <a href="mailto:hello@doscode.kz">hello@doscode.kz</a> поштасына жазыңыз'
     },
-    footer: { copy: 'DosCode \u00b7 Алматы \u00b7 2020\u20132026' }
+    footer: { copy: 'DosCode \u00b7 Алматы \u00b7 2020\u20132026' },
+    ui: {
+      prev: 'Артқа',
+      next: 'Алға',
+      close: 'Жабу',
+      viewer: 'Суретті қарау',
+      themeToLight: 'Жарық тақырыпқа ауысу',
+      themeToDark: 'Қараңғы тақырыпқа ауысу'
+    }
   },
   en: {
     nav: { cta: 'Discuss project\u00a0\u2192', services: 'Services', projects: 'Projects', process: 'Process', pricing: 'Pricing', testimonials: 'Reviews', faq: 'FAQ' },
@@ -5301,7 +5784,8 @@ var TRANSLATIONS = {
     },
     flow: { idea: 'IDEA', code: 'CODE', launch: 'LAUNCH', clients: 'CLIENTS' },
     offer: {
-      badge: '\u26a1 FAST LANDING PAGE', title1: 'Landing page', title2: '48 hours',
+      badge: '\u26a1 FAST LANDING PAGE',
+      title: 'Landing page<br><span class="fo-title-highlight">in 48 hours</span>',
       sub: 'First mockup in 3\u20134 hours after your message. Launch in 48 hours if the content is ready.',
       guarantee: "Don\u2019t like it \u2014 don\u2019t pay.",
       step1: 'You contact us', step2: 'First mockup', step3: 'Site in production',
@@ -5323,30 +5807,44 @@ var TRANSLATIONS = {
       item4: 'Portals, dashboards, and internal systems',
       cta: 'Discuss the task →'
     },
-    stats: { projects: 'Projects launched', years: 'Years of experience', mvp: 'Average MVP', free: 'Free estimate' },
+    stats: {
+      projectsValue: '40+',
+      yearsValue: '5',
+      mvpValue: '4 wks',
+      freeValue: '24h',
+      projects: 'Projects launched',
+      years: 'Years of experience',
+      mvp: 'Average MVP',
+      free: 'Free estimate'
+    },
     projects: {
-      title: 'CASES', openSite: 'Open site \u2192',
+      kicker: 'Results and launches',
+      title: 'CASES',
+      intro: 'These are not just interfaces. They show what shipped, how fast it shipped, and what changed for the business.',
+      openSite: 'Open site \u2192',
       dospass: {
-        desc: 'Launched a loyalty SaaS product for small businesses with digital cards, gift cards, referral mechanics, and AI marketing. Took it from idea to a working product and early launches in the UAE market.',
-        metric1: '6 weeks to launch',
-        metric2: 'Loyalty SaaS',
-        metric3: 'UAE market'
+        result: '6 WEEKS<span>from idea to SaaS launch in the UAE</span>',
+        desc: 'We launched a loyalty SaaS platform for small business: digital cards, gift cards, referral mechanics and AI marketing. From idea to working product and market launch in the UAE.',
+        meta: 'Loyalty SaaS \u00b7 UAE market \u00b7 AI marketing'
       },
       doschat: {
-        desc: 'Built a voice AI interface for Claude, GPT, and local models. Users can talk to AI from a phone or laptop without a separate app or complicated setup.',
-        metric1: 'Voice AI',
-        metric2: 'Phone + laptop',
-        metric3: 'No app'
+        result: 'NO APP<span>voice AI from phone and laptop</span>',
+        desc: 'We built a voice AI interface for Claude, GPT and local models. Users can talk to AI from phone or laptop without a separate app or painful setup.',
+        meta: 'Voice AI \u00b7 Phone + laptop \u00b7 Claude / GPT'
       },
       chicago: {
-        desc: 'Automated the restaurant flow with WhatsApp ordering, iiko integration, loyalty tools, and analytics. As a result, up to 40% of orders now go through automatically.',
-        metric1: '40% auto-orders',
-        metric2: 'iiko + WhatsApp',
-        metric3: 'Live analytics'
+        result: '40%<span>of orders run automatically</span>',
+        desc: 'We automated the restaurant stack: WhatsApp orders, iiko integration, loyalty program and analytics. As a result, up to 40% of orders now pass through automatically.',
+        meta: 'iiko + WhatsApp \u00b7 Live analytics \u00b7 Loyalty flow'
       }
     },
     testi: {
+      kicker: 'Feedback after launch',
       title: 'WHAT CLIENTS<br>SAY',
+      intro: 'These quotes are about launch speed, conversion lift and working operations, not vague “great to work with” praise.',
+      kicker1: '6-week launch',
+      kicker2: '2 weeks for bot + POS',
+      kicker3: 'x3 conversion after relaunch',
       1: '"We launched DosPass from zero to a working product in 6 weeks. The team really dug into the task \u2014 not just wrote code, but proposed several solutions we hadn\'t thought of ourselves. Now the platform operates in three countries."',
       2: '"We needed a Telegram bot for order taking and integration with our POS system. Done in 2 weeks, everything has been working without issues for over a year. Support responds quickly \u2014 that\'s rare among developers."',
       3: '"We got the first mockup 4 hours after the call. That honestly shocked us. The final site launched the next day \u2014 conversion tripled compared to the old one."',
@@ -5355,29 +5853,98 @@ var TRANSLATIONS = {
     },
     srv: {
       title: 'WHAT WE<br><span class="lime">BUILD</span>',
-      pitch: 'We take the full project \u2014 from first sketch to live product. No subcontractors, no surprises.',
+      pitch: 'We take the full project \u2014 from first sketch to live product. The focus is not the service list. The focus is shipping something clear, working and commercially useful.',
+      stats1: 'tracks',
+      stats2: 'team',
+      stats3: 'scale',
       cta: 'Discuss project \u2192',
-      '01': { name: 'UI/UX Design', desc: 'We research users, build prototypes, create design systems. Result \u2014 an interface that converts.', li1: 'User research', li2: 'Wireframes & prototypes', li3: 'Ready-to-ship designs' },
-      '02': { name: 'Web Apps', desc: 'SaaS, corporate portals, marketplaces. Built on modern stack \u2014 fast, reliable, zero to prod.', li1: 'React / Next.js frontend', li2: 'Node.js / Python backend', li3: 'PostgreSQL, Redis, deploy' },
-      '03': { name: 'PWA & portals', desc: 'Client portals, partner dashboards and PWA products that work great on phones without App Store overhead.', li1: 'Portals and account areas', li2: 'PWA install to home screen', li3: 'Mobile-first flow without native app work' },
-      '04': { name: 'AI Agents', desc: 'We automate processes with LLMs. Claude, GPT, custom pipelines \u2014 AI that actually works for business.', li1: 'Claude / GPT integrations', li2: 'RAG & vector databases', li3: 'Workflow automation' },
-      '05': { name: 'Telegram Bots', desc: 'Bots that sell, notify and support customers 24/7. CRM, iiko, payment integrations.', li1: 'Order & payment taking', li2: 'CRM & iiko integration', li3: 'Broadcasts & funnels' },
-      '06': { name: 'Dashboards', desc: 'Real-time analytics \u2014 see what matters, when it matters. BI systems, reports, KPIs on one screen.', li1: 'Real-time metrics', li2: 'Custom charts & KPIs', li3: 'Any data source integration' }
+      '01': { name: 'UI/UX Design', desc: 'We turn a raw request into a user flow, structure and interface that moves people toward lead, payment or the action that matters.', li1: 'Research and core flows', li2: 'Prototypes and key screens', li3: 'UI kit for development' },
+      '02': { name: 'Web Apps', desc: 'We ship MVPs, SaaS products and internal tools you can launch, validate and keep growing without rewriting a month later.', li1: 'MVP in 4\u20138 weeks', li2: 'Account area, CRM, admin, backoffice', li3: 'Integrations, payments, deploy' },
+      '03': { name: 'PWA & portals', desc: 'We build a mobile-first flow without native-app overhead when the priority is speed to launch and solid UX on phones.', li1: 'PWA and install flow', li2: 'Portals and account areas', li3: 'Auth, push and mobile logic' },
+      '04': { name: 'AI Agents', desc: 'We automate repeatable work where it truly removes load from the team, speeds up sales or cuts routine.', li1: 'LLM workflow design', li2: 'RAG and knowledge bases', li3: 'Support, ops and sales automation' },
+      '05': { name: 'Telegram Bots', desc: 'We build a channel where it is easier for the user to order, pay or get status than to open a site or install an app.', li1: 'Orders, payments, notifications', li2: 'CRM, iiko and custom integrations', li3: 'Funnels, broadcasts, support flow' },
+      '06': { name: 'Dashboards', desc: 'We build management panels so the team can see revenue, funnel, statuses and bottlenecks without manual reporting.', li1: 'Realtime KPI', li2: 'Custom charts and filters', li3: 'Any data source integration' }
     },
     proc: {
+      kicker: 'How the work runs',
       title: 'HOW WE<br><span class="lime">WORK</span>',
-      '01': { title: 'Request', desc: 'Write to us on Telegram or email. Describe your task \u2014 in any format, even voice. We respond within an hour during business hours.' },
-      '02': { title: 'Brief & estimate', desc: 'We ask the right questions, clarify goals and audience. We give an honest estimate with a fixed price \u2014 no hidden charges.' },
-      '03': { title: 'Design', desc: 'We create prototypes and mockups. Show the first version and collect feedback until you say "yes, that\'s it".' },
-      '04': { title: 'Development', desc: 'We write code based on the approved design. Weekly updates, access to the dev version from day one. No "ready in a month".' },
-      '05': { title: 'Launch & support', desc: 'We deploy, set up the domain, check everything before launch. After \u2014 we stay in touch for quick fixes and updates.' }
+      intro: 'The process is designed so you get a clear estimate fast, see an early version early, and never wait weeks without signal.',
+      '01': { title: 'Request', desc: 'Write to us on Telegram or email. Describe the task in any format, even voice. We reply within an hour during business hours.', time: '// 1 hour' },
+      '02': { title: 'Brief & estimate', desc: 'We ask the right questions, clarify goals and audience, and return with a fixed-price estimate and clear scope.', time: '// 1 day' },
+      '03': { title: 'Design', desc: 'We create prototypes and mockups, show the first version early and iterate until you say it is the right direction.', time: '// 2\u20135 days' },
+      '04': { title: 'Development', desc: 'We build against the approved design with weekly updates and access to the dev version from day one.', time: '// depends on scope' },
+      '05': { title: 'Launch & support', desc: 'We deploy, set up the domain, verify the release and stay available for fixes and follow-up updates.', time: '// live' }
+    },
+    tech: { label: 'Tech stack' },
+    pricing: {
+      kicker: 'Scope is fixed before build starts',
+      title: 'PRICING',
+      intro: 'These are starting points. After a short discovery pass we give you an exact estimate, stages and fixed price instead of surprise extras mid-project.',
+      landing: {
+        name: 'Landing page',
+        amount: 'from 100 000 ₸',
+        duration: '48 h',
+        desc: 'Fast launch for an offer page, ad traffic or first lead funnel.',
+        li1: 'First mockup the same day',
+        li2: '2 rounds of revisions included',
+        li3: 'Deploy included',
+        btn: 'Discuss landing page'
+      },
+      mvp: {
+        name: 'MVP',
+        badge: 'Popular choice',
+        amount: 'from 600 000 ₸',
+        duration: '4\u20138 wks',
+        desc: 'Full cycle for a first working product: design, development and release.',
+        li1: 'Design + development + release',
+        li2: 'Weekly demos and updates',
+        li3: 'Launch and handoff support',
+        btn: 'Discuss MVP'
+      },
+      custom: {
+        name: 'Custom build',
+        amount: 'By request',
+        duration: 'Custom',
+        desc: 'For complex stacks, integrations, SLA requirements or a dedicated team around the product.',
+        li1: 'Architecture and integrations',
+        li2: 'Dedicated team / SLA',
+        li3: 'Roadmap and support',
+        btn: 'Discuss the task'
+      },
+      note: 'We reply on Telegram within an hour during business hours.'
+    },
+    faq: {
+      kicker: 'We answer the risks first',
+      title: 'FAQ',
+      intro: 'Most clients come with a business problem, not a finished brief. These are the questions that usually block a faster start.',
+      q1: 'How much will my project cost?',
+      a1: 'It depends on scope. Landing pages start at 100 000 ₸. MVP work starts at 600 000 ₸. After the first call we send an exact estimate with clear stages.',
+      q2: 'What do you need to start?',
+      a2: 'An idea or the current problem is enough. You do not need a finished brief, mockups or technical spec \u2014 we can structure it with you.',
+      q3: 'Do you work with clients outside Kazakhstan?',
+      a3: 'Yes. We work with clients in Kazakhstan, Russia, the UAE and elsewhere. We accept KZT, USD and USDT. Telegram is the main communication channel.',
+      q4: 'What happens after payment?',
+      a4: 'The work moves in stages with regular updates. You see progress early instead of waiting a month for a reveal.',
+      q5: 'Do you provide a warranty or support after launch?',
+      a5: 'Yes. After launch we stay available for quick fixes and follow-up updates. If needed, we can set up ongoing support or SLA terms.',
+      q6: 'Can I see something before paying?',
+      a6: 'For landing pages \u2014 yes. We can show the first mockup in 3\u20134 hours. For larger builds we work through milestones so the scope and payment logic stay clear.'
     },
     cta: {
       title: 'Got an idea?',
       sub: 'Tell us about your project \u2014 in 24\u00a0hours you\'ll have an estimate and a plan. No obligations.',
-      btn: 'Discuss project on Telegram\u00a0\u2192'
+      btn: 'Discuss project on Telegram\u00a0\u2192',
+      small: 'or email <a href="mailto:hello@doscode.kz">hello@doscode.kz</a>'
     },
-    footer: { copy: 'DosCode \u00b7 Almaty \u00b7 2020\u20132026' }
+    footer: { copy: 'DosCode \u00b7 Almaty \u00b7 2020\u20132026' },
+    ui: {
+      prev: 'Previous',
+      next: 'Next',
+      close: 'Close',
+      viewer: 'Image viewer',
+      themeToLight: 'Switch to light theme',
+      themeToDark: 'Switch to dark theme'
+    }
   }
 };
 
@@ -5406,6 +5973,21 @@ function setLang(lang) {
     } else {
       el.textContent = val;
     }
+  });
+
+  [
+    ['data-i18n-aria-label', 'aria-label'],
+    ['data-i18n-title', 'title'],
+    ['data-i18n-alt', 'alt']
+  ].forEach(function(pair) {
+    var dataAttr = pair[0];
+    var targetAttr = pair[1];
+    document.querySelectorAll('[' + dataAttr + ']').forEach(function(el) {
+      var key = el.getAttribute(dataAttr);
+      var val = key.split('.').reduce(function(o, k) { return (o && o[k] !== undefined) ? o[k] : null; }, t);
+      if (val === null || val === undefined) return;
+      el.setAttribute(targetAttr, val);
+    });
   });
 
   // Marquee: generate repeated text from base string

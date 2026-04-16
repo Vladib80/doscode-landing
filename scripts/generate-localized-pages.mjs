@@ -18,7 +18,12 @@ const localeConfigs = {
     description: 'DosCode в Алматы: веб-приложения, MVP, Telegram-боты, AI-автоматизация и внутренние системы для бизнеса. Лендинги за 48 часов, MVP за 4–8 недель.',
     ogLocale: 'ru_KZ',
     ogLocaleAlternates: ['kk_KZ', 'en_US'],
-    schemaDescription: 'Студия разработки веб-приложений, MVP, AI-автоматизации и Telegram-ботов в Алматы.'
+    schemaDescription: 'Студия разработки веб-приложений, MVP, AI-автоматизации и Telegram-ботов в Алматы.',
+    schemaCatalogName: 'Услуги разработки',
+    schemaLandingName: 'Лендинг',
+    schemaLandingDescription: 'Дизайн, разработка, деплой под ключ за 2 недели',
+    schemaMvpName: 'MVP разработка',
+    schemaMvpDescription: 'Полный цикл: дизайн + разработка + деплой за 4–8 недель'
   },
   kk: {
     langKey: 'kz',
@@ -29,7 +34,12 @@ const localeConfigs = {
     description: 'DosCode Алматыда веб-қосымшалар, MVP, Telegram-боттар, AI-автоматтандыру және бизнеске арналған ішкі жүйелер жасайды. Лендинг 48 сағатта, MVP 4–8 аптада.',
     ogLocale: 'kk_KZ',
     ogLocaleAlternates: ['ru_KZ', 'en_US'],
-    schemaDescription: 'Алматыдағы DosCode веб-қосымшалар, MVP, AI-автоматтандыру және Telegram-боттар жасайды.'
+    schemaDescription: 'Алматыдағы DosCode веб-қосымшалар, MVP, AI-автоматтандыру және Telegram-боттар жасайды.',
+    schemaCatalogName: 'Әзірлеу қызметтері',
+    schemaLandingName: 'Лендинг',
+    schemaLandingDescription: 'Дизайн, әзірлеу және деплой толық циклмен 2 апта ішінде',
+    schemaMvpName: 'MVP әзірлеу',
+    schemaMvpDescription: 'Толық цикл: дизайн + әзірлеу + деплой 4–8 аптада'
   },
   en: {
     langKey: 'en',
@@ -40,11 +50,23 @@ const localeConfigs = {
     description: 'DosCode builds web apps, MVPs, Telegram bots, AI automation and internal systems in Almaty, Kazakhstan. Landing pages in 48 hours, MVPs in 4–8 weeks.',
     ogLocale: 'en_US',
     ogLocaleAlternates: ['ru_KZ', 'kk_KZ'],
-    schemaDescription: 'DosCode builds web apps, MVPs, AI automation and Telegram bots in Almaty.'
+    schemaDescription: 'DosCode builds web apps, MVPs, AI automation and Telegram bots in Almaty.',
+    schemaCatalogName: 'Development services',
+    schemaLandingName: 'Landing page development',
+    schemaLandingDescription: 'Design, development and deployment turnkey in 2 weeks',
+    schemaMvpName: 'MVP development',
+    schemaMvpDescription: 'Full cycle: design + development + deployment in 4–8 weeks'
   }
 };
 
 function mustReplace(html, pattern, replacement, label) {
+  if (typeof pattern === 'string') {
+    if (!html.includes(pattern)) {
+      throw new Error(`Failed to replace ${label}`);
+    }
+    return html.replace(pattern, replacement);
+  }
+
   const next = html.replace(pattern, replacement);
   if (next === html) {
     throw new Error(`Failed to replace ${label}`);
@@ -63,6 +85,12 @@ function resolvePath(obj, dottedPath) {
 
 function repeatMarquee(base) {
   return `${base}${base}${base}${base}`;
+}
+
+function escapeHtmlAttr(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;');
 }
 
 function extractObjectLiteral(source, regex, label) {
@@ -146,6 +174,36 @@ function localizeHtml(baseHtml, translations, marqueeBase, config) {
     `"inLanguage": "${config.htmlLang}"`,
     'schema inLanguage'
   );
+  html = mustReplace(
+    html,
+    '"name": "Услуги разработки"',
+    `"name": "${config.schemaCatalogName}"`,
+    'schema catalog name'
+  );
+  html = mustReplace(
+    html,
+    '"itemOffered": {"@type": "Service", "name": "Лендинг"}',
+    `"itemOffered": {"@type": "Service", "name": "${config.schemaLandingName}"}`,
+    'schema landing service name'
+  );
+  html = mustReplace(
+    html,
+    '"description": "Дизайн, разработка, деплой под ключ за 2 недели"',
+    `"description": "${config.schemaLandingDescription}"`,
+    'schema landing description'
+  );
+  html = mustReplace(
+    html,
+    '"itemOffered": {"@type": "Service", "name": "MVP разработка"}',
+    `"itemOffered": {"@type": "Service", "name": "${config.schemaMvpName}"}`,
+    'schema mvp service name'
+  );
+  html = mustReplace(
+    html,
+    '"description": "Полный цикл: дизайн + разработка + деплой за 4–8 недель"',
+    `"description": "${config.schemaMvpDescription}"`,
+    'schema mvp description'
+  );
 
   html = html.replace(/class="lang-btn active"/g, 'class="lang-btn"');
   html = mustReplace(
@@ -180,6 +238,40 @@ function localizeHtml(baseHtml, translations, marqueeBase, config) {
       return `<${tag}${before}data-i18n="${key}"${after}>${output}</${tag}>`;
     }
   );
+
+  [
+    ['data-i18n-aria-label', 'aria-label'],
+    ['data-i18n-title', 'title'],
+    ['data-i18n-alt', 'alt']
+  ].forEach(([dataAttr, targetAttr]) => {
+    html = html.replace(
+      new RegExp(`<([a-zA-Z0-9]+)([^>]*?)${dataAttr}="([^"]+)"([^>]*)>`, 'g'),
+      (match, tag, before, key, after) => {
+        const translated = resolvePath(translations[config.langKey], key);
+        if (translated === undefined || translated === null) {
+          return match;
+        }
+
+        const safeValue = escapeHtmlAttr(translated);
+        if (new RegExp(`${targetAttr}="[^"]*"`).test(match)) {
+          return match.replace(new RegExp(`${targetAttr}="[^"]*"`), `${targetAttr}="${safeValue}"`);
+        }
+
+        return `<${tag}${before}${targetAttr}="${safeValue}" ${dataAttr}="${key}"${after}>`;
+      }
+    );
+  });
+
+  const initialThemeLabel = resolvePath(translations[config.langKey], 'ui.themeToLight');
+  if (initialThemeLabel) {
+    const safeThemeLabel = escapeHtmlAttr(initialThemeLabel);
+    html = mustReplace(
+      html,
+      /(<button class="theme-toggle" id="themeToggle" type="button" aria-label=")[^"]*(" aria-pressed="false" title=")[^"]*(")/,
+      `$1${safeThemeLabel}$2${safeThemeLabel}$3`,
+      'theme toggle label'
+    );
+  }
 
   return html;
 }
