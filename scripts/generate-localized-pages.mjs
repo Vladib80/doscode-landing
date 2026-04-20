@@ -262,13 +262,13 @@ function localizeHtml(baseHtml, translations, marqueeBase, config) {
     );
   });
 
-  const initialThemeLabel = resolvePath(translations[config.langKey], 'ui.themeToLight');
+  const initialThemeLabel = resolvePath(translations[config.langKey], 'ui.themeToDark');
   if (initialThemeLabel) {
     const safeThemeLabel = escapeHtmlAttr(initialThemeLabel);
     html = mustReplace(
       html,
-      /(<button class="theme-toggle" id="themeToggle" type="button" aria-label=")[^"]*(" aria-pressed="false" title=")[^"]*(")/,
-      `$1${safeThemeLabel}$2${safeThemeLabel}$3`,
+      /(<button class="theme-toggle" id="themeToggle" type="button" aria-label=")[^"]*(" aria-pressed=")(?:true|false)(" title=")[^"]*(")/,
+      `$1${safeThemeLabel}$2true$3${safeThemeLabel}$4`,
       'theme toggle label'
     );
   }
