@@ -31,7 +31,7 @@
   <meta name="twitter:title" content="DosCode — Web App Development, MVPs and Telegram Bots in Almaty">
   <meta name="twitter:description" content="DosCode builds web apps, MVPs, Telegram bots, AI automation and internal systems in Almaty, Kazakhstan. Landing pages in 48 hours, MVPs in 4–8 weeks.">
   <meta name="twitter:image" content="https://doscode.kz/logo.png">
-  <meta name="theme-color" content="#080808" id="themeColorMeta">
+  <meta name="theme-color" content="#f4f1e8" id="themeColorMeta">
 
   <script>
     (function() {
@@ -46,8 +46,16 @@
             return;
           }
         }
-        if (localStorage.getItem('doscode-theme') === 'light') {
+        var storedTheme = localStorage.getItem('doscode-theme');
+        var isLightTheme = storedTheme !== 'dark';
+        if (isLightTheme) {
           document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+        var themeMeta = document.getElementById('themeColorMeta');
+        if (themeMeta) {
+          themeMeta.setAttribute('content', isLightTheme ? '#f4f1e8' : '#080808');
         }
       } catch (e) {}
     })();
@@ -200,6 +208,10 @@
     .srv-desc,
     .price-desc,
     .testi-text,
+    .bridge-sub,
+    .bridge-note-text,
+    .bridge-lane-desc,
+    .bridge-lane-note,
     .faq-a p {
       overflow-wrap: anywhere;
     }
@@ -212,6 +224,10 @@
     .fo-sub,
     .ps-desc,
     .testi-text,
+    .bridge-sub,
+    .bridge-note-text,
+    .bridge-lane-desc,
+    .bridge-lane-note,
     .faq-a p,
     .cta-lime p {
       text-wrap: pretty;
@@ -1065,7 +1081,7 @@
       display: grid;
       gap: 16px;
       margin-bottom: clamp(28px, 3vw, 42px);
-      align-items: end;
+      align-items: start;
     }
 
     .section-header--split {
@@ -1076,6 +1092,25 @@
     .section-header--center {
       justify-items: center;
       text-align: center;
+    }
+
+    .section-header--chapter {
+      justify-items: center;
+      text-align: center;
+      margin-bottom: clamp(34px, 4vw, 56px);
+    }
+
+    .section-header--spotlight {
+      justify-items: center;
+      text-align: center;
+      gap: clamp(14px, 2vw, 22px);
+      margin-bottom: clamp(34px, 4vw, 56px);
+    }
+
+    .section-header--spotlight > div {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
     }
 
     .section-header .section-title {
@@ -1110,6 +1145,28 @@
     }
 
     .section-header--center .section-intro {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-header--chapter .section-title,
+    .section-header--chapter .section-intro {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-header--chapter .section-intro {
+      max-width: 54ch;
+    }
+
+    .section-header--spotlight .section-title {
+      max-width: 12ch;
+      text-wrap: balance;
+    }
+
+    .section-header--spotlight .section-intro {
+      max-width: 50ch;
+      text-wrap: pretty;
       margin-left: auto;
       margin-right: auto;
     }
@@ -1311,6 +1368,10 @@
       margin-bottom: 28px !important;
     }
 
+    .services-kicker {
+      margin-bottom: 18px;
+    }
+
     .services-pitch {
       font-family: var(--font-body);
       font-size: clamp(15px, 1.3vw, 18px);
@@ -1499,6 +1560,10 @@
         margin-bottom: 22px !important;
       }
 
+      .services-kicker {
+        margin-bottom: 14px;
+      }
+
       .services-pitch {
         margin-bottom: 28px;
       }
@@ -1538,6 +1603,8 @@
       .services-title {
         font-size: clamp(30px, 3.2vw, 52px) !important;
         margin-bottom: 20px !important;
+        max-width: 8ch;
+        text-wrap: balance;
       }
 
       .services-pitch {
@@ -2069,93 +2136,297 @@
 
     /* ── CAPABILITY BRIDGE ── */
     .bridge-section {
+      position: relative;
+      overflow: hidden;
       border-top: 1px solid var(--border-soft);
       border-bottom: 1px solid var(--border-soft);
-      padding: clamp(52px, 7vw, 84px) clamp(20px, 4vw, 60px);
+      padding: clamp(64px, 8vw, 112px) clamp(20px, 4vw, 60px);
       background:
-        linear-gradient(180deg, rgba(var(--accent-rgb), 0.035), transparent 65%),
-        rgba(255, 255, 255, 0.01);
+        radial-gradient(circle at 10% 20%, rgba(var(--accent-rgb), 0.17), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent 34%),
+        var(--bg);
+    }
+
+    .bridge-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.34;
+      background-image:
+        linear-gradient(90deg, rgba(var(--accent-rgb), 0.05) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: min(18vw, 160px) 100%, 100% 112px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.92), transparent 96%);
     }
 
     .bridge-inner {
+      position: relative;
+      z-index: 1;
       max-width: 1280px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-      gap: clamp(28px, 4vw, 56px);
+      grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+      gap: clamp(28px, 4vw, 64px);
       align-items: start;
     }
 
     .bridge-copy {
+      position: sticky;
+      top: 108px;
       display: grid;
-      gap: 16px;
+      gap: 20px;
+      padding: clamp(24px, 2.6vw, 34px);
+      border: 1px solid var(--surface-border);
+      border-radius: 28px;
+      background:
+        linear-gradient(150deg, rgba(var(--accent-rgb), 0.14), rgba(var(--accent-rgb), 0.04) 44%, rgba(255, 255, 255, 0.02) 100%),
+        rgba(255, 255, 255, 0.02);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     .bridge-title {
+      max-width: 8ch;
       font-family: var(--font-display);
       font-weight: 900;
-      font-size: clamp(34px, 4vw, 58px);
-      line-height: 0.98;
-      letter-spacing: -0.03em;
+      font-size: clamp(40px, 4.4vw, 64px);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
     }
 
     .bridge-sub {
-      max-width: 44ch;
+      max-width: 34ch;
       font-size: clamp(15px, 1.15vw, 18px);
+      line-height: 1.78;
+      color: var(--text-dim);
+    }
+
+    .bridge-signals {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .bridge-signal {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-border);
+      background: rgba(0, 0, 0, 0.18);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .bridge-note {
+      display: grid;
+      gap: 8px;
+      padding-top: 18px;
+      border-top: 1px solid var(--accent-line);
+    }
+
+    .bridge-note-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .bridge-note-text {
+      max-width: 36ch;
+      font-size: 14px;
       line-height: 1.75;
       color: var(--text-dim);
     }
 
     .bridge-cta {
       width: fit-content;
-      margin-top: 10px;
+      margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-border-strong);
+      background: rgba(var(--accent-rgb), 0.08);
+      color: var(--accent);
       font-family: var(--font-mono);
       font-size: 12px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--accent);
       text-decoration: none;
-      padding-bottom: 4px;
-      border-bottom: 1px solid var(--accent-border);
+      transition: transform 0.24s ease, border-color 0.24s ease, background 0.24s ease, box-shadow 0.24s ease;
     }
 
     .bridge-cta:hover {
+      transform: translateY(-1px);
       border-color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.14);
+      box-shadow: 0 16px 34px rgba(var(--accent-rgb), 0.15);
     }
 
-    .bridge-list {
-      list-style: none;
+    .bridge-stack {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      gap: 14px;
+      align-content: start;
     }
 
-    .bridge-item {
-      min-height: 100%;
-      padding: 18px;
-      border-radius: 16px;
+    .bridge-lane {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1.2fr) minmax(180px, 0.8fr);
+      gap: 22px;
+      align-items: start;
+      padding: clamp(20px, 2.2vw, 28px);
       border: 1px solid var(--surface-border);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015)),
-        var(--bg-2);
-      font-size: 14px;
-      line-height: 1.65;
-      color: var(--text-dim);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.034), rgba(255, 255, 255, 0.018));
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.12);
+      transition: transform 0.24s ease, border-color 0.24s ease, background 0.24s ease, box-shadow 0.24s ease;
     }
 
-    .bridge-item::before {
-      content: '→';
-      display: inline-block;
-      margin-right: 10px;
-      color: var(--accent);
+    .bridge-lane::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.88), rgba(var(--accent-rgb), 0.12));
+      opacity: 0.58;
+    }
+
+    .bridge-lane:hover {
+      transform: translateX(6px);
+      border-color: var(--accent-border-strong);
+      background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.09), rgba(255, 255, 255, 0.018));
+      box-shadow: 0 24px 46px rgba(0, 0, 0, 0.16);
+    }
+
+    .bridge-lane--featured {
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.18), rgba(var(--accent-rgb), 0.05) 42%, rgba(255, 255, 255, 0.03) 100%);
+    }
+
+    .bridge-lane-num {
+      padding-top: 4px;
       font-family: var(--font-mono);
+      font-size: clamp(20px, 1.9vw, 26px);
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      opacity: 0.92;
+    }
+
+    .bridge-lane-main {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bridge-lane-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(24px, 2.2vw, 32px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .bridge-lane-desc {
+      max-width: 34ch;
+      font-size: clamp(15px, 1.02vw, 17px);
+      line-height: 1.72;
+      color: var(--text-dim);
+    }
+
+    .bridge-lane-note {
+      padding-top: 4px;
+      padding-left: 18px;
+      border-left: 1px solid var(--border-soft);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.8;
+      letter-spacing: 0.03em;
+      color: var(--text-faint);
+    }
+
+    @media (max-width: 1180px) {
+      .bridge-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .bridge-copy {
+        position: relative;
+        top: auto;
+      }
     }
 
     @media (max-width: 900px) {
-      .bridge-inner,
-      .bridge-list {
+      .bridge-section {
+        padding-block: clamp(52px, 10vw, 76px);
+      }
+
+      .bridge-inner {
+        gap: 22px;
+      }
+
+      .bridge-copy {
+        border-radius: 24px;
+      }
+
+      .bridge-title {
+        max-width: none;
+        font-size: clamp(36px, 10.5vw, 52px);
+      }
+
+      .bridge-sub,
+      .bridge-note-text {
+        max-width: none;
+      }
+
+      .bridge-lane {
+        grid-template-columns: 48px 1fr;
+        gap: 16px 18px;
+      }
+
+      .bridge-lane-note {
+        grid-column: 2;
+        padding-left: 0;
+        padding-top: 14px;
+        border-left: none;
+        border-top: 1px solid var(--border-soft);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .bridge-copy {
+        padding: 22px 18px;
+      }
+
+      .bridge-signals {
+        gap: 8px;
+      }
+
+      .bridge-signal {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .bridge-lane {
         grid-template-columns: 1fr;
+        padding: 20px 18px;
+      }
+
+      .bridge-lane-num {
+        padding-top: 0;
+      }
+
+      .bridge-lane-note {
+        grid-column: auto;
       }
     }
 
@@ -2383,6 +2654,8 @@
       flex-direction: column;
       gap: 0;
       max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .process-step {
@@ -2465,11 +2738,38 @@
 
     @media (min-width: 1024px) {
       .process-grid {
-        max-width: 680px;
+        max-width: 1180px;
       }
 
-      .ps-content {
-        max-width: 520px;
+      .process-step {
+        width: min(100%, 33rem);
+      }
+
+      .process-step:nth-child(odd) {
+        margin-right: auto;
+      }
+
+      .process-step:nth-child(even) {
+        margin-left: auto;
+        grid-template-columns: minmax(0, 1fr) 40px 60px;
+      }
+
+      .process-step:nth-child(even) .ps-content {
+        grid-column: 1;
+      }
+
+      .process-step:nth-child(even) .ps-connector {
+        grid-column: 2;
+      }
+
+      .process-step:nth-child(even) .ps-num {
+        grid-column: 3;
+        text-align: left;
+      }
+
+      .process-step:last-child {
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .ps-title {
@@ -2539,7 +2839,9 @@
       max-width: 820px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .faq-item {
@@ -2564,31 +2866,48 @@
 
     .faq-q {
       width: 100%;
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
-      gap: 20px;
-      padding: 24px 24px 20px;
+      gap: 24px;
+      padding: 24px 28px 22px;
       background: none;
       border: none;
       cursor: pointer;
       text-align: left;
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: clamp(16px, 1.5vw, 20px);
+      font-size: clamp(17px, 1.45vw, 21px);
+      line-height: 1.08;
       color: var(--text);
       transition: color 0.3s;
     }
 
+    .faq-q > span:first-child {
+      flex: 1 1 auto;
+      min-width: 0;
+      text-wrap: balance;
+      overflow-wrap: anywhere;
+    }
+
     .faq-q:hover { color: var(--accent); }
+
+    .faq-q:focus { outline: none; }
+
+    .faq-q:focus-visible {
+      border-radius: 14px;
+      box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 42%, transparent);
+    }
 
     .faq-icon {
       font-family: var(--font-mono);
-      font-size: 24px;
+      font-size: 28px;
       color: var(--accent);
       flex-shrink: 0;
       transition: transform 0.3s;
       line-height: 1;
+      align-self: center;
+      margin-top: 0;
     }
 
     .faq-q[aria-expanded="true"] .faq-icon {
@@ -2603,14 +2922,21 @@
     }
 
     .faq-a.open {
-      padding: 0 24px 24px;
+      padding: 0 28px 24px;
     }
 
     .faq-a p {
+      margin: 0;
       font-family: var(--font-body);
-      font-size: clamp(14px, 1.1vw, 16px);
+      font-size: clamp(15px, 1.05vw, 16px);
       color: var(--text-dim);
-      line-height: 1.8;
+      line-height: 1.72;
+      max-width: 41ch;
+    }
+
+    .faq-a.open p {
+      padding-top: 16px;
+      border-top: 1px solid var(--border-medium);
     }
 
     /* ── PROJECT LINK BUTTON ── */
@@ -3632,19 +3958,23 @@
       }
 
       .faq-q {
-        padding: 20px 0;
-        gap: 16px;
-        font-size: clamp(16px, 1.15vw, 18px);
+        padding: 22px 24px 20px;
+        gap: 18px;
+        font-size: clamp(17px, 1.15vw, 19px);
       }
 
       .faq-a.open {
-        padding-bottom: 20px;
+        padding: 0 24px 22px;
       }
 
       .faq-a p {
-        max-width: 50ch;
+        max-width: 44ch;
         font-size: clamp(14px, 0.95vw, 15px);
         line-height: 1.65;
+      }
+
+      .faq-a.open p {
+        padding-top: 14px;
       }
 
       .cta-lime {
@@ -3799,6 +4129,31 @@
         0 18px 42px rgba(22, 18, 12, 0.04);
     }
 
+    html[data-theme="light"] .bridge-copy,
+    html[data-theme="light"] .bridge-lane {
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.42),
+        0 18px 42px rgba(22, 18, 12, 0.05);
+    }
+
+    html[data-theme="light"] .bridge-copy {
+      background:
+        linear-gradient(150deg, rgba(var(--accent-rgb), 0.2), rgba(var(--accent-rgb), 0.07) 42%, rgba(255, 255, 255, 0.78) 100%),
+        rgba(255, 255, 255, 0.72);
+    }
+
+    html[data-theme="light"] .bridge-signal {
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    html[data-theme="light"] .bridge-lane {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.62));
+    }
+
+    html[data-theme="light"] .bridge-lane--featured {
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.26), rgba(255, 255, 255, 0.76) 68%);
+    }
+
     html[data-theme="light"] .testi-card--featured {
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.38),
@@ -3949,7 +4304,7 @@
     </ul>
     <a href="https://t.me/doscode_kz" class="nav-cta" target="_blank" rel="noopener noreferrer" data-i18n="nav.cta">Discuss project →</a>
     <div class="nav-utility">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme" aria-pressed="false" title="Switch to light theme">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" aria-pressed="true" title="Switch to dark theme">
         <span class="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true">
           <svg viewBox="0 0 16 16">
             <path d="M11.9 10.4A5.7 5.7 0 1 1 5.6 4.1 4.6 4.6 0 0 0 11.9 10.4Z"/>
@@ -4227,24 +4582,57 @@
 <!-- BRIDGE: BROADER PROJECT TYPES -->
 <section class="bridge-section">
   <div class="bridge-inner">
-    <div class="bridge-left">
-      <span class="bridge-kicker" data-i18n="bridge.kicker">Beyond urgent launches</span>
+    <div class="bridge-copy">
+      <span class="section-kicker" data-i18n="bridge.kicker">Beyond urgent launches</span>
       <h2 class="bridge-title" data-i18n="bridge.title">Not just landing pages</h2>
-      <p class="bridge-copy" data-i18n="bridge.copy">Clients come to us not only for fast launches. We also build Telegram bots, AI automation, MVPs, and internal systems for business. If the task is more complex than a regular website, that is still our lane. We look at the problem soberly and suggest the fastest sensible path to a result.</p>
-    </div>
-    <div class="bridge-right">
-      <div class="bridge-board">
-        <span class="bridge-board-label" data-i18n="bridge.boardLabel">What we launch</span>
-        <ul class="bridge-list">
-          <li data-i18n="bridge.item1">Telegram bots for sales, orders, and support</li>
-          <li data-i18n="bridge.item2">AI automation for repetitive work and internal processes</li>
-          <li data-i18n="bridge.item3">MVPs and web apps from scratch</li>
-          <li data-i18n="bridge.item4">Portals, dashboards, and internal systems</li>
-        </ul>
-        <div class="bridge-actions">
-          <a href="https://t.me/doscode_kz" class="bridge-cta" target="_blank" rel="noopener noreferrer" data-i18n="bridge.cta">Discuss the task →</a>
-        </div>
+      <p class="bridge-sub" data-i18n="bridge.sub">When the task no longer fits inside a promo site, we build the working product: a bot, MVP, client area or internal tool that removes routine and keeps the business moving every day.</p>
+      <div class="bridge-signals">
+        <span class="bridge-signal" data-i18n="bridge.signal1">Bots and workflows</span>
+        <span class="bridge-signal" data-i18n="bridge.signal2">AI and automation</span>
+        <span class="bridge-signal" data-i18n="bridge.signal3">MVPs and internal products</span>
       </div>
+      <div class="bridge-note">
+        <span class="bridge-note-label" data-i18n="bridge.noteLabel">When teams call us</span>
+        <p class="bridge-note-text" data-i18n="bridge.noteText">When they need more than a polished screen: take orders, guide users, collect data, surface metrics or remove manual operations from the team.</p>
+      </div>
+      <a href="https://t.me/doscode_kz" class="bridge-cta" target="_blank" rel="noopener noreferrer" data-i18n="bridge.cta">Discuss the task →</a>
+    </div>
+    <div class="bridge-stack">
+      <article class="bridge-lane bridge-lane--featured">
+        <div class="bridge-lane-num">01</div>
+        <div class="bridge-lane-main">
+          <h3 class="bridge-lane-title" data-i18n="bridge.item1">Telegram bots</h3>
+          <p class="bridge-lane-desc" data-i18n="bridge.item1Desc">Sales flows, order status, support, repeat touchpoints and notifications inside one scenario.</p>
+        </div>
+        <p class="bridge-lane-note" data-i18n="bridge.item1Note">We launch the bot as part of the funnel, not as a disconnected gadget.</p>
+      </article>
+
+      <article class="bridge-lane">
+        <div class="bridge-lane-num">02</div>
+        <div class="bridge-lane-main">
+          <h3 class="bridge-lane-title" data-i18n="bridge.item2">AI automation</h3>
+          <p class="bridge-lane-desc" data-i18n="bridge.item2Desc">Inbound triage, lead qualification, internal assistants, reporting and repeated operations.</p>
+        </div>
+        <p class="bridge-lane-note" data-i18n="bridge.item2Note">We only add LLMs where they clearly save time or money.</p>
+      </article>
+
+      <article class="bridge-lane">
+        <div class="bridge-lane-num">03</div>
+        <div class="bridge-lane-main">
+          <h3 class="bridge-lane-title" data-i18n="bridge.item3">MVPs and web apps</h3>
+          <p class="bridge-lane-desc" data-i18n="bridge.item3Desc">Client area, first-traffic service, CRM layer, partner portal or a new product from scratch.</p>
+        </div>
+        <p class="bridge-lane-note" data-i18n="bridge.item3Note">We ship the first working version fast so you can test demand in market, not in meetings.</p>
+      </article>
+
+      <article class="bridge-lane">
+        <div class="bridge-lane-num">04</div>
+        <div class="bridge-lane-main">
+          <h3 class="bridge-lane-title" data-i18n="bridge.item4">Dashboards and internal tools</h3>
+          <p class="bridge-lane-desc" data-i18n="bridge.item4Desc">Finance, requests, operating metrics, team roles, process control and one view of the business.</p>
+        </div>
+        <p class="bridge-lane-note" data-i18n="bridge.item4Note">We replace spreadsheet chaos with one system that shows what matters today.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -4273,10 +4661,10 @@
 
 <!-- PROJECTS -->
 <section class="section" id="projects">
-  <div class="section-header section-header--split">
+  <div class="section-header section-header--spotlight">
     <div>
       <span class="section-kicker" data-i18n="projects.kicker">Results and launches</span>
-      <h2 class="section-title" data-i18n="projects.title">CASES</h2>
+      <h2 class="section-title" data-i18n="projects.title">WHAT<br>SHIPPED</h2>
     </div>
     <p class="section-intro" data-i18n="projects.intro">These are not just interfaces. They show what shipped, how fast it shipped, and what changed for the business.</p>
   </div>
@@ -4368,7 +4756,7 @@
 
 <!-- TESTIMONIALS -->
 <section class="section" id="testimonials">
-  <div class="section-header section-header--center">
+  <div class="section-header section-header--spotlight">
     <span class="section-kicker" data-i18n="testi.kicker">Feedback after launch</span>
     <h2 class="section-title" data-i18n="testi.title">WHAT CLIENTS<br>SAY</h2>
     <p class="section-intro" data-i18n="testi.intro">These quotes are about launch speed, conversion lift and working operations, not vague “great to work with” praise.</p>
@@ -4423,7 +4811,8 @@
 
     <!-- LEFT: sticky context column -->
     <div class="services-left">
-      <h2 class="section-title services-title" data-i18n="srv.title">WHAT WE<br><span class="lime">BUILD</span></h2>
+      <span class="section-kicker services-kicker" data-i18n="srv.kicker">What we launch for business</span>
+      <h2 class="section-title services-title" data-i18n="srv.title">WHAT<br>WE<br><span class="lime">BUILD</span></h2>
       <p class="services-pitch" data-i18n="srv.pitch">We take the full project — from first sketch to live product. The focus is not the service list. The focus is shipping something clear, working and commercially useful.</p>
       <div class="services-stat-row">
         <div class="ss-item"><span class="ss-num">6</span><span class="ss-label" data-i18n="srv.stats1">tracks</span></div>
@@ -4571,10 +4960,10 @@
 
 <!-- PROCESS -->
 <section class="section" id="process">
-  <div class="section-header section-header--split">
+  <div class="section-header section-header--spotlight">
     <div>
       <span class="section-kicker" data-i18n="proc.kicker">How the work runs</span>
-      <h2 class="section-title" data-i18n="proc.title">HOW WE<br><span class="lime">WORK</span></h2>
+      <h2 class="section-title" data-i18n="proc.title">HOW<br>WE<br><span class="lime">WORK</span></h2>
     </div>
     <p class="section-intro" data-i18n="proc.intro">The process is designed so you get a clear estimate fast, see an early version early, and never wait weeks without signal.</p>
   </div>
@@ -4669,10 +5058,10 @@
 
 <!-- PRICING -->
 <section class="section" id="pricing">
-  <div class="section-header section-header--split">
+  <div class="section-header section-header--spotlight">
     <div>
       <span class="section-kicker" data-i18n="pricing.kicker">Scope is fixed before build starts</span>
-      <h2 class="section-title" data-i18n="pricing.title">PRICING</h2>
+      <h2 class="section-title" data-i18n="pricing.title">WHAT<br>IT COSTS</h2>
     </div>
     <p class="section-intro" data-i18n="pricing.intro">These are starting points. After a short discovery pass we give you an exact estimate, stages and fixed price instead of surprise extras mid-project.</p>
   </div>
@@ -4720,10 +5109,10 @@
 
 <!-- FAQ -->
 <section class="section" id="faq">
-  <div class="section-header section-header--split">
+  <div class="section-header section-header--spotlight">
     <div>
       <span class="section-kicker" data-i18n="faq.kicker">We answer the risks first</span>
-      <h2 class="section-title" data-i18n="faq.title">FAQ</h2>
+      <h2 class="section-title" data-i18n="faq.title">COMMON<br>QUESTIONS</h2>
     </div>
     <p class="section-intro" data-i18n="faq.intro">Most clients come with a business problem, not a finished brief. These are the questions that usually block a faster start.</p>
   </div>
@@ -5453,12 +5842,24 @@ var TRANSLATIONS = {
     bridge: {
       kicker: 'Кроме срочных запусков',
       title: 'Не только лендинги',
-      copy: 'К нам приходят не только за быстрым запуском. Мы также делаем Telegram-ботов, AI-автоматизацию, MVP и внутренние системы для бизнеса. Если задача сложнее обычного сайта, это тоже к нам. Смотрим на задачу трезво и предлагаем самый быстрый разумный путь к результату.',
-      boardLabel: 'Что запускаем',
-      item1: 'Telegram-боты для продаж, заказов и поддержки',
-      item2: 'AI-автоматизация рутины и внутренних процессов',
-      item3: 'MVP и веб-приложения с нуля',
-      item4: 'Кабинеты, дашборды и внутренние системы',
+      sub: 'Если задаче уже тесно в рамках промо-сайта, собираем рабочий продукт: бота, MVP, кабинет или внутреннюю систему, которая снимает рутину и двигает бизнес каждый день.',
+      signal1: 'Боты и сценарии',
+      signal2: 'AI и автоматизация',
+      signal3: 'MVP и внутренние продукты',
+      noteLabel: 'Когда обращаются',
+      noteText: 'Когда нужен не просто красивый экран, а процесс: принять заказ, провести пользователя, собрать данные, показать метрики или убрать ручную работу из команды.',
+      item1: 'Telegram-боты',
+      item1Desc: 'Продажи, статусы заказов, поддержка, повторные касания и уведомления в одном сценарии.',
+      item1Note: 'Запускаем бота как часть воронки, а не как отдельную игрушку.',
+      item2: 'AI-автоматизация',
+      item2Desc: 'Разбор входящих, квалификация лидов, внутренние ассистенты, отчёты и повторяющиеся операции.',
+      item2Note: 'Подключаем LLM только туда, где они реально экономят время и деньги.',
+      item3: 'MVP и веб-приложения',
+      item3Desc: 'Личный кабинет, сервис под первый трафик, CRM-слой, партнёрский портал или новый продукт с нуля.',
+      item3Note: 'Быстро собираем первую рабочую версию, чтобы проверять спрос на рынке, а не на созвонах.',
+      item4: 'Кабинеты и дашборды',
+      item4Desc: 'Финансы, заявки, операционные метрики, роли команды, контроль процессов и единая картина по бизнесу.',
+      item4Note: 'Убираем Excel-хаос и даём систему, в которой видно, что происходит сегодня.',
       cta: 'Обсудить задачу →'
     },
     stats: {
@@ -5473,7 +5874,7 @@ var TRANSLATIONS = {
     },
     projects: {
       kicker: 'Результаты и запуски',
-      title: 'КЕЙСЫ',
+      title: 'НАШИ<br>КЕЙСЫ',
       intro: 'Показываем не только интерфейс, а то, что удалось запустить и какой бизнес-эффект это дало.',
       openSite: 'Открыть сайт \u2192',
       dospass: {
@@ -5506,7 +5907,8 @@ var TRANSLATIONS = {
       role1: 'Основатель, DosPass', role2: 'Директор, Chicago Pizza', role3: 'CEO, IT-стартап, Алматы'
     },
     srv: {
-      title: 'ЧТО МЫ<br><span class="lime">ДЕЛАЕМ</span>',
+      kicker: 'Что запускаем для бизнеса',
+      title: 'ЧТО<br>МЫ<br><span class="lime">ДЕЛАЕМ</span>',
       pitch: 'Берём проект целиком \u2014 от первого скетча до живого продукта. Фокус не на списке услуг, а на том, чтобы запустить понятный, работающий и коммерчески полезный результат.',
       stats1: 'направлений',
       stats2: 'команда',
@@ -5521,7 +5923,7 @@ var TRANSLATIONS = {
     },
     proc: {
       kicker: 'Как идёт работа',
-      title: 'КАК МЫ<br><span class="lime">РАБОТАЕМ</span>',
+      title: 'КАК<br>МЫ<br><span class="lime">РАБОТАЕМ</span>',
       intro: 'Процесс сделан так, чтобы вы быстро получили понятную смету, увидели первую версию рано и не ждали апдейта неделями.',
       '01': { title: 'Заявка', desc: 'Пишете в Telegram или на почту. Рассказываете задачу \u2014 в любом формате, даже голосом. Отвечаем в течение часа в рабочее время.', time: '// 1 час' },
       '02': { title: 'Бриф и оценка', desc: 'Задаём нужные вопросы, уточняем цели и аудиторию. Даём честную смету с фиксированной ценой \u2014 без скрытых доплат.', time: '// 1 день' },
@@ -5532,7 +5934,7 @@ var TRANSLATIONS = {
     tech: { label: 'Технологии' },
     pricing: {
       kicker: 'Фиксируем объём до старта',
-      title: 'СТОИМОСТЬ',
+      title: 'СКОЛЬКО<br>СТОИТ',
       intro: 'Это стартовые ориентиры. После короткого разбора задачи даём точную смету, этапы и фиксированную цену без доплат по ходу.',
       landing: {
         name: 'Лендинг',
@@ -5569,7 +5971,7 @@ var TRANSLATIONS = {
     },
     faq: {
       kicker: 'Сначала отвечаем на риски',
-      title: 'ВОПРОСЫ',
+      title: 'ЧАСТЫЕ<br>ВОПРОСЫ',
       intro: 'Большинство клиентов приходят с задачей, а не с готовым ТЗ. Ниже ответы на вопросы, которые обычно мешают стартовать быстрее.',
       q1: 'Сколько будет стоить мой проект?',
       a1: 'Зависит от сложности. Лендинг \u2014 от 100 000 ₸. MVP \u2014 от 600 000 ₸. После первого звонка даём точную смету с фиксированной ценой и понятными этапами.',
@@ -5626,12 +6028,24 @@ var TRANSLATIONS = {
     bridge: {
       kicker: 'Шұғыл іске қосудан бөлек',
       title: 'Тек лендинг емес',
-      copy: 'Бізге тек тез іске қосу үшін ғана келмейді. Біз Telegram-боттар, AI-автоматтандыру, MVP және бизнеске арналған ішкі жүйелер де жасаймыз. Егер міндет кәдімгі сайттан күрделірек болса, ол да бізге келеді. Міндетке байыппен қарап, нәтижеге апаратын ең жылдам дұрыс жолды ұсынамыз.',
-      boardLabel: 'Не іске қосамыз',
-      item1: 'Сату, тапсырыс және қолдау үшін Telegram-боттар',
-      item2: 'Рутина мен ішкі процестерге AI-автоматтандыру',
-      item3: 'Нөлден MVP және веб-қосымшалар',
-      item4: 'Кабинеттер, дашбордтар және ішкі жүйелер',
+      sub: 'Мәселе промо-сайт шеңберінен шыққанда, біз жұмыс істейтін өнімді жасаймыз: бот, MVP, кабинет немесе күн сайын рутинаны азайтатын ішкі жүйе.',
+      signal1: 'Боттар мен сценарийлер',
+      signal2: 'AI және автоматтандыру',
+      signal3: 'MVP және ішкі өнімдер',
+      noteLabel: 'Қашан жүгінеді',
+      noteText: 'Тек әдемі экран емес, нақты процесс керек кезде: тапсырыс қабылдау, пайдаланушыны жүргізу, дерек жинау, метриканы көрсету немесе команданың қол жұмысын азайту.',
+      item1: 'Telegram-боттар',
+      item1Desc: 'Сату, тапсырыс мәртебесі, қолдау, қайталама байланыс және хабарламалар бір сценарийде.',
+      item1Note: 'Ботты бөлек ойыншық емес, сату процесінің бөлігі ретінде іске қосамыз.',
+      item2: 'AI-автоматтандыру',
+      item2Desc: 'Кіріс сұрауларды сұрыптау, лидтерді саралау, ішкі ассистенттер, есептер және қайталанатын операциялар.',
+      item2Note: 'LLM-ді тек уақыт пен ақшаны нақты үнемдейтін жерге қосамыз.',
+      item3: 'MVP және веб-қосымшалар',
+      item3Desc: 'Жеке кабинет, алғашқы трафикке арналған сервис, CRM-қабат, серіктес порталы немесе нөлден жаңа өнім.',
+      item3Note: 'Бірінші жұмыс нұсқасын тез шығарамыз, сонда сұранысты жиналыста емес, нарықта тексересіз.',
+      item4: 'Кабинеттер мен дашбордтар',
+      item4Desc: 'Қаржы, өтінімдер, операциялық метрикалар, команда рөлдері, процестерді бақылау және бизнеске ортақ көрініс.',
+      item4Note: 'Excel-дегі бытыраңқылықтың орнына бүгін не болып жатқанын көрсететін бір жүйе береміз.',
       cta: 'Тапсырманы талқылау →'
     },
     stats: {
@@ -5646,7 +6060,7 @@ var TRANSLATIONS = {
     },
     projects: {
       kicker: 'Нәтижелер мен іске қосулар',
-      title: 'КЕЙСТЕР',
+      title: 'БІЗДІҢ<br>КЕЙСТЕР',
       intro: 'Мұнда жай интерфейс емес, іске қосылған өнім мен бизнеске берген нақты әсер көрсетілген.',
       openSite: 'Сайтты ашу \u2192',
       dospass: {
@@ -5679,7 +6093,8 @@ var TRANSLATIONS = {
       role1: 'Негізін қалаушы, DosPass', role2: 'Директор, Chicago Pizza', role3: 'CEO, IT-стартап, Алматы'
     },
     srv: {
-      title: 'НЕ\u00a0ҚҰРАМЫЗ<br><span class="lime">БІЗ</span>',
+      kicker: 'Бизнес үшін не іске қосамыз',
+      title: 'НЕ<br>ҚҰРАМЫЗ<br><span class="lime">БІЗ</span>',
       pitch: 'Жобаны толығымен аламыз \u2014 бірінші эскизден тірі өнімге дейін. Фокус қызметтер тізімінде емес, нақты іске қосылатын және бизнеске пайдасы бар нәтиже алуда.',
       stats1: 'бағыттар',
       stats2: 'команда',
@@ -5694,7 +6109,7 @@ var TRANSLATIONS = {
     },
     proc: {
       kicker: 'Жұмыс қалай жүреді',
-      title: 'ҚАЛАЙ<br><span class="lime">ЖҰМЫС ІСТЕЙМІЗ</span>',
+      title: 'ҚАЛАЙ<br>ЖҰМЫС<br><span class="lime">ІСТЕЙМІЗ</span>',
       intro: 'Процесс сметаны тез алуға, алғашқы нұсқаны ерте көруге және апталап белгісіздікте отырмауға құрылған.',
       '01': { title: 'Өтініш', desc: 'Telegram-ға немесе поштаға жазыңыз. Тапсырманы кез келген форматта айтыңыз, тіпті дауыспен де. Жұмыс уақытында бір сағат ішінде жауап береміз.', time: '// 1 сағат' },
       '02': { title: 'Бриф және бағалау', desc: 'Қажетті сұрақтарды қойып, мақсаттар мен аудиторияны нақтылаймыз. Бекітілген бағамен адал смета береміз.', time: '// 1 күн' },
@@ -5705,7 +6120,7 @@ var TRANSLATIONS = {
     tech: { label: 'Технологиялар' },
     pricing: {
       kicker: 'Көлемді басталмай тұрып бекітеміз',
-      title: 'ҚҰНЫ',
+      title: 'ҚАНША<br>ТҰРАДЫ',
       intro: 'Бұл бастапқы бағалар. Міндетті қысқа талдаудан кейін нақты смета, кезеңдер және жол-жөнекей өзгермейтін бекітілген баға береміз.',
       landing: {
         name: 'Лендинг',
@@ -5742,7 +6157,7 @@ var TRANSLATIONS = {
     },
     faq: {
       kicker: 'Алдымен тәуекелдерге жауап береміз',
-      title: 'СҰРАҚТАР',
+      title: 'ЖИІ<br>СҰРАҚТАР',
       intro: 'Көп клиенттер толық ТЗ емес, жай міндетпен келеді. Төменде жобаны тезірек бастауға кедергі болатын негізгі сұрақтарға жауап бар.',
       q1: 'Менің жобам қанша тұрады?',
       a1: 'Күрделілікке байланысты. Лендинг \u2014 100 000 ₸ бастап. MVP \u2014 600 000 ₸ бастап. Алғашқы қоңыраудан кейін нақты смета мен кезеңдер береміз.',
@@ -5799,12 +6214,24 @@ var TRANSLATIONS = {
     bridge: {
       kicker: 'Beyond urgent launches',
       title: 'Not just landing pages',
-      copy: 'Clients come to us not only for fast launches. We also build Telegram bots, AI automation, MVPs, and internal systems for business. If the task is more complex than a regular website, that is still our lane. We look at the problem soberly and suggest the fastest sensible path to a result.',
-      boardLabel: 'What we launch',
-      item1: 'Telegram bots for sales, orders, and support',
-      item2: 'AI automation for repetitive work and internal processes',
-      item3: 'MVPs and web apps from scratch',
-      item4: 'Portals, dashboards, and internal systems',
+      sub: 'When the task no longer fits inside a promo site, we build the working product: a bot, MVP, client area or internal tool that removes routine and keeps the business moving every day.',
+      signal1: 'Bots and workflows',
+      signal2: 'AI and automation',
+      signal3: 'MVPs and internal products',
+      noteLabel: 'When teams call us',
+      noteText: 'When they need more than a polished screen: take orders, guide users, collect data, surface metrics or remove manual operations from the team.',
+      item1: 'Telegram bots',
+      item1Desc: 'Sales flows, order status, support, repeat touchpoints and notifications inside one scenario.',
+      item1Note: 'We launch the bot as part of the funnel, not as a disconnected gadget.',
+      item2: 'AI automation',
+      item2Desc: 'Inbound triage, lead qualification, internal assistants, reporting and repeated operations.',
+      item2Note: 'We only add LLMs where they clearly save time or money.',
+      item3: 'MVPs and web apps',
+      item3Desc: 'Client area, first-traffic service, CRM layer, partner portal or a new product from scratch.',
+      item3Note: 'We ship the first working version fast so you can test demand in market, not in meetings.',
+      item4: 'Dashboards and internal tools',
+      item4Desc: 'Finance, requests, operating metrics, team roles, process control and one view of the business.',
+      item4Note: 'We replace spreadsheet chaos with one system that shows what matters today.',
       cta: 'Discuss the task →'
     },
     stats: {
@@ -5819,7 +6246,7 @@ var TRANSLATIONS = {
     },
     projects: {
       kicker: 'Results and launches',
-      title: 'CASES',
+      title: 'WHAT<br>SHIPPED',
       intro: 'These are not just interfaces. They show what shipped, how fast it shipped, and what changed for the business.',
       openSite: 'Open site \u2192',
       dospass: {
@@ -5852,7 +6279,8 @@ var TRANSLATIONS = {
       role1: 'Founder, DosPass', role2: 'Director, Chicago Pizza', role3: 'CEO, IT startup, Almaty'
     },
     srv: {
-      title: 'WHAT WE<br><span class="lime">BUILD</span>',
+      kicker: 'What we launch for business',
+      title: 'WHAT<br>WE<br><span class="lime">BUILD</span>',
       pitch: 'We take the full project \u2014 from first sketch to live product. The focus is not the service list. The focus is shipping something clear, working and commercially useful.',
       stats1: 'tracks',
       stats2: 'team',
@@ -5867,7 +6295,7 @@ var TRANSLATIONS = {
     },
     proc: {
       kicker: 'How the work runs',
-      title: 'HOW WE<br><span class="lime">WORK</span>',
+      title: 'HOW<br>WE<br><span class="lime">WORK</span>',
       intro: 'The process is designed so you get a clear estimate fast, see an early version early, and never wait weeks without signal.',
       '01': { title: 'Request', desc: 'Write to us on Telegram or email. Describe the task in any format, even voice. We reply within an hour during business hours.', time: '// 1 hour' },
       '02': { title: 'Brief & estimate', desc: 'We ask the right questions, clarify goals and audience, and return with a fixed-price estimate and clear scope.', time: '// 1 day' },
@@ -5878,7 +6306,7 @@ var TRANSLATIONS = {
     tech: { label: 'Tech stack' },
     pricing: {
       kicker: 'Scope is fixed before build starts',
-      title: 'PRICING',
+      title: 'WHAT<br>IT COSTS',
       intro: 'These are starting points. After a short discovery pass we give you an exact estimate, stages and fixed price instead of surprise extras mid-project.',
       landing: {
         name: 'Landing page',
@@ -5915,7 +6343,7 @@ var TRANSLATIONS = {
     },
     faq: {
       kicker: 'We answer the risks first',
-      title: 'FAQ',
+      title: 'COMMON<br>QUESTIONS',
       intro: 'Most clients come with a business problem, not a finished brief. These are the questions that usually block a faster start.',
       q1: 'How much will my project cost?',
       a1: 'It depends on scope. Landing pages start at 100 000 ₸. MVP work starts at 600 000 ₸. After the first call we send an exact estimate with clear stages.',

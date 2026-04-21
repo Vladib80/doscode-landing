@@ -208,6 +208,10 @@
     .srv-desc,
     .price-desc,
     .testi-text,
+    .bridge-sub,
+    .bridge-note-text,
+    .bridge-lane-desc,
+    .bridge-lane-note,
     .faq-a p {
       overflow-wrap: anywhere;
     }
@@ -220,6 +224,10 @@
     .fo-sub,
     .ps-desc,
     .testi-text,
+    .bridge-sub,
+    .bridge-note-text,
+    .bridge-lane-desc,
+    .bridge-lane-note,
     .faq-a p,
     .cta-lime p {
       text-wrap: pretty;
@@ -2128,93 +2136,297 @@
 
     /* ── CAPABILITY BRIDGE ── */
     .bridge-section {
+      position: relative;
+      overflow: hidden;
       border-top: 1px solid var(--border-soft);
       border-bottom: 1px solid var(--border-soft);
-      padding: clamp(52px, 7vw, 84px) clamp(20px, 4vw, 60px);
+      padding: clamp(64px, 8vw, 112px) clamp(20px, 4vw, 60px);
       background:
-        linear-gradient(180deg, rgba(var(--accent-rgb), 0.035), transparent 65%),
-        rgba(255, 255, 255, 0.01);
+        radial-gradient(circle at 10% 20%, rgba(var(--accent-rgb), 0.17), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent 34%),
+        var(--bg);
+    }
+
+    .bridge-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.34;
+      background-image:
+        linear-gradient(90deg, rgba(var(--accent-rgb), 0.05) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: min(18vw, 160px) 100%, 100% 112px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.92), transparent 96%);
     }
 
     .bridge-inner {
+      position: relative;
+      z-index: 1;
       max-width: 1280px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-      gap: clamp(28px, 4vw, 56px);
+      grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+      gap: clamp(28px, 4vw, 64px);
       align-items: start;
     }
 
     .bridge-copy {
+      position: sticky;
+      top: 108px;
       display: grid;
-      gap: 16px;
+      gap: 20px;
+      padding: clamp(24px, 2.6vw, 34px);
+      border: 1px solid var(--surface-border);
+      border-radius: 28px;
+      background:
+        linear-gradient(150deg, rgba(var(--accent-rgb), 0.14), rgba(var(--accent-rgb), 0.04) 44%, rgba(255, 255, 255, 0.02) 100%),
+        rgba(255, 255, 255, 0.02);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     .bridge-title {
+      max-width: 8ch;
       font-family: var(--font-display);
       font-weight: 900;
-      font-size: clamp(34px, 4vw, 58px);
-      line-height: 0.98;
-      letter-spacing: -0.03em;
+      font-size: clamp(40px, 4.4vw, 64px);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
     }
 
     .bridge-sub {
-      max-width: 44ch;
+      max-width: 34ch;
       font-size: clamp(15px, 1.15vw, 18px);
+      line-height: 1.78;
+      color: var(--text-dim);
+    }
+
+    .bridge-signals {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .bridge-signal {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-border);
+      background: rgba(0, 0, 0, 0.18);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .bridge-note {
+      display: grid;
+      gap: 8px;
+      padding-top: 18px;
+      border-top: 1px solid var(--accent-line);
+    }
+
+    .bridge-note-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .bridge-note-text {
+      max-width: 36ch;
+      font-size: 14px;
       line-height: 1.75;
       color: var(--text-dim);
     }
 
     .bridge-cta {
       width: fit-content;
-      margin-top: 10px;
+      margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-border-strong);
+      background: rgba(var(--accent-rgb), 0.08);
+      color: var(--accent);
       font-family: var(--font-mono);
       font-size: 12px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--accent);
       text-decoration: none;
-      padding-bottom: 4px;
-      border-bottom: 1px solid var(--accent-border);
+      transition: transform 0.24s ease, border-color 0.24s ease, background 0.24s ease, box-shadow 0.24s ease;
     }
 
     .bridge-cta:hover {
+      transform: translateY(-1px);
       border-color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.14);
+      box-shadow: 0 16px 34px rgba(var(--accent-rgb), 0.15);
     }
 
-    .bridge-list {
-      list-style: none;
+    .bridge-stack {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      gap: 14px;
+      align-content: start;
     }
 
-    .bridge-item {
-      min-height: 100%;
-      padding: 18px;
-      border-radius: 16px;
+    .bridge-lane {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1.2fr) minmax(180px, 0.8fr);
+      gap: 22px;
+      align-items: start;
+      padding: clamp(20px, 2.2vw, 28px);
       border: 1px solid var(--surface-border);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015)),
-        var(--bg-2);
-      font-size: 14px;
-      line-height: 1.65;
-      color: var(--text-dim);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.034), rgba(255, 255, 255, 0.018));
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.12);
+      transition: transform 0.24s ease, border-color 0.24s ease, background 0.24s ease, box-shadow 0.24s ease;
     }
 
-    .bridge-item::before {
-      content: '→';
-      display: inline-block;
-      margin-right: 10px;
-      color: var(--accent);
+    .bridge-lane::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.88), rgba(var(--accent-rgb), 0.12));
+      opacity: 0.58;
+    }
+
+    .bridge-lane:hover {
+      transform: translateX(6px);
+      border-color: var(--accent-border-strong);
+      background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.09), rgba(255, 255, 255, 0.018));
+      box-shadow: 0 24px 46px rgba(0, 0, 0, 0.16);
+    }
+
+    .bridge-lane--featured {
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.18), rgba(var(--accent-rgb), 0.05) 42%, rgba(255, 255, 255, 0.03) 100%);
+    }
+
+    .bridge-lane-num {
+      padding-top: 4px;
       font-family: var(--font-mono);
+      font-size: clamp(20px, 1.9vw, 26px);
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      opacity: 0.92;
+    }
+
+    .bridge-lane-main {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bridge-lane-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(24px, 2.2vw, 32px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .bridge-lane-desc {
+      max-width: 34ch;
+      font-size: clamp(15px, 1.02vw, 17px);
+      line-height: 1.72;
+      color: var(--text-dim);
+    }
+
+    .bridge-lane-note {
+      padding-top: 4px;
+      padding-left: 18px;
+      border-left: 1px solid var(--border-soft);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.8;
+      letter-spacing: 0.03em;
+      color: var(--text-faint);
+    }
+
+    @media (max-width: 1180px) {
+      .bridge-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .bridge-copy {
+        position: relative;
+        top: auto;
+      }
     }
 
     @media (max-width: 900px) {
-      .bridge-inner,
-      .bridge-list {
+      .bridge-section {
+        padding-block: clamp(52px, 10vw, 76px);
+      }
+
+      .bridge-inner {
+        gap: 22px;
+      }
+
+      .bridge-copy {
+        border-radius: 24px;
+      }
+
+      .bridge-title {
+        max-width: none;
+        font-size: clamp(36px, 10.5vw, 52px);
+      }
+
+      .bridge-sub,
+      .bridge-note-text {
+        max-width: none;
+      }
+
+      .bridge-lane {
+        grid-template-columns: 48px 1fr;
+        gap: 16px 18px;
+      }
+
+      .bridge-lane-note {
+        grid-column: 2;
+        padding-left: 0;
+        padding-top: 14px;
+        border-left: none;
+        border-top: 1px solid var(--border-soft);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .bridge-copy {
+        padding: 22px 18px;
+      }
+
+      .bridge-signals {
+        gap: 8px;
+      }
+
+      .bridge-signal {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .bridge-lane {
         grid-template-columns: 1fr;
+        padding: 20px 18px;
+      }
+
+      .bridge-lane-num {
+        padding-top: 0;
+      }
+
+      .bridge-lane-note {
+        grid-column: auto;
       }
     }
 
@@ -3917,6 +4129,31 @@
         0 18px 42px rgba(22, 18, 12, 0.04);
     }
 
+    html[data-theme="light"] .bridge-copy,
+    html[data-theme="light"] .bridge-lane {
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.42),
+        0 18px 42px rgba(22, 18, 12, 0.05);
+    }
+
+    html[data-theme="light"] .bridge-copy {
+      background:
+        linear-gradient(150deg, rgba(var(--accent-rgb), 0.2), rgba(var(--accent-rgb), 0.07) 42%, rgba(255, 255, 255, 0.78) 100%),
+        rgba(255, 255, 255, 0.72);
+    }
+
+    html[data-theme="light"] .bridge-signal {
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    html[data-theme="light"] .bridge-lane {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.62));
+    }
+
+    html[data-theme="light"] .bridge-lane--featured {
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.26), rgba(255, 255, 255, 0.76) 68%);
+    }
+
     html[data-theme="light"] .testi-card--featured {
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.38),
@@ -4345,24 +4582,57 @@
 <!-- BRIDGE: BROADER PROJECT TYPES -->
 <section class="bridge-section">
   <div class="bridge-inner">
-    <div class="bridge-left">
-      <span class="bridge-kicker" data-i18n="bridge.kicker">Кроме срочных запусков</span>
+    <div class="bridge-copy">
+      <span class="section-kicker" data-i18n="bridge.kicker">Кроме срочных запусков</span>
       <h2 class="bridge-title" data-i18n="bridge.title">Не только лендинги</h2>
-      <p class="bridge-copy" data-i18n="bridge.copy">К нам приходят не только за быстрым запуском. Мы также делаем Telegram-ботов, AI-автоматизацию, MVP и внутренние системы для бизнеса. Если задача сложнее обычного сайта, это тоже к нам. Смотрим на задачу трезво и предлагаем самый быстрый разумный путь к результату.</p>
-    </div>
-    <div class="bridge-right">
-      <div class="bridge-board">
-        <span class="bridge-board-label" data-i18n="bridge.boardLabel">Что запускаем</span>
-        <ul class="bridge-list">
-          <li data-i18n="bridge.item1">Telegram-боты для продаж, заказов и поддержки</li>
-          <li data-i18n="bridge.item2">AI-автоматизация рутины и внутренних процессов</li>
-          <li data-i18n="bridge.item3">MVP и веб-приложения с нуля</li>
-          <li data-i18n="bridge.item4">Кабинеты, дашборды и внутренние системы</li>
-        </ul>
-        <div class="bridge-actions">
-          <a href="https://t.me/doscode_kz" class="bridge-cta" target="_blank" rel="noopener noreferrer" data-i18n="bridge.cta">Обсудить задачу →</a>
-        </div>
+      <p class="bridge-sub" data-i18n="bridge.sub">Если задаче уже тесно в рамках промо-сайта, собираем рабочий продукт: бота, MVP, кабинет или внутреннюю систему, которая снимает рутину и двигает бизнес каждый день.</p>
+      <div class="bridge-signals">
+        <span class="bridge-signal" data-i18n="bridge.signal1">Боты и сценарии</span>
+        <span class="bridge-signal" data-i18n="bridge.signal2">AI и автоматизация</span>
+        <span class="bridge-signal" data-i18n="bridge.signal3">MVP и внутренние продукты</span>
       </div>
+      <div class="bridge-note">
+        <span class="bridge-note-label" data-i18n="bridge.noteLabel">Когда обращаются</span>
+        <p class="bridge-note-text" data-i18n="bridge.noteText">Когда нужен не просто красивый экран, а процесс: принять заказ, провести пользователя, собрать данные, показать метрики или убрать ручную работу из команды.</p>
+      </div>
+      <a href="https://t.me/doscode_kz" class="bridge-cta" target="_blank" rel="noopener noreferrer" data-i18n="bridge.cta">Обсудить задачу →</a>
+    </div>
+    <div class="bridge-stack">
+      <article class="bridge-lane bridge-lane--featured">
+        <div class="bridge-lane-num">01</div>
+        <div class="bridge-lane-main">
+          <h3 class="bridge-lane-title" data-i18n="bridge.item1">Telegram-боты</h3>
+          <p class="bridge-lane-desc" data-i18n="bridge.item1Desc">Продажи, статусы заказов, поддержка, повторные касания и уведомления в одном сценарии.</p>
+        </div>
+        <p class="bridge-lane-note" data-i18n="bridge.item1Note">Запускаем бота как часть воронки, а не как отдельную игрушку.</p>
+      </article>
+
+      <article class="bridge-lane">
+        <div class="bridge-lane-num">02</div>
+        <div class="bridge-lane-main">
+          <h3 class="bridge-lane-title" data-i18n="bridge.item2">AI-автоматизация</h3>
+          <p class="bridge-lane-desc" data-i18n="bridge.item2Desc">Разбор входящих, квалификация лидов, внутренние ассистенты, отчёты и повторяющиеся операции.</p>
+        </div>
+        <p class="bridge-lane-note" data-i18n="bridge.item2Note">Подключаем LLM только туда, где они реально экономят время и деньги.</p>
+      </article>
+
+      <article class="bridge-lane">
+        <div class="bridge-lane-num">03</div>
+        <div class="bridge-lane-main">
+          <h3 class="bridge-lane-title" data-i18n="bridge.item3">MVP и веб-приложения</h3>
+          <p class="bridge-lane-desc" data-i18n="bridge.item3Desc">Личный кабинет, сервис под первый трафик, CRM-слой, партнёрский портал или новый продукт с нуля.</p>
+        </div>
+        <p class="bridge-lane-note" data-i18n="bridge.item3Note">Быстро собираем первую рабочую версию, чтобы проверять спрос на рынке, а не на созвонах.</p>
+      </article>
+
+      <article class="bridge-lane">
+        <div class="bridge-lane-num">04</div>
+        <div class="bridge-lane-main">
+          <h3 class="bridge-lane-title" data-i18n="bridge.item4">Кабинеты и дашборды</h3>
+          <p class="bridge-lane-desc" data-i18n="bridge.item4Desc">Финансы, заявки, операционные метрики, роли команды, контроль процессов и единая картина по бизнесу.</p>
+        </div>
+        <p class="bridge-lane-note" data-i18n="bridge.item4Note">Убираем Excel-хаос и даём систему, в которой видно, что происходит сегодня.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -5572,12 +5842,24 @@ var TRANSLATIONS = {
     bridge: {
       kicker: 'Кроме срочных запусков',
       title: 'Не только лендинги',
-      copy: 'К нам приходят не только за быстрым запуском. Мы также делаем Telegram-ботов, AI-автоматизацию, MVP и внутренние системы для бизнеса. Если задача сложнее обычного сайта, это тоже к нам. Смотрим на задачу трезво и предлагаем самый быстрый разумный путь к результату.',
-      boardLabel: 'Что запускаем',
-      item1: 'Telegram-боты для продаж, заказов и поддержки',
-      item2: 'AI-автоматизация рутины и внутренних процессов',
-      item3: 'MVP и веб-приложения с нуля',
-      item4: 'Кабинеты, дашборды и внутренние системы',
+      sub: 'Если задаче уже тесно в рамках промо-сайта, собираем рабочий продукт: бота, MVP, кабинет или внутреннюю систему, которая снимает рутину и двигает бизнес каждый день.',
+      signal1: 'Боты и сценарии',
+      signal2: 'AI и автоматизация',
+      signal3: 'MVP и внутренние продукты',
+      noteLabel: 'Когда обращаются',
+      noteText: 'Когда нужен не просто красивый экран, а процесс: принять заказ, провести пользователя, собрать данные, показать метрики или убрать ручную работу из команды.',
+      item1: 'Telegram-боты',
+      item1Desc: 'Продажи, статусы заказов, поддержка, повторные касания и уведомления в одном сценарии.',
+      item1Note: 'Запускаем бота как часть воронки, а не как отдельную игрушку.',
+      item2: 'AI-автоматизация',
+      item2Desc: 'Разбор входящих, квалификация лидов, внутренние ассистенты, отчёты и повторяющиеся операции.',
+      item2Note: 'Подключаем LLM только туда, где они реально экономят время и деньги.',
+      item3: 'MVP и веб-приложения',
+      item3Desc: 'Личный кабинет, сервис под первый трафик, CRM-слой, партнёрский портал или новый продукт с нуля.',
+      item3Note: 'Быстро собираем первую рабочую версию, чтобы проверять спрос на рынке, а не на созвонах.',
+      item4: 'Кабинеты и дашборды',
+      item4Desc: 'Финансы, заявки, операционные метрики, роли команды, контроль процессов и единая картина по бизнесу.',
+      item4Note: 'Убираем Excel-хаос и даём систему, в которой видно, что происходит сегодня.',
       cta: 'Обсудить задачу →'
     },
     stats: {
@@ -5746,12 +6028,24 @@ var TRANSLATIONS = {
     bridge: {
       kicker: 'Шұғыл іске қосудан бөлек',
       title: 'Тек лендинг емес',
-      copy: 'Бізге тек тез іске қосу үшін ғана келмейді. Біз Telegram-боттар, AI-автоматтандыру, MVP және бизнеске арналған ішкі жүйелер де жасаймыз. Егер міндет кәдімгі сайттан күрделірек болса, ол да бізге келеді. Міндетке байыппен қарап, нәтижеге апаратын ең жылдам дұрыс жолды ұсынамыз.',
-      boardLabel: 'Не іске қосамыз',
-      item1: 'Сату, тапсырыс және қолдау үшін Telegram-боттар',
-      item2: 'Рутина мен ішкі процестерге AI-автоматтандыру',
-      item3: 'Нөлден MVP және веб-қосымшалар',
-      item4: 'Кабинеттер, дашбордтар және ішкі жүйелер',
+      sub: 'Мәселе промо-сайт шеңберінен шыққанда, біз жұмыс істейтін өнімді жасаймыз: бот, MVP, кабинет немесе күн сайын рутинаны азайтатын ішкі жүйе.',
+      signal1: 'Боттар мен сценарийлер',
+      signal2: 'AI және автоматтандыру',
+      signal3: 'MVP және ішкі өнімдер',
+      noteLabel: 'Қашан жүгінеді',
+      noteText: 'Тек әдемі экран емес, нақты процесс керек кезде: тапсырыс қабылдау, пайдаланушыны жүргізу, дерек жинау, метриканы көрсету немесе команданың қол жұмысын азайту.',
+      item1: 'Telegram-боттар',
+      item1Desc: 'Сату, тапсырыс мәртебесі, қолдау, қайталама байланыс және хабарламалар бір сценарийде.',
+      item1Note: 'Ботты бөлек ойыншық емес, сату процесінің бөлігі ретінде іске қосамыз.',
+      item2: 'AI-автоматтандыру',
+      item2Desc: 'Кіріс сұрауларды сұрыптау, лидтерді саралау, ішкі ассистенттер, есептер және қайталанатын операциялар.',
+      item2Note: 'LLM-ді тек уақыт пен ақшаны нақты үнемдейтін жерге қосамыз.',
+      item3: 'MVP және веб-қосымшалар',
+      item3Desc: 'Жеке кабинет, алғашқы трафикке арналған сервис, CRM-қабат, серіктес порталы немесе нөлден жаңа өнім.',
+      item3Note: 'Бірінші жұмыс нұсқасын тез шығарамыз, сонда сұранысты жиналыста емес, нарықта тексересіз.',
+      item4: 'Кабинеттер мен дашбордтар',
+      item4Desc: 'Қаржы, өтінімдер, операциялық метрикалар, команда рөлдері, процестерді бақылау және бизнеске ортақ көрініс.',
+      item4Note: 'Excel-дегі бытыраңқылықтың орнына бүгін не болып жатқанын көрсететін бір жүйе береміз.',
       cta: 'Тапсырманы талқылау →'
     },
     stats: {
@@ -5920,12 +6214,24 @@ var TRANSLATIONS = {
     bridge: {
       kicker: 'Beyond urgent launches',
       title: 'Not just landing pages',
-      copy: 'Clients come to us not only for fast launches. We also build Telegram bots, AI automation, MVPs, and internal systems for business. If the task is more complex than a regular website, that is still our lane. We look at the problem soberly and suggest the fastest sensible path to a result.',
-      boardLabel: 'What we launch',
-      item1: 'Telegram bots for sales, orders, and support',
-      item2: 'AI automation for repetitive work and internal processes',
-      item3: 'MVPs and web apps from scratch',
-      item4: 'Portals, dashboards, and internal systems',
+      sub: 'When the task no longer fits inside a promo site, we build the working product: a bot, MVP, client area or internal tool that removes routine and keeps the business moving every day.',
+      signal1: 'Bots and workflows',
+      signal2: 'AI and automation',
+      signal3: 'MVPs and internal products',
+      noteLabel: 'When teams call us',
+      noteText: 'When they need more than a polished screen: take orders, guide users, collect data, surface metrics or remove manual operations from the team.',
+      item1: 'Telegram bots',
+      item1Desc: 'Sales flows, order status, support, repeat touchpoints and notifications inside one scenario.',
+      item1Note: 'We launch the bot as part of the funnel, not as a disconnected gadget.',
+      item2: 'AI automation',
+      item2Desc: 'Inbound triage, lead qualification, internal assistants, reporting and repeated operations.',
+      item2Note: 'We only add LLMs where they clearly save time or money.',
+      item3: 'MVPs and web apps',
+      item3Desc: 'Client area, first-traffic service, CRM layer, partner portal or a new product from scratch.',
+      item3Note: 'We ship the first working version fast so you can test demand in market, not in meetings.',
+      item4: 'Dashboards and internal tools',
+      item4Desc: 'Finance, requests, operating metrics, team roles, process control and one view of the business.',
+      item4Note: 'We replace spreadsheet chaos with one system that shows what matters today.',
       cta: 'Discuss the task →'
     },
     stats: {
