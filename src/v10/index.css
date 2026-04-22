@@ -170,6 +170,31 @@
   mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
 }
 
+.v10-marquee-track {
+  width: max-content;
+  max-width: none;
+}
+
+.v10-marquee-run,
+.v10-marquee-item,
+.v10-marquee-dot {
+  flex: 0 0 auto;
+  min-width: max-content;
+}
+
+.v10-marquee-item,
+.v10-marquee-dot {
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v10-marquee-track {
+    transform: translateX(0) !important;
+  }
+}
+
 @media (max-width: 639px) {
   .container {
     width: 100vw !important;

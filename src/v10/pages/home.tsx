@@ -491,24 +491,27 @@ function StatsBar() {
 function CapabilitiesMarquee() {
   const { t } = useTranslation();
   const items = t("marquee.items", { returnObjects: true }) as string[];
-  const renderRun = (keyPrefix: string) =>
-    items.map((item, i) => (
-      <React.Fragment key={`${keyPrefix}-${i}`}>
-        <span className={`text-xl sm:text-2xl md:text-3xl font-bold font-display tracking-tight ${i % 2 === 0 ? "text-foreground" : "text-primary"}`}>
-          {item}
-        </span>
-        <span className="text-xl sm:text-2xl md:text-3xl font-bold font-display text-muted-foreground">·</span>
-      </React.Fragment>
-    ));
+  const renderRun = (keyPrefix: string, hidden = false) => (
+    <div className="v10-marquee-run flex shrink-0 items-center gap-8 pr-8 sm:gap-12 sm:pr-12" aria-hidden={hidden}>
+      {items.map((item, i) => (
+        <React.Fragment key={`${keyPrefix}-${i}`}>
+          <span className={`v10-marquee-item text-xl sm:text-2xl md:text-3xl font-bold font-display tracking-tight ${i % 2 === 0 ? "text-foreground" : "text-primary"}`}>
+            {item}
+          </span>
+          <span className="v10-marquee-dot text-xl sm:text-2xl md:text-3xl font-bold font-display text-muted-foreground">·</span>
+        </React.Fragment>
+      ))}
+    </div>
+  );
   return (
-    <div className="overflow-hidden border-y border-border/50 py-5 sm:py-6 bg-card/30" data-testid="capabilities-marquee">
+    <div className="v10-marquee overflow-hidden border-y border-border/50 py-5 sm:py-6 bg-card/30" data-testid="capabilities-marquee">
       <motion.div
-        className="flex gap-8 sm:gap-12 whitespace-nowrap"
+        className="v10-marquee-track flex w-max max-w-none whitespace-nowrap will-change-transform"
         animate={{ x: ["0%", "-50%"] }}
         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
       >
         {renderRun("a")}
-        {renderRun("b")}
+        {renderRun("b", true)}
       </motion.div>
     </div>
   );
