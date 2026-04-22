@@ -1,0 +1,273 @@
+{
+  "header": {
+    "services": "Services",
+    "cases": "Cases",
+    "process": "Process",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "cta": "Start a project",
+    "ctaShort": "Telegram"
+  },
+  "hero": {
+    "kicker": "// Almaty · 2020 — present",
+    "badge": "Fast-build studio",
+    "title1": "We ship products",
+    "title2": "that work",
+    "subtitle": "Landing pages in 48 hours, MVPs in 4–8 weeks, AI automation, dashboards, Telegram bots, internal tools. Not a corporate agency — a founder team that ships on time.",
+    "ctaPrimary": "Discuss a project",
+    "ctaSecondary": "See cases",
+    "trustHour": "Reply within an hour",
+    "trustEstimate": "Quote in 24 hours",
+    "trustPrice": "Fixed price per stage",
+    "pipeline": {
+      "file": "build_pipeline.sh",
+      "live": "● LIVE",
+      "steps": ["Idea", "Design", "Code", "Launch", "Growth"],
+      "stepsShort": ["Idea", "Code", "Launch"],
+      "successLine": "all systems green. moving on."
+    }
+  },
+  "services": {
+    "title": "What we build",
+    "subtitle": "Fast, scalable solutions for real businesses. No template code.",
+    "ai": {
+      "title": "AI agents",
+      "desc": "Process automation, data handling, smart support bots with context and memory.",
+      "active": "agent active",
+      "trace": "Reasoning Trace",
+      "step1": "→ Extract Intent: \"Scrape competitors\"",
+      "step2Prefix": "→ Execute Tool:"
+    },
+    "telegram": {
+      "title": "Telegram bots",
+      "desc": "Stores, onboarding, services right inside the messenger.",
+      "msg1": "Hi. I'm your assistant. Ask me anything.",
+      "msg2": "Show today's stats",
+      "msg3": "Pulling the data..."
+    },
+    "dashboards": {
+      "title": "Business dashboards",
+      "desc": "Analytics, CRM and admin panels to run the business.",
+      "label": "Revenue"
+    },
+    "sprint": {
+      "title": "Landing sprint",
+      "desc": "A finished site in 48 hours. Design and code included."
+    },
+    "mvp": {
+      "title": "MVP / SaaS",
+      "desc": "Full web apps in 4–8 weeks."
+    }
+  },
+  "stats": {
+    "projects": "projects shipped",
+    "years": "years in production",
+    "mvp": "average MVP",
+    "estimate": "free estimate",
+    "valueMvp": "4 wks",
+    "valueEstimate": "24h"
+  },
+  "marquee": {
+    "items": ["DESIGN", "DEVELOPMENT", "AI", "PWA", "TELEGRAM BOTS", "DASHBOARDS", "E-COMMERCE", "UI/UX", "MVP", "AUTOMATION"]
+  },
+  "cases": {
+    "title": "Cases",
+    "expand": "Read more",
+    "collapse": "Collapse",
+    "overview": "Overview",
+    "capabilities": "Capabilities",
+    "outcomes": "Outcomes",
+    "stack": "Stack",
+    "dospass": {
+      "metric": "3x customer return rate",
+      "desc": "A viral loyalty program that lives at a personal link. No app downloads, everything via WhatsApp. Customers earn stamps for purchases, referrals and Instagram stories — you grow your base without an ad budget. Works for cafes, salons, fitness studios, clinics.",
+      "details": {
+        "overview": "A viral loyalty program that lives at a personal link. No apps, no downloads — the customer opens a WhatsApp link and immediately sees their card: stamps, progress, rewards, missions. The business gets word-of-mouth growth without paying for ads. Currently live in several countries.",
+        "capabilities": [
+          "Personal customer page at a unique link",
+          "Stamps for purchases, referrals, Instagram/TikTok stories",
+          "WhatsApp onboarding by phone — no signup",
+          "Two-sided referral program",
+          "Spin Wheel and daily rewards for retention",
+          "Reputation guard: happy customers go to Google/2GIS, unhappy ones straight to the owner",
+          "Gift cards with 0% commission",
+          "Automatic birthday greetings"
+        ],
+        "outcomes": [
+          "Launched in the UAE in 6 weeks from idea to production",
+          "Repeat visits up by ~36%",
+          "Customer follows and stories instead of paid ads",
+          "Live in cafes, salons, fitness, clinics, retail"
+        ],
+        "stack": ["React", "Node.js", "PostgreSQL", "WhatsApp API", "Stripe"]
+      }
+    },
+    "chicago": {
+      "metric": "Direct sales + loyalty",
+      "qrEarn": "+12 pts",
+      "pointsLabel": "points:",
+      "channels": ["dine-in", "delivery", "pickup", "stories"],
+      "desc": "Full stack: web, iOS, Android, admin panel and owner dashboard. Direct orders instead of aggregators, in-room QR payments (Apple Pay / Kaspi / card), points for every purchase and viral action — all wired into iiko.",
+      "details": {
+        "overview": "We built Chicago Pizza their own tech platform — the pizzeria no longer pays aggregator commissions, accepts in-room payments by QR, owns its customer base and earns points for every touchpoint: delivery, dine-in, takeout and viral actions. All synced with iiko in real time.",
+        "capabilities": [
+          "Web app and native iOS/Android for direct orders",
+          "In-room QR payments: Apple Pay, Kaspi, bank cards",
+          "Unified loyalty: points for dine-in, delivery, takeout",
+          "Viral rewards: points for stories, reviews and invited friends",
+          "5% cashback on direct orders instead of aggregators",
+          "Admin panel: menu, prices, photos, availability, promos",
+          "Owner dashboard: sales, ops metrics, reports",
+          "Full iiko integration: orders, customers, stock, receipts",
+          "Separate flow for corporate catering and leads",
+          "Customer segmentation and targeted promos"
+        ],
+        "outcomes": [
+          "Lower dependency on aggregators and their fees",
+          "All sales channels rolled into one loyalty program",
+          "Direct access to the customer base and every touchpoint",
+          "Single point of control for ops, marketing and growth"
+        ],
+        "stack": ["React", "React Native", "Node.js", "PostgreSQL", "iiko API", "Kaspi Pay"]
+      }
+    },
+    "mmg": {
+      "metric": "Excel + WhatsApp → one system",
+      "desc": "Internal platform for Medical Marketing Group: catalog, customer-tier pricing, tenders, 1C sync, FX risk and role-based access for the owner and managers.",
+      "details": {
+        "overview": "An internal operations platform for Medical Marketing Group in Kazakhstan. We replaced Excel and WhatsApp with one system — roles, business rules for pricing, and automatic 1C sync.",
+        "capabilities": [
+          "Product catalog with USD/EUR purchase and KZT sales",
+          "Server-side pricing per customer tier: state, private, VIP, distributor",
+          "Daily National Bank FX rates and VAT in cost",
+          "Margin alerts when FX moves (re-order risk)",
+          "Medical tender monitoring via tenderbot.kz",
+          "1C data sync via AgentMail email attachments",
+          "Role-based access: the owner sees margin and team activity, managers see only allowed prices",
+          "Daily owner report + action audit log",
+          "Trilingual interface: Russian, Kazakh, English"
+        ],
+        "outcomes": [
+          "Real-time visibility into ops and sales",
+          "Fewer manual errors and lost data",
+          "Safe access split with no margin leak"
+        ],
+        "stack": ["React", "Express", "PostgreSQL", "1C", "i18n", "Render"]
+      }
+    }
+  },
+  "fastLaunch": {
+    "badge": "48-hour sprint",
+    "title": "A landing page in 48 hours",
+    "guarantee": "Don't like it — don't pay.",
+    "subtitle": "Crazy speed. No drop in quality. You get a working, converting site while competitors are still approving the brief.",
+    "bullet1": "Mockup in 3–4 hours — review before you pay",
+    "bullet2": "Live in 48 hours when content is ready",
+    "bullet3": "2 rounds of edits included",
+    "bullet4": "Deploy included (domain billed separately)",
+    "priceLabel": "Price",
+    "price": "from 100,000 ₸",
+    "cta": "Order a sprint",
+    "logTitle": "deploy_status.log",
+    "logLines": [
+      "Initiating sprint protocol...",
+      "Wireframes approved. Proceeding to visual design.",
+      "Design system locked. Handoff to engineering.",
+      "Frontend components built. Wiring state.",
+      "Performance optimization: 99/100 (Lighthouse)",
+      "Final QA checks complete.",
+      "SYSTEM LIVE. Traffic routing enabled."
+    ],
+    "progress": "sprint progress"
+  },
+  "process": {
+    "title": "Process",
+    "subtitle": "Transparent, predictable and very fast.",
+    "steps": [
+      { "title": "Request", "desc": "You describe the task in Telegram. Short is fine — just the gist.", "time": "// 1 hour" },
+      { "title": "Estimate", "desc": "A 15-minute call. We lock scope, timeline and price.", "time": "// 1 day" },
+      { "title": "Prototype", "desc": "We assemble the structure and logic. Approve the foundation.", "time": "// 2–5 days" },
+      { "title": "Build", "desc": "We code. Fast, clean, with weekly demos for larger projects.", "time": "// depends on project" },
+      { "title": "Launch", "desc": "Production deploy. Domain and analytics wired up.", "time": "// 1 day" },
+      { "title": "Support", "desc": "A month of bug fixes free. After that — as needed.", "time": "// 1 month included" }
+    ]
+  },
+  "pricing": {
+    "title": "Pricing",
+    "subtitle": "No hidden fees, no inflated estimates.",
+    "popular": "Most popular",
+    "ctaPopular": "Start a project",
+    "ctaDefault": "Discuss the task",
+    "plans": [
+      {
+        "name": "Landing",
+        "price": "from 100,000 ₸",
+        "time": "48 hours",
+        "for": "For a fast hypothesis or product test",
+        "features": ["Custom design (no templates)", "Responsive layout", "Base animations", "CRM / Telegram integration", "Analytics setup"]
+      },
+      {
+        "name": "MVP",
+        "price": "from 800,000 ₸",
+        "time": "4–8 weeks",
+        "for": "First product version for investors and users",
+        "features": ["DB and architecture design", "Backend + API", "React/Vue frontend", "Admin panel", "Payments integration"]
+      },
+      {
+        "name": "Custom build",
+        "price": "On request",
+        "time": "Custom",
+        "for": "Complex SaaS, AI agents, large systems",
+        "features": ["Microservice architecture", "AI/ML integrations", "High load", "Mobile apps (React Native)", "SLA support"]
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "What people say",
+    "subtitle": "Reviews about launch speed and processes that work — not abstract \"nice to work with\" lines.",
+    "quotes": [
+      {
+        "metric": "6 weeks to launch",
+        "quote": "We took DosPass from zero to a working product in 6 weeks. The team really got into the problem — not just code, they suggested solutions we hadn't thought of. The platform now runs in three countries.",
+        "author": "Vladimir B.",
+        "role": "Founder, DosPass",
+        "initials": "VB"
+      },
+      {
+        "metric": "2 weeks for the bot + POS",
+        "quote": "We needed a Telegram bot for orders and a POS integration. Done in 2 weeks, running smoothly for over a year. Support replies fast — that's rare with developers.",
+        "author": "Asel S.",
+        "role": "Director, Chicago Pizza",
+        "initials": "AS"
+      },
+      {
+        "metric": "3x conversion after redesign",
+        "quote": "We got the first mockup four hours after the call. Honestly shocking. The final site went live the next day — conversion tripled compared to the old one.",
+        "author": "Maxim A.",
+        "role": "CEO, IT startup, Almaty",
+        "initials": "MA"
+      }
+    ]
+  },
+  "faq": {
+    "title": "FAQ",
+    "items": [
+      { "q": "How does payment work?", "a": "We work on 50% upfront and 50% on successful delivery. For larger projects we can split into stages (sprints)." },
+      { "q": "Do you work with international clients?", "a": "Yes, we work worldwide. We accept crypto (USDT/USDC) or international wire transfers." },
+      { "q": "What do you need from me to start?", "a": "A description of the task (free-form is fine), references if you have any, and a willingness to give fast feedback. We'll fill the formal brief together on a 15-minute call." },
+      { "q": "Do you support the project after launch?", "a": "Yes — 1 month of free bug fixes on every project. After that we can sign a monthly SLA support contract." },
+      { "q": "Why so fast (a landing page in 48 hours)?", "a": "Tight processes, our own UI component library, and we don't waste time on corporate bureaucracy. While others draw Gantt charts, we ship code." },
+      { "q": "Do you use builders (Tilda/Webflow)?", "a": "No. We write code (React, Next.js, Tailwind, Node.js). Full freedom in design, animation and integrations — plus 99/100 Lighthouse scores." }
+    ]
+  },
+  "ctaSection": {
+    "title": "Ready to ship?",
+    "subtitle": "Stop planning. Start building. Message us on Telegram now and get an estimate within 2 hours.",
+    "button": "Message on Telegram"
+  },
+  "footer": {
+    "city": "Almaty, Kazakhstan",
+    "telegram": "Telegram",
+    "email": "hello@doscode.kz"
+  }
+}
