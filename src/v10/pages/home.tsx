@@ -68,7 +68,7 @@ function ThemeSwitcher() {
             key={value}
             type="button"
             onClick={() => {
-              applyV10Theme(value, { syncUrl: true });
+              applyV10Theme(value);
               setTheme(value);
             }}
             className={`inline-flex h-7 min-w-7 items-center justify-center gap-1 rounded px-1.5 text-[10px] font-mono font-bold transition-colors sm:h-8 sm:min-w-8 sm:px-2 sm:text-xs ${

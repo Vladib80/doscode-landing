@@ -2,6 +2,9 @@ export type V10Theme = "light" | "dark";
 
 const THEME_STORAGE_KEY = "doscode-v10-theme";
 
+const isV10Theme = (value: string | null): value is V10Theme =>
+  value === "light" || value === "dark";
+
 export function getV10ThemeFromRoot(): V10Theme {
   if (typeof document === "undefined") {
     return "dark";
@@ -11,10 +14,22 @@ export function getV10ThemeFromRoot(): V10Theme {
 }
 
 export function initializeV10Theme(fallback: V10Theme) {
-  applyV10Theme(fallback, { persist: false });
+  if (typeof window === "undefined") {
+    applyV10Theme(fallback, { persist: false });
+    return;
+  }
+
+  let storedTheme: string | null = null;
+  try {
+    storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+  } catch {
+    storedTheme = null;
+  }
+
+  applyV10Theme(isV10Theme(storedTheme) ? storedTheme : fallback, { persist: false });
 }
 
-export function applyV10Theme(theme: V10Theme, options: { syncUrl?: boolean; persist?: boolean } = {}) {
+export function applyV10Theme(theme: V10Theme, options: { persist?: boolean } = {}) {
   if (typeof document === "undefined") {
     return;
   }
@@ -40,17 +55,4 @@ export function applyV10Theme(theme: V10Theme, options: { syncUrl?: boolean; per
       // Storage can be unavailable in private or embedded contexts; the visual theme still applies.
     }
   }
-
-  if (!options.syncUrl) {
-    return;
-  }
-
-  const fileName = light ? "v10-lite.html" : "v10.html";
-  const currentPath = window.location.pathname;
-  if (!/(^|\/)v10(?:-lite)?\.html$/.test(currentPath)) {
-    return;
-  }
-
-  const prefix = currentPath.slice(0, currentPath.lastIndexOf("/") + 1);
-  window.history.replaceState(null, "", `${prefix}${fileName}${window.location.search}${window.location.hash}`);
 }
