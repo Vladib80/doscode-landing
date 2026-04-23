@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DosCode v10 Lite - быстрый запуск сайтов и MVP</title>
+    <meta
+      name="description"
+      content="Lite-версия DosCode v10: лендинги за 48 часов, MVP, AI-автоматизация, Telegram-боты и дашборды в фирменной светлой палитре DosCode."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="DosCode v10 Lite" />
+    <meta property="og:description" content="Светлая и быстрая версия DosCode v10 для запуска сайтов, MVP и автоматизации." />
+    <meta property="og:image" content="/v10/opengraph.jpg" />
+    <meta name="theme-color" content="#f5f1e6" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..800&family=JetBrains+Mono:wght@400..800&family=Unbounded:wght@500..800&display=swap");
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        min-width: 0;
+      }
+
+      :root {
+        --bg: #f5f1e6;
+        --paper: #fcf8ee;
+        --paper-2: rgba(255, 255, 255, 0.62);
+        --ink: #14120d;
+        --muted: #5d584b;
+        --faint: rgba(23, 21, 16, 0.62);
+        --line: rgba(23, 21, 16, 0.12);
+        --line-strong: rgba(23, 21, 16, 0.2);
+        --accent: #799f00;
+        --accent-rgb: 121, 159, 0;
+        --accent-soft: rgba(var(--accent-rgb), 0.12);
+        --accent-line: rgba(var(--accent-rgb), 0.28);
+        --dark: #080808;
+        --dark-2: #11120d;
+        --cream: #faf7ef;
+        --lime: #c8ff00;
+        --radius: 8px;
+        --font-display: "Unbounded", sans-serif;
+        --font-body: "Golos Text", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        color-scheme: light;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        background:
+          linear-gradient(rgba(23, 21, 16, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(23, 21, 16, 0.045) 1px, transparent 1px),
+          var(--bg);
+        background-size: 48px 48px;
+        color: var(--ink);
+        font-family: var(--font-body);
+        line-height: 1.5;
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      span,
+      a {
+        overflow-wrap: anywhere;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input,
+      textarea {
+        font: inherit;
+      }
+
+      .page {
+        min-height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      .wrap {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid var(--line);
+        background: rgba(245, 241, 230, 0.9);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav__inner {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 18px;
+      }
+
+      .brand__mark {
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 24px;
+        line-height: 1;
+      }
+
+      .nav__links {
+        display: none;
+        align-items: center;
+        gap: 28px;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 13px;
+      }
+
+      .nav__links a:hover {
+        color: var(--ink);
+      }
+
+      .nav__actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .pill-link,
+      .btn {
+        min-height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border-radius: var(--radius);
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 13px;
+        transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      }
+
+      .pill-link {
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        color: var(--muted);
+      }
+
+      .pill-link:hover {
+        border-color: var(--line-strong);
+        color: var(--ink);
+      }
+
+      .btn {
+        padding: 0 18px;
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: var(--cream);
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        background: color-mix(in srgb, var(--accent) 84%, black);
+      }
+
+      .btn--dark {
+        border-color: var(--dark);
+        background: var(--dark);
+        color: var(--cream);
+      }
+
+      .btn--ghost {
+        background: transparent;
+        color: var(--ink);
+        border-color: var(--line-strong);
+      }
+
+      .hero {
+        padding: 80px 0 48px;
+      }
+
+      .hero__grid {
+        display: grid;
+        gap: 34px;
+        align-items: end;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 24px;
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 99px;
+        background: var(--accent);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: var(--font-display);
+        letter-spacing: 0;
+      }
+
+      h1 {
+        max-width: 980px;
+        font-size: 48px;
+        line-height: 1;
+        font-weight: 800;
+        overflow-wrap: anywhere;
+      }
+
+      h1 span,
+      .accent {
+        color: var(--accent);
+      }
+
+      .hero__copy {
+        max-width: 760px;
+        margin-top: 26px;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .proof-line {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: 42px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: var(--line);
+      }
+
+      .proof-line__item {
+        min-height: 104px;
+        padding: 18px;
+        background: rgba(252, 248, 238, 0.74);
+      }
+
+      .proof-line__value {
+        display: block;
+        color: var(--accent);
+        font-family: var(--font-display);
+        font-size: 36px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .proof-line__label {
+        display: block;
+        margin-top: 12px;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+
+      .launch-panel {
+        width: 100%;
+        max-width: 100%;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius);
+        background: var(--dark);
+        color: var(--cream);
+        box-shadow: 0 22px 60px rgba(18, 15, 12, 0.16);
+        overflow: hidden;
+      }
+
+      .launch-panel__bar {
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 16px;
+        border-bottom: 1px solid rgba(250, 247, 239, 0.12);
+        color: rgba(250, 247, 239, 0.62);
+        font-family: var(--font-mono);
+        font-size: 12px;
+      }
+
+      .launch-panel__body {
+        padding: 22px;
+      }
+
+      .board {
+        display: grid;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .board__row {
+        display: grid;
+        grid-template-columns: 88px 1fr auto;
+        align-items: center;
+        gap: 14px;
+        min-height: 54px;
+        border-bottom: 1px solid rgba(250, 247, 239, 0.09);
+        font-family: var(--font-mono);
+        font-size: 12px;
+      }
+
+      .board__row:last-child {
+        border-bottom: 0;
+      }
+
+      .board__tag {
+        color: var(--lime);
+        white-space: nowrap;
+      }
+
+      .board__status {
+        color: rgba(250, 247, 239, 0.62);
+        overflow-wrap: anywhere;
+      }
+
+      .board__time {
+        color: var(--lime);
+        text-align: right;
+      }
+
+      .section {
+        padding: 72px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section__head {
+        display: grid;
+        gap: 14px;
+        margin-bottom: 32px;
+      }
+
+      .section__label {
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        font-size: 36px;
+        line-height: 1.08;
+        font-weight: 800;
+      }
+
+      .section__copy {
+        max-width: 680px;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .service-grid,
+      .case-grid,
+      .price-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .service,
+      .case,
+      .price,
+      .faq details {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(252, 248, 238, 0.72);
+      }
+
+      .service {
+        display: grid;
+        gap: 16px;
+        padding: 20px;
+      }
+
+      .service__top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .num {
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .service h3,
+      .case h3,
+      .price h3 {
+        font-size: 21px;
+      }
+
+      .service p,
+      .case p,
+      .price p {
+        color: var(--muted);
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        border: 1px solid var(--accent-line);
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: var(--accent);
+        background: var(--accent-soft);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .dark-band {
+        padding: 72px 0;
+        background: var(--dark);
+        color: var(--cream);
+      }
+
+      .dark-band .section__copy,
+      .dark-band .step p {
+        color: rgba(250, 247, 239, 0.68);
+      }
+
+      .steps {
+        display: grid;
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 16px;
+        align-items: start;
+        padding: 18px 0;
+        border-top: 1px solid rgba(250, 247, 239, 0.12);
+      }
+
+      .step:first-child {
+        border-top: 0;
+      }
+
+      .step__num {
+        color: var(--lime);
+        font-family: var(--font-mono);
+        font-weight: 800;
+      }
+
+      .step h3 {
+        font-size: 20px;
+      }
+
+      .case,
+      .price {
+        padding: 22px;
+      }
+
+      .case__metric,
+      .price__value {
+        margin: 16px 0;
+        color: var(--accent);
+        font-family: var(--font-display);
+        font-size: 28px;
+        font-weight: 800;
+      }
+
+      .case__meta,
+      .price__meta {
+        color: var(--faint);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .price {
+        display: flex;
+        min-height: 320px;
+        flex-direction: column;
+      }
+
+      .price ul {
+        display: grid;
+        gap: 10px;
+        margin: 0 0 24px;
+        padding: 0;
+        color: var(--muted);
+        list-style: none;
+      }
+
+      .price li::before {
+        content: ">";
+        margin-right: 8px;
+        color: var(--accent);
+        font-family: var(--font-mono);
+      }
+
+      .price .btn {
+        margin-top: auto;
+      }
+
+      .price--featured {
+        border-color: var(--accent-line);
+        background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.13), rgba(252, 248, 238, 0.82));
+      }
+
+      .faq {
+        display: grid;
+        gap: 10px;
+      }
+
+      .faq details {
+        padding: 0 18px;
+      }
+
+      .faq summary {
+        min-height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        cursor: pointer;
+        font-family: var(--font-display);
+        font-weight: 700;
+      }
+
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq summary::after {
+        content: "+";
+        color: var(--accent);
+        font-family: var(--font-mono);
+      }
+
+      .faq details[open] summary::after {
+        content: "-";
+      }
+
+      .faq p {
+        padding: 0 0 18px;
+        color: var(--muted);
+      }
+
+      .cta {
+        padding: 78px 0;
+        background: var(--accent);
+        color: var(--cream);
+      }
+
+      .cta__grid {
+        display: grid;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .cta h2 {
+        color: var(--cream);
+      }
+
+      .cta p {
+        max-width: 680px;
+        color: rgba(252, 250, 239, 0.76);
+        font-size: 18px;
+      }
+
+      footer {
+        padding: 28px 0;
+        background: var(--dark);
+        color: rgba(250, 247, 239, 0.62);
+        font-family: var(--font-mono);
+        font-size: 12px;
+      }
+
+      .footer__inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      @media (min-width: 720px) {
+        .nav__links {
+          display: flex;
+        }
+
+        .hero {
+          padding-top: 108px;
+        }
+
+        .hero__grid {
+          grid-template-columns: 1.1fr 0.9fr;
+        }
+
+        h1 {
+          font-size: 76px;
+        }
+
+        .proof-line {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        h2 {
+          font-size: 52px;
+        }
+
+        .section__head {
+          grid-template-columns: 0.9fr 1.1fr;
+          align-items: end;
+        }
+
+        .service-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .case-grid,
+        .price-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .steps {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .step {
+          display: block;
+          padding: 24px 18px 0 0;
+          border-top: 1px solid rgba(250, 247, 239, 0.12);
+        }
+
+        .cta__grid {
+          grid-template-columns: 1.1fr auto;
+        }
+      }
+
+      @media (max-width: 719px) {
+        .wrap {
+          width: min(calc(100% - 24px), 520px);
+        }
+
+        .nav__inner {
+          min-height: 64px;
+          gap: 12px;
+        }
+
+        .brand {
+          gap: 8px;
+          font-size: 16px;
+        }
+
+        .brand__mark {
+          font-size: 22px;
+        }
+
+        .nav__actions .btn {
+          position: relative;
+          width: 44px;
+          min-height: 40px;
+          padding: 0;
+          overflow: hidden;
+          color: transparent;
+          font-size: 11px;
+        }
+
+        .nav__actions .btn::after {
+          content: "TG";
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--cream);
+        }
+
+        .pill-link {
+          display: none;
+        }
+
+        h1 {
+          font-size: 30px;
+          line-height: 1.06;
+        }
+
+        .hero__copy,
+        .section__copy,
+        .cta p {
+          font-size: 16px;
+        }
+
+        .board__row {
+          grid-template-columns: 78px minmax(0, 1fr);
+          gap: 10px;
+          min-height: 62px;
+          align-items: start;
+          padding: 10px 0;
+        }
+
+        .board__time {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="nav">
+        <div class="wrap nav__inner">
+          <a class="brand" href="/">
+            <span class="brand__mark">&gt;_</span>
+            <span>DosCode</span>
+          </a>
+          <nav class="nav__links" aria-label="Основная навигация">
+            <a href="#services">Услуги</a>
+            <a href="#cases">Кейсы</a>
+            <a href="#process">Процесс</a>
+            <a href="#pricing">Цены</a>
+          </nav>
+          <div class="nav__actions">
+            <a class="pill-link" href="/v10.html">Full v10</a>
+            <a class="btn btn--dark" href="https://t.me/doscode_kz" target="_blank" rel="noreferrer">Начать проект</a>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="wrap hero__grid">
+            <div>
+              <div class="eyebrow">Lite v10 - Almaty build studio</div>
+              <h1>Быстрый сайт, MVP или бот <span>без агентского шума</span></h1>
+              <p class="hero__copy">
+                Светлая и короткая версия v10: меньше анимации, быстрее загрузка, тот же DosCode-вайб и прямой путь к заявке.
+                Собираем лендинги, AI-автоматизацию, Telegram-боты и внутренние инструменты.
+              </p>
+              <div class="hero__actions">
+                <a class="btn" href="https://t.me/doscode_kz" target="_blank" rel="noreferrer">Обсудить проект</a>
+                <a class="btn btn--ghost" href="#cases">Смотреть кейсы</a>
+              </div>
+              <div class="proof-line" aria-label="DosCode в цифрах">
+                <div class="proof-line__item">
+                  <span class="proof-line__value">48ч</span>
+                  <span class="proof-line__label">лендинг-спринт</span>
+                </div>
+                <div class="proof-line__item">
+                  <span class="proof-line__value">4-8</span>
+                  <span class="proof-line__label">недель на MVP</span>
+                </div>
+                <div class="proof-line__item">
+                  <span class="proof-line__value">40+</span>
+                  <span class="proof-line__label">запусков</span>
+                </div>
+                <div class="proof-line__item">
+                  <span class="proof-line__value">24ч</span>
+                  <span class="proof-line__label">на оценку</span>
+                </div>
+              </div>
+            </div>
+
+            <aside class="launch-panel" aria-label="План запуска">
+              <div class="launch-panel__bar">
+                <span>doscode-lite.plan</span>
+                <span>live</span>
+              </div>
+              <div class="launch-panel__body">
+                <div class="board">
+                  <div class="board__row">
+                    <span class="board__tag">01 brief</span>
+                    <span class="board__status">фиксируем цель, оффер, CTA</span>
+                    <span class="board__time">2h</span>
+                  </div>
+                  <div class="board__row">
+                    <span class="board__tag">02 design</span>
+                    <span class="board__status">делаем структуру и визуальный прототип</span>
+                    <span class="board__time">1d</span>
+                  </div>
+                  <div class="board__row">
+                    <span class="board__tag">03 build</span>
+                    <span class="board__status">верстаем, подключаем формы и аналитику</span>
+                    <span class="board__time">1d</span>
+                  </div>
+                  <div class="board__row">
+                    <span class="board__tag">04 launch</span>
+                    <span class="board__status">деплой, домен, проверка на мобильных</span>
+                    <span class="board__time">live</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section" id="services">
+          <div class="wrap">
+            <div class="section__head">
+              <div>
+                <div class="section__label">Что запускаем</div>
+                <h2>Понятные продукты вместо бесконечных созвонов</h2>
+              </div>
+              <p class="section__copy">
+                Делаем ровно тот слой, который нужен бизнесу сейчас: продающий сайт, рабочий MVP, бот, дашборд или AI-процесс.
+              </p>
+            </div>
+            <div class="service-grid">
+              <article class="service">
+                <div class="service__top">
+                  <h3>Лендинг-спринт</h3>
+                  <span class="num">01</span>
+                </div>
+                <p>Оффер, дизайн, верстка, адаптив, аналитика и запуск за 48 часов.</p>
+                <div class="chips">
+                  <span class="chip">48 часов</span>
+                  <span class="chip">SEO base</span>
+                  <span class="chip">forms</span>
+                </div>
+              </article>
+              <article class="service">
+                <div class="service__top">
+                  <h3>MVP / SaaS</h3>
+                  <span class="num">02</span>
+                </div>
+                <p>Первый рабочий продукт с админкой, ролями, API, оплатами и деплоем.</p>
+                <div class="chips">
+                  <span class="chip">React</span>
+                  <span class="chip">Node</span>
+                  <span class="chip">PostgreSQL</span>
+                </div>
+              </article>
+              <article class="service">
+                <div class="service__top">
+                  <h3>AI-автоматизация</h3>
+                  <span class="num">03</span>
+                </div>
+                <p>Агенты, обработка заявок, документы, интеграции и контроль качества процесса.</p>
+                <div class="chips">
+                  <span class="chip">agents</span>
+                  <span class="chip">RAG</span>
+                  <span class="chip">ops</span>
+                </div>
+              </article>
+              <article class="service">
+                <div class="service__top">
+                  <h3>Telegram-боты</h3>
+                  <span class="num">04</span>
+                </div>
+                <p>Заказы, онбординг, уведомления, оплаты и CRM прямо в привычном канале.</p>
+                <div class="chips">
+                  <span class="chip">orders</span>
+                  <span class="chip">payments</span>
+                  <span class="chip">CRM</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="dark-band" id="process">
+          <div class="wrap">
+            <div class="section__head">
+              <div>
+                <div class="section__label">Процесс</div>
+                <h2>Короткий маршрут от идеи до прода</h2>
+              </div>
+              <p class="section__copy">
+                Без тяжелой агентской машины. Вы говорите с командой, которая проектирует, пишет код и сама отвечает за запуск.
+              </p>
+            </div>
+            <div class="steps">
+              <div class="step">
+                <div class="step__num">01</div>
+                <div>
+                  <h3>Разбираем задачу</h3>
+                  <p>Фиксируем аудиторию, оффер, ограничения и метрики успеха.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step__num">02</div>
+                <div>
+                  <h3>Собираем структуру</h3>
+                  <p>Делаем быстрый прототип и убираем лишнее до разработки.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step__num">03</div>
+                <div>
+                  <h3>Пишем и проверяем</h3>
+                  <p>Верстаем, подключаем интеграции и тестируем ключевые сценарии.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step__num">04</div>
+                <div>
+                  <h3>Запускаем</h3>
+                  <p>Деплой, домен, аналитика и быстрые правки после выхода.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="cases">
+          <div class="wrap">
+            <div class="section__head">
+              <div>
+                <div class="section__label">Кейсы</div>
+                <h2>Примеры задач, где важен запуск</h2>
+              </div>
+              <p class="section__copy">
+                Берем не только визуал. Смотрим на операционку, каналы продаж, повторные касания и интеграции.
+              </p>
+            </div>
+            <div class="case-grid">
+              <article class="case">
+                <div class="case__meta">loyalty platform</div>
+                <h3>DosPass</h3>
+                <div class="case__metric">x3 возврат</div>
+                <p>Виральная программа лояльности без установки приложения: ссылки, WhatsApp, награды и рефералы.</p>
+              </article>
+              <article class="case">
+                <div class="case__meta">foodtech</div>
+                <h3>Chicago Pizza</h3>
+                <div class="case__metric">прямые продажи</div>
+                <p>Веб, мобильные приложения, QR-оплата, лояльность и синхронизация с iiko.</p>
+              </article>
+              <article class="case">
+                <div class="case__meta">internal ops</div>
+                <h3>MMG</h3>
+                <div class="case__metric">Excel -> система</div>
+                <p>Каталог, цены, роли, 1C-синхронизация и отчеты для собственника.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="pricing">
+          <div class="wrap">
+            <div class="section__head">
+              <div>
+                <div class="section__label">Цены</div>
+                <h2>Стартуем с понятного объема</h2>
+              </div>
+              <p class="section__copy">
+                Финальная смета зависит от контента, интеграций и сроков. Но первый ориентир даем быстро, чтобы не растягивать решение.
+              </p>
+            </div>
+            <div class="price-grid">
+              <article class="price">
+                <h3>Landing</h3>
+                <div class="price__value">от 250k ₸</div>
+                <div class="price__meta">2-5 дней</div>
+                <ul>
+                  <li>дизайн и верстка</li>
+                  <li>адаптив</li>
+                  <li>аналитика и деплой</li>
+                </ul>
+                <a class="btn btn--ghost" href="https://t.me/doscode_kz" target="_blank" rel="noreferrer">Обсудить</a>
+              </article>
+              <article class="price price--featured">
+                <h3>MVP</h3>
+                <div class="price__value">от 800k ₸</div>
+                <div class="price__meta">4-8 недель</div>
+                <ul>
+                  <li>backend + API</li>
+                  <li>frontend и админка</li>
+                  <li>оплаты и интеграции</li>
+                </ul>
+                <a class="btn" href="https://t.me/doscode_kz" target="_blank" rel="noreferrer">Начать</a>
+              </article>
+              <article class="price">
+                <h3>Custom</h3>
+                <div class="price__value">по задаче</div>
+                <div class="price__meta">сложные системы</div>
+                <ul>
+                  <li>AI и автоматизация</li>
+                  <li>дашборды</li>
+                  <li>поддержка и развитие</li>
+                </ul>
+                <a class="btn btn--ghost" href="https://t.me/doscode_kz" target="_blank" rel="noreferrer">Оценить</a>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="wrap">
+            <div class="section__head">
+              <div>
+                <div class="section__label">FAQ</div>
+                <h2>Коротко по частым вопросам</h2>
+              </div>
+            </div>
+            <div class="faq">
+              <details>
+                <summary>Это замена полной v10?</summary>
+                <p>Нет. Lite-страница быстрее и спокойнее, а полная v10 остается отдельной более анимированной версией.</p>
+              </details>
+              <details>
+                <summary>Можно ли так же сделать на английском?</summary>
+                <p>Да. Структура статичная, поэтому локализацию можно добавить без тяжелого фреймворка.</p>
+              </details>
+              <details>
+                <summary>Что нужно для оценки?</summary>
+                <p>Коротко опишите продукт, аудиторию, нужный срок, референсы и интеграции. Ответим с вилкой и планом.</p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <section class="cta">
+          <div class="wrap cta__grid">
+            <div>
+              <h2>Готовы собрать легкую, быструю версию?</h2>
+              <p>Напишите в Telegram. Дадим план, срок и вилку бюджета без длинного пресейла.</p>
+            </div>
+            <a class="btn btn--dark" href="https://t.me/doscode_kz" target="_blank" rel="noreferrer">Написать в Telegram</a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="wrap footer__inner">
+          <span>DosCode - Almaty, Kazakhstan</span>
+          <span>hello@doscode.kz</span>
+          <span>v10-lite</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
