@@ -1,22 +1,43 @@
 <!DOCTYPE html>
-<html lang="ru" class="dark">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DosCode v11 — Быстрая разработка с визуалом v10 и структурой, которая продаёт</title>
+    <title>DosCode v11 — Запускаем продукты, которые работают</title>
     <meta
       name="description"
-      content="DosCode v11: визуально сильный landing page с эстетикой v10 и более продающей структурой. Лендинги за 48 часов, MVP за 4–8 недель, AI-автоматизация, Telegram-боты и дашборды."
+      content="DosCode v11: лендинг-спринты, MVP и AI-автоматизация для бизнеса. Типовой лендинг за 48 часов при готовом контенте и быстрой обратной связи."
     />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="DosCode v11 — Запускаем продукты, которые работают" />
     <meta
       property="og:description"
-      content="Обновлённая DosCode landing page: визуал v10, stronger offer flow, кейсы, отзывы и pricing ближе к верху."
+      content="Продуктовая студия для бизнеса: лендинг-спринты, MVP, Telegram-боты и AI-автоматизация."
     />
     <meta property="og:image" content="/v10/opengraph.jpg" />
-    <meta name="theme-color" content="#0a0a0d" />
+    <meta name="theme-color" content="#f5f1e6" id="themeColorMeta" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("doscode-v10-theme");
+          var theme = stored === "dark" ? "dark" : "light";
+          var root = document.documentElement;
+          root.classList.toggle("v10-light", theme === "light");
+          root.classList.toggle("dark", theme !== "light");
+          root.dataset.theme = theme;
+          root.style.colorScheme = theme === "light" ? "light" : "dark";
+          var meta = document.getElementById("themeColorMeta");
+          if (meta) {
+            meta.setAttribute("content", theme === "light" ? "#f5f1e6" : "#0a0a0d");
+          }
+        } catch (e) {
+          document.documentElement.classList.add("v10-light");
+          document.documentElement.dataset.theme = "light";
+          document.documentElement.style.colorScheme = "light";
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

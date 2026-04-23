@@ -57,7 +57,7 @@ function ThemeSwitcher() {
 
   return (
     <div
-      className="flex items-center gap-0.5 rounded-md border border-border/50 bg-card/40 p-0.5"
+      className="flex items-center gap-0.5 rounded-lg border border-border/40 bg-background/55 p-0.5"
       data-testid="theme-switcher"
       aria-label="Theme"
     >
@@ -71,17 +71,17 @@ function ThemeSwitcher() {
               applyV10Theme(value);
               setTheme(value);
             }}
-            className={`inline-flex h-7 min-w-7 items-center justify-center gap-1 rounded px-1.5 text-[10px] font-mono font-bold transition-colors sm:h-8 sm:min-w-8 sm:px-2 sm:text-xs ${
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-md border transition-colors ${
               active
-                ? "bg-primary/15 text-primary"
-                : "text-muted-foreground hover:text-foreground"
+                ? "border-primary/30 bg-primary/10 text-primary"
+                : "border-transparent text-muted-foreground hover:bg-card/40 hover:text-foreground"
             }`}
             data-testid={`theme-${value}`}
             aria-label={`${label} theme`}
+            title={label}
             aria-pressed={active}
           >
-            <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-            <span className="hidden xl:inline">{label}</span>
+            <Icon className="h-4 w-4" />
           </button>
         );
       })}
@@ -310,7 +310,7 @@ function Hero() {
               {t("hero.ctaPrimary")}
             </Button>
           </a>
-          <a href="#process" className="w-full sm:w-auto">
+          <a href="#cases" className="w-full sm:w-auto">
             <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 font-mono border-border/50 hover:bg-card/50" data-testid="btn-hero-cases">
               {t("hero.ctaSecondary")}
             </Button>
@@ -1153,18 +1153,18 @@ function FastLaunch() {
             </div>
             <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-black font-display">{t("fastLaunch.title")}</h2>
             <p className="text-xl sm:text-2xl md:text-3xl font-bold text-black mb-4">{t("fastLaunch.guarantee")}</p>
-            <p className="text-lg sm:text-2xl mb-10 text-black/80 font-medium leading-tight">{t("fastLaunch.subtitle")}</p>
+            <p className="text-lg sm:text-2xl mb-10 text-black font-medium leading-tight">{t("fastLaunch.subtitle")}</p>
             <div className="space-y-4 font-mono text-sm sm:text-base">
               {[t("fastLaunch.bullet1"), t("fastLaunch.bullet2"), t("fastLaunch.bullet3"), t("fastLaunch.bullet4")].map((b, i) => (
-                <div key={i} className="flex items-center gap-4 bg-black/5 p-4 rounded-xl border border-black/10 transition-colors hover:bg-black/10">
+                <div key={i} className="flex items-center gap-4 bg-black/6 p-4 rounded-xl border border-black/12 transition-colors hover:bg-black/10">
                   <CheckCircle2 className="w-5 h-5 text-black shrink-0" />
-                  <span className="text-black/80 font-medium">{b}</span>
+                  <span className="text-black font-medium">{b}</span>
                 </div>
               ))}
             </div>
             <div className="mt-12 pt-8 border-t border-black/10 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
               <div>
-                <div className="text-sm font-bold text-black/60 uppercase tracking-widest mb-1">{t("fastLaunch.priceLabel")}</div>
+                <div className="text-sm font-bold text-black/75 uppercase tracking-widest mb-1">{t("fastLaunch.priceLabel")}</div>
                 <div className="text-3xl sm:text-4xl font-bold text-black font-mono">{t("fastLaunch.price")}</div>
               </div>
               <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="w-full sm:w-auto">

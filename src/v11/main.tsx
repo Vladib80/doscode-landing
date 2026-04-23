@@ -5,5 +5,5 @@ import "../v10/theme.css";
 import "../v10/i18n";
 import { initializeV10Theme } from "../v10/theme-mode";
 
-initializeV10Theme("dark");
+initializeV10Theme("light");
 createRoot(document.getElementById("root")!).render(<Home />);
