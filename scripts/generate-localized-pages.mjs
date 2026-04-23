@@ -15,13 +15,13 @@ const localeConfigs = {
     dir: '',
     url: `${siteUrl}/`,
     title: 'DosCode — Разработка веб-приложений, MVP и Telegram-ботов в Алматы',
-    description: 'DosCode в Алматы: веб-приложения, MVP, Telegram-боты, AI-автоматизация и внутренние системы для бизнеса. Лендинги за 48 часов, MVP за 4–8 недель.',
+    description: 'DosCode в Алматы: веб-приложения, MVP, Telegram-боты, AI-автоматизация и внутренние системы. Лендинг-спринт за 48 часов при готовом контенте и быстрой обратной связи.',
     ogLocale: 'ru_KZ',
     ogLocaleAlternates: ['kk_KZ', 'en_US'],
     schemaDescription: 'Студия разработки веб-приложений, MVP, AI-автоматизации и Telegram-ботов в Алматы.',
     schemaCatalogName: 'Услуги разработки',
-    schemaLandingName: 'Лендинг',
-    schemaLandingDescription: 'Дизайн, разработка, деплой под ключ за 2 недели',
+    schemaLandingName: 'Лендинг-спринт',
+    schemaLandingDescription: 'Первый макет в день обращения, запуск за 48 часов при готовом контенте и быстрой обратной связи.',
     schemaMvpName: 'MVP разработка',
     schemaMvpDescription: 'Полный цикл: дизайн + разработка + деплой за 4–8 недель'
   },
@@ -31,13 +31,13 @@ const localeConfigs = {
     dir: 'kk',
     url: `${siteUrl}/kk/`,
     title: 'DosCode — Алматыда веб-қосымша, MVP және Telegram-бот жасау',
-    description: 'DosCode Алматыда веб-қосымшалар, MVP, Telegram-боттар, AI-автоматтандыру және бизнеске арналған ішкі жүйелер жасайды. Лендинг 48 сағатта, MVP 4–8 аптада.',
+    description: 'DosCode Алматыда веб-қосымшалар, MVP, Telegram-боттар, AI-автоматтандыру және ішкі жүйелер жасайды. Контент дайын болып, кері байланыс жедел болса, лендинг-спринт 48 сағатта.',
     ogLocale: 'kk_KZ',
     ogLocaleAlternates: ['ru_KZ', 'en_US'],
     schemaDescription: 'Алматыдағы DosCode веб-қосымшалар, MVP, AI-автоматтандыру және Telegram-боттар жасайды.',
     schemaCatalogName: 'Әзірлеу қызметтері',
-    schemaLandingName: 'Лендинг',
-    schemaLandingDescription: 'Дизайн, әзірлеу және деплой толық циклмен 2 апта ішінде',
+    schemaLandingName: 'Лендинг-спринт',
+    schemaLandingDescription: 'Контент дайын болып, кері байланыс жедел болса, алғашқы макет сол күні, іске қосу 48 сағатта.',
     schemaMvpName: 'MVP әзірлеу',
     schemaMvpDescription: 'Толық цикл: дизайн + әзірлеу + деплой 4–8 аптада'
   },
@@ -47,13 +47,13 @@ const localeConfigs = {
     dir: 'en',
     url: `${siteUrl}/en/`,
     title: 'DosCode — Web App Development, MVPs and Telegram Bots in Almaty',
-    description: 'DosCode builds web apps, MVPs, Telegram bots, AI automation and internal systems in Almaty, Kazakhstan. Landing pages in 48 hours, MVPs in 4–8 weeks.',
+    description: 'DosCode builds web apps, MVPs, Telegram bots, AI automation and internal systems in Almaty. Landing sprint in 48 hours when content is ready and feedback is fast.',
     ogLocale: 'en_US',
     ogLocaleAlternates: ['ru_KZ', 'kk_KZ'],
     schemaDescription: 'DosCode builds web apps, MVPs, AI automation and Telegram bots in Almaty.',
     schemaCatalogName: 'Development services',
-    schemaLandingName: 'Landing page development',
-    schemaLandingDescription: 'Design, development and deployment turnkey in 2 weeks',
+    schemaLandingName: 'Landing sprint',
+    schemaLandingDescription: 'First mockup the same day, launch in 48 hours when content is ready and feedback is fast.',
     schemaMvpName: 'MVP development',
     schemaMvpDescription: 'Full cycle: design + development + deployment in 4–8 weeks'
   }
@@ -104,7 +104,12 @@ function extractObjectLiteral(source, regex, label) {
 function localizeHtml(baseHtml, translations, marqueeBase, config) {
   let html = baseHtml;
 
-  html = mustReplace(html, /<html lang="[^"]+">/, `<html lang="${config.htmlLang}">`, 'html lang');
+  html = mustReplace(
+    html,
+    /<html\s+lang="[^"]+"([^>]*)>/,
+    `<html lang="${config.htmlLang}"$1>`,
+    'html lang'
+  );
   html = mustReplace(html, /<title>[\s\S]*?<\/title>/, `<title>${config.title}</title>`, 'title');
   html = mustReplace(
     html,
@@ -182,13 +187,13 @@ function localizeHtml(baseHtml, translations, marqueeBase, config) {
   );
   html = mustReplace(
     html,
-    '"itemOffered": {"@type": "Service", "name": "Лендинг"}',
+    '"itemOffered": {"@type": "Service", "name": "Лендинг-спринт"}',
     `"itemOffered": {"@type": "Service", "name": "${config.schemaLandingName}"}`,
     'schema landing service name'
   );
   html = mustReplace(
     html,
-    '"description": "Дизайн, разработка, деплой под ключ за 2 недели"',
+    '"description": "Первый макет в день обращения, запуск за 48 часов при готовом контенте и быстрой обратной связи."',
     `"description": "${config.schemaLandingDescription}"`,
     'schema landing description'
   );
