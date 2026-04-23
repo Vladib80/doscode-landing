@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Terminal, Zap, Code2, Rocket, CheckCircle2, ChevronDown, Command, LayoutTemplate, Database, Cpu, Bot, LineChart, Timer, TrendingUp, TrendingDown, Minus, Check, X, Clock } from "lucide-react";
+import { ArrowRight, Terminal, Zap, Code2, Rocket, CheckCircle2, ChevronDown, Command, LayoutTemplate, Database, Cpu, Bot, LineChart, Timer, TrendingUp, TrendingDown, Minus, Check, X, Clock, Sun, Moon } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
+import { applyV10Theme, getV10ThemeFromRoot, type V10Theme } from "../theme-mode";
 
 const TELEGRAM_URL = "https://t.me/doscode_kz";
 
@@ -43,34 +44,79 @@ function LanguageSwitcher() {
   );
 }
 
+function ThemeSwitcher() {
+  const [theme, setTheme] = useState<V10Theme>(() => getV10ThemeFromRoot());
+  const options: Array<{ value: V10Theme; label: string; icon: React.ElementType }> = [
+    { value: "light", label: "Lite", icon: Sun },
+    { value: "dark", label: "Dark", icon: Moon },
+  ];
+
+  useEffect(() => {
+    setTheme(getV10ThemeFromRoot());
+  }, []);
+
+  return (
+    <div
+      className="flex items-center gap-0.5 rounded-md border border-border/50 bg-card/40 p-0.5"
+      data-testid="theme-switcher"
+      aria-label="Theme"
+    >
+      {options.map(({ value, label, icon: Icon }) => {
+        const active = theme === value;
+        return (
+          <button
+            key={value}
+            type="button"
+            onClick={() => {
+              applyV10Theme(value, { syncUrl: true });
+              setTheme(value);
+            }}
+            className={`inline-flex h-7 min-w-7 items-center justify-center gap-1 rounded px-1.5 text-[10px] font-mono font-bold transition-colors sm:h-8 sm:min-w-8 sm:px-2 sm:text-xs ${
+              active
+                ? "bg-primary/15 text-primary"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+            data-testid={`theme-${value}`}
+            aria-label={`${label} theme`}
+            aria-pressed={active}
+          >
+            <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span className="hidden xl:inline">{label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 function Header() {
   const { t } = useTranslation();
   return (
     <header className="fixed top-0 left-0 right-0 z-40 border-b border-border/50 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 w-full max-w-full items-center justify-between gap-2 px-3 sm:px-6">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-2 px-3 sm:px-6">
         <div className="flex items-center gap-2 shrink-0">
           <Terminal className="h-5 w-5 text-primary" />
           <span className="font-display font-bold text-lg sm:text-xl tracking-tight">DosCode</span>
         </div>
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground font-mono">
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-8 text-sm font-medium text-muted-foreground font-mono" aria-label="Primary">
           <a href="#services" className="hover:text-foreground transition-colors" data-testid="nav-services">{t("header.services")}</a>
           <a href="#cases" className="hover:text-foreground transition-colors" data-testid="nav-cases">{t("header.cases")}</a>
           <a href="#process" className="hover:text-foreground transition-colors" data-testid="nav-process">{t("header.process")}</a>
           <a href="#pricing" className="hover:text-foreground transition-colors" data-testid="nav-pricing">{t("header.pricing")}</a>
           <a href="#faq" className="hover:text-foreground transition-colors" data-testid="nav-faq">{t("header.faq")}</a>
         </nav>
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+          <ThemeSwitcher />
           <LanguageSwitcher />
-          <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="hidden sm:block">
+          <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="hidden xl:block">
             <Button
               variant="outline"
               size="sm"
-              className="border-primary/20 hover:bg-primary/10 hover:text-primary transition-colors gap-1 sm:gap-2 px-2 sm:px-3 h-9 sm:h-10"
+              className="border-primary/20 hover:bg-primary/10 hover:text-primary transition-colors gap-2 px-3 h-10"
               data-testid="btn-header-telegram"
             >
-              <Zap className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              <span className="hidden sm:inline text-sm">{t("header.cta")}</span>
-              <span className="sm:hidden text-xs font-mono">{t("header.ctaShort")}</span>
+              <Zap className="h-4 w-4" />
+              <span className="text-sm">{t("header.cta")}</span>
             </Button>
           </a>
         </div>
@@ -275,7 +321,7 @@ function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mx-auto flex w-[calc(100vw-2rem)] max-w-sm flex-wrap items-center justify-center gap-3 text-xs font-mono text-muted-foreground sm:w-auto sm:max-w-none sm:gap-6 sm:text-sm"
+          className="v10-hero-trust mx-auto flex w-[calc(100vw-2rem)] max-w-sm flex-wrap items-center justify-center gap-3 text-xs font-mono text-muted-foreground sm:w-auto sm:max-w-none sm:gap-6 sm:text-sm"
           data-testid="hero-trust-row"
         >
           <span className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> {t("hero.trustHour")}</span>
