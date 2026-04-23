@@ -23,7 +23,7 @@ i18n
     load: "languageOnly",
     interpolation: { escapeValue: false },
     detection: {
-      order: ["localStorage", "navigator", "htmlTag"],
+      order: ["htmlTag", "localStorage", "navigator"],
       lookupLocalStorage: "doscode-lang",
       caches: ["localStorage"],
     },

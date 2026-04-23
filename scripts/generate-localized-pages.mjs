@@ -1,305 +1,170 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import vm from 'node:vm';
 
 const rootDir = process.cwd();
-const siteUrl = 'https://doscode.kz';
-const sourcePath = path.join(rootDir, 'index.html');
 const publicDir = path.join(rootDir, 'public');
 const sitemapPath = path.join(publicDir, 'sitemap.xml');
+const siteUrl = 'https://doscode.kz';
+const ogImageUrl = `${siteUrl}/v10/opengraph.jpg`;
+
+const alternateLinks = [
+  { hreflang: 'ru', href: `${siteUrl}/` },
+  { hreflang: 'kk', href: `${siteUrl}/kk/` },
+  { hreflang: 'en', href: `${siteUrl}/en/` },
+  { hreflang: 'x-default', href: `${siteUrl}/` }
+];
 
 const localeConfigs = {
-  ru: {
-    langKey: 'ru',
-    htmlLang: 'ru',
-    dir: '',
-    url: `${siteUrl}/`,
-    title: 'DosCode — Разработка веб-приложений, MVP и Telegram-ботов в Алматы',
-    description: 'DosCode в Алматы: веб-приложения, MVP, Telegram-боты, AI-автоматизация и внутренние системы. Лендинг-спринт за 48 часов при готовом контенте и быстрой обратной связи.',
-    ogLocale: 'ru_KZ',
-    ogLocaleAlternates: ['kk_KZ', 'en_US'],
-    schemaDescription: 'Студия разработки веб-приложений, MVP, AI-автоматизации и Telegram-ботов в Алматы.',
-    schemaCatalogName: 'Услуги разработки',
-    schemaLandingName: 'Лендинг-спринт',
-    schemaLandingDescription: 'Первый макет в день обращения, запуск за 48 часов при готовом контенте и быстрой обратной связи.',
-    schemaMvpName: 'MVP разработка',
-    schemaMvpDescription: 'Полный цикл: дизайн + разработка + деплой за 4–8 недель'
-  },
   kk: {
-    langKey: 'kz',
+    langKey: 'kk',
     htmlLang: 'kk',
     dir: 'kk',
     url: `${siteUrl}/kk/`,
-    title: 'DosCode — Алматыда веб-қосымша, MVP және Telegram-бот жасау',
-    description: 'DosCode Алматыда веб-қосымшалар, MVP, Telegram-боттар, AI-автоматтандыру және ішкі жүйелер жасайды. Контент дайын болып, кері байланыс жедел болса, лендинг-спринт 48 сағатта.',
+    title: 'DosCode — Бизнеске арналған лендингтер, MVP және AI-жүйелер',
+    description:
+      'DosCode Қазақстан мен CIS нарығындағы бизнеске лендинг-спринттер, MVP, Telegram-боттар және AI-автоматтандыру жасайды. Контент дайын болып, кері байланыс жедел болса, типтік лендинг 48 сағатта іске қосылады.',
     ogLocale: 'kk_KZ',
-    ogLocaleAlternates: ['ru_KZ', 'en_US'],
-    schemaDescription: 'Алматыдағы DosCode веб-қосымшалар, MVP, AI-автоматтандыру және Telegram-боттар жасайды.',
-    schemaCatalogName: 'Әзірлеу қызметтері',
-    schemaLandingName: 'Лендинг-спринт',
-    schemaLandingDescription: 'Контент дайын болып, кері байланыс жедел болса, алғашқы макет сол күні, іске қосу 48 сағатта.',
-    schemaMvpName: 'MVP әзірлеу',
-    schemaMvpDescription: 'Толық цикл: дизайн + әзірлеу + деплой 4–8 аптада'
+    ogLocaleAlternates: ['ru_KZ', 'en_US']
   },
   en: {
     langKey: 'en',
     htmlLang: 'en',
     dir: 'en',
     url: `${siteUrl}/en/`,
-    title: 'DosCode — Web App Development, MVPs and Telegram Bots in Almaty',
-    description: 'DosCode builds web apps, MVPs, Telegram bots, AI automation and internal systems in Almaty. Landing sprint in 48 hours when content is ready and feedback is fast.',
+    title: 'DosCode — Landing Pages, MVPs and AI Systems for Business',
+    description:
+      'DosCode launches landing sprints, MVPs, Telegram bots and AI automation for businesses in Kazakhstan and the CIS. A standard landing page ships in 48 hours when content is ready and feedback is fast.',
     ogLocale: 'en_US',
-    ogLocaleAlternates: ['ru_KZ', 'kk_KZ'],
-    schemaDescription: 'DosCode builds web apps, MVPs, AI automation and Telegram bots in Almaty.',
-    schemaCatalogName: 'Development services',
-    schemaLandingName: 'Landing sprint',
-    schemaLandingDescription: 'First mockup the same day, launch in 48 hours when content is ready and feedback is fast.',
-    schemaMvpName: 'MVP development',
-    schemaMvpDescription: 'Full cycle: design + development + deployment in 4–8 weeks'
+    ogLocaleAlternates: ['ru_KZ', 'kk_KZ']
   }
 };
 
-function mustReplace(html, pattern, replacement, label) {
-  if (typeof pattern === 'string') {
-    if (!html.includes(pattern)) {
-      throw new Error(`Failed to replace ${label}`);
-    }
-    return html.replace(pattern, replacement);
-  }
-
-  const next = html.replace(pattern, replacement);
-  if (next === html) {
-    throw new Error(`Failed to replace ${label}`);
-  }
-  return next;
+function renderAlternateMeta() {
+  return alternateLinks
+    .map((link) => `    <link rel="alternate" hreflang="${link.hreflang}" href="${link.href}" />`)
+    .join('\n');
 }
 
-function resolvePath(obj, dottedPath) {
-  return dottedPath.split('.').reduce((acc, key) => {
-    if (acc && Object.prototype.hasOwnProperty.call(acc, key)) {
-      return acc[key];
-    }
-    return undefined;
-  }, obj);
+function renderOgLocaleAlternates(locales) {
+  return locales
+    .map((locale) => `    <meta property="og:locale:alternate" content="${locale}" />`)
+    .join('\n');
 }
 
-function repeatMarquee(base) {
-  return `${base}${base}${base}${base}`;
-}
+function renderShell(config) {
+  return `<!DOCTYPE html>
+<html lang="${config.htmlLang}" data-landing-version="v11">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="doscode-landing-version" content="v11" />
 
-function escapeHtmlAttr(value) {
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;');
-}
+    <title>${config.title}</title>
+    <meta name="description" content="${config.description}" />
+    <link rel="canonical" href="${config.url}" />
+${renderAlternateMeta()}
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="DosCode" />
 
-function extractObjectLiteral(source, regex, label) {
-  const match = source.match(regex);
-  if (!match) {
-    throw new Error(`Failed to extract ${label}`);
-  }
-  return vm.runInNewContext(`(${match[1]})`);
-}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="${config.url}" />
+    <meta property="og:title" content="${config.title}" />
+    <meta property="og:description" content="${config.description}" />
+    <meta property="og:image" content="${ogImageUrl}" />
+    <meta property="og:locale" content="${config.ogLocale}" />
+${renderOgLocaleAlternates(config.ogLocaleAlternates)}
+    <meta property="og:site_name" content="DosCode" />
 
-function localizeHtml(baseHtml, translations, marqueeBase, config) {
-  let html = baseHtml;
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${config.title}" />
+    <meta name="twitter:description" content="${config.description}" />
+    <meta name="twitter:image" content="${ogImageUrl}" />
+    <meta name="theme-color" content="#f5f1e6" id="themeColorMeta" />
 
-  html = mustReplace(
-    html,
-    /<html\s+lang="[^"]+"([^>]*)>/,
-    `<html lang="${config.htmlLang}"$1>`,
-    'html lang'
-  );
-  html = mustReplace(html, /<title>[\s\S]*?<\/title>/, `<title>${config.title}</title>`, 'title');
-  html = mustReplace(
-    html,
-    /<meta name="description" content="[^"]*">/,
-    `<meta name="description" content="${config.description}">`,
-    'meta description'
-  );
-  html = mustReplace(
-    html,
-    /<link rel="canonical" href="[^"]*">/,
-    `<link rel="canonical" href="${config.url}">`,
-    'canonical'
-  );
-  html = mustReplace(
-    html,
-    /<meta property="og:url" content="[^"]*">/,
-    `<meta property="og:url" content="${config.url}">`,
-    'og:url'
-  );
-  html = mustReplace(
-    html,
-    /<meta property="og:title" content="[^"]*">/,
-    `<meta property="og:title" content="${config.title}">`,
-    'og:title'
-  );
-  html = mustReplace(
-    html,
-    /<meta property="og:description" content="[^"]*">/,
-    `<meta property="og:description" content="${config.description}">`,
-    'og:description'
-  );
-  html = mustReplace(
-    html,
-    /<meta property="og:locale" content="[^"]*">/,
-    `<meta property="og:locale" content="${config.ogLocale}">`,
-    'og:locale'
-  );
-  html = mustReplace(
-    html,
-    /<meta property="og:locale:alternate" content="[^"]*">\n  <meta property="og:locale:alternate" content="[^"]*">/,
-    config.ogLocaleAlternates
-      .map((locale) => `  <meta property="og:locale:alternate" content="${locale}">`)
-      .join('\n'),
-    'og alternate locales'
-  );
-  html = mustReplace(
-    html,
-    /<meta name="twitter:title" content="[^"]*">/,
-    `<meta name="twitter:title" content="${config.title}">`,
-    'twitter:title'
-  );
-  html = mustReplace(
-    html,
-    /<meta name="twitter:description" content="[^"]*">/,
-    `<meta name="twitter:description" content="${config.description}">`,
-    'twitter:description'
-  );
-  html = mustReplace(
-    html,
-    /"description": "[^"]*",\n    "url": "https:\/\/doscode\.kz"/,
-    `"description": "${config.schemaDescription}",\n    "url": "${config.url}"`,
-    'schema description and url'
-  );
-  html = mustReplace(
-    html,
-    /"inLanguage": "[^"]*"/,
-    `"inLanguage": "${config.htmlLang}"`,
-    'schema inLanguage'
-  );
-  html = mustReplace(
-    html,
-    '"name": "Услуги разработки"',
-    `"name": "${config.schemaCatalogName}"`,
-    'schema catalog name'
-  );
-  html = mustReplace(
-    html,
-    '"itemOffered": {"@type": "Service", "name": "Лендинг-спринт"}',
-    `"itemOffered": {"@type": "Service", "name": "${config.schemaLandingName}"}`,
-    'schema landing service name'
-  );
-  html = mustReplace(
-    html,
-    '"description": "Первый макет в день обращения, запуск за 48 часов при готовом контенте и быстрой обратной связи."',
-    `"description": "${config.schemaLandingDescription}"`,
-    'schema landing description'
-  );
-  html = mustReplace(
-    html,
-    '"itemOffered": {"@type": "Service", "name": "MVP разработка"}',
-    `"itemOffered": {"@type": "Service", "name": "${config.schemaMvpName}"}`,
-    'schema mvp service name'
-  );
-  html = mustReplace(
-    html,
-    '"description": "Полный цикл: дизайн + разработка + деплой за 4–8 недель"',
-    `"description": "${config.schemaMvpDescription}"`,
-    'schema mvp description'
-  );
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-  html = html.replace(/class="lang-btn active"/g, 'class="lang-btn"');
-  html = mustReplace(
-    html,
-    new RegExp(`class="lang-btn" data-lang="${config.langKey}"`),
-    `class="lang-btn active" data-lang="${config.langKey}"`,
-    'active language switcher'
-  );
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var defaultLang = "${config.langKey}";
 
-  html = html.replace(
-    /<([a-zA-Z0-9]+)([^>]*?)data-i18n="([^"]+)"([^>]*)>([\s\S]*?)<\/\1>/g,
-    (match, tag, before, key, after, inner) => {
-      let translated;
-      if (key === 'marquee.text') {
-        translated = repeatMarquee(marqueeBase[config.langKey]);
-      } else {
-        translated = resolvePath(translations[config.langKey], key);
-      }
+        try {
+          var url = new URL(window.location.href);
+          var queryLang = url.searchParams.get("lang");
+          var redirectMap = { ru: "/", kk: "/kk/", kz: "/kk/", en: "/en/" };
+          if (queryLang && redirectMap[queryLang] && url.pathname !== redirectMap[queryLang]) {
+            window.location.replace(redirectMap[queryLang] + url.hash);
+            return;
+          }
 
-      if (translated === undefined || translated === null) {
-        return match;
-      }
+          var path = window.location.pathname;
+          var forcedLang = path.indexOf("/kk/") === 0 ? "kk" : path.indexOf("/en/") === 0 ? "en" : null;
+          var storedLang = null;
 
-      let output = String(translated);
-      if (key.startsWith('offer.check')) {
-        const iconMatch = inner.match(/<span class="fo-check">[\s\S]*?<\/span>/);
-        if (iconMatch) {
-          output = `${iconMatch[0]}${translated}`;
+          try {
+            storedLang = localStorage.getItem("doscode-lang");
+          } catch (e) {
+            storedLang = null;
+          }
+
+          var lang = forcedLang || (storedLang === "ru" || storedLang === "kk" || storedLang === "en" ? storedLang : defaultLang);
+          root.lang = lang;
+          root.dataset.lang = lang;
+
+          if (forcedLang) {
+            try {
+              localStorage.setItem("doscode-lang", forcedLang);
+            } catch (e) {}
+          }
+
+          var storedTheme = null;
+          try {
+            storedTheme = localStorage.getItem("doscode-v10-theme");
+          } catch (e) {
+            storedTheme = null;
+          }
+
+          var theme = storedTheme === "dark" ? "dark" : "light";
+          root.classList.toggle("v10-light", theme === "light");
+          root.classList.toggle("dark", theme !== "light");
+          root.dataset.theme = theme;
+          root.style.colorScheme = theme === "light" ? "light" : "dark";
+
+          var meta = document.getElementById("themeColorMeta");
+          if (meta) {
+            meta.setAttribute("content", theme === "light" ? "#f5f1e6" : "#0a0a0d");
+          }
+        } catch (e) {
+          root.lang = defaultLang;
+          root.dataset.lang = defaultLang;
+          root.classList.add("v10-light");
+          root.dataset.theme = "light";
+          root.style.colorScheme = "light";
         }
-      }
-
-      return `<${tag}${before}data-i18n="${key}"${after}>${output}</${tag}>`;
-    }
-  );
-
-  [
-    ['data-i18n-aria-label', 'aria-label'],
-    ['data-i18n-title', 'title'],
-    ['data-i18n-alt', 'alt']
-  ].forEach(([dataAttr, targetAttr]) => {
-    html = html.replace(
-      new RegExp(`<([a-zA-Z0-9]+)([^>]*?)${dataAttr}="([^"]+)"([^>]*)>`, 'g'),
-      (match, tag, before, key, after) => {
-        const translated = resolvePath(translations[config.langKey], key);
-        if (translated === undefined || translated === null) {
-          return match;
-        }
-
-        const safeValue = escapeHtmlAttr(translated);
-        if (new RegExp(`${targetAttr}="[^"]*"`).test(match)) {
-          return match.replace(new RegExp(`${targetAttr}="[^"]*"`), `${targetAttr}="${safeValue}"`);
-        }
-
-        return `<${tag}${before}${targetAttr}="${safeValue}" ${dataAttr}="${key}"${after}>`;
-      }
-    );
-  });
-
-  const initialThemeLabel = resolvePath(translations[config.langKey], 'ui.themeToDark');
-  if (initialThemeLabel) {
-    const safeThemeLabel = escapeHtmlAttr(initialThemeLabel);
-    html = mustReplace(
-      html,
-      /(<button class="theme-toggle" id="themeToggle" type="button" aria-label=")[^"]*(" aria-pressed=")(?:true|false)(" title=")[^"]*(")/,
-      `$1${safeThemeLabel}$2true$3${safeThemeLabel}$4`,
-      'theme toggle label'
-    );
-  }
-
-  return html;
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>Please enable JavaScript to view this site.</noscript>
+    <script type="module" src="/src/v11/main.tsx"></script>
+  </body>
+</html>
+`;
 }
 
 function buildSitemap(lastmod) {
   const urls = [
-    { loc: `${siteUrl}/`, hreflang: 'ru' },
-    { loc: `${siteUrl}/kk/`, hreflang: 'kk' },
-    { loc: `${siteUrl}/en/`, hreflang: 'en' }
-  ];
-
-  const alternates = [
-    { hreflang: 'ru', href: `${siteUrl}/` },
-    { hreflang: 'kk', href: `${siteUrl}/kk/` },
-    { hreflang: 'en', href: `${siteUrl}/en/` },
-    { hreflang: 'x-default', href: `${siteUrl}/` }
+    { loc: `${siteUrl}/` },
+    { loc: `${siteUrl}/kk/` },
+    { loc: `${siteUrl}/en/` }
   ];
 
   const body = urls
     .map(
       ({ loc }) => `  <url>
     <loc>${loc}</loc>
-${alternates.map((alt) => `    <xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${alt.href}"/>`).join('\n')}
+${alternateLinks.map((alt) => `    <xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${alt.href}"/>`).join('\n')}
     <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${loc === `${siteUrl}/` ? '1.0' : '0.9'}</priority>
@@ -316,26 +181,14 @@ ${body}
 }
 
 async function main() {
-  const source = await fs.readFile(sourcePath, 'utf8');
-  const marqueeBase = extractObjectLiteral(
-    source,
-    /var MARQUEE_BASE = (\{[\s\S]*?\n\});\n\nvar TRANSLATIONS =/,
-    'MARQUEE_BASE'
-  );
-  const translations = extractObjectLiteral(
-    source,
-    /var TRANSLATIONS = (\{[\s\S]*?\n\});\n\nfunction setLang/,
-    'TRANSLATIONS'
-  );
-
-  for (const locale of ['kk', 'en']) {
+  for (const locale of Object.keys(localeConfigs)) {
     const config = localeConfigs[locale];
-    const localizedHtml = localizeHtml(source, translations, marqueeBase, config);
-    const dir = path.join(publicDir, config.dir);
+    const dir = path.join(rootDir, config.dir);
     await fs.mkdir(dir, { recursive: true });
-    await fs.writeFile(path.join(dir, 'index.html'), localizedHtml);
+    await fs.writeFile(path.join(dir, 'index.html'), renderShell(config));
   }
 
+  await fs.mkdir(publicDir, { recursive: true });
   const lastmod = new Date().toISOString().slice(0, 10);
   await fs.writeFile(sitemapPath, buildSitemap(lastmod));
 }

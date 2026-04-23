@@ -1,42 +1,33 @@
 <!DOCTYPE html>
-<html lang="ru" data-landing-version="v11">
+<html lang="en" data-landing-version="v11">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="doscode-landing-version" content="v11" />
 
-    <title>DosCode — Лендинги, MVP и AI-системы для бизнеса</title>
-    <meta
-      name="description"
-      content="DosCode запускает лендинг-спринты, MVP, Telegram-боты и AI-автоматизацию для бизнеса в Казахстане и CIS. Типовой лендинг — за 48 часов при готовом контенте и быстрой обратной связи."
-    />
-    <link rel="canonical" href="https://doscode.kz/" />
+    <title>DosCode — Landing Pages, MVPs and AI Systems for Business</title>
+    <meta name="description" content="DosCode launches landing sprints, MVPs, Telegram bots and AI automation for businesses in Kazakhstan and the CIS. A standard landing page ships in 48 hours when content is ready and feedback is fast." />
+    <link rel="canonical" href="https://doscode.kz/en/" />
     <link rel="alternate" hreflang="ru" href="https://doscode.kz/" />
     <link rel="alternate" hreflang="kk" href="https://doscode.kz/kk/" />
     <link rel="alternate" hreflang="en" href="https://doscode.kz/en/" />
     <link rel="alternate" hreflang="x-default" href="https://doscode.kz/" />
-    <meta name="robots" content="noindex, follow" />
+    <meta name="robots" content="index, follow" />
     <meta name="author" content="DosCode" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://doscode.kz/" />
-    <meta property="og:title" content="DosCode — Лендинги, MVP и AI-системы для бизнеса" />
-    <meta
-      property="og:description"
-      content="Лендинг-спринты, MVP, Telegram-боты и AI-автоматизация для бизнеса в Казахстане и CIS."
-    />
+    <meta property="og:url" content="https://doscode.kz/en/" />
+    <meta property="og:title" content="DosCode — Landing Pages, MVPs and AI Systems for Business" />
+    <meta property="og:description" content="DosCode launches landing sprints, MVPs, Telegram bots and AI automation for businesses in Kazakhstan and the CIS. A standard landing page ships in 48 hours when content is ready and feedback is fast." />
     <meta property="og:image" content="https://doscode.kz/v10/opengraph.jpg" />
-    <meta property="og:locale" content="ru_KZ" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ru_KZ" />
     <meta property="og:locale:alternate" content="kk_KZ" />
-    <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:site_name" content="DosCode" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DosCode — Лендинги, MVP и AI-системы для бизнеса" />
-    <meta
-      name="twitter:description"
-      content="Лендинг-спринты, MVP, Telegram-боты и AI-автоматизация для бизнеса в Казахстане и CIS."
-    />
+    <meta name="twitter:title" content="DosCode — Landing Pages, MVPs and AI Systems for Business" />
+    <meta name="twitter:description" content="DosCode launches landing sprints, MVPs, Telegram bots and AI automation for businesses in Kazakhstan and the CIS. A standard landing page ships in 48 hours when content is ready and feedback is fast." />
     <meta name="twitter:image" content="https://doscode.kz/v10/opengraph.jpg" />
     <meta name="theme-color" content="#f5f1e6" id="themeColorMeta" />
 
@@ -45,9 +36,17 @@
     <script>
       (function () {
         var root = document.documentElement;
-        var defaultLang = "ru";
+        var defaultLang = "en";
 
         try {
+          var url = new URL(window.location.href);
+          var queryLang = url.searchParams.get("lang");
+          var redirectMap = { ru: "/", kk: "/kk/", kz: "/kk/", en: "/en/" };
+          if (queryLang && redirectMap[queryLang] && url.pathname !== redirectMap[queryLang]) {
+            window.location.replace(redirectMap[queryLang] + url.hash);
+            return;
+          }
+
           var path = window.location.pathname;
           var forcedLang = path.indexOf("/kk/") === 0 ? "kk" : path.indexOf("/en/") === 0 ? "en" : null;
           var storedLang = null;

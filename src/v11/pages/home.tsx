@@ -7,6 +7,18 @@ import { Button } from "../../v10/components/ui/button";
 import { applyV10Theme, getV10ThemeFromRoot, type V10Theme } from "../../v10/theme-mode";
 
 const TELEGRAM_URL = "https://t.me/doscode_kz";
+const LOCALE_PATHS: Record<"ru" | "kk" | "en", string> = {
+  ru: "/",
+  kk: "/kk/",
+  en: "/en/",
+};
+
+function normalizeLocalePath(pathname: string) {
+  if (pathname === "/index.html") return "/";
+  if (pathname === "/kk" || pathname === "/kk/index.html") return "/kk/";
+  if (pathname === "/en" || pathname === "/en/index.html") return "/en/";
+  return pathname;
+}
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();
@@ -16,6 +28,35 @@ function LanguageSwitcher() {
     { code: "kk", label: "ҚАЗ" },
     { code: "en", label: "EN" },
   ] as const;
+
+  const setLanguage = (code: "ru" | "kk" | "en") => {
+    void i18n.changeLanguage(code);
+
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = code;
+      document.documentElement.dataset.lang = code;
+    }
+
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    try {
+      window.localStorage.setItem("doscode-lang", code);
+    } catch {
+      // Storage can be unavailable in private or embedded contexts; navigation still keeps locale correct.
+    }
+
+    const targetPath = LOCALE_PATHS[code];
+    const currentPath = normalizeLocalePath(window.location.pathname);
+
+    if (currentPath === targetPath) {
+      return;
+    }
+
+    window.location.assign(`${targetPath}${window.location.search}${window.location.hash}`);
+  };
+
   return (
     <div
       className="flex items-center gap-0.5 rounded-md border border-border/50 bg-card/40 p-0.5"
@@ -27,7 +68,7 @@ function LanguageSwitcher() {
           <button
             key={l.code}
             type="button"
-            onClick={() => i18n.changeLanguage(l.code)}
+            onClick={() => setLanguage(l.code)}
             className={`px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs font-mono font-bold rounded transition-colors ${
               active
                 ? "bg-primary/15 text-primary"
