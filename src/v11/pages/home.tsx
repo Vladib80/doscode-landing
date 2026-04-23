@@ -310,7 +310,7 @@ function Hero() {
               {t("hero.ctaPrimary")}
             </Button>
           </a>
-          <a href="#cases" className="w-full sm:w-auto">
+          <a href="#process" className="w-full sm:w-auto">
             <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 font-mono border-border/50 hover:bg-card/50" data-testid="btn-hero-cases">
               {t("hero.ctaSecondary")}
             </Button>
@@ -328,30 +328,6 @@ function Hero() {
           <span className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> {t("hero.trustEstimate")}</span>
           <span className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> {t("hero.trustPrice")}</span>
         </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.45 }}
-          className="mx-auto mt-6 grid w-full max-w-4xl grid-cols-1 gap-3 px-1 sm:grid-cols-3"
-          data-testid="hero-offer-strip"
-        >
-          {(t("hero.offerCards", { returnObjects: true }) as Array<{ kicker: string; title: string; note: string }>).map((card, i) => (
-            <div key={i} className="rounded-2xl border border-border/60 bg-card/40 px-4 py-4 text-left backdrop-blur-sm">
-              <div className="text-[10px] font-mono uppercase tracking-[0.24em] text-primary/80">{card.kicker}</div>
-              <div className="mt-2 text-lg font-bold leading-tight text-foreground">{card.title}</div>
-              <div className="mt-2 text-sm leading-relaxed text-muted-foreground">{card.note}</div>
-            </div>
-          ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-        >
-          <HeroPipeline />
-        </motion.div>
       </div>
     </section>
   );
@@ -360,7 +336,7 @@ function Hero() {
 function Services() {
   const { t } = useTranslation();
   return (
-    <section id="services" className="py-24 sm:py-32 bg-card/30 relative border-t border-border/50">
+    <section id="services" className="py-20 sm:py-24 bg-card/30 relative border-t border-border/50">
       <div className="container mx-auto px-6">
         <div className="mb-16 sm:mb-20">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4 font-display">{t("services.title")}</h2>
@@ -1029,7 +1005,7 @@ function Cases() {
   const [expandedId, setExpandedId] = useState<number | null>(0);
 
   return (
-    <section id="cases" className="py-24 sm:py-32 relative">
+    <section id="cases" className="py-20 sm:py-24 relative">
       <div className="container mx-auto px-6">
         <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-16 sm:mb-20 text-center font-display">{t("cases.title")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-start">
@@ -1167,7 +1143,7 @@ function FastLaunch() {
   const logLines = t("fastLaunch.logLines", { returnObjects: true }) as string[];
   const tStamps = ["[T-48:00]", "[T-45:30]", "[T-24:00]", "[T-12:00]", "[T-02:00]", "[T-00:30]", "[T-00:00]"];
   return (
-    <section className="py-24 sm:py-32 bg-primary text-primary-foreground relative overflow-hidden">
+    <section className="py-20 sm:py-24 bg-primary text-primary-foreground relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiMwMDAiIG9wYWNpdHk9IjAuMSIvPjwvc3ZnPg==')] opacity-30" />
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
@@ -1260,7 +1236,7 @@ function Process() {
   const steps = rawSteps.map((s, i) => ({ num: String(i + 1).padStart(2, "0"), ...s }));
 
   return (
-    <section id="process" className="py-24 sm:py-32 bg-background relative border-b border-border/50">
+    <section id="process" className="py-20 sm:py-24 bg-background relative border-b border-border/50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 sm:mb-20">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4 font-display">{t("process.title")}</h2>
@@ -1299,7 +1275,7 @@ function Pricing() {
   }>).map((p, i) => ({ ...p, popular: i === 1 }));
 
   return (
-    <section id="pricing" className="py-24 sm:py-32 bg-card/30">
+    <section id="pricing" className="py-20 sm:py-24 bg-card/30">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 sm:mb-20">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4 font-display">{t("pricing.title")}</h2>
@@ -1348,7 +1324,7 @@ function FAQ() {
   const faqs = t("faq.items", { returnObjects: true }) as Array<{ q: string; a: string }>;
 
   return (
-    <section id="faq" className="py-24 sm:py-32 border-t border-border/50 bg-background relative overflow-hidden">
+    <section id="faq" className="py-20 sm:py-24 border-t border-border/50 bg-background relative overflow-hidden">
       <div className="absolute -left-40 top-40 w-96 h-96 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
       <div className="container mx-auto px-6 max-w-4xl relative z-10">
         <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-12 sm:mb-16 text-center font-display">{t("faq.title")}</h2>
@@ -1374,7 +1350,7 @@ function Testimonials() {
   }>;
 
   return (
-    <section id="testimonials" className="py-24 sm:py-32 border-t border-border/50 bg-background">
+    <section id="testimonials" className="py-20 sm:py-24 border-t border-border/50 bg-background">
       <div className="container mx-auto px-6">
         <div className="mb-12 sm:mb-16 max-w-3xl">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4 font-display">{t("testimonials.title")}</h2>
@@ -1442,7 +1418,7 @@ function Testimonials() {
 function CTA() {
   const { t } = useTranslation();
   return (
-    <section className="py-32 sm:py-40 relative overflow-hidden bg-[#050505] border-t border-border/50">
+    <section className="py-24 sm:py-28 relative overflow-hidden bg-[#050505] border-t border-border/50">
       <div className="absolute inset-0 bg-primary/5" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[400px] bg-primary/20 blur-[150px] rounded-full pointer-events-none" />
 

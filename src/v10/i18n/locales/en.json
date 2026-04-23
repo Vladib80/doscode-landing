@@ -5,20 +5,20 @@
     "process": "Process",
     "pricing": "Pricing",
     "faq": "FAQ",
-    "cta": "Start a project",
+    "cta": "Open brief bot",
     "ctaShort": "Telegram"
   },
   "hero": {
     "kicker": "// Almaty · 2020 — present",
-    "badge": "Fast-build studio",
-    "title1": "We ship products",
-    "title2": "that work",
-    "subtitle": "Landing pages in 48 hours, MVPs in 4–8 weeks, AI automation, dashboards, Telegram bots, internal tools. Not a corporate agency — a founder team that ships on time.",
-    "ctaPrimary": "Discuss a project",
-    "ctaSecondary": "See cases",
-    "trustHour": "Reply within an hour",
-    "trustEstimate": "Quote in 24 hours",
-    "trustPrice": "Fixed price per stage",
+    "badge": "Fastest path to an accurate estimate",
+    "title1": "Start with",
+    "title2": "the brief bot",
+    "subtitle": "First, fill the short brief in our Telegram bot. Then we understand the task faster, ask better follow-up questions and give a more accurate estimate for landing pages, MVPs, AI automation, dashboards and Telegram bots. Calls happen after the brief, once there is real context.",
+    "ctaPrimary": "Fill the brief in the bot",
+    "ctaSecondary": "What happens next",
+    "trustHour": "Reply after the brief",
+    "trustEstimate": "Accurate quote after the brief",
+    "trustPrice": "3–5 min brief",
     "offerCards": [
       {
         "kicker": "FAST ENTRY",
@@ -203,13 +203,13 @@
     "title": "A landing page in 48 hours",
     "guarantee": "Don't like it — don't pay.",
     "subtitle": "Crazy speed. No drop in quality. You get a working, converting site while competitors are still approving the brief.",
-    "bullet1": "Mockup in 3–4 hours — review before you pay",
-    "bullet2": "Live in 48 hours when content is ready",
-    "bullet3": "2 rounds of edits included",
+    "bullet1": "Short bot brief — the fastest way to start",
+    "bullet2": "Accurate estimate after the brief",
+    "bullet3": "Call only when the task is clear",
     "bullet4": "Deploy included (domain billed separately)",
     "priceLabel": "Price",
     "price": "from 100,000 ₸",
-    "cta": "Order a sprint",
+    "cta": "Fill the sprint brief",
     "logTitle": "deploy_status.log",
     "logLines": [
       "Initiating sprint protocol...",
@@ -226,8 +226,8 @@
     "title": "Process",
     "subtitle": "Transparent, predictable and very fast.",
     "steps": [
-      { "title": "Request", "desc": "You describe the task in Telegram. Short is fine — just the gist.", "time": "// 1 hour" },
-      { "title": "Estimate", "desc": "A 15-minute call. We lock scope, timeline and price.", "time": "// 1 day" },
+      { "title": "Bot brief", "desc": "You fill a short brief in our Telegram bot. It's the fastest way to give context without wasting time on vague calls.", "time": "// 3–5 min" },
+      { "title": "Estimate", "desc": "We review the brief, ask follow-up questions in chat and send an estimate or range. If the task is real, we jump on a short call already with context.", "time": "// 1 day" },
       { "title": "Prototype", "desc": "We assemble the structure and logic. Approve the foundation.", "time": "// 2–5 days" },
       { "title": "Build", "desc": "We code. Fast, clean, with weekly demos for larger projects.", "time": "// depends on project" },
       { "title": "Launch", "desc": "Production deploy. Domain and analytics wired up.", "time": "// 1 day" },
@@ -238,8 +238,8 @@
     "title": "Pricing",
     "subtitle": "No hidden fees, no inflated estimates.",
     "popular": "Most popular",
-    "ctaPopular": "Start a project",
-    "ctaDefault": "Discuss the task",
+    "ctaPopular": "Fill brief",
+    "ctaDefault": "Fill brief",
     "plans": [
       {
         "name": "Landing",
@@ -268,9 +268,9 @@
     "title": "What people say",
     "subtitle": "Reviews about launch speed and processes that work — not abstract \"nice to work with\" lines.",
     "ctaKicker": "NEXT STEP",
-    "ctaTitle": "If speed matters, start with the 48-hour sprint.",
-    "ctaNote": "Send the task in Telegram and we'll tell you if it fits the fast lane, what we'll ship first and how we price it.",
-    "ctaButton": "Check my scope",
+    "ctaTitle": "The fastest path is the bot brief.",
+    "ctaNote": "Open the Telegram bot, fill the short brief and we'll understand the scope faster, ask better follow-up questions and give a more accurate estimate. Calls work best after the brief.",
+    "ctaButton": "Open brief bot",
     "quotes": [
       {
         "metric": "6 weeks to launch",
@@ -298,18 +298,18 @@
   "faq": {
     "title": "FAQ",
     "items": [
-      { "q": "How does payment work?", "a": "We work on 50% upfront and 50% on successful delivery. For larger projects we can split into stages (sprints)." },
+      { "q": "How does payment work?", "a": "We work on 50% upfront and 50% on successful delivery. For larger projects we can split the work into stages or sprints." },
+      { "q": "Do we need a call right away?", "a": "Preferably not. The best first step is the short Telegram bot brief. It helps us understand the task, collect references and give a more accurate estimate. Calls work better after the brief, when there is real context." },
+      { "q": "What do you need from me to start?", "a": "Fill the brief in the bot: goal, scope, timing, examples, links and anything you already have. Better brief in, better estimate out." },
       { "q": "Do you work with international clients?", "a": "Yes, we work worldwide. We accept crypto (USDT/USDC) or international wire transfers." },
-      { "q": "What do you need from me to start?", "a": "A description of the task (free-form is fine), references if you have any, and a willingness to give fast feedback. We'll fill the formal brief together on a 15-minute call." },
-      { "q": "Do you support the project after launch?", "a": "Yes — 1 month of free bug fixes on every project. After that we can sign a monthly SLA support contract." },
-      { "q": "Why so fast (a landing page in 48 hours)?", "a": "Tight processes, our own UI component library, and we don't waste time on corporate bureaucracy. While others draw Gantt charts, we ship code." },
-      { "q": "Do you use builders (Tilda/Webflow)?", "a": "No. We write code (React, Next.js, Tailwind, Node.js). Full freedom in design, animation and integrations — plus 99/100 Lighthouse scores." }
+      { "q": "Why so fast (a landing page in 48 hours)?", "a": "Tight processes, our own UI component library and no agency bureaucracy. While others spend days aligning on briefs, we collect context quickly through the bot and move into delivery." },
+      { "q": "Do you use builders (Tilda/Webflow)?", "a": "No. We write code (React, Next.js, Tailwind, Node.js). That gives full freedom in design, animation and integrations, plus 99/100 Lighthouse scores." }
     ]
   },
   "ctaSection": {
     "title": "Ready to ship?",
-    "subtitle": "Stop planning. Start building. Message us on Telegram now and get an estimate within 2 hours.",
-    "button": "Message on Telegram"
+    "subtitle": "The fastest way to get an accurate estimate is to fill the short brief in our Telegram bot. After that we can clarify details fast and jump on a call if needed.",
+    "button": "Open brief bot"
   },
   "footer": {
     "city": "Almaty, Kazakhstan",
