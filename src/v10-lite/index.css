@@ -1,0 +1,83 @@
+.v10-light {
+  --background: 42 43% 93%;
+  --foreground: 43 22% 6%;
+
+  --border: 42 15% 79%;
+  --input: 42 18% 82%;
+  --ring: 74 100% 31%;
+
+  --card: 43 55% 96%;
+  --card-foreground: 43 22% 6%;
+  --card-border: 42 15% 79%;
+
+  --popover: 43 55% 96%;
+  --popover-foreground: 43 22% 6%;
+  --popover-border: 42 15% 79%;
+
+  --primary: 74 100% 31%;
+  --primary-foreground: 42 67% 96%;
+
+  --secondary: 43 34% 88%;
+  --secondary-foreground: 43 22% 6%;
+
+  --muted: 43 34% 88%;
+  --muted-foreground: 41 10% 36%;
+
+  --accent: 74 100% 31%;
+  --accent-foreground: 42 67% 96%;
+
+  --destructive: 0 74% 48%;
+  --destructive-foreground: 42 67% 96%;
+
+  --primary-border: hsl(var(--primary) / 0.35);
+  --secondary-border: hsl(var(--secondary) / 0.75);
+  --destructive-border: hsl(var(--destructive) / 0.35);
+  --button-outline: hsl(var(--foreground) / 0.18);
+}
+
+.v10-light body {
+  background-color: hsl(var(--background));
+  background-image:
+    linear-gradient(rgba(23, 21, 16, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 21, 16, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.v10-light .noise-bg {
+  opacity: 0.38;
+  mix-blend-mode: multiply;
+}
+
+.v10-light .grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(23, 21, 16, 0.075) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 21, 16, 0.075) 1px, transparent 1px);
+}
+
+.v10-light header {
+  box-shadow: 0 1px 0 rgba(23, 21, 16, 0.04);
+}
+
+.v10-light .shadow-inner {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66), inset 0 -1px 0 rgba(23, 21, 16, 0.035);
+}
+
+.v10-light .shadow-xs {
+  box-shadow: 0 1px 2px rgba(23, 21, 16, 0.06);
+}
+
+.v10-light .text-white {
+  color: #faf7ef;
+}
+
+.v10-light .bg-black {
+  background-color: #080808;
+}
+
+.v10-light .bg-\[\#050505\],
+.v10-light .bg-\[\#0a0a0a\],
+.v10-light .bg-\[\#0f1115\],
+.v10-light .bg-\[\#0f172a\],
+.v10-light .bg-\[\#1e293b\] {
+  color: #faf7ef;
+}
