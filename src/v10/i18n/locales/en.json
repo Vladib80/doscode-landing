@@ -19,6 +19,23 @@
     "trustHour": "Reply within an hour",
     "trustEstimate": "Quote in 24 hours",
     "trustPrice": "Fixed price per stage",
+    "offerCards": [
+      {
+        "kicker": "FAST ENTRY",
+        "title": "Landing page in 48 hours",
+        "note": "For founders who need a sharp first screen and a live page fast, not endless briefing cycles."
+      },
+      {
+        "kicker": "CORE BUILD",
+        "title": "MVP in 4–8 weeks",
+        "note": "Web apps, dashboards, portals and internal tools with enough structure to launch without a rewrite."
+      },
+      {
+        "kicker": "WORKING STYLE",
+        "title": "Founder-led, low-bureaucracy",
+        "note": "Direct communication, fixed stage pricing and quick feedback loops instead of agency theatre."
+      }
+    ],
     "pipeline": {
       "file": "build_pipeline.sh",
       "live": "● LIVE",
@@ -67,6 +84,30 @@
     "valueMvp": "4 wks",
     "valueEstimate": "24h"
   },
+  "proofStrip": {
+    "items": [
+      {
+        "label": "Entry offer",
+        "value": "48-hour landing sprint",
+        "note": "A concrete first step for teams who need something live now, not another deck."
+      },
+      {
+        "label": "Shipped proof",
+        "value": "DosPass live in the UAE",
+        "note": "Loyalty SaaS launched from idea to production in 6 weeks with real customer flows."
+      },
+      {
+        "label": "Ops impact",
+        "value": "Up to 40% order automation",
+        "note": "Chicago Pizza combines direct orders, loyalty and iiko-connected operations in one system."
+      },
+      {
+        "label": "Internal systems",
+        "value": "1C, WhatsApp, dashboards",
+        "note": "We also build owner tools that replace Excel chaos with reporting, pricing control and sync."
+      }
+    ]
+  },
   "marquee": {
     "items": ["DESIGN", "DEVELOPMENT", "AI", "PWA", "TELEGRAM BOTS", "DASHBOARDS", "E-COMMERCE", "UI/UX", "MVP", "AUTOMATION"]
   },
@@ -78,6 +119,7 @@
     "capabilities": "Capabilities",
     "outcomes": "Outcomes",
     "stack": "Stack",
+    "openSite": "Open site",
     "dospass": {
       "metric": "3x customer return rate",
       "desc": "A viral loyalty program that lives at a personal link. No app downloads, everything via WhatsApp. Customers earn stamps for purchases, referrals and Instagram stories — you grow your base without an ad budget. Works for cafes, salons, fitness studios, clinics.",
@@ -225,6 +267,10 @@
   "testimonials": {
     "title": "What people say",
     "subtitle": "Reviews about launch speed and processes that work — not abstract \"nice to work with\" lines.",
+    "ctaKicker": "NEXT STEP",
+    "ctaTitle": "If speed matters, start with the 48-hour sprint.",
+    "ctaNote": "Send the task in Telegram and we'll tell you if it fits the fast lane, what we'll ship first and how we price it.",
+    "ctaButton": "Check my scope",
     "quotes": [
       {
         "metric": "6 weeks to launch",
