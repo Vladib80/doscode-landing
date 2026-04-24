@@ -20,19 +20,19 @@ type EstimateScope = "lean" | "standard" | "custom";
 
 const V115_COPY = {
   ru: {
-    heroBadge: "Лендинги, e-commerce, приложения, MVP",
+    heroBadge: "Сайты, лендинги, интернет-магазины, приложения, MVP",
     heroTitle: "Цифровые продукты для бизнеса в Казахстане.",
     heroAccent: "От лендинга до MVP.",
     heroSubtitle:
-      "Запускаем лендинги за 48 часов, e-commerce, нативные приложения, бизнес-дашборды и MVP. AI-агентов и Telegram-ботов подключаем там, где они реально ускоряют процессы.",
+      "Запускаем сайты и лендинги за 48 часов, интернет-магазины, нативные приложения, бизнес-дашборды и MVP. AI-агентов и Telegram-ботов подключаем там, где они реально ускоряют процессы.",
     heroCta: "Оценить проект",
     techKicker: "языки, фреймворки, интеграции",
     techTitle: "Стек под задачу",
     techSubtitle: "Работаем от лендингов до сложных систем: подбираем технологию по срокам, бюджету и будущей поддержке.",
-    estimatorKicker: "Быстрая оценка",
-    estimatorTitle: "Ориентир бюджета до сообщения в Telegram",
-    estimatorSubtitle: "Выберите тип проекта, уровень кастома и интеграции. Это не финальная смета, а честный стартовый диапазон.",
-    estimateNote: "Финальная цена зависит от контента, количества экранов, скорости согласований, доступа к API и реальной сложности интеграций.",
+    estimatorKicker: "Цены и сроки",
+    estimatorTitle: "Ориентир бюджета",
+    estimatorSubtitle: "Выберите формат, уровень кастома и интеграции. Это предварительный диапазон; финальная смета зависит от контента, логики и доступа к API.",
+    estimateNote: "Финальная смета зависит от контента, числа экранов, скорости согласований, API-доступа и сложности интеграций.",
     project: "Формат",
     scope: "Уровень кастома",
     integrations: "Интеграции",
@@ -44,19 +44,19 @@ const V115_COPY = {
     briefIntro: "Привет, хочу оценить проект DosCode.",
   },
   kk: {
-    heroBadge: "Лендингтер, e-commerce, қосымшалар, MVP",
+    heroBadge: "Сайттар, лендингтер, e-commerce, қосымшалар, MVP",
     heroTitle: "Қазақстан бизнесіне арналған цифрлық өнімдер.",
     heroAccent: "Лендингтен MVP-ге дейін.",
     heroSubtitle:
-      "48 сағатта лендинг, e-commerce, нативті қосымшалар, бизнес-дашбордтар және MVP іске қосамыз. AI-агенттер мен Telegram-боттарды процесс нақты жылдамдайтын жерде қосамыз.",
+      "Сайттар мен лендингтерді 48 сағатта, e-commerce, нативті қосымшалар, бизнес-дашбордтар және MVP іске қосамыз. AI-агенттер мен Telegram-боттарды процесс нақты жылдамдайтын жерде қосамыз.",
     heroCta: "Жобаны бағалау",
     techKicker: "тілдер, фреймворктер, интеграциялар",
     techTitle: "Стек міндетке қарай",
     techSubtitle: "Лендингтен күрделі жүйеге дейін: технологияны мерзімге, бюджетке және қолдауға қарай таңдаймыз.",
-    estimatorKicker: "Жылдам бағалау",
-    estimatorTitle: "Telegram-ға жазбас бұрын бюджет бағдары",
-    estimatorSubtitle: "Жоба түрін, кастом деңгейін және интеграцияларды таңдаңыз. Бұл финал смета емес, бастапқы адал диапазон.",
-    estimateNote: "Финал баға контентке, экран санына, келісу жылдамдығына, API қолжетімділігіне және интеграция күрделілігіне байланысты.",
+    estimatorKicker: "Баға және мерзім",
+    estimatorTitle: "Бюджет бағдары",
+    estimatorSubtitle: "Форматты, кастом деңгейін және интеграцияларды таңдаңыз. Бұл алдын ала диапазон; финал смета контентке, логикаға және API қолжетімділігіне байланысты.",
+    estimateNote: "Финал смета контентке, экран санына, келісу жылдамдығына, API қолжетімділігіне және интеграция күрделілігіне байланысты.",
     project: "Формат",
     scope: "Кастом деңгейі",
     integrations: "Интеграциялар",
@@ -68,19 +68,19 @@ const V115_COPY = {
     briefIntro: "Сәлем, DosCode жобасын бағалатқым келеді.",
   },
   en: {
-    heroBadge: "Landing pages, e-commerce, apps, MVPs",
+    heroBadge: "Websites, landing pages, e-commerce, apps, MVPs",
     heroTitle: "Digital products for business in Kazakhstan.",
     heroAccent: "From landing page to MVP.",
     heroSubtitle:
-      "We launch 48-hour landing pages, e-commerce, native apps, business dashboards and MVPs. We add AI agents and Telegram bots where they actually speed up operations.",
+      "We launch websites and landing pages in 48 hours, e-commerce, native apps, business dashboards and MVPs. We add AI agents and Telegram bots where they actually speed up operations.",
     heroCta: "Estimate project",
     techKicker: "languages, frameworks, integrations",
     techTitle: "Stack by task",
     techSubtitle: "From landing pages to complex systems: we pick technology by timeline, budget and long-term support.",
-    estimatorKicker: "Quick estimate",
-    estimatorTitle: "Budget range before messaging us",
-    estimatorSubtitle: "Pick project type, customization level and integrations. This is not a final quote, just an honest starting range.",
-    estimateNote: "Final price depends on content, screen count, feedback speed, API access and the real complexity of integrations.",
+    estimatorKicker: "Pricing guide",
+    estimatorTitle: "Budget range",
+    estimatorSubtitle: "Pick format, customization level and integrations. This is a preliminary range; the final quote depends on content, logic and API access.",
+    estimateNote: "Final quote depends on content, screen count, feedback speed, API access and integration complexity.",
     project: "Format",
     scope: "Customization level",
     integrations: "Integrations",
@@ -100,7 +100,7 @@ const V115_INTEGRATIONS = Object.keys(pricingModel.integrationAddOns);
 const V115_PRICING_CARDS = {
   ru: {
     title: "Цены",
-    subtitle: "Стартовые диапазоны для Казахстана. Финальная смета зависит от объёма и интеграций.",
+    subtitle: "Стартовые диапазоны для Казахстана. Финальная смета зависит от объёма, логики и интеграций.",
     popular: "Чаще всего",
     cta: "Обсудить проект",
     cards: [
@@ -116,7 +116,7 @@ const V115_PRICING_CARDS = {
         price: "450 000 - 2 000 000 ₸",
         time: "2-9 недель",
         for: "E-commerce, дашборды, боты, внутренние системы",
-        features: ["Каталог, админка, роли, таблицы, отчёты или bot-flow", "Kaspi, оплата картой, iiko, 1C, WhatsApp, Telegram считаются отдельно", "Хорошо подходит для малого и среднего бизнеса в КЗ"],
+        features: ["Каталог, админка, роли, таблицы, отчёты или bot-flow", "Kaspi, оплата картой, iiko, 1C, WhatsApp, Telegram считаются отдельно", "Хорошо подходит для малого и среднего бизнеса в Казахстане"],
       },
       {
         name: "MVP / SaaS",
@@ -158,7 +158,7 @@ const V115_PRICING_CARDS = {
   },
   en: {
     title: "Pricing",
-    subtitle: "Starting ranges for Kazakhstan. Final quote depends on scope and integrations.",
+    subtitle: "Starting ranges for Kazakhstan. Final quote depends on scope, logic and integrations.",
     popular: "Most common",
     cta: "Discuss project",
     cards: [
@@ -621,7 +621,7 @@ function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[minmax(300px,auto)]">
 
           {/* AI Agent Module */}
-          <div className="v115-service-ai col-span-1 lg:col-span-2 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 overflow-hidden relative group hover:border-primary/30 transition-colors">
+          <div className="v115-service-ai order-6 col-span-1 lg:col-span-2 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 overflow-hidden relative group hover:border-primary/30 transition-colors">
             <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
               <Cpu className="w-48 h-48 text-primary" />
             </div>
@@ -665,7 +665,7 @@ function Services() {
           </div>
 
           {/* Telegram Bot Module */}
-          <div className="v115-service-telegram col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 relative group hover:border-primary/30 transition-colors">
+          <div className="v115-service-telegram order-7 col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 relative group hover:border-primary/30 transition-colors">
             <h3 className="text-2xl font-bold mb-3 font-display">{t("services.telegram.title")}</h3>
             <p className="text-muted-foreground mb-8">{t("services.telegram.desc")}</p>
 
@@ -685,7 +685,7 @@ function Services() {
           </div>
 
           {/* Dashboard Module */}
-          <div className="v115-service-dashboards col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 group hover:border-primary/30 transition-colors">
+          <div className="v115-service-dashboards order-4 col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 group hover:border-primary/30 transition-colors">
             <h3 className="text-2xl font-bold mb-3 font-display">{t("services.dashboards.title")}</h3>
             <p className="text-muted-foreground mb-8">{t("services.dashboards.desc")}</p>
 
@@ -712,7 +712,7 @@ function Services() {
           </div>
 
           {/* E-commerce */}
-          <div className="v115-service-ecommerce col-span-1 lg:col-span-2 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 overflow-hidden relative group hover:border-primary/30 transition-colors">
+          <div className="v115-service-ecommerce order-2 col-span-1 lg:col-span-2 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 overflow-hidden relative group hover:border-primary/30 transition-colors">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <h3 className="text-2xl font-bold mb-3 flex items-center gap-3 font-display">
@@ -839,7 +839,7 @@ function Services() {
           </div>
 
           {/* Native Apps */}
-          <div className="v115-service-native col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 group hover:border-primary/30 transition-colors">
+          <div className="v115-service-native order-3 col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 group hover:border-primary/30 transition-colors">
             <h3 className="text-2xl font-bold mb-3 flex items-center gap-3 font-display">
               <Smartphone className="text-primary w-6 h-6" /> {t("services.nativeApps.title")}
             </h3>
@@ -918,7 +918,7 @@ function Services() {
           </div>
 
           {/* Landing Sprint */}
-          <div className="v115-service-sprint col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 group hover:border-primary/30 transition-colors">
+          <div className="v115-service-sprint order-1 col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 group hover:border-primary/30 transition-colors">
             <h3 className="text-2xl font-bold mb-3 font-display">{t("services.sprint.title")}</h3>
             <p className="text-muted-foreground mb-8">{t("services.sprint.desc")}</p>
 
@@ -945,7 +945,7 @@ function Services() {
           </div>
 
           {/* MVP / SaaS */}
-          <div className="v115-service-mvp col-span-1 lg:col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 group hover:border-primary/30 transition-colors">
+          <div className="v115-service-mvp order-5 col-span-1 lg:col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 group hover:border-primary/30 transition-colors">
             <h3 className="text-2xl font-bold mb-3 font-display">{t("services.mvp.title")}</h3>
             <p className="text-muted-foreground mb-8">{t("services.mvp.desc")}</p>
 

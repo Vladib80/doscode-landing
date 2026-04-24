@@ -10,12 +10,12 @@
   },
   "hero": {
     "kicker": "// Almaty · 2020 — present",
-    "badge": "Landing sprints, MVPs, AI systems",
-    "title1": "We launch products.",
-    "title2": "That work.",
-    "subtitle": "We launch landing sprints, MVPs and AI automation for businesses in Kazakhstan and the CIS. A standard landing can go live in 48 hours when content is ready and feedback is fast.",
-    "ctaPrimary": "Discuss project",
-    "ctaSecondary": "View cases",
+    "badge": "Landing pages, MVPs, AI automation",
+    "title1": "Landing pages, MVPs and AI for business.",
+    "title2": "Fast and focused.",
+    "subtitle": "DosCode designs, builds and launches landing pages in 48 hours, MVPs in 4-8 weeks and automation for teams that need results without agency bureaucracy.",
+    "ctaPrimary": "Get an estimate in 24 hours",
+    "ctaSecondary": "View real cases",
     "trustHour": "Response within an hour",
     "trustEstimate": "Estimate in 24 hours",
     "trustPrice": "Fixed price by milestones",
@@ -45,8 +45,8 @@
     }
   },
   "services": {
-    "title": "What we build",
-    "subtitle": "Fast, scalable solutions for real businesses. No template code.",
+    "title": "What you can launch with us",
+    "subtitle": "Websites, landing pages, online stores, apps, dashboards and MVPs for businesses in Kazakhstan.",
     "ai": {
       "title": "AI agents",
       "desc": "Process automation, data handling, smart support bots with context and memory.",
@@ -57,23 +57,31 @@
     },
     "telegram": {
       "title": "Telegram bots",
-      "desc": "Stores, onboarding, services right inside the messenger.",
+      "desc": "Stores, lead capture, notifications, onboarding and service flows right inside the messenger.",
       "msg1": "Hi. I'm your assistant. Ask me anything.",
       "msg2": "Show today's stats",
       "msg3": "Pulling the data..."
     },
     "dashboards": {
       "title": "Business dashboards",
-      "desc": "Analytics, CRM and admin panels to run the business.",
+      "desc": "Analytics, CRM, admin panels, reports and integrations with 1C, spreadsheets or APIs.",
       "label": "Revenue"
     },
+    "ecommerce": {
+      "title": "Online stores / e-commerce",
+      "desc": "Catalogs, checkout, card payments, Kaspi, delivery, pickup and loyalty mechanics."
+    },
+    "nativeApps": {
+      "title": "Native apps",
+      "desc": "iOS and Android apps: services, customer portals, push, maps, payments and internal tools."
+    },
     "sprint": {
-      "title": "Landing sprint",
-      "desc": "A finished site in 48 hours. Design and code included."
+      "title": "Website / landing page in 48 hours",
+      "desc": "A responsive site with design, code, basic SEO and a lead form."
     },
     "mvp": {
       "title": "MVP / SaaS",
-      "desc": "Full web apps in 4–8 weeks."
+      "desc": "A first product with backend, database, user accounts, payments or internal business logic."
     }
   },
   "stats": {
@@ -120,6 +128,10 @@
     "outcomes": "Outcomes",
     "stack": "Stack",
     "openSite": "Open site",
+    "ctaKicker": "SIMILAR REQUEST",
+    "ctaTitle": "Need something like this?",
+    "ctaNote": "We take the mechanics from the relevant case and adapt them to your business, workflows and stack.",
+    "ctaButton": "Discuss a similar project",
     "dospass": {
       "metric": "3x customer return rate",
       "desc": "A viral loyalty program that lives at a personal link. No app downloads, everything via WhatsApp. Customers earn stamps for purchases, referrals and Instagram stories — you grow your base without an ad budget. Works for cafes, salons, fitness studios, clinics.",
@@ -196,6 +208,30 @@
         ],
         "stack": ["React", "Express", "PostgreSQL", "1C", "i18n", "Render"]
       }
+    },
+    "whatsapp": {
+      "metric": "Multi-account support + AI",
+      "desc": "A reusable desktop operator workspace we adapt per client: multiple WhatsApp accounts in one app, AI suggestions based on chat context, draft rewrite into ready-to-send replies, and a knowledge base attached to each account.",
+      "details": {
+        "overview": "Originally built for Chicago Pizza, then shaped into a reusable desktop tool for operators and customer support teams. Multiple WhatsApp accounts run side by side in one app with persistent sessions, fast switching, unread badges, and an AI panel that suggests replies from the live conversation plus the docs attached to that specific account.",
+        "capabilities": [
+          "Multiple WhatsApp accounts running simultaneously in one app",
+          "Persistent sessions, unread badges, color coding and hotkeys for switching",
+          "3 AI reply suggestions based on the current conversation context",
+          "Rewrite mode: the operator types rough notes, AI returns 3 polished reply options",
+          "Tone modes: auto, formal, casual, brief",
+          "Conversation summaries for long threads and shift handoffs",
+          "Per-account knowledge base: PDF, XLSX, DOCX, markdown/text files and URLs",
+          "Per-account AI instructions plus automatic instruction improvement from real conversations"
+        ],
+        "outcomes": [
+          "One operator workspace instead of many browser tabs and windows",
+          "More consistent replies across operators and shifts",
+          "Faster onboarding when menus, FAQs and internal docs are attached to the account",
+          "AI stays grounded in the account context instead of replying generically"
+        ],
+        "stack": ["Electron", "JavaScript", "OpenAI / Anthropic", "PDF/XLSX/DOCX parsing", "WhatsApp Web"]
+      }
     }
   },
   "fastLaunch": {
@@ -216,7 +252,7 @@
       "Wireframes approved. Proceeding to visual design.",
       "Design system locked. Handoff to engineering.",
       "Frontend components built. Wiring state.",
-      "Performance optimization: 99/100 (Lighthouse)",
+      "Performance checks complete.",
       "Final QA checks complete.",
       "SYSTEM LIVE. Traffic routing enabled."
     ],
@@ -301,14 +337,14 @@
       { "q": "How does payment work?", "a": "We work on 50% upfront and 50% on successful delivery. For larger projects we can split the work into stages or sprints." },
       { "q": "Do we need a call right away?", "a": "No. A short message on Telegram or email is enough to start. We collect context in chat first and suggest a call only if it will actually speed things up." },
       { "q": "What do you need from me to start?", "a": "The goal, timing, examples and anything you already have. A polished brief, mockups or a full spec are not required." },
-      { "q": "Do you work with international clients?", "a": "Yes, we work worldwide. We accept crypto (USDT/USDC) or international wire transfers." },
+      { "q": "Do you only work in Kazakhstan?", "a": "Kazakhstan is our main market, but we can take projects from other countries. Payment, documents and workflow are agreed per project." },
       { "q": "Why so fast (a landing page in 48 hours)?", "a": "We have a tight delivery process, our own UI component library and short approval loops. For a standard landing with ready content and fast feedback, 48 hours is realistic." },
-      { "q": "Do you use builders (Tilda/Webflow)?", "a": "No. We write code (React, Next.js, Tailwind, Node.js). That gives full freedom in design, animation and integrations, plus 99/100 Lighthouse scores." }
+      { "q": "Do you use builders (Tilda/Webflow)?", "a": "No. We write code (React, Next.js, Tailwind, Node.js). That gives full freedom in design, animation, integrations and load-time optimization." }
     ]
   },
   "ctaSection": {
     "title": "Ready to ship?",
-    "subtitle": "Message us on Telegram. We will clarify details fast, give an estimate and jump on a call if needed.",
+    "subtitle": "Message us on Telegram or email. We will clarify details fast, give a budget range and jump on a call if needed.",
     "button": "Discuss project"
   },
   "footer": {

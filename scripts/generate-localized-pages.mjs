@@ -22,9 +22,10 @@ const localeConfigs = {
     htmlLang: 'ru',
     dir: '.',
     url: `${siteUrl}/`,
-    title: 'DosCode — лендинги, e-commerce, приложения и MVP в Казахстане',
+    title: 'DosCode — сайты, лендинги, интернет-магазины и MVP в Казахстане',
     description:
-      'DosCode запускает лендинги за 48 часов, e-commerce, нативные приложения, бизнес-дашборды, MVP и автоматизацию для бизнеса в Казахстане.',
+      'Разрабатываем сайты и лендинги за 48 часов, интернет-магазины, нативные приложения, бизнес-дашборды, MVP и автоматизацию для бизнеса в Казахстане.',
+    imageAlt: 'DosCode — разработка сайтов и цифровых продуктов для бизнеса в Казахстане',
     ogLocale: 'ru_KZ',
     ogLocaleAlternates: ['kk_KZ', 'en_US']
   },
@@ -33,9 +34,10 @@ const localeConfigs = {
     htmlLang: 'kk',
     dir: 'kk',
     url: `${siteUrl}/kk/`,
-    title: 'DosCode — Қазақстандағы лендинг, e-commerce, қосымша және MVP',
+    title: 'DosCode — Қазақстандағы сайттар, лендингтер, e-commerce және MVP',
     description:
-      'DosCode Қазақстан бизнесі үшін 48 сағатта лендинг, e-commerce, нативті қосымша, бизнес-дашборд, MVP және автоматтандыру жобаларын іске қосады.',
+      'Қазақстан бизнесіне сайттар мен лендингтерді 48 сағатта, e-commerce, нативті қосымша, бизнес-дашборд, MVP және автоматтандыру жобаларын іске қосамыз.',
+    imageAlt: 'DosCode — Қазақстан бизнесіне сайттар мен цифрлық өнімдер әзірлеу',
     ogLocale: 'kk_KZ',
     ogLocaleAlternates: ['ru_KZ', 'en_US']
   },
@@ -44,9 +46,10 @@ const localeConfigs = {
     htmlLang: 'en',
     dir: 'en',
     url: `${siteUrl}/en/`,
-    title: 'DosCode — Landing Pages, E-commerce, Apps and MVPs in Kazakhstan',
+    title: 'DosCode — Websites, Landing Pages, E-commerce and MVPs in Kazakhstan',
     description:
-      'DosCode launches 48-hour landing pages, e-commerce, native apps, business dashboards, MVPs and automation for businesses in Kazakhstan.',
+      'DosCode builds websites and landing pages in 48 hours, e-commerce, native apps, business dashboards, MVPs and automation for businesses in Kazakhstan.',
+    imageAlt: 'DosCode — websites and digital products for businesses in Kazakhstan',
     ogLocale: 'en_US',
     ogLocaleAlternates: ['ru_KZ', 'kk_KZ']
   }
@@ -62,6 +65,34 @@ function renderOgLocaleAlternates(locales) {
   return locales
     .map((locale) => `    <meta property="og:locale:alternate" content="${locale}" />`)
     .join('\n');
+}
+
+function renderStructuredData(config) {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'DosCode',
+    url: siteUrl,
+    logo: `${siteUrl}/logo.png`,
+    email: 'hello@doscode.kz',
+    description: config.description,
+    areaServed: {
+      '@type': 'Country',
+      name: 'Kazakhstan'
+    },
+    availableLanguage: ['ru', 'kk', 'en'],
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        email: 'hello@doscode.kz',
+        url: 'https://t.me/doscode_kz',
+        availableLanguage: ['Russian', 'Kazakh', 'English']
+      }
+    ]
+  };
+
+  return `    <script type="application/ld+json">${JSON.stringify(data)}</script>`;
 }
 
 function renderShell(config) {
@@ -84,6 +115,7 @@ ${renderAlternateMeta()}
     <meta property="og:title" content="${config.title}" />
     <meta property="og:description" content="${config.description}" />
     <meta property="og:image" content="${ogImageUrl}" />
+    <meta property="og:image:alt" content="${config.imageAlt}" />
     <meta property="og:locale" content="${config.ogLocale}" />
 ${renderOgLocaleAlternates(config.ogLocaleAlternates)}
     <meta property="og:site_name" content="DosCode" />
@@ -92,9 +124,11 @@ ${renderOgLocaleAlternates(config.ogLocaleAlternates)}
     <meta name="twitter:title" content="${config.title}" />
     <meta name="twitter:description" content="${config.description}" />
     <meta name="twitter:image" content="${ogImageUrl}" />
+    <meta name="twitter:image:alt" content="${config.imageAlt}" />
     <meta name="theme-color" content="#f5f1e6" id="themeColorMeta" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+${renderStructuredData(config)}
 
     <script>
       (function () {
