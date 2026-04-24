@@ -6,6 +6,8 @@ const publicDir = path.join(rootDir, 'public');
 const sitemapPath = path.join(publicDir, 'sitemap.xml');
 const siteUrl = 'https://doscode.kz';
 const ogImageUrl = `${siteUrl}/v10/opengraph.jpg`;
+const landingVersion = 'v12';
+const landingEntry = '/src/v12/main.tsx';
 
 const alternateLinks = [
   { hreflang: 'ru', href: `${siteUrl}/` },
@@ -15,14 +17,25 @@ const alternateLinks = [
 ];
 
 const localeConfigs = {
+  ru: {
+    langKey: 'ru',
+    htmlLang: 'ru',
+    dir: '.',
+    url: `${siteUrl}/`,
+    title: 'DosCode — лендинги, e-commerce, приложения и MVP в Казахстане',
+    description:
+      'DosCode запускает лендинги за 48 часов, e-commerce, нативные приложения, бизнес-дашборды, MVP и автоматизацию для бизнеса в Казахстане.',
+    ogLocale: 'ru_KZ',
+    ogLocaleAlternates: ['kk_KZ', 'en_US']
+  },
   kk: {
     langKey: 'kk',
     htmlLang: 'kk',
     dir: 'kk',
     url: `${siteUrl}/kk/`,
-    title: 'DosCode — Бизнеске арналған лендингтер, MVP және AI-жүйелер',
+    title: 'DosCode — Қазақстандағы лендинг, e-commerce, қосымша және MVP',
     description:
-      'DosCode Қазақстан мен CIS нарығындағы бизнеске лендинг-спринттер, MVP, Telegram-боттар және AI-автоматтандыру жасайды. Контент дайын болып, кері байланыс жедел болса, типтік лендинг 48 сағатта іске қосылады.',
+      'DosCode Қазақстан бизнесі үшін 48 сағатта лендинг, e-commerce, нативті қосымша, бизнес-дашборд, MVP және автоматтандыру жобаларын іске қосады.',
     ogLocale: 'kk_KZ',
     ogLocaleAlternates: ['ru_KZ', 'en_US']
   },
@@ -31,9 +44,9 @@ const localeConfigs = {
     htmlLang: 'en',
     dir: 'en',
     url: `${siteUrl}/en/`,
-    title: 'DosCode — Landing Pages, MVPs and AI Systems for Business',
+    title: 'DosCode — Landing Pages, E-commerce, Apps and MVPs in Kazakhstan',
     description:
-      'DosCode launches landing sprints, MVPs, Telegram bots and AI automation for businesses in Kazakhstan and the CIS. A standard landing page ships in 48 hours when content is ready and feedback is fast.',
+      'DosCode launches 48-hour landing pages, e-commerce, native apps, business dashboards, MVPs and automation for businesses in Kazakhstan.',
     ogLocale: 'en_US',
     ogLocaleAlternates: ['ru_KZ', 'kk_KZ']
   }
@@ -53,11 +66,11 @@ function renderOgLocaleAlternates(locales) {
 
 function renderShell(config) {
   return `<!DOCTYPE html>
-<html lang="${config.htmlLang}" data-landing-version="v11">
+<html lang="${config.htmlLang}" data-landing-version="${landingVersion}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="doscode-landing-version" content="v11" />
+    <meta name="doscode-landing-version" content="${landingVersion}" />
 
     <title>${config.title}</title>
     <meta name="description" content="${config.description}" />
@@ -147,7 +160,7 @@ ${renderOgLocaleAlternates(config.ogLocaleAlternates)}
   <body>
     <div id="root"></div>
     <noscript>Please enable JavaScript to view this site.</noscript>
-    <script type="module" src="/src/v11/main.tsx"></script>
+    <script type="module" src="${landingEntry}"></script>
   </body>
 </html>
 `;

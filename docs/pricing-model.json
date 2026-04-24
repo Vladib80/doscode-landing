@@ -1,0 +1,385 @@
+{
+  "version": "2026-04-24",
+  "currency": "KZT",
+  "market": "Kazakhstan",
+  "positioning": "New lean studio using Codex-assisted development. Price below mature agencies, above cheap template freelancers, and charge for shipped business outcome rather than hours typed.",
+  "scopeLevels": {
+    "lean": {
+      "labels": {
+        "ru": "быстро / по нашей структуре",
+        "kk": "жылдам / біздің құрылыммен",
+        "en": "fast / our structure"
+      },
+      "description": "Client accepts the proposed structure quickly, content is mostly ready, and there are no unusual integrations."
+    },
+    "standard": {
+      "labels": {
+        "ru": "стандарт",
+        "kk": "стандарт",
+        "en": "standard"
+      },
+      "description": "Custom design and normal business logic with a few feedback rounds."
+    },
+    "custom": {
+      "labels": {
+        "ru": "кастом / сложнее",
+        "kk": "кастом / күрделірек",
+        "en": "custom / more complex"
+      },
+      "description": "More unique UX, unclear requirements, custom interactions, heavier integrations, or extra stakeholder feedback."
+    }
+  },
+  "projectTypes": {
+    "landing": {
+      "labels": {
+        "ru": "Лендинг",
+        "kk": "Лендинг",
+        "en": "Landing"
+      },
+      "ranges": {
+        "lean": {
+          "min": 100000,
+          "max": 220000,
+          "timeline": {
+            "ru": "2-4 дня",
+            "kk": "2-4 күн",
+            "en": "2-4 days"
+          }
+        },
+        "standard": {
+          "min": 220000,
+          "max": 420000,
+          "timeline": {
+            "ru": "4-8 дней",
+            "kk": "4-8 күн",
+            "en": "4-8 days"
+          }
+        },
+        "custom": {
+          "min": 420000,
+          "max": 900000,
+          "timeline": {
+            "ru": "1-3 недели",
+            "kk": "1-3 апта",
+            "en": "1-3 weeks"
+          }
+        }
+      },
+      "included": [
+        "structure and offer",
+        "responsive design",
+        "frontend build",
+        "basic SEO/meta",
+        "lead form or Telegram/WhatsApp CTA",
+        "deployment handoff"
+      ]
+    },
+    "ecommerce": {
+      "labels": {
+        "ru": "E-commerce",
+        "kk": "E-commerce",
+        "en": "E-commerce"
+      },
+      "ranges": {
+        "lean": {
+          "min": 450000,
+          "max": 750000,
+          "timeline": {
+            "ru": "2-4 недели",
+            "kk": "2-4 апта",
+            "en": "2-4 weeks"
+          }
+        },
+        "standard": {
+          "min": 750000,
+          "max": 1400000,
+          "timeline": {
+            "ru": "4-8 недель",
+            "kk": "4-8 апта",
+            "en": "4-8 weeks"
+          }
+        },
+        "custom": {
+          "min": 1400000,
+          "max": 3500000,
+          "timeline": {
+            "ru": "8-14 недель",
+            "kk": "8-14 апта",
+            "en": "8-14 weeks"
+          }
+        }
+      },
+      "included": [
+        "catalog",
+        "product pages",
+        "cart or order flow",
+        "admin basics",
+        "payment or lead flow",
+        "deployment"
+      ]
+    },
+    "nativeApp": {
+      "labels": {
+        "ru": "Нативное приложение",
+        "kk": "Нативті қосымша",
+        "en": "Native app"
+      },
+      "ranges": {
+        "lean": {
+          "min": 900000,
+          "max": 1600000,
+          "timeline": {
+            "ru": "4-7 недель",
+            "kk": "4-7 апта",
+            "en": "4-7 weeks"
+          }
+        },
+        "standard": {
+          "min": 1600000,
+          "max": 3000000,
+          "timeline": {
+            "ru": "7-12 недель",
+            "kk": "7-12 апта",
+            "en": "7-12 weeks"
+          }
+        },
+        "custom": {
+          "min": 3000000,
+          "max": 6000000,
+          "timeline": {
+            "ru": "12-20 недель",
+            "kk": "12-20 апта",
+            "en": "12-20 weeks"
+          }
+        }
+      },
+      "included": [
+        "React Native/Expo build",
+        "core screens",
+        "API connection",
+        "basic auth if needed",
+        "store-ready handoff"
+      ]
+    },
+    "dashboard": {
+      "labels": {
+        "ru": "Бизнес-дашборд",
+        "kk": "Бизнес-дашборд",
+        "en": "Business dashboard"
+      },
+      "ranges": {
+        "lean": {
+          "min": 600000,
+          "max": 1000000,
+          "timeline": {
+            "ru": "3-5 недель",
+            "kk": "3-5 апта",
+            "en": "3-5 weeks"
+          }
+        },
+        "standard": {
+          "min": 1000000,
+          "max": 2000000,
+          "timeline": {
+            "ru": "5-9 недель",
+            "kk": "5-9 апта",
+            "en": "5-9 weeks"
+          }
+        },
+        "custom": {
+          "min": 2000000,
+          "max": 4500000,
+          "timeline": {
+            "ru": "9-16 недель",
+            "kk": "9-16 апта",
+            "en": "9-16 weeks"
+          }
+        }
+      },
+      "included": [
+        "admin interface",
+        "roles",
+        "charts/tables",
+        "exports",
+        "data sync basics",
+        "deployment"
+      ]
+    },
+    "mvp": {
+      "labels": {
+        "ru": "MVP / SaaS",
+        "kk": "MVP / SaaS",
+        "en": "MVP / SaaS"
+      },
+      "ranges": {
+        "lean": {
+          "min": 1500000,
+          "max": 2500000,
+          "timeline": {
+            "ru": "4-7 недель",
+            "kk": "4-7 апта",
+            "en": "4-7 weeks"
+          }
+        },
+        "standard": {
+          "min": 2500000,
+          "max": 5000000,
+          "timeline": {
+            "ru": "8-12 недель",
+            "kk": "8-12 апта",
+            "en": "8-12 weeks"
+          }
+        },
+        "custom": {
+          "min": 5000000,
+          "max": 10000000,
+          "timeline": {
+            "ru": "12-24 недели",
+            "kk": "12-24 апта",
+            "en": "12-24 weeks"
+          }
+        }
+      },
+      "included": [
+        "product scope",
+        "UX/UI",
+        "frontend",
+        "backend/API",
+        "database",
+        "auth",
+        "deployment"
+      ]
+    },
+    "automation": {
+      "labels": {
+        "ru": "AI / Telegram bot",
+        "kk": "AI / Telegram bot",
+        "en": "AI / Telegram bot"
+      },
+      "ranges": {
+        "lean": {
+          "min": 250000,
+          "max": 500000,
+          "timeline": {
+            "ru": "1-3 недели",
+            "kk": "1-3 апта",
+            "en": "1-3 weeks"
+          }
+        },
+        "standard": {
+          "min": 500000,
+          "max": 1200000,
+          "timeline": {
+            "ru": "3-6 недель",
+            "kk": "3-6 апта",
+            "en": "3-6 weeks"
+          }
+        },
+        "custom": {
+          "min": 1200000,
+          "max": 3000000,
+          "timeline": {
+            "ru": "6-12 недель",
+            "kk": "6-12 апта",
+            "en": "6-12 weeks"
+          }
+        }
+      },
+      "included": [
+        "bot or agent flow",
+        "prompt/workflow design",
+        "API connection",
+        "admin handoff",
+        "deployment"
+      ]
+    }
+  },
+  "integrationAddOns": {
+    "Kaspi": {
+      "labels": {
+        "ru": "Kaspi",
+        "kk": "Kaspi",
+        "en": "Kaspi"
+      },
+      "min": 80000,
+      "max": 250000
+    },
+    "iiko": {
+      "labels": {
+        "ru": "iiko",
+        "kk": "iiko",
+        "en": "iiko"
+      },
+      "min": 120000,
+      "max": 400000
+    },
+    "1C": {
+      "labels": {
+        "ru": "1C",
+        "kk": "1C",
+        "en": "1C"
+      },
+      "min": 150000,
+      "max": 500000
+    },
+    "cardPayments": {
+      "labels": {
+        "ru": "Оплата картой",
+        "kk": "Картамен төлеу",
+        "en": "Card payments"
+      },
+      "min": 120000,
+      "max": 450000
+    },
+    "WhatsApp": {
+      "labels": {
+        "ru": "WhatsApp",
+        "kk": "WhatsApp",
+        "en": "WhatsApp"
+      },
+      "min": 80000,
+      "max": 250000
+    },
+    "Telegram": {
+      "labels": {
+        "ru": "Telegram",
+        "kk": "Telegram",
+        "en": "Telegram"
+      },
+      "min": 60000,
+      "max": 180000
+    },
+    "AI": {
+      "labels": {
+        "ru": "AI",
+        "kk": "AI",
+        "en": "AI"
+      },
+      "min": 150000,
+      "max": 600000
+    }
+  },
+  "rules": {
+    "rushSurchargePercent": {
+      "min": 15,
+      "max": 30
+    },
+    "firstClientDiscountPercent": {
+      "min": 0,
+      "max": 15
+    },
+    "paymentSchedule": [
+      "50% upfront",
+      "30% after clickable draft or first working build",
+      "20% before production handoff"
+    ],
+    "neverQuoteBelow": {
+      "landing": 100000,
+      "ecommerce": 450000,
+      "nativeApp": 900000,
+      "dashboard": 600000,
+      "mvp": 1500000,
+      "automation": 250000
+    }
+  }
+}

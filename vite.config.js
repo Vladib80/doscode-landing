@@ -13,6 +13,7 @@ const rollupInputs = {
   v10: 'v10.html',
   v10Lite: 'v10-lite.html',
   v11: 'v11.html',
+  v12: 'v12.html',
 };
 
 if (fs.existsSync('duck-inspired.html')) {
