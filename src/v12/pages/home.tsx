@@ -2466,12 +2466,12 @@ const RESTOPULSE_COPY = {
 function RestoPulseMockup({ copy }: { copy: typeof RESTOPULSE_COPY.ru }) {
   return (
     <div className="relative rounded-[2rem] border border-border/60 bg-card/40 p-3 shadow-2xl">
-      <div className="rounded-[1.5rem] border border-border/50 bg-background/90 p-4 sm:p-5">
+      <div className="rounded-[1.5rem] border border-border/50 bg-background/95 p-4 sm:p-5">
         <div className="mb-4 flex items-center gap-3 border-b border-border/50 pb-4">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/15 font-mono font-bold text-primary">RP</div>
           <div>
             <div className="font-display text-lg font-bold">RestoPulse</div>
-            <div className="font-mono text-xs text-muted-foreground">{copy.metricOne} · Telegram</div>
+            <div className="font-mono text-xs text-muted-foreground">08:30 · Telegram bot</div>
           </div>
         </div>
         <div className="space-y-3">
@@ -2480,10 +2480,17 @@ function RestoPulseMockup({ copy }: { copy: typeof RESTOPULSE_COPY.ru }) {
             <p className="text-sm leading-relaxed text-foreground/90">{copy.reportText}</p>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            {[["1.84M ₸", "sales"], ["+12%", "week"], ["3", "refunds"], ["21:00", "check"]].map(([value, label]) => (
+            {[["1.84M ₸", "revenue"], ["+12%", "vs period"], ["214", "orders"], ["8 607 ₸", "avg check"]].map(([value, label]) => (
               <div key={label} className="rounded-2xl border border-border/50 bg-card/60 p-3">
                 <div className="font-mono text-lg font-bold text-foreground">{value}</div>
                 <div className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-2 gap-2 pt-1">
+            {["📊 Каналы", "🤖 Совет", "🎯 Скидки", "🚚 Доставка", "⏰ Часы", "🍕 Блюда", "👥 Смена", "📊 YTD"].map((button) => (
+              <div key={button} className="rounded-xl border border-border/50 bg-background/70 px-2 py-2 text-center font-mono text-[11px] text-foreground/80">
+                {button}
               </div>
             ))}
           </div>
@@ -2499,6 +2506,67 @@ function RestoPulsePage() {
   const copy = RESTOPULSE_COPY[lang];
   const primaryUrl = `https://t.me/doscode_bot?start=restopulse_${lang === "kk" ? "kk" : "ru"}`;
   const secondaryUrl = `https://t.me/doscode_bot?start=restopulse_fit_${lang === "kk" ? "kk" : "ru"}`;
+  const isKk = lang === "kk";
+  const pain = isKk
+    ? {
+        title: "Егер таңертең iiko ашпасаңыз, кеше не болғанын кеш білесіз.",
+        subtitle: "RestoPulse мейрамхана иесіне күнді 30 секундта түсінуге көмектеседі. Сандар ғана емес, қай жерде ақша, уақыт немесе бақылау жоғалып жатқанын көрсетеді.",
+        beforeTitle: "RestoPulse-қа дейін",
+        afterTitle: "RestoPulse-пен",
+        before: ["iiko-ға кіріп, бірнеше есепті қолмен қарау керек", "Әлсіз тағамдар, скидкалар және жеткізу мәселелері кеш байқалады", "Менеджердің қысқа түсіндірмесіне сенуге тура келеді", "Апта, ай, жыл басы бөлек қаралады"],
+        after: ["Есеп Telegram-ға өзі келеді", "Сатылым, орташа чек, смена, тағамдар және скидкалар бір жерде", "🤖 Кеңес нақты не тексеру керегін айтады", "Кеше, апта, ай, MTD және YTD бір bot ішінде"]
+      }
+    : {
+        title: "Если утром вы не открыли iiko, вы уже можете узнать проблему слишком поздно.",
+        subtitle: "RestoPulse помогает владельцу понять день за 30 секунд. Не просто цифры, а где ресторан теряет деньги, время или контроль.",
+        beforeTitle: "До RestoPulse",
+        afterTitle: "С RestoPulse",
+        before: ["Нужно заходить в iiko и вручную искать нужные отчеты", "Слабые блюда, скидки и проблемы доставки всплывают поздно", "Приходится верить короткому пересказу управляющего", "Неделя, месяц и год смотрятся отдельно"],
+        after: ["Отчет сам приходит в Telegram", "Продажи, чек, смена, блюда и скидки в одном месте", "🤖 Совет говорит, что проверить сегодня", "Вчера, неделя, месяц, MTD и YTD в одном bot"]
+      };
+  const reportBlocks = isKk
+    ? [
+        ["Күнделікті", "Кешегі сатылым, тапсырыс, орташа чек, ауысым, топ тағам және не тексеру керек."],
+        ["Апталық", "Апта динамикасы, каналдар, сұраныс сағаттары, жеткізу және слабый жерлер."],
+        ["Айлық", "Ай қорытындысы, жоспар темпі, MTD және ай соңына дейін керек күндік сатылым."],
+        ["YTD", "Жыл басынан бергі нәтиже және өткен жылмен салыстыру. Стратегиялық бақылау үшін."]
+      ]
+    : [
+        ["Ежедневный", "Продажи за вчера, заказы, средний чек, смена, топ блюдо и что проверить сегодня."],
+        ["Еженедельный", "Динамика недели, каналы, часы спроса, доставка и слабые места."],
+        ["Ежемесячный", "Итог месяца, темп к плану, MTD и сколько нужно в день до конца месяца."],
+        ["YTD", "С начала года и сравнение с прошлым годом. Для стратегического контроля."]
+      ];
+  const advice = isKk
+    ? {
+        title: "Совет тек әдемі мәтін емес. Ол әрекет береді.",
+        evidence: "Агрегаторлар түсімнің 38% алды, скидкалар 21:00-ден кейін өсті, орташа чек кешкі уақытта төмендеді.",
+        action: "Бүгін кешкі сменада прямой delivery промокодын қосып, 21:00-ден кейінгі қолмен скидкаларды тексеріңіз.",
+        watch: "Ертең қараңыз: прямой delivery үлесі, орташа чек, скидка сомасы."
+      }
+    : {
+        title: "Совет это не красивый текст. Это действие.",
+        evidence: "Агрегаторы забрали 38% выручки, скидки выросли после 21:00, средний чек просел вечером.",
+        action: "Сегодня на вечерней смене включите промокод на прямую доставку и проверьте ручные скидки после 21:00.",
+        watch: "Завтра смотрите: доля прямой доставки, средний чек, сумма скидок."
+      };
+  const faq = isKk
+    ? [
+        ["Бұл dashboard па?", "Жоқ. Бұл Telegram bot. Есептер мен детальдар Telegram ішінде келеді."],
+        ["Қандай периодтар бар?", "Кеше, апта, ай, MTD және YTD."],
+        ["Персонал бойынша не көрсетеді?", "Кім сменада болды, кім қазір жұмыс істеп тұр, кім сменаны аяқтады және уақыттары."],
+        ["Тағамдар бойынша не бар?", "Топ 10 және әлсіз 10 позиция. Түсім және саны бойынша."],
+        ["Қосу үшін не керек?", "iiko деректеріне қол жеткізу және есеп алатын Telegram chat."],
+        ["Кеңес қайдан шығады?", "Bot сатылым, каналдар, скидкалар, тағамдар және салыстырулар бойынша нақты сигналдарды қарайды."]
+      ]
+    : [
+        ["Это dashboard?", "Нет. Это Telegram bot. Отчеты и детали приходят прямо в Telegram."],
+        ["Какие периоды есть?", "За вчера, неделя, месяц, MTD и YTD."],
+        ["Что показывает по персоналу?", "Кто был на смене, кто сейчас работает, кто завершил смену и время работы."],
+        ["Что показывает по блюдам?", "Топ 10 и слабые 10 позиций по выручке и количеству."],
+        ["Что нужно для подключения?", "Доступ к данным iiko и Telegram chat, куда отправлять отчеты."],
+        ["Откуда берется совет?", "Bot смотрит продажи, каналы, скидки, блюда и сравнения, затем дает конкретное действие владельцу."]
+      ];
 
   return (
     <>
@@ -2545,7 +2613,7 @@ function RestoPulsePage() {
 
       <section className="border-b border-border/50 py-16 sm:py-24">
         <div className="container mx-auto px-6">
-          <div className="mb-12 max-w-3xl">
+          <div className="mb-12 max-w-4xl">
             <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">{copy.productLabel}</div>
             <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.sectionTitle}</h2>
             <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{copy.sectionText}</p>
@@ -2562,13 +2630,57 @@ function RestoPulsePage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24">
+      <section className="border-b border-border/50 py-16 sm:py-24">
+        <div className="container mx-auto px-6">
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+            <div>
+              <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{pain.title}</h2>
+              <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{pain.subtitle}</p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[[pain.beforeTitle, pain.before, false], [pain.afterTitle, pain.after, true]].map(([title, items, positive]) => (
+                <div key={String(title)} className={`rounded-3xl border p-6 ${positive ? "border-primary/30 bg-primary/10" : "border-border/50 bg-card/40"}`}>
+                  <h3 className="font-display text-2xl font-bold">{String(title)}</h3>
+                  <ul className="mt-5 space-y-3">
+                    {(items as string[]).map((item) => (
+                      <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+                        <span className={positive ? "text-primary" : "text-destructive"}>{positive ? "✓" : "×"}</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24">
+        <div className="container mx-auto px-6">
+          <div className="mb-10 max-w-3xl">
+            <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">reports</div>
+            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{isKk ? "Есептер өзі келеді. Сіз тек оқисыз." : "Отчеты приходят сами. Вы просто читаете."}</h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-4">
+            {reportBlocks.map(([title, text]) => (
+              <div key={title} className="rounded-3xl border border-border/50 bg-card/40 p-6">
+                <div className="mb-4 font-mono text-sm font-bold text-primary">{title}</div>
+                <p className="text-sm leading-relaxed text-muted-foreground">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24">
         <div className="container mx-auto px-6">
           <div className="rounded-[2rem] border border-primary/20 bg-primary/5 p-6 sm:p-10">
-            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+            <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
               <div>
                 <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-5xl">{copy.flowTitle}</h2>
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
+                <p className="mt-4 text-muted-foreground">{isKk ? "Иесі деталдарды Telegram ішінде ашады. Жаңа жүйе үйренудің қажеті жоқ." : "Владелец открывает детали внутри Telegram. Не нужно учиться новой системе."}</p>
+                <div className="mt-6">
                   <a href={primaryUrl} target="_blank" rel="noreferrer">
                     <Button size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 sm:w-auto lg:w-full">{copy.footerCta}</Button>
                   </a>
@@ -2582,6 +2694,64 @@ function RestoPulsePage() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24">
+        <div className="container mx-auto px-6">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">🤖 advice</div>
+              <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{advice.title}</h2>
+            </div>
+            <div className="rounded-3xl border border-border/50 bg-card/50 p-6 sm:p-8">
+              <div className="space-y-5">
+                <div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">evidence</div><p className="mt-2 text-lg">{advice.evidence}</p></div>
+                <div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">action</div><p className="mt-2 text-lg text-primary">{advice.action}</p></div>
+                <div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">watch tomorrow</div><p className="mt-2 text-lg">{advice.watch}</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24">
+        <div className="container mx-auto px-6">
+          <div className="mb-10 max-w-3xl">
+            <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">proof</div>
+            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{isKk ? "Нақты мейрамхана операциясынан туған." : "Сделано из реальной ресторанной операционки."}</h2>
+            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{isKk ? "RestoPulse аналитика үшін аналитика емес. Ол иесінің күнделікті сұрағынан шықты: кеше не болды, бүгін нені тексеру керек, ақша қай жерде жоғалуы мүмкін." : "RestoPulse не про аналитику ради аналитики. Он появился из ежедневного вопроса владельца: что случилось вчера, что проверить сегодня, где могут теряться деньги."}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-24">
+        <div className="container mx-auto px-6">
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">FAQ</h2>
+              <p className="mt-4 text-muted-foreground">{isKk ? "Мейрамхана иесі бірінші сұрайтын сұрақтар." : "Вопросы, которые владелец ресторана задаст первым."}</p>
+            </div>
+            <div className="space-y-3">
+              {faq.map(([q, a]) => (
+                <div key={q} className="rounded-2xl border border-border/50 bg-card/40 p-5">
+                  <h3 className="font-display text-xl font-bold">{q}</h3>
+                  <p className="mt-2 text-muted-foreground">{a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-10 rounded-[2rem] border border-primary/20 bg-primary/10 p-8 text-center">
+            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{isKk ? "Мейрамханаңыздың есебі Telegram-ға келсін." : "Пусть ресторан сам докладывает вам в Telegram."}</h2>
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+              <a href={primaryUrl} target="_blank" rel="noreferrer">
+                <Button size="lg" className="h-14 w-full bg-primary px-6 font-mono text-primary-foreground hover:bg-primary/90 sm:w-auto">{copy.primary}</Button>
+              </a>
+              <a href={secondaryUrl} target="_blank" rel="noreferrer">
+                <Button size="lg" variant="outline" className="h-14 w-full border-border/70 bg-background/40 px-6 font-mono sm:w-auto">{copy.secondary}</Button>
+              </a>
             </div>
           </div>
         </div>
