@@ -206,13 +206,20 @@ function buildSitemap(lastmod) {
     { hreflang: 'kk-KZ', href: `${siteUrl}/kk/restopulse` },
     { hreflang: 'x-default', href: `${siteUrl}/restopulse` }
   ];
+  const whatsappAlternateLinks = [
+    { hreflang: 'ru-KZ', href: `${siteUrl}/whatsapp` },
+    { hreflang: 'kk-KZ', href: `${siteUrl}/kk/whatsapp` },
+    { hreflang: 'x-default', href: `${siteUrl}/whatsapp` }
+  ];
 
   const urls = [
     { loc: `${siteUrl}/`, alternates: alternateLinks, priority: '1.0' },
     { loc: `${siteUrl}/kk/`, alternates: alternateLinks, priority: '0.9' },
     { loc: `${siteUrl}/en/`, alternates: alternateLinks, priority: '0.9' },
     { loc: `${siteUrl}/restopulse`, alternates: restopulseAlternateLinks, priority: '0.9' },
-    { loc: `${siteUrl}/kk/restopulse`, alternates: restopulseAlternateLinks, priority: '0.9' }
+    { loc: `${siteUrl}/kk/restopulse`, alternates: restopulseAlternateLinks, priority: '0.9' },
+    { loc: `${siteUrl}/whatsapp`, alternates: whatsappAlternateLinks, priority: '0.9' },
+    { loc: `${siteUrl}/kk/whatsapp`, alternates: whatsappAlternateLinks, priority: '0.9' }
   ];
 
   const body = urls

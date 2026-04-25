@@ -16,6 +16,8 @@ const rollupInputs = {
   v12: 'v12.html',
   restopulse: 'restopulse/index.html',
   restopulseKk: 'kk/restopulse/index.html',
+  whatsapp: 'whatsapp/index.html',
+  whatsappKk: 'kk/whatsapp/index.html',
 };
 
 if (fs.existsSync('duck-inspired.html')) {

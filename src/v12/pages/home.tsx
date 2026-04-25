@@ -288,11 +288,16 @@ function LanguageSwitcher() {
     }
 
     const isRestoPulsePath = currentPath === "/restopulse" || currentPath === "/restopulse/" || currentPath === "/kk/restopulse" || currentPath === "/kk/restopulse/";
+    const isWhatsAppPath = currentPath === "/whatsapp" || currentPath === "/whatsapp/" || currentPath === "/kk/whatsapp" || currentPath === "/kk/whatsapp/";
     const targetPath = isRestoPulsePath
       ? code === "kk"
         ? "/kk/restopulse"
         : "/restopulse"
-      : LOCALE_PATHS[code];
+      : isWhatsAppPath
+        ? code === "kk"
+          ? "/kk/whatsapp"
+          : "/whatsapp"
+        : LOCALE_PATHS[code];
     if (currentPath === targetPath || currentPath === `${targetPath}/`) {
       return;
     }
@@ -2760,6 +2765,198 @@ function RestoPulsePage() {
   );
 }
 
+
+const WHATSAPP_COPY = {
+  ru: {
+    badge: "продукт DosCode / WhatsApp / AI",
+    title: "WhatsApp Operator Copilot",
+    accent: "Один рабочий стол для всех WhatsApp аккаунтов и AI-ответов.",
+    subtitle: "Desktop-приложение для команд, которые отвечают клиентам в WhatsApp: несколько аккаунтов одновременно, быстрые переключения, уведомления, AI-подсказки, переписывание черновиков, краткое summary переписки и база знаний для каждого аккаунта.",
+    primary: "Получить демо WhatsApp Copilot",
+    secondary: "Обсудить внедрение",
+    navBack: "Все продукты DosCode",
+    productLabel: "Что делает приложение",
+    metricOne: "∞ accounts",
+    metricOneLabel: "несколько WhatsApp аккаунтов",
+    metricTwo: "⌘1-⌘9",
+    metricTwoLabel: "быстрое переключение",
+    metricThree: "AI replies",
+    metricThreeLabel: "3 варианта ответа",
+    sectionTitle: "Оператор отвечает быстрее, точнее и не теряет контекст.",
+    sectionText: "WhatsApp Operator Copilot держит все рабочие WhatsApp в одном окне и помогает оператору писать ответы на основе переписки, инструкций и документов компании.",
+    cards: [
+      ["Несколько аккаунтов", "Каждый WhatsApp аккаунт живет в отдельной сессии, сохраняется после перезапуска и имеет свой цвет, бейджи и DND."],
+      ["AI-подсказки", "AI генерирует 3 варианта ответа для открытого диалога: auto, formal, casual или brief."],
+      ["Переписывание черновика", "Оператор пишет грубо: цену, адрес, условие. Copilot превращает это в нормальный клиентский ответ."],
+      ["Summary переписки", "Быстро понять, что клиент хотел, что уже обещали и что нужно сделать дальше."],
+      ["База знаний", "PDF, Excel, DOCX, меню, прайсы, FAQ и URL можно прикрепить к конкретному аккаунту."],
+      ["Auto-suggest", "Когда приходит новое сообщение, AI может сам предложить ответ, если режим включен."]
+    ],
+    painTitle: "Когда WhatsApp становится главным каналом продаж, хаос начинается быстро.",
+    painSubtitle: "Один оператор держит доставку, второй отвечает VIP, третий ведет опт. Аккаунты открыты в разных окнах, контекст теряется, ответы отличаются по качеству.",
+    beforeTitle: "До Copilot",
+    afterTitle: "С Copilot",
+    before: ["Несколько WhatsApp Web окон и браузеров", "Оператор ищет цены, FAQ и правила вручную", "Ответы зависят от настроения и опыта смены", "Новый оператор долго входит в контекст"],
+    after: ["Все аккаунты в одном desktop app", "AI читает инструкции и базу знаний аккаунта", "Черновик превращается в готовый ответ", "Summary помогает быстро понять переписку"],
+    buttonsTitle: "Что внутри приложения",
+    buttons: ["Accounts sidebar", "Unread badges", "DND mode", "AI suggestions", "Tone selector", "Draft rewrite", "Conversation summary", "Knowledge base", "Improve Instructions", "Claude / OpenAI"],
+    adviceTitle: "Главный wow: AI учится на реальном диалоге.",
+    evidence: "Откройте разговор и нажмите Improve Instructions. Приложение читает последние сообщения и обновляет инструкции аккаунта под реальные вопросы клиентов.",
+    action: "Для каждого аккаунта можно задать свой контекст: доставка, VIP, продажи, поддержка, меню, прайс, правила возврата.",
+    watch: "Результат: меньше ручного объяснения операторам, быстрее ответы и меньше ошибок в WhatsApp.",
+    faq: [
+      ["Это WhatsApp Business API?", "Нет. Это desktop app поверх WhatsApp Web для операторов и нескольких аккаунтов."],
+      ["Можно несколько аккаунтов одновременно?", "Да. Каждый аккаунт имеет отдельную persistent session и быстрый shortcut."],
+      ["AI отправляет сообщения сам?", "Нет. AI помогает оператору подготовить ответ. Оператор контролирует отправку."],
+      ["Какие AI провайдеры?", "Claude или OpenAI. Можно использовать свой API key."],
+      ["Можно загрузить документы?", "Да. PDF, DOCX, Excel, файлы и URL как knowledge base для конкретного аккаунта."],
+      ["Для кого это?", "Для ресторанов, доставок, e-commerce, сервисных компаний и команд, где WhatsApp это основной канал продаж или поддержки."]
+    ],
+    finalTitle: "Сделайте WhatsApp рабочим местом оператора, а не хаосом из вкладок.",
+    footerCta: "Получить демо"
+  },
+  kk: {
+    badge: "DosCode өнімі / WhatsApp / AI",
+    title: "WhatsApp Operator Copilot",
+    accent: "Барлық WhatsApp аккаунттары және AI жауаптары бір жұмыс орнында.",
+    subtitle: "WhatsApp арқылы клиенттерге жауап беретін командаларға арналған desktop-қосымша: бірнеше аккаунт қатар, тез ауысу, хабарламалар, AI ұсыныстары, черновикті дұрыстау, переписка summary және әр аккаунтқа база знаний.",
+    primary: "WhatsApp Copilot демо алу",
+    secondary: "Енгізуді талқылау",
+    navBack: "DosCode өнімдері",
+    productLabel: "Қосымша не істейді",
+    metricOne: "∞ accounts",
+    metricOneLabel: "бірнеше WhatsApp аккаунт",
+    metricTwo: "⌘1-⌘9",
+    metricTwoLabel: "тез ауысу",
+    metricThree: "AI replies",
+    metricThreeLabel: "3 жауап нұсқасы",
+    sectionTitle: "Оператор тезірек, нақтырақ жауап береді және контекст жоғалтпайды.",
+    sectionText: "WhatsApp Operator Copilot барлық жұмыс WhatsApp аккаунттарын бір терезеде ұстап, операторға переписка, нұсқаулық және компания құжаттары негізінде жауап жазуға көмектеседі.",
+    cards: [
+      ["Бірнеше аккаунт", "Әр WhatsApp аккаунт бөлек сессияда сақталады, restart-тен кейін жоғалмайды, өз түсі, badge және DND режимі бар."],
+      ["AI ұсыныстары", "AI ашық диалогқа 3 жауап нұсқасын жасайды: auto, formal, casual немесе brief."],
+      ["Черновикті дұрыстау", "Оператор қысқа ой жазады: баға, адрес, шарт. Copilot оны клиентке дайын жауапқа айналдырады."],
+      ["Переписка summary", "Клиент не сұрады, не уәде етілді және әрі қарай не істеу керек екенін тез түсіну."],
+      ["База знаний", "PDF, Excel, DOCX, меню, прайс, FAQ және URL нақты аккаунтқа тіркеледі."],
+      ["Auto-suggest", "Жаңа хабарлама келгенде, режим қосулы болса, AI өзі жауап ұсына алады."]
+    ],
+    painTitle: "WhatsApp негізгі сату каналы болса, хаос тез басталады.",
+    painSubtitle: "Бір оператор delivery ұстайды, екіншісі VIP жауап береді, үшіншісі оптпен сөйлеседі. Аккаунттар әр терезеде, контекст жоғалады, жауап сапасы әртүрлі.",
+    beforeTitle: "Copilot-қа дейін",
+    afterTitle: "Copilot-пен",
+    before: ["Бірнеше WhatsApp Web терезесі және браузер", "Оператор баға, FAQ және ережені өзі іздейді", "Жауап сапасы смена тәжірибесіне байланысты", "Жаңа оператор контекстке ұзақ кіреді"],
+    after: ["Барлық аккаунт бір desktop app ішінде", "AI аккаунт нұсқаулығын және база знаний оқиды", "Черновик дайын жауапқа айналады", "Summary переписканы тез түсіндіреді"],
+    buttonsTitle: "Қосымша ішінде не бар",
+    buttons: ["Accounts sidebar", "Unread badges", "DND mode", "AI suggestions", "Tone selector", "Draft rewrite", "Conversation summary", "Knowledge base", "Improve Instructions", "Claude / OpenAI"],
+    adviceTitle: "Негізгі wow: AI нақты диалогтан үйренеді.",
+    evidence: "Диалогты ашып, Improve Instructions басыңыз. Қосымша соңғы хабарламаларды оқып, аккаунт инструкциясын клиенттердің нақты сұрақтарына қарай жаңартады.",
+    action: "Әр аккаунтқа өз контекстін беруге болады: delivery, VIP, sales, support, меню, прайс, қайтару ережесі.",
+    watch: "Нәтиже: операторларға аз түсіндіру, тез жауап және WhatsApp-та аз қате.",
+    faq: [
+      ["Бұл WhatsApp Business API ма?", "Жоқ. Бұл операторларға арналған WhatsApp Web негізіндегі desktop app."],
+      ["Бірнеше аккаунт қатар бола ма?", "Иә. Әр аккаунтта бөлек persistent session және тез shortcut бар."],
+      ["AI хабарламаны өзі жібере ме?", "Жоқ. AI жауап дайындауға көмектеседі. Жіберуді оператор бақылайды."],
+      ["Қандай AI провайдерлер?", "Claude немесе OpenAI. Өз API key қолдануға болады."],
+      ["Құжат жүктеуге бола ма?", "Иә. PDF, DOCX, Excel, файлдар және URL knowledge base ретінде."],
+      ["Кімге арналған?", "Ресторан, delivery, e-commerce, сервис компаниялары және WhatsApp негізгі sales/support каналы болған командаларға."]
+    ],
+    finalTitle: "WhatsApp-ты вкладкалар хаосы емес, оператордың жұмыс орнына айналдырыңыз.",
+    footerCta: "Демо алу"
+  }
+} as const;
+
+function WhatsAppCopilotMockup({ copy }: { copy: typeof WHATSAPP_COPY.ru }) {
+  return (
+    <div className="relative rounded-[2rem] border border-border/60 bg-card/40 p-3 shadow-2xl">
+      <div className="rounded-[1.5rem] border border-border/50 bg-background/95 p-4 sm:p-5">
+        <div className="mb-4 flex items-center justify-between border-b border-border/50 pb-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/15 font-mono font-bold text-primary">WA</div>
+            <div>
+              <div className="font-display text-lg font-bold">Operator Desk</div>
+              <div className="font-mono text-xs text-muted-foreground">3 accounts · AI enabled</div>
+            </div>
+          </div>
+          <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-1 font-mono text-xs text-primary">⌘1-⌘9</span>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-[64px_1fr]">
+          <div className="flex gap-2 sm:flex-col">
+            {[["OPS", "4"], ["WEB", "2"], ["VIP", "1"]].map(([label, badge], i) => (
+              <div key={label} className={`relative flex h-12 w-12 items-center justify-center rounded-2xl border font-mono text-xs font-bold ${i === 0 ? "border-primary/40 bg-primary text-primary-foreground" : "border-border/50 bg-card/60"}`}>
+                {label}<span className="absolute -right-1 -top-1 rounded-full bg-background px-1 text-[10px] text-foreground">{badge}</span>
+              </div>
+            ))}
+          </div>
+          <div className="space-y-3">
+            <div className="rounded-2xl border border-border/50 bg-card/60 p-3">
+              <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.22em] text-primary">customer message</div>
+              <div className="h-2 w-4/5 rounded-full bg-foreground/15" />
+              <div className="mt-2 h-2 w-2/3 rounded-full bg-foreground/10" />
+            </div>
+            <div className="ml-auto rounded-2xl border border-primary/30 bg-primary/10 p-3">
+              <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.22em] text-primary">AI suggestion 1/3</div>
+              <p className="text-sm text-foreground/90">Здравствуйте! Проверил заказ. Курьер уже в пути, ориентир 18 минут. Если нужно, могу отправить ссылку на оплату.</p>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {["Formal", "Casual", "Brief", "Rewrite"].map((item) => <div key={item} className="rounded-xl border border-border/50 bg-background/70 px-3 py-2 text-center font-mono text-xs">{item}</div>)}
+            </div>
+            <div className="rounded-2xl border border-cyan-400/25 bg-cyan-400/10 p-3">
+              <div className="font-mono text-xs text-cyan-400">Knowledge: menu.pdf · pricing.xlsx · faq.docx</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function WhatsAppCopilotPage() {
+  const { i18n } = useTranslation();
+  const lang = getV115Lang(i18n.language);
+  const copy = WHATSAPP_COPY[lang === "kk" ? "kk" : "ru"];
+  const primaryUrl = `https://t.me/doscode_bot?start=whatsapp_copilot_${lang === "kk" ? "kk" : "ru"}`;
+  const secondaryUrl = `https://t.me/doscode_bot?start=whatsapp_copilot_fit_${lang === "kk" ? "kk" : "ru"}`;
+  const isKk = lang === "kk";
+
+  return (
+    <>
+      <section className="relative overflow-hidden border-b border-border/50 pt-28 sm:pt-32 pb-16 sm:pb-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(132,204,22,0.16),transparent_32%),radial-gradient(circle_at_78%_10%,rgba(6,182,212,0.14),transparent_28%)]" />
+        <div className="container relative z-10 mx-auto px-6">
+          <a href={lang === "kk" ? "/kk/" : "/"} className="mb-8 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-primary">
+            <ArrowRight className="h-4 w-4 rotate-180" /> {copy.navBack}
+          </a>
+          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <div>
+              <div className="mb-5 inline-flex rounded-full border border-primary/25 bg-primary/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-primary">{copy.badge}</div>
+              <h1 className="font-display text-5xl font-bold tracking-tighter sm:text-7xl lg:text-8xl">{copy.title}<span className="block text-primary">{copy.accent}</span></h1>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">{copy.subtitle}</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a href={primaryUrl} target="_blank" rel="noreferrer"><Button size="lg" className="h-14 w-full gap-2 bg-primary px-6 font-mono text-primary-foreground hover:bg-primary/90 sm:w-auto"><Send className="h-5 w-5" /> {copy.primary}</Button></a>
+                <a href={secondaryUrl} target="_blank" rel="noreferrer"><Button size="lg" variant="outline" className="h-14 w-full gap-2 border-border/70 bg-card/40 px-6 font-mono sm:w-auto"><Bot className="h-5 w-5" /> {copy.secondary}</Button></a>
+              </div>
+              <div className="mt-8 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
+                {[[copy.metricOne, copy.metricOneLabel], [copy.metricTwo, copy.metricTwoLabel], [copy.metricThree, copy.metricThreeLabel]].map(([value, label]) => <div key={value} className="rounded-2xl border border-border/50 bg-card/40 p-4"><div className="font-mono text-xl font-bold text-primary">{value}</div><div className="mt-1 text-sm text-muted-foreground">{label}</div></div>)}
+              </div>
+            </div>
+            <WhatsAppCopilotMockup copy={copy} />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24"><div className="container mx-auto px-6"><div className="mb-12 max-w-4xl"><div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">{copy.productLabel}</div><h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.sectionTitle}</h2><p className="mt-5 text-lg leading-relaxed text-muted-foreground">{copy.sectionText}</p></div><div className="grid gap-6 md:grid-cols-3">{copy.cards.map(([title, text], i) => <div key={title} className="rounded-3xl border border-border/50 bg-card/40 p-6 transition-colors hover:border-primary/40"><div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 font-mono font-bold text-primary">0{i + 1}</div><h3 className="font-display text-2xl font-bold tracking-tight">{title}</h3><p className="mt-3 text-muted-foreground">{text}</p></div>)}</div></div></section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24"><div className="container mx-auto px-6"><div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start"><div><h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.painTitle}</h2><p className="mt-5 text-lg leading-relaxed text-muted-foreground">{copy.painSubtitle}</p></div><div className="grid gap-4 sm:grid-cols-2">{[[copy.beforeTitle, copy.before, false], [copy.afterTitle, copy.after, true]].map(([title, items, positive]) => <div key={String(title)} className={`rounded-3xl border p-6 ${positive ? "border-primary/30 bg-primary/10" : "border-border/50 bg-card/40"}`}><h3 className="font-display text-2xl font-bold">{String(title)}</h3><ul className="mt-5 space-y-3">{(items as string[]).map((item) => <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground"><span className={positive ? "text-primary" : "text-destructive"}>{positive ? "✓" : "×"}</span><span>{item}</span></li>)}</ul></div>)}</div></div></div></section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24"><div className="container mx-auto px-6"><div className="rounded-[2rem] border border-primary/20 bg-primary/5 p-6 sm:p-10"><div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center"><div><h2 className="font-display text-4xl font-bold tracking-tighter sm:text-5xl">{copy.buttonsTitle}</h2><p className="mt-4 text-muted-foreground">{isKk ? "Оператор клиентке жауап берген кезде барлық көмек бір панельде." : "Все, что помогает оператору отвечать клиенту, находится в одном рабочем месте."}</p><div className="mt-6"><a href={primaryUrl} target="_blank" rel="noreferrer"><Button size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 sm:w-auto lg:w-full">{copy.footerCta}</Button></a></div></div><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{copy.buttons.map((item) => <div key={item} className="rounded-2xl border border-border/50 bg-background/60 p-4"><div className="text-base font-semibold">{item}</div></div>)}</div></div></div></div></section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24"><div className="container mx-auto px-6"><div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"><div><div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">AI context</div><h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.adviceTitle}</h2></div><div className="rounded-3xl border border-border/50 bg-card/50 p-6 sm:p-8"><div className="space-y-5"><div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">how it works</div><p className="mt-2 text-lg">{copy.evidence}</p></div><div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">per account context</div><p className="mt-2 text-lg text-primary">{copy.action}</p></div><div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">result</div><p className="mt-2 text-lg">{copy.watch}</p></div></div></div></div></div></section>
+
+      <section className="py-16 sm:py-24"><div className="container mx-auto px-6"><div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]"><div><h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">FAQ</h2><p className="mt-4 text-muted-foreground">{isKk ? "Команда енгізер алдында сұрайтын сұрақтар." : "Вопросы, которые команда задаст перед внедрением."}</p></div><div className="space-y-3">{copy.faq.map(([q, a]) => <div key={q} className="rounded-2xl border border-border/50 bg-card/40 p-5"><h3 className="font-display text-xl font-bold">{q}</h3><p className="mt-2 text-muted-foreground">{a}</p></div>)}</div></div><div className="mt-10 rounded-[2rem] border border-primary/20 bg-primary/10 p-8 text-center"><h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.finalTitle}</h2><div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"><a href={primaryUrl} target="_blank" rel="noreferrer"><Button size="lg" className="h-14 w-full bg-primary px-6 font-mono text-primary-foreground hover:bg-primary/90 sm:w-auto">{copy.primary}</Button></a><a href={secondaryUrl} target="_blank" rel="noreferrer"><Button size="lg" variant="outline" className="h-14 w-full border-border/70 bg-background/40 px-6 font-mono sm:w-auto">{copy.secondary}</Button></a></div></div></div></section>
+    </>
+  );
+}
+
 function Footer() {
   const { t } = useTranslation();
   return (
@@ -2782,6 +2979,7 @@ function Footer() {
 
 export default function Home() {
   const isRestoPulsePage = typeof window !== "undefined" && ["/restopulse", "/restopulse/", "/kk/restopulse", "/kk/restopulse/"].includes(window.location.pathname);
+  const isWhatsAppPage = typeof window !== "undefined" && ["/whatsapp", "/whatsapp/", "/kk/whatsapp", "/kk/whatsapp/"].includes(window.location.pathname);
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary selection:text-primary-foreground">
@@ -2790,6 +2988,8 @@ export default function Home() {
       <main>
         {isRestoPulsePage ? (
           <RestoPulsePage />
+        ) : isWhatsAppPage ? (
+          <WhatsAppCopilotPage />
         ) : (
           <>
             <Hero />
