@@ -201,20 +201,28 @@ ${renderStructuredData(config)}
 }
 
 function buildSitemap(lastmod) {
+  const restopulseAlternateLinks = [
+    { hreflang: 'ru-KZ', href: `${siteUrl}/restopulse` },
+    { hreflang: 'kk-KZ', href: `${siteUrl}/kk/restopulse` },
+    { hreflang: 'x-default', href: `${siteUrl}/restopulse` }
+  ];
+
   const urls = [
-    { loc: `${siteUrl}/` },
-    { loc: `${siteUrl}/kk/` },
-    { loc: `${siteUrl}/en/` }
+    { loc: `${siteUrl}/`, alternates: alternateLinks, priority: '1.0' },
+    { loc: `${siteUrl}/kk/`, alternates: alternateLinks, priority: '0.9' },
+    { loc: `${siteUrl}/en/`, alternates: alternateLinks, priority: '0.9' },
+    { loc: `${siteUrl}/restopulse`, alternates: restopulseAlternateLinks, priority: '0.9' },
+    { loc: `${siteUrl}/kk/restopulse`, alternates: restopulseAlternateLinks, priority: '0.9' }
   ];
 
   const body = urls
     .map(
-      ({ loc }) => `  <url>
+      ({ loc, alternates, priority }) => `  <url>
     <loc>${loc}</loc>
-${alternateLinks.map((alt) => `    <xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${alt.href}"/>`).join('\n')}
+${alternates.map((alt) => `    <xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${alt.href}"/>`).join('\n')}
     <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>${loc === `${siteUrl}/` ? '1.0' : '0.9'}</priority>
+    <priority>${priority}</priority>
   </url>`
     )
     .join('\n');
