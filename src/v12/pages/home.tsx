@@ -287,8 +287,13 @@ function LanguageSwitcher() {
       return;
     }
 
-    const targetPath = LOCALE_PATHS[code];
-    if (currentPath === targetPath) {
+    const isRestoPulsePath = currentPath === "/restopulse" || currentPath === "/restopulse/" || currentPath === "/kk/restopulse" || currentPath === "/kk/restopulse/";
+    const targetPath = isRestoPulsePath
+      ? code === "kk"
+        ? "/kk/restopulse"
+        : "/restopulse"
+      : LOCALE_PATHS[code];
+    if (currentPath === targetPath || currentPath === `${targetPath}/`) {
       return;
     }
 
@@ -369,7 +374,12 @@ function ThemeSwitcher() {
 }
 
 function Header() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = getV115Lang(i18n.language);
+  const isRestoPulsePage = typeof window !== "undefined" && ["/restopulse", "/restopulse/", "/kk/restopulse", "/kk/restopulse/"].includes(window.location.pathname);
+  const homePath = lang === "kk" ? "/kk/" : lang === "en" ? "/en/" : "/";
+  const navHref = (hash: string) => (isRestoPulsePage ? `${homePath}${hash}` : hash);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-40 border-b border-border/50 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-2 px-3 sm:px-6">
@@ -378,11 +388,11 @@ function Header() {
           <span className="font-display font-bold text-lg sm:text-xl tracking-tight">DosCode</span>
         </div>
         <nav className="hidden lg:flex items-center gap-5 xl:gap-8 text-sm font-medium text-muted-foreground font-mono" aria-label="Primary">
-          <a href="#services" className="hover:text-foreground transition-colors" data-testid="nav-services">{t("header.services")}</a>
-          <a href="#cases" className="hover:text-foreground transition-colors" data-testid="nav-cases">{t("header.cases")}</a>
-          <a href="#process" className="hover:text-foreground transition-colors" data-testid="nav-process">{t("header.process")}</a>
-          <a href="#pricing" className="hover:text-foreground transition-colors" data-testid="nav-pricing">{t("header.pricing")}</a>
-          <a href="#faq" className="hover:text-foreground transition-colors" data-testid="nav-faq">{t("header.faq")}</a>
+          <a href={navHref("#services")} className="hover:text-foreground transition-colors" data-testid="nav-services">{t("header.services")}</a>
+          <a href={navHref("#cases")} className="hover:text-foreground transition-colors" data-testid="nav-cases">{t("header.cases")}</a>
+          <a href={navHref("#process")} className="hover:text-foreground transition-colors" data-testid="nav-process">{t("header.process")}</a>
+          <a href={navHref("#pricing")} className="hover:text-foreground transition-colors" data-testid="nav-pricing">{t("header.pricing")}</a>
+          <a href={navHref("#faq")} className="hover:text-foreground transition-colors" data-testid="nav-faq">{t("header.faq")}</a>
         </nav>
         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
           <ThemeSwitcher />
@@ -2333,6 +2343,7 @@ function Testimonials() {
   );
 }
 
+
 function CTA() {
   const { t } = useTranslation();
   return (
@@ -2353,6 +2364,220 @@ function CTA() {
         </a>
       </div>
     </section>
+  );
+}
+
+const RESTOPULSE_COPY = {
+  ru: {
+    badge: "продукт DosCode / рестораны / iiko",
+    title: "RestoPulse",
+    accent: "Утренний отчет для владельца ресторана.",
+    subtitle: "Каждый день RestoPulse собирает важные цифры из iiko и отправляет владельцу короткий Telegram-отчет: продажи, смены, касса, возвраты и точки внимания.",
+    primary: "Получить пример отчета",
+    secondary: "Обсудить подключение",
+    navBack: "Все продукты DosCode",
+    productLabel: "Наш продукт",
+    metricOne: "08:30",
+    metricOneLabel: "отчет приходит утром",
+    metricTwo: "iiko",
+    metricTwoLabel: "данные ресторана",
+    metricThree: "Telegram",
+    metricThreeLabel: "без нового dashboard",
+    sectionTitle: "Не еще один dashboard. Просто то, что владелец должен знать утром.",
+    sectionText: "RestoPulse сделан как операционный продукт DosCode: сначала конкретная боль, потом интерфейс, автоматизация и понятный sales-flow через Telegram bot.",
+    cards: [
+      ["Продажи и динамика", "Выручка, заказы, средний чек и сравнение с прошлой неделей без ручной проверки iiko."],
+      ["Касса и риски", "Скидки, возвраты, отмены и странные изменения сразу попадают в блок внимания."],
+      ["Команда и смены", "Какая смена сработала лучше, где просел чек и что нужно обсудить с управляющим."]
+    ],
+    flowTitle: "Как работает заявка",
+    flow: ["Ресторан нажимает CTA", "Бот спрашивает iiko и число точек", "Мы отправляем пример отчета", "Если подходит, запускаем пилот"],
+    reportTitle: "RestoPulse report",
+    reportText: "Вчера 1 842 000 ₸. Выше прошлой среды на 12%. Проверьте скидки после 21:00 и позиции с падением маржи.",
+    footerCta: "Хочу такой отчет"
+  },
+  kk: {
+    badge: "DosCode өнімі / мейрамханалар / iiko",
+    title: "RestoPulse",
+    accent: "Мейрамхана иесіне арналған таңғы есеп.",
+    subtitle: "RestoPulse күн сайын iiko ішіндегі маңызды сандарды жинап, иесіне қысқа Telegram есеп жібереді: сатылым, ауысым, касса, қайтарым және назар нүктелері.",
+    primary: "Есеп үлгісін алу",
+    secondary: "Қосуды талқылау",
+    navBack: "DosCode өнімдері",
+    productLabel: "Біздің өнім",
+    metricOne: "08:30",
+    metricOneLabel: "есеп таңертең келеді",
+    metricTwo: "iiko",
+    metricTwoLabel: "мейрамхана деректері",
+    metricThree: "Telegram",
+    metricThreeLabel: "жаңа dashboard қажет емес",
+    sectionTitle: "Тағы бір dashboard емес. Иесі таңертең білуі керек нәрсе.",
+    sectionText: "RestoPulse DosCode операциялық өнімі ретінде жасалды: алдымен нақты мәселе, кейін интерфейс, автоматтандыру және Telegram bot арқылы түсінікті sales-flow.",
+    cards: [
+      ["Сатылым және динамика", "Түсім, тапсырыс, орташа чек және өткен аптамен салыстыру iiko-ны қолмен тексермей келеді."],
+      ["Касса және тәуекел", "Жеңілдіктер, қайтарымдар, бас тартулар және күмәнді өзгерістер бірден назар блогына түседі."],
+      ["Команда және ауысым", "Қай ауысым жақсы жұмыс істеді, қай жерде чек төмендеді және басқарушымен нені талқылау керек."]
+    ],
+    flowTitle: "Өтінім қалай жүреді",
+    flow: ["Мейрамхана CTA басады", "Бот iiko және нүкте санын сұрайды", "Біз есеп үлгісін жібереміз", "Сәйкес келсе, пилот қосамыз"],
+    reportTitle: "RestoPulse есебі",
+    reportText: "Кеше 1 842 000 ₸. Өткен сәрсенбіден 12% жоғары. 21:00-ден кейінгі жеңілдіктерді және маржасы төмендеген позицияларды тексеріңіз.",
+    footerCta: "Осындай есеп керек"
+  },
+  en: {
+    badge: "DosCode product / restaurants / iiko",
+    title: "RestoPulse",
+    accent: "Morning owner report for restaurants.",
+    subtitle: "RestoPulse turns iiko data into a short Telegram report for owners: sales, shifts, cash signals, refunds and what needs attention.",
+    primary: "Get sample report",
+    secondary: "Discuss setup",
+    navBack: "All DosCode products",
+    productLabel: "Our product",
+    metricOne: "08:30",
+    metricOneLabel: "morning delivery",
+    metricTwo: "iiko",
+    metricTwoLabel: "restaurant data",
+    metricThree: "Telegram",
+    metricThreeLabel: "no new dashboard",
+    sectionTitle: "Not another dashboard. Just what the owner needs every morning.",
+    sectionText: "RestoPulse follows the DosCode product pattern: clear pain, useful interface, automation, and a Telegram bot sales flow.",
+    cards: [
+      ["Sales and trend", "Revenue, orders, average check and week comparison without manual iiko checks."],
+      ["Cash and risk", "Discounts, refunds, cancellations and suspicious changes move into an attention block."],
+      ["Team and shifts", "Which shift worked better, where check dropped and what to discuss with the manager."]
+    ],
+    flowTitle: "How the enquiry works",
+    flow: ["Restaurant clicks CTA", "Bot asks about iiko and locations", "We send a sample report", "If it fits, we launch a pilot"],
+    reportTitle: "RestoPulse report",
+    reportText: "Yesterday 1,842,000 ₸. Up 12% vs last Wednesday. Check discounts after 21:00 and items with margin drop.",
+    footerCta: "I want this report"
+  }
+} as const;
+
+function RestoPulseMockup({ copy }: { copy: typeof RESTOPULSE_COPY.ru }) {
+  return (
+    <div className="relative rounded-[2rem] border border-border/60 bg-card/40 p-3 shadow-2xl">
+      <div className="rounded-[1.5rem] border border-border/50 bg-background/90 p-4 sm:p-5">
+        <div className="mb-4 flex items-center gap-3 border-b border-border/50 pb-4">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/15 font-mono font-bold text-primary">RP</div>
+          <div>
+            <div className="font-display text-lg font-bold">RestoPulse</div>
+            <div className="font-mono text-xs text-muted-foreground">{copy.metricOne} · Telegram</div>
+          </div>
+        </div>
+        <div className="space-y-3">
+          <div className="rounded-2xl border border-primary/20 bg-primary/10 p-4">
+            <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.24em] text-primary">{copy.reportTitle}</div>
+            <p className="text-sm leading-relaxed text-foreground/90">{copy.reportText}</p>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {[["1.84M ₸", "sales"], ["+12%", "week"], ["3", "refunds"], ["21:00", "check"]].map(([value, label]) => (
+              <div key={label} className="rounded-2xl border border-border/50 bg-card/60 p-3">
+                <div className="font-mono text-lg font-bold text-foreground">{value}</div>
+                <div className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RestoPulsePage() {
+  const { i18n } = useTranslation();
+  const lang = getV115Lang(i18n.language);
+  const copy = RESTOPULSE_COPY[lang];
+  const primaryUrl = `https://t.me/doscode_bot?start=restopulse_${lang === "kk" ? "kk" : "ru"}`;
+  const secondaryUrl = `https://t.me/doscode_bot?start=restopulse_fit_${lang === "kk" ? "kk" : "ru"}`;
+
+  return (
+    <>
+      <section className="relative overflow-hidden border-b border-border/50 pt-28 sm:pt-32 pb-16 sm:pb-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(132,204,22,0.16),transparent_32%),radial-gradient(circle_at_78%_10%,rgba(59,130,246,0.12),transparent_28%)]" />
+        <div className="container relative z-10 mx-auto px-6">
+          <a href={lang === "kk" ? "/kk/" : "/"} className="mb-8 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-primary">
+            <ArrowRight className="h-4 w-4 rotate-180" /> {copy.navBack}
+          </a>
+          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <div>
+              <div className="mb-5 inline-flex rounded-full border border-primary/25 bg-primary/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-primary">
+                {copy.badge}
+              </div>
+              <h1 className="font-display text-5xl font-bold tracking-tighter sm:text-7xl lg:text-8xl">
+                {copy.title}<span className="block text-primary">{copy.accent}</span>
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">{copy.subtitle}</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a href={primaryUrl} target="_blank" rel="noreferrer">
+                  <Button size="lg" className="h-14 w-full gap-2 bg-primary px-6 font-mono text-primary-foreground hover:bg-primary/90 sm:w-auto">
+                    <Send className="h-5 w-5" /> {copy.primary}
+                  </Button>
+                </a>
+                <a href={secondaryUrl} target="_blank" rel="noreferrer">
+                  <Button size="lg" variant="outline" className="h-14 w-full gap-2 border-border/70 bg-card/40 px-6 font-mono sm:w-auto">
+                    <Bot className="h-5 w-5" /> {copy.secondary}
+                  </Button>
+                </a>
+              </div>
+              <div className="mt-8 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
+                {[[copy.metricOne, copy.metricOneLabel], [copy.metricTwo, copy.metricTwoLabel], [copy.metricThree, copy.metricThreeLabel]].map(([value, label]) => (
+                  <div key={value} className="rounded-2xl border border-border/50 bg-card/40 p-4">
+                    <div className="font-mono text-xl font-bold text-primary">{value}</div>
+                    <div className="mt-1 text-sm text-muted-foreground">{label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <RestoPulseMockup copy={copy} />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24">
+        <div className="container mx-auto px-6">
+          <div className="mb-12 max-w-3xl">
+            <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">{copy.productLabel}</div>
+            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.sectionTitle}</h2>
+            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{copy.sectionText}</p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {copy.cards.map(([title, text], i) => (
+              <div key={title} className="rounded-3xl border border-border/50 bg-card/40 p-6 transition-colors hover:border-primary/40">
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 font-mono font-bold text-primary">0{i + 1}</div>
+                <h3 className="font-display text-2xl font-bold tracking-tight">{title}</h3>
+                <p className="mt-3 text-muted-foreground">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-24">
+        <div className="container mx-auto px-6">
+          <div className="rounded-[2rem] border border-primary/20 bg-primary/5 p-6 sm:p-10">
+            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+              <div>
+                <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-5xl">{copy.flowTitle}</h2>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
+                  <a href={primaryUrl} target="_blank" rel="noreferrer">
+                    <Button size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 sm:w-auto lg:w-full">{copy.footerCta}</Button>
+                  </a>
+                </div>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {copy.flow.map((item, i) => (
+                  <div key={item} className="rounded-2xl border border-border/50 bg-background/60 p-5">
+                    <div className="mb-3 font-mono text-sm font-bold text-primary">{String(i + 1).padStart(2, "0")}</div>
+                    <div className="text-lg font-semibold">{item}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
@@ -2377,21 +2602,29 @@ function Footer() {
 }
 
 export default function Home() {
+  const isRestoPulsePage = typeof window !== "undefined" && ["/restopulse", "/restopulse/", "/kk/restopulse", "/kk/restopulse/"].includes(window.location.pathname);
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary selection:text-primary-foreground">
       <div className="noise-bg" />
       <Header />
       <main>
-        <Hero />
-        <FastLaunch />
-        <TechStrip />
-        <Services />
-        <Cases />
-        <Testimonials />
-	        <Process />
-	        <ProjectEstimator />
-	        <FAQ />
-        <CTA />
+        {isRestoPulsePage ? (
+          <RestoPulsePage />
+        ) : (
+          <>
+            <Hero />
+            <FastLaunch />
+            <TechStrip />
+            <Services />
+            <Cases />
+            <Testimonials />
+            <Process />
+            <ProjectEstimator />
+            <FAQ />
+            <CTA />
+          </>
+        )}
       </main>
       <Footer />
     </div>
