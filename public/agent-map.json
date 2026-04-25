@@ -1,0 +1,103 @@
+{
+  "site": {
+    "name": "DosCode",
+    "url": "https://doscode.kz",
+    "description": "DosCode builds fast business launches for companies in Kazakhstan: websites, landing pages, MVPs, business dashboards, bots, e-commerce, and automation.",
+    "serviceArea": "Kazakhstan",
+    "languages": ["ru", "kk", "en"],
+    "primaryLanguage": "ru",
+    "contact": {
+      "telegram": "https://t.me/doscode_bot",
+      "email": "hello@doscode.kz"
+    }
+  },
+  "navigation": [
+    {
+      "title": "Homepage",
+      "type": "homepage",
+      "urls": {
+        "ru": "https://doscode.kz/",
+        "kk": "https://doscode.kz/kk/",
+        "en": "https://doscode.kz/en/"
+      },
+      "sections": ["services", "cases", "process", "pricing", "faq"]
+    },
+    {
+      "title": "RestoPulse",
+      "type": "product",
+      "urls": {
+        "ru": "https://doscode.kz/restopulse",
+        "kk": "https://doscode.kz/kk/restopulse"
+      },
+      "bestFit": "Restaurant owners and operators using iiko",
+      "contactUrl": "https://t.me/doscode_bot?start=restopulse_ru"
+    },
+    {
+      "title": "WhatsApp Operator Copilot",
+      "type": "product",
+      "urls": {
+        "ru": "https://doscode.kz/whatsapp",
+        "kk": "https://doscode.kz/kk/whatsapp"
+      },
+      "bestFit": "Teams where WhatsApp is a main sales or support channel",
+      "contactUrl": "https://t.me/doscode_bot?start=whatsapp_copilot_ru"
+    }
+  ],
+  "services": [
+    {
+      "name": "Landing pages and websites",
+      "summary": "Clear offer, fast page, lead capture, and launch path connected to Telegram, WhatsApp, forms, payments, or analytics.",
+      "startingRangeKzt": "100000-420000",
+      "typicalTimeline": "2-8 days"
+    },
+    {
+      "name": "Business products",
+      "summary": "E-commerce, dashboards, bots, internal tools, reports, and operational systems for small and medium businesses.",
+      "startingRangeKzt": "450000-2000000",
+      "typicalTimeline": "2-9 weeks"
+    },
+    {
+      "name": "MVP and SaaS builds",
+      "summary": "First working product with users, backend, admin logic, integrations, and deployment.",
+      "startingRangeKzt": "1500000-5000000+",
+      "typicalTimeline": "4-12+ weeks"
+    }
+  ],
+  "integrations": [
+    "Kaspi",
+    "iiko",
+    "1C",
+    "WhatsApp",
+    "Telegram",
+    "Google Sheets",
+    "Excel",
+    "CRM",
+    "payments",
+    "analytics",
+    "AI APIs",
+    "Stripe",
+    "Kaspi Pay",
+    "OpenAI API",
+    "Telegram API",
+    "WhatsApp API"
+  ],
+  "products": [
+    {
+      "name": "RestoPulse",
+      "url": "https://doscode.kz/restopulse",
+      "summary": "Connects to iiko and sends restaurant owners reports in Telegram: sales, average check, shifts, staff, menu items, discounts, delivery, and operational issues.",
+      "audience": "Restaurant owners and operators using iiko"
+    },
+    {
+      "name": "WhatsApp Operator Copilot",
+      "url": "https://doscode.kz/whatsapp",
+      "summary": "Desktop workspace for teams that answer customers in WhatsApp, with multiple accounts, notifications, AI reply suggestions, rewriting, and company context.",
+      "audience": "Restaurants, delivery teams, e-commerce, service businesses, and support teams"
+    }
+  ],
+  "crawl": {
+    "sitemap": "https://doscode.kz/sitemap.xml",
+    "llmsTxt": "https://doscode.kz/llms.txt",
+    "robotsTxt": "https://doscode.kz/robots.txt"
+  }
+}

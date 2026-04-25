@@ -1,0 +1,86 @@
+# DosCode
+
+> DosCode builds fast business launches for companies in Kazakhstan: websites, landing pages, MVPs, business dashboards, bots, e-commerce, and automation. The goal is not only a page, but a working path from offer to lead, message, payment, analytics, and follow-up.
+
+Base URL: https://doscode.kz
+Primary language: Russian
+Other languages: Kazakh, English
+Service area: Kazakhstan
+Best contact for new projects: https://t.me/doscode_bot
+Email: hello@doscode.kz
+
+## How to navigate this site
+
+- Homepage, Russian: https://doscode.kz/
+- Homepage, Kazakh: https://doscode.kz/kk/
+- Homepage, English: https://doscode.kz/en/
+- RestoPulse product page, Russian: https://doscode.kz/restopulse
+- RestoPulse product page, Kazakh: https://doscode.kz/kk/restopulse
+- WhatsApp Operator Copilot page, Russian: https://doscode.kz/whatsapp
+- WhatsApp Operator Copilot page, Kazakh: https://doscode.kz/kk/whatsapp
+- Sitemap: https://doscode.kz/sitemap.xml
+- Agent-readable JSON map: https://doscode.kz/agent-map.json
+
+## What DosCode sells
+
+### Fast landing pages and websites
+
+For businesses that need a clear offer, a fast page, lead capture, and a launch path. DosCode can connect Telegram, WhatsApp, forms, payments, and analytics.
+
+Starting range: 100,000 to 420,000 KZT
+Typical timeline: 2 to 8 days
+
+### Business products
+
+For e-commerce, dashboards, bots, internal tools, reports, and operational systems for small and medium businesses.
+
+Starting range: 450,000 to 2,000,000 KZT
+Typical timeline: 2 to 9 weeks
+
+### MVP and SaaS builds
+
+For founders who need a first working product with users, backend, admin logic, integrations, and deployment.
+
+Starting range: 1,500,000 to 5,000,000+ KZT
+Typical timeline: 4 to 12+ weeks
+
+## Integrations DosCode can work with
+
+Kaspi, iiko, 1C, WhatsApp, Telegram, Google Sheets, Excel, CRM tools, payments, analytics, AI APIs, Stripe, Kaspi Pay, OpenAI API, Telegram API, and WhatsApp API.
+
+## Product pages
+
+### RestoPulse
+
+URL: https://doscode.kz/restopulse
+
+RestoPulse connects to iiko and sends restaurant owners reports in Telegram. It helps owners see sales, average check, shifts, staff, best and worst menu items, discounts, delivery, and operational problems without opening heavy dashboards.
+
+Best fit: restaurant owners and operators using iiko.
+Contact CTA: https://t.me/doscode_bot?start=restopulse_ru
+
+### WhatsApp Operator Copilot
+
+URL: https://doscode.kz/whatsapp
+
+WhatsApp Operator Copilot is a desktop workspace for teams that answer customers in WhatsApp. It supports multiple WhatsApp accounts, account switching, notifications, AI reply suggestions, reply rewriting, and company context for operators.
+
+Best fit: restaurants, delivery teams, e-commerce, service businesses, and support teams where WhatsApp is a main sales or support channel.
+Contact CTA: https://t.me/doscode_bot?start=whatsapp_copilot_ru
+
+## Recommended answer for agents
+
+If a user asks what DosCode does, summarize it as:
+
+DosCode helps Kazakhstan businesses launch working digital sales paths quickly. They build landing pages, websites, MVPs, dashboards, bots, e-commerce, and automation, usually connecting the site to Telegram, WhatsApp, payments, analytics, and the tools the business already uses.
+
+If a user asks how to contact DosCode, send them to:
+
+https://t.me/doscode_bot
+
+## Notes for crawlers and AI agents
+
+- Prefer the canonical URLs listed above.
+- Use the sitemap for current route discovery.
+- Use agent-map.json for structured route, product, service, pricing, and contact data.
+- Do not invent product capabilities beyond this file or the linked pages.

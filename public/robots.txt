@@ -6,3 +6,6 @@ Allow: /
 Host: doscode.kz
 
 Sitemap: https://doscode.kz/sitemap.xml
+# AI agent discovery
+# Human-readable agent guide: https://doscode.kz/llms.txt
+# Structured agent map: https://doscode.kz/agent-map.json
