@@ -62,12 +62,12 @@ const V115_COPY = {
     techKicker: "бизнес қазір қолданатын интеграциялар",
     techTitle: "Сіздің нақты жұмысыңызға қосыламыз",
     techSubtitle: "Kaspi, iiko, 1C, WhatsApp, Telegram, кестелер, төлем, аналитика және AI. Технологияны әдемі тізім үшін емес, мерзім, бюджет және қолдау үшін таңдаймыз.",
-    launchKicker: "бет емес, запуск",
+    launchKicker: "бет емес, іске қосу",
     launchTitle: "Лендинг - бірінші қабат қана. Маңыздысы клиенттің толық жолы.",
-    launchSubtitle: "Қысқа цепочка құрамыз: оффер, бет, өтінім, жауап, follow-up және нәтижені өлшеу. Сондықтан DosCode арзан шаблон беттерімен бір қатарда емес.",
+    launchSubtitle: "Қысқа жол құрамыз: оффер, бет, өтінім, жауап, кейінгі байланыс және нәтижені өлшеу. Сондықтан DosCode арзан шаблон беттерімен бір қатарда емес.",
     launchCards: [
       { chip: "01", title: "Оффер", text: "Адам не алады және неге дәл қазір өтінім қалдыруы керек екенін нақтылаймыз." },
-      { chip: "02", title: "Бет", text: "Жарнамаға, тікелей сілтемеге немесе жаңа қызмет запускына дайын адаптивті сайт жинаймыз." },
+      { chip: "02", title: "Бет", text: "Жарнамаға, тікелей сілтемеге немесе жаңа қызметті іске қосуға дайын адаптивті сайт жинаймыз." },
       { chip: "03", title: "Өтінім", text: "Telegram, WhatsApp, форма, төлем немесе клиентке түсінікті басқа кіру нүктесін қосамыз." },
       { chip: "04", title: "Әрі қарай", text: "Оффер жұмыс істесе, оны бот, дашборд, CRM, e-commerce немесе MVP арқылы күшейтеміз." },
     ],
@@ -164,7 +164,7 @@ const V115_PRICING_CARDS = {
         name: "Лендинг",
         price: "100 000 - 420 000 ₸",
         time: "2-8 күн",
-        for: "Бет, оффер, өтінім, базалық аналитика және жарнамаға не тікелей сілтемеге запуск",
+        for: "Бет, оффер, өтінім, базалық аналитика және жарнамаға не тікелей сілтемеге іске қосу",
         features: ["100 000 ₸ - біздің құрылыммен тез запуск", "180 000 ₸+ - лендинг + оффер + өтінім + аналитика", "Форма, Telegram немесе WhatsApp кіру нүктесі ретінде"],
       },
       {
@@ -602,13 +602,13 @@ function Hero() {
         </motion.div>
 
         <motion.h1
-          className="mx-auto w-[calc(100vw-2rem)] max-w-5xl sm:w-auto text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-balance mb-6 font-display"
+          className="mx-auto w-[calc(100vw-2rem)] max-w-5xl sm:w-auto text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-balance mb-6 font-display leading-[0.96]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          {v115.heroTitle} <br />
-          <span className="text-primary">{v115.heroAccent}</span>
+          {v115.heroTitle}
+          <span className="mt-2 block text-primary text-[0.88em] leading-tight">{v115.heroAccent}</span>
         </motion.h1>
 
         <motion.p
@@ -1028,7 +1028,7 @@ function LaunchSystem() {
   const v115 = useV115Copy();
 
   return (
-    <section className="relative overflow-hidden border-y border-border/50 bg-background py-16 sm:py-24">
+    <section className="relative overflow-hidden border-y border-border/50 bg-background py-14 sm:py-20">
       <div className="absolute left-1/2 top-0 h-72 w-[720px] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]" />
       <div className="container relative z-10 mx-auto px-6">
         <div className="mx-auto mb-10 max-w-4xl text-center sm:mb-14">
