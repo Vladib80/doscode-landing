@@ -14,6 +14,8 @@ const rollupInputs = {
   v10Lite: 'v10-lite.html',
   v11: 'v11.html',
   v12: 'v12.html',
+  restopulse: 'restopulse/index.html',
+  restopulseKk: 'kk/restopulse/index.html',
 };
 
 if (fs.existsSync('duck-inspired.html')) {

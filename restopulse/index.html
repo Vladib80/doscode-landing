@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RestoPulse для iiko: ежедневный Telegram-отчет для владельцев ресторанов</title>
+  <meta name="description" content="RestoPulse отправляет владельцу ресторана ежедневный Telegram-отчет по продажам, сменам, кассе и проблемам в iiko. Для ресторанов, кафе, доставок и сетей в Казахстане." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://doscode.kz/restopulse" />
+  <link rel="alternate" hreflang="ru-KZ" href="https://doscode.kz/restopulse" />
+  <link rel="alternate" hreflang="kk-KZ" href="https://doscode.kz/kk/restopulse" />
+  <link rel="alternate" hreflang="x-default" href="https://doscode.kz/restopulse" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://doscode.kz/restopulse" />
+  <meta property="og:title" content="RestoPulse для iiko: ежедневный Telegram-отчет для владельцев ресторанов" />
+  <meta property="og:description" content="RestoPulse отправляет владельцу ресторана ежедневный Telegram-отчет по продажам, сменам, кассе и проблемам в iiko. Для ресторанов, кафе, доставок и сетей в Казахстане." />
+  <meta property="og:image" content="https://doscode.kz/og-restopulse.jpg" />
+  <meta property="og:locale" content="ru_KZ" />
+  <meta property="og:site_name" content="DosCode" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="RestoPulse для iiko: ежедневный Telegram-отчет для владельцев ресторанов" />
+  <meta name="twitter:description" content="RestoPulse отправляет владельцу ресторана ежедневный Telegram-отчет по продажам, сменам, кассе и проблемам в iiko. Для ресторанов, кафе, доставок и сетей в Казахстане." />
+  <meta name="twitter:image" content="https://doscode.kz/og-restopulse.jpg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "RestoPulse", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Telegram", "url": "https://doscode.kz/restopulse", "description": "RestoPulse отправляет владельцу ресторана ежедневный Telegram-отчет по продажам, сменам, кассе и проблемам в iiko. Для ресторанов, кафе, доставок и сетей в Казахстане.", "offers": {"@type": "Offer", "priceCurrency": "KZT", "availability": "https://schema.org/InStock"}, "provider": {"@type": "Organization", "name": "DosCode", "url": "https://doscode.kz"}}, {"@type": "FAQPage", "mainEntity": []}]}</script>
+  <style>
+    :root {
+      --bg: #05070a;
+      --panel: rgba(255,255,255,.075);
+      --panel-strong: rgba(255,255,255,.115);
+      --text: #f6f3ea;
+      --muted: #aab3c2;
+      --line: rgba(255,255,255,.14);
+      --lime: #c8ff00;
+      --cyan: #3de7ff;
+      --green: #2dff88;
+      --red: #ff5b7a;
+      --shadow: 0 30px 90px rgba(0,0,0,.45);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 8%, rgba(61,231,255,.18), transparent 30%),
+        radial-gradient(circle at 80% 12%, rgba(200,255,0,.16), transparent 28%),
+        linear-gradient(180deg, #05070a 0%, #080d14 44%, #040507 100%);
+      color: var(--text);
+      font-family: Manrope, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+    body:before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 260 260' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: 10;
+    }
+    a { color: inherit; }
+    .shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(5,7,10,.74);
+      backdrop-filter: blur(20px);
+    }
+    .nav-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 900; letter-spacing: -.04em; font-family: Unbounded, Manrope, sans-serif; }
+    .brand-mark { width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, var(--lime), var(--cyan)); color: #07100a; display: grid; place-items: center; box-shadow: 0 0 32px rgba(200,255,0,.22); }
+    .nav-links { display: flex; align-items: center; gap: 18px; font-size: 14px; color: var(--muted); }
+    .nav-links a { text-decoration: none; }
+    .lang { display: flex; gap: 6px; padding: 5px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.04); }
+    .lang a { padding: 7px 10px; border-radius: 999px; font-weight: 800; color: var(--muted); }
+    .lang a.active { background: var(--text); color: #05070a; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: 16px; text-decoration: none; font-weight: 900; color: #061006; background: linear-gradient(135deg, var(--lime), var(--green)); box-shadow: 0 16px 50px rgba(200,255,0,.22); border: 1px solid rgba(255,255,255,.2); transition: transform .2s ease, box-shadow .2s ease; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 20px 60px rgba(200,255,0,.3); }
+    .button.ghost { background: rgba(255,255,255,.06); color: var(--text); box-shadow: none; }
+    .hero { position: relative; padding: 82px 0 72px; }
+    .hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: 44px; align-items: center; }
+    .kicker { color: var(--lime); text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 900; margin: 0 0 18px; }
+    h1, h2, h3 { font-family: Unbounded, Manrope, sans-serif; line-height: .96; letter-spacing: -.06em; margin: 0; }
+    h1 { font-size: clamp(44px, 7vw, 86px); max-width: 900px; }
+    h2 { font-size: clamp(34px, 5vw, 64px); margin-bottom: 18px; }
+    h3 { font-size: 22px; letter-spacing: -.035em; line-height: 1.08; }
+    .lead { font-size: clamp(18px, 2vw, 23px); color: #dbe3ed; max-width: 720px; margin: 24px 0 0; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .trust-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .pill { border: 1px solid var(--line); background: rgba(255,255,255,.055); border-radius: 999px; padding: 9px 13px; color: var(--muted); font-size: 13px; }
+    .phone-wrap { position: relative; min-height: 650px; display: grid; place-items: center; }
+    .orb { position: absolute; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(200,255,0,.22), transparent 62%); filter: blur(4px); }
+    .phone { position: relative; width: min(390px, 100%); border: 1px solid rgba(255,255,255,.18); border-radius: 42px; padding: 18px; background: linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.04)); box-shadow: var(--shadow); backdrop-filter: blur(18px); }
+    .phone-screen { border-radius: 30px; overflow: hidden; background: #0c1118; border: 1px solid rgba(255,255,255,.1); }
+    .telegram-top { background: linear-gradient(135deg, #1e90ff, #35c5ff); padding: 18px; display: flex; align-items: center; gap: 12px; }
+    .bot-avatar { width: 42px; height: 42px; border-radius: 50%; background: #fff; color: #1087d7; display: grid; place-items: center; font-weight: 900; }
+    .telegram-top strong { display: block; }
+    .telegram-top span { opacity: .82; font-size: 13px; }
+    .chat { padding: 18px; display: grid; gap: 12px; }
+    .msg { background: #17202b; border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 14px; }
+    .msg strong { color: var(--lime); display: block; margin-bottom: 8px; }
+    .kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .kpi { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 10px; }
+    .kpi span { display: block; color: var(--muted); font-size: 12px; }
+    .kpi b { font-size: 18px; }
+    .warn { color: var(--red); }
+    .good { color: var(--green); }
+    section { padding: 76px 0; position: relative; }
+    .section-head { max-width: 780px; margin-bottom: 30px; }
+    .section-head p { color: var(--muted); font-size: 19px; margin: 0; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { border: 1px solid var(--line); border-radius: 28px; padding: 24px; background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04)); box-shadow: 0 18px 60px rgba(0,0,0,.18); }
+    .card p, .card li { color: var(--muted); }
+    .card ul { padding-left: 18px; margin-bottom: 0; }
+    .icon { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: rgba(200,255,0,.12); color: var(--lime); font-weight: 900; margin-bottom: 18px; }
+    .wide-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 16px; align-items: stretch; }
+    .report-panel { border: 1px solid var(--line); border-radius: 32px; padding: 24px; background: rgba(255,255,255,.07); }
+    .report-row { display: flex; justify-content: space-between; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.09); }
+    .report-row:last-child { border-bottom: 0; }
+    .report-row span { color: var(--muted); }
+    .report-row b { text-align: right; }
+    .steps { counter-reset: step; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .step:before { counter-increment: step; content: '0' counter(step); display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--lime); color: #061006; font-weight: 900; margin-bottom: 18px; }
+    .faq { display: grid; gap: 12px; }
+    details { border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.055); padding: 18px 20px; }
+    summary { cursor: pointer; font-weight: 900; }
+    details p { color: var(--muted); margin-bottom: 0; }
+    .final { text-align: center; border: 1px solid var(--line); border-radius: 38px; padding: 52px 24px; background: radial-gradient(circle at 50% 0%, rgba(200,255,0,.18), rgba(255,255,255,.05) 48%, rgba(255,255,255,.035)); }
+    .final p { color: var(--muted); font-size: 19px; max-width: 720px; margin: 18px auto 28px; }
+    footer { padding: 38px 0; border-top: 1px solid rgba(255,255,255,.08); color: var(--muted); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .reveal { opacity: 0; transform: translateY(18px); animation: rise .7s ease forwards; }
+    .reveal:nth-child(2) { animation-delay: .08s; }
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+    @media (max-width: 900px) { .hero-grid, .wide-grid { grid-template-columns: 1fr; } .cards, .steps { grid-template-columns: 1fr; } .phone-wrap { min-height: auto; } .nav-links > a:not(.button), .nav-links .button { display: none; } h1 { font-size: clamp(42px, 13vw, 64px); } section { padding: 56px 0; } }
+    @media (max-width: 520px) { .shell { width: min(100% - 22px, 1180px); } .nav-inner { min-height: 62px; } .brand span:last-child { display: none; } .hero { padding-top: 54px; } .button { width: 100%; } .hero-actions { gap: 10px; } .phone { border-radius: 32px; padding: 10px; } .phone-screen { border-radius: 24px; } .kpis { grid-template-columns: 1fr; } .report-row { display: block; } .report-row b { display: block; text-align: left; margin-top: 4px; } }
+</style>
+</head>
+<body>
+  <header class="nav">
+    <div class="shell nav-inner">
+      <a class="brand" href="/"><span class="brand-mark">D</span><span>DosCode</span></a>
+      <nav class="nav-links" aria-label="Navigation">
+        <a href="#pain">Проблемы</a><a href="#report">Отчет</a><a href="#iiko">iiko</a><a href="#faq">FAQ</a>
+        <span class="lang"><a class="active" href="/restopulse">RU</a><a href="/kk/restopulse">ҚАЗ</a></span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="reveal">
+          <p class="kicker">RESTOPULSE / IIKO / TELEGRAM ОТЧЕТЫ</p>
+          <h1>Не открывайте iiko. Просто читайте утренний отчет.</h1>
+          <p class="lead">RestoPulse каждый день отправляет владельцу ресторана понятный Telegram-отчет по продажам, сменам, кассе и проблемам в iiko. Без лишних дашбордов. Без ручных выгрузок.</p>
+          <div class="hero-actions"><a class="button" href="https://t.me/doscode_bot?start=restopulse_ru">Получить пример отчета</a><a class="button ghost" href="https://t.me/doscode_bot?start=restopulse_fit_ru">Узнать, подойдет ли моему ресторану</a></div>
+          <div class="trust-row"><span class="pill">Для ресторанов, кафе, доставок и сетей</span><span class="pill">Подключение через iiko</span><span class="pill">Отчет прямо в Telegram</span></div>
+        </div>
+        <div class="phone-wrap reveal" aria-label="Telegram report preview">
+          <div class="orb"></div>
+          <div class="phone"><div class="phone-screen">
+            <div class="telegram-top"><div class="bot-avatar">RP</div><div><strong>RestoPulse</strong><span>сегодня 08:30</span></div></div>
+            <div class="chat"><div class="msg"><strong>Утренний отчет</strong><p>Вчера ресторан сделал 1 842 000 ₸. Выше прошлой среды на 12%. Есть 3 точки внимания.</p><div class="kpis"><div class="kpi"><span>Продажи</span><b>1.84M ₸</b></div><div class="kpi"><span>Средний чек</span><b class="good">+9%</b></div><div class="kpi"><span>Возвраты</span><b class="warn">3</b></div><div class="kpi"><span>Лучшая смена</span><b>Алия</b></div></div></div><div class="msg"><strong>Что проверить</strong><p>Скидки после 21:00 и позиции с падением маржи.</p></div></div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pain"><div class="shell"><div class="section-head"><h2>Что владелец обычно узнает слишком поздно</h2><p>Проблемы видны в iiko, но владелец часто не видит их вовремя. RestoPulse вытаскивает важное и пишет человеческим языком.</p></div><div class="cards"><article class="card reveal"><div class="icon">1</div><h3>Падение продаж</h3><p>Вы видите не просто сумму, а сравнение с прошлой неделей и понятный сигнал: норма это или тревога.</p></article><article class="card reveal"><div class="icon">2</div><h3>Касса и возвраты</h3><p>Скидки, отмены, возвраты и подозрительные изменения попадают в отдельный блок внимания.</p></article><article class="card reveal"><div class="icon">3</div><h3>Смена и команда</h3><p>Какая смена сработала лучше, где просел средний чек, кто требует разговора с управляющим.</p></article></div></div></section>
+    <section id="report"><div class="shell wide-grid"><div class="section-head"><h2>Что приходит каждое утро</h2><p>Один Telegram-отчет вместо десяти экранов в iiko. Коротко, по делу, с выводами для владельца.</p></div><div class="report-panel"><div class="report-row"><span>Итог дня</span><b>выручка, заказы, средний чек, сравнение</b></div><div class="report-row"><span>Меню</span><b>топ позиции, слабые позиции, продажи по категориям</b></div><div class="report-row"><span>Операции</span><b>скидки, возвраты, отмены, кассовые сигналы</b></div><div class="report-row"><span>Команда</span><b>смены, сотрудники, точки внимания</b></div><div class="report-row"><span>Вывод</span><b>что проверить сегодня и где может быть потеря денег</b></div></div></div></section>
+    <section><div class="shell"><div class="section-head"><h2>Почему Telegram лучше очередного дашборда</h2><p>Дашборд требует дисциплины. Telegram приходит сам. Владелец видит ресторан утром, до того как проблема станет дорогой.</p></div><div class="cards"><article class="card"><h3>Не надо заходить в систему</h3><p>Отчет сам приходит в привычный канал. Это особенно важно для владельцев, которые не сидят весь день в iiko.</p></article><article class="card"><h3>Понятный язык</h3><p>Не просто графики. RestoPulse объясняет, что изменилось и на что обратить внимание.</p></article><article class="card"><h3>Быстрый старт</h3><p>Первую версию отчета можно запустить быстро, потом добавлять нужные метрики под ваш ресторан.</p></article></div></div></section>
+    <section id="iiko"><div class="shell wide-grid"><article class="card"><h2>Для ресторанов на iiko</h2><p>RestoPulse лучше всего подходит ресторанам, кафе, dark kitchen, доставкам и сетям, где продажи и операции уже ведутся в iiko. Мы не заявляем официальное партнерство с iiko. Мы строим отчетность вокруг ваших данных и управленческих вопросов.</p></article><article class="card"><h2>Сделано на реальной ресторанной боли</h2><p>RestoPulse родился из ежедневной операционной рутины ресторана в Алматы. Поэтому страница продает не аналитику ради аналитики, а контроль: что случилось вчера, что проверить сегодня и где могут теряться деньги.</p></article></div></section>
+    <section><div class="shell"><div class="section-head"><h2>Как начинается продажа</h2></div><div class="steps"><article class="card step"><h3>Вы нажимаете кнопку</h3><p>Бот спросит название ресторана, используете ли вы iiko и сколько у вас точек.</p></article><article class="card step"><h3>Получаете пример</h3><p>Мы покажем, как выглядит утренний отчет и какие блоки можно включить.</p></article><article class="card step"><h3>Подключаем пилот</h3><p>Если подходит, запускаем пилотный отчет и доводим формат под владельца.</p></article></div></div></section>
+    <section id="faq"><div class="shell"><div class="section-head"><h2>FAQ для владельца ресторана</h2></div><div class="faq"><details><summary>Бот сам проверяет, есть ли у нас iiko?</summary><p>Нет. На первом шаге бот просто спросит, используете ли вы iiko. Автоматическая проверка потребовала бы доступов и усложнила бы заявку.</p></details><details><summary>Если у нас не iiko, можно оставить заявку?</summary><p>Да. Но текущий фокус RestoPulse на ресторанах с iiko. Мы можем показать пример и записать вас в список для других систем.</p></details><details><summary>Это дашборд или отчет?</summary><p>В первую очередь отчет в Telegram. Дашборд можно добавить позже, но главная ценность в том, что владелец получает важное без ручной проверки.</p></details><details><summary>Сколько времени занимает запуск?</summary><p>Обычно стартовый формат можно подготовить быстро. Точный срок зависит от доступа к данным и нужных метрик.</p></details></div></div></section>
+    <section><div class="shell"><div class="final"><h2>Хотите такой отчет для своего ресторана?</h2><p>Нажмите кнопку, бот задаст несколько коротких вопросов и отправит вас в правильный сценарий продаж RestoPulse.</p><a class="button" href="https://t.me/doscode_bot?start=restopulse_ru">Получить пример отчета</a></div></div></section>
+  </main>
+  <footer><div class="shell footer-inner"><span>DosCode, Алматы. RestoPulse для ресторанов на iiko.</span><span>© 2026 DosCode</span></div></footer>
+</body>
+</html>
