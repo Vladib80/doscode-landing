@@ -7,7 +7,7 @@ import { Button } from "../../v10/components/ui/button";
 import { applyV10Theme, getV10ThemeFromRoot, type V10Theme } from "../../v10/theme-mode";
 import pricingModel from "../../../docs/pricing-model.json";
 
-const TELEGRAM_URL = "https://t.me/doscode_kz";
+const TELEGRAM_URL = "https://t.me/doscode_bot";
 const LOCALE_PATHS: Record<"ru" | "kk" | "en", string> = {
   ru: "/",
   kk: "/kk/",
@@ -578,7 +578,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <a href="#pricing" className="w-full sm:w-auto">
+          <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="w-full sm:w-auto">
             <Button size="lg" className="w-full sm:w-auto text-base h-14 px-8 font-mono tracking-wide bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-transform" data-testid="btn-hero-primary">
               <Calculator className="mr-2 h-5 w-5" />
               {v115.heroCta}

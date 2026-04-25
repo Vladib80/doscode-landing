@@ -6,7 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "..
 import { Button } from "../../v10/components/ui/button";
 import { applyV10Theme, getV10ThemeFromRoot, type V10Theme } from "../../v10/theme-mode";
 
-const TELEGRAM_URL = "https://t.me/doscode_kz";
+const TELEGRAM_URL = "https://t.me/doscode_bot";
 const LOCALE_PATHS: Record<"ru" | "kk" | "en", string> = {
   ru: "/",
   kk: "/kk/",

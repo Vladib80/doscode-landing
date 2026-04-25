@@ -6,7 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "..
 import { Button } from "../components/ui/button";
 import { applyV10Theme, getV10ThemeFromRoot, type V10Theme } from "../theme-mode";
 
-const TELEGRAM_URL = "https://t.me/doscode_kz";
+const TELEGRAM_URL = "https://t.me/doscode_bot";
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();

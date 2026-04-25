@@ -86,7 +86,7 @@ function renderStructuredData(config) {
         '@type': 'ContactPoint',
         contactType: 'sales',
         email: 'hello@doscode.kz',
-        url: 'https://t.me/doscode_kz',
+        url: 'https://t.me/doscode_bot',
         availableLanguage: ['Russian', 'Kazakh', 'English']
       }
     ]
