@@ -20,15 +20,24 @@ type EstimateScope = "lean" | "standard" | "custom";
 
 const V115_COPY = {
   ru: {
-    heroBadge: "Сайты, лендинги, интернет-магазины, приложения, MVP",
-    heroTitle: "Цифровые продукты для бизнеса в Казахстане.",
-    heroAccent: "От лендинга до MVP.",
+    heroBadge: "48-часовой лендинг · MVP · боты · дашборды",
+    heroTitle: "Быстрый запуск digital-продуктов для бизнеса.",
+    heroAccent: "От оффера до продаж.",
     heroSubtitle:
-      "Запускаем сайты и лендинги за 48 часов, интернет-магазины, нативные приложения, бизнес-дашборды и MVP. AI-агентов и Telegram-ботов подключаем там, где они реально ускоряют процессы.",
-    heroCta: "Оценить проект",
-    techKicker: "языки, фреймворки, интеграции",
-    techTitle: "Стек под задачу",
-    techSubtitle: "Работаем от лендингов до сложных систем: подбираем технологию по срокам, бюджету и будущей поддержке.",
+      "Запускаем не просто страницы, а рабочие бизнес-флоу: лендинг, заявка, Telegram/WhatsApp, оплата, аналитика, бот, дашборд или MVP. Первый макет лендинга - через 3-4 часа, оценка проекта - за 24 часа.",
+    heroCta: "Получить оценку за 24 часа",
+    techKicker: "интеграции, которые бизнес уже использует",
+    techTitle: "Подключаемся к вашей реальности",
+    techSubtitle: "Kaspi, iiko, 1C, WhatsApp, Telegram, таблицы, оплата, аналитика и AI. Технологию выбираем под срок, бюджет и поддержку, а не ради красивого списка.",
+    launchKicker: "не страница, а запуск",
+    launchTitle: "Лендинг - это только первый слой. Важен весь путь клиента.",
+    launchSubtitle: "Мы собираем короткую цепочку: оффер, страница, заявка, ответ, follow-up и измерение результата. Поэтому DosCode не конкурирует с дешёвыми шаблонными страницами.",
+    launchCards: [
+      { chip: "01", title: "Оффер", text: "Формулируем, что человек получает и почему ему нужно оставить заявку сейчас." },
+      { chip: "02", title: "Страница", text: "Собираем быстрый, адаптивный сайт под рекламу, прямую ссылку или запуск новой услуги." },
+      { chip: "03", title: "Заявка", text: "Подключаем Telegram, WhatsApp, форму, оплату или другой понятный вход для клиента." },
+      { chip: "04", title: "Дальше", text: "Если оффер работает, усиливаем его ботом, дашбордом, CRM, e-commerce или MVP." },
+    ],
     estimatorKicker: "Цены и сроки",
     estimatorTitle: "Ориентир бюджета",
     estimatorSubtitle: "Выберите формат, уровень кастома и интеграции. Это предварительный диапазон; финальная смета зависит от контента, логики и доступа к API.",
@@ -44,15 +53,24 @@ const V115_COPY = {
     briefIntro: "Привет, хочу оценить проект DosCode.",
   },
   kk: {
-    heroBadge: "Сайттар, лендингтер, e-commerce, қосымшалар, MVP",
-    heroTitle: "Қазақстан бизнесіне арналған цифрлық өнімдер.",
-    heroAccent: "Лендингтен MVP-ге дейін.",
+    heroBadge: "48 сағатта лендинг · MVP · боттар · дашбордтар",
+    heroTitle: "Бизнеске digital-өнімдерді тез іске қосамыз.",
+    heroAccent: "Офферден сатылымға дейін.",
     heroSubtitle:
-      "Сайттар мен лендингтерді 48 сағатта, e-commerce, нативті қосымшалар, бизнес-дашбордтар және MVP іске қосамыз. AI-агенттер мен Telegram-боттарды процесс нақты жылдамдайтын жерде қосамыз.",
-    heroCta: "Жобаны бағалау",
-    techKicker: "тілдер, фреймворктер, интеграциялар",
-    techTitle: "Стек міндетке қарай",
-    techSubtitle: "Лендингтен күрделі жүйеге дейін: технологияны мерзімге, бюджетке және қолдауға қарай таңдаймыз.",
+      "Жай ғана бет емес, жұмыс істейтін бизнес-флоу құрамыз: лендинг, өтінім, Telegram/WhatsApp, төлем, аналитика, бот, дашборд немесе MVP. Лендингтің алғашқы макеті - 3-4 сағатта, жоба бағасы - 24 сағатта.",
+    heroCta: "24 сағатта бағалау алу",
+    techKicker: "бизнес қазір қолданатын интеграциялар",
+    techTitle: "Сіздің нақты жұмысыңызға қосыламыз",
+    techSubtitle: "Kaspi, iiko, 1C, WhatsApp, Telegram, кестелер, төлем, аналитика және AI. Технологияны әдемі тізім үшін емес, мерзім, бюджет және қолдау үшін таңдаймыз.",
+    launchKicker: "бет емес, запуск",
+    launchTitle: "Лендинг - бірінші қабат қана. Маңыздысы клиенттің толық жолы.",
+    launchSubtitle: "Қысқа цепочка құрамыз: оффер, бет, өтінім, жауап, follow-up және нәтижені өлшеу. Сондықтан DosCode арзан шаблон беттерімен бір қатарда емес.",
+    launchCards: [
+      { chip: "01", title: "Оффер", text: "Адам не алады және неге дәл қазір өтінім қалдыруы керек екенін нақтылаймыз." },
+      { chip: "02", title: "Бет", text: "Жарнамаға, тікелей сілтемеге немесе жаңа қызмет запускына дайын адаптивті сайт жинаймыз." },
+      { chip: "03", title: "Өтінім", text: "Telegram, WhatsApp, форма, төлем немесе клиентке түсінікті басқа кіру нүктесін қосамыз." },
+      { chip: "04", title: "Әрі қарай", text: "Оффер жұмыс істесе, оны бот, дашборд, CRM, e-commerce немесе MVP арқылы күшейтеміз." },
+    ],
     estimatorKicker: "Баға және мерзім",
     estimatorTitle: "Бюджет бағдары",
     estimatorSubtitle: "Форматты, кастом деңгейін және интеграцияларды таңдаңыз. Бұл алдын ала диапазон; финал смета контентке, логикаға және API қолжетімділігіне байланысты.",
@@ -68,15 +86,24 @@ const V115_COPY = {
     briefIntro: "Сәлем, DosCode жобасын бағалатқым келеді.",
   },
   en: {
-    heroBadge: "Websites, landing pages, e-commerce, apps, MVPs",
-    heroTitle: "Digital products for business in Kazakhstan.",
-    heroAccent: "From landing page to MVP.",
+    heroBadge: "48-hour landing · MVPs · bots · dashboards",
+    heroTitle: "Fast digital product launches for business.",
+    heroAccent: "From offer to sales.",
     heroSubtitle:
-      "We launch websites and landing pages in 48 hours, e-commerce, native apps, business dashboards and MVPs. We add AI agents and Telegram bots where they actually speed up operations.",
-    heroCta: "Estimate project",
-    techKicker: "languages, frameworks, integrations",
-    techTitle: "Stack by task",
-    techSubtitle: "From landing pages to complex systems: we pick technology by timeline, budget and long-term support.",
+      "We do not just ship pages. We launch working business flows: landing page, lead capture, Telegram/WhatsApp, payments, analytics, bots, dashboards or MVPs. First landing mockup in 3-4 hours, project estimate in 24 hours.",
+    heroCta: "Get an estimate in 24 hours",
+    techKicker: "integrations the business already uses",
+    techTitle: "We connect to your real workflow",
+    techSubtitle: "Kaspi, iiko, 1C, WhatsApp, Telegram, spreadsheets, payments, analytics and AI. We pick the stack by timeline, budget and support needs, not for a pretty list.",
+    launchKicker: "not a page, a launch",
+    launchTitle: "The landing page is only the first layer. The customer path matters.",
+    launchSubtitle: "We build the short chain: offer, page, lead capture, reply, follow-up and result tracking. That is why DosCode does not compete with cheap template pages.",
+    launchCards: [
+      { chip: "01", title: "Offer", text: "We clarify what the customer gets and why they should leave a request now." },
+      { chip: "02", title: "Page", text: "We build a fast responsive site for ads, direct links or a new service launch." },
+      { chip: "03", title: "Lead", text: "We connect Telegram, WhatsApp, a form, payment or another clear entry point." },
+      { chip: "04", title: "Next", text: "If the offer works, we strengthen it with a bot, dashboard, CRM, e-commerce or MVP." },
+    ],
     estimatorKicker: "Pricing guide",
     estimatorTitle: "Budget range",
     estimatorSubtitle: "Pick format, customization level and integrations. This is a preliminary range; the final quote depends on content, logic and API access.",
@@ -108,8 +135,8 @@ const V115_PRICING_CARDS = {
         name: "Лендинг",
         price: "100 000 - 420 000 ₸",
         time: "2-8 дней",
-        for: "Быстрый запуск, тест оффера, заявка или рекламная кампания",
-        features: ["100 000 ₸ — если принимаем нашу структуру быстро", "Адаптив, базовое SEO, форма или Telegram/WhatsApp CTA", "Кастомные анимации, квизы и CRM поднимают бюджет"],
+        for: "Страница, оффер, заявка, базовая аналитика и запуск под рекламу или прямую ссылку",
+        features: ["100 000 ₸ - быстрый запуск по нашей структуре", "180 000 ₸+ - лендинг + оффер + заявка + аналитика", "Форма, Telegram или WhatsApp как точка входа"],
       },
       {
         name: "Бизнес-продукт",
@@ -137,8 +164,8 @@ const V115_PRICING_CARDS = {
         name: "Лендинг",
         price: "100 000 - 420 000 ₸",
         time: "2-8 күн",
-        for: "Офферді тез тексеру, өтінім жинау немесе жарнама кампаниясы",
-        features: ["100 000 ₸ — біздің құрылымды тез қабылдаса", "Адаптив, basic SEO, форма немесе Telegram/WhatsApp CTA", "Кастом анимация, квиз және CRM бюджетті өсіреді"],
+        for: "Бет, оффер, өтінім, базалық аналитика және жарнамаға не тікелей сілтемеге запуск",
+        features: ["100 000 ₸ - біздің құрылыммен тез запуск", "180 000 ₸+ - лендинг + оффер + өтінім + аналитика", "Форма, Telegram немесе WhatsApp кіру нүктесі ретінде"],
       },
       {
         name: "Бизнес-өнім",
@@ -166,8 +193,8 @@ const V115_PRICING_CARDS = {
         name: "Landing",
         price: "100,000 - 420,000 ₸",
         time: "2-8 days",
-        for: "Fast launch, offer test, lead capture or ad campaign",
-        features: ["100,000 ₸ works when our structure is accepted quickly", "Responsive build, basic SEO, form or Telegram/WhatsApp CTA", "Custom animation, quizzes and CRM raise the budget"],
+        for: "Page, offer, lead capture, basic analytics and launch for ads or a direct link",
+        features: ["100,000 ₸ for a fast launch with our structure", "180,000 ₸+ for landing + offer + lead capture + analytics", "Form, Telegram or WhatsApp as the entry point"],
       },
       {
         name: "Business product",
@@ -188,8 +215,8 @@ const V115_PRICING_CARDS = {
 } as const;
 
 const TECH_STRIP_ROWS = [
-  ["TypeScript", "JavaScript", "Python", "PHP", "Go", "Swift", "Kotlin", "SQL", "HTML", "CSS", "Java", "C#"],
-  ["React", "Next.js", "Node.js", "FastAPI", "Django", "Laravel", "React Native", "Expo", "PostgreSQL", "Redis", "Docker", "Cloudflare", "OpenAI API", "Telegram API", "WhatsApp API"],
+  ["Kaspi", "iiko", "1C", "WhatsApp", "Telegram", "Google Sheets", "Excel", "CRM", "Payments", "Analytics", "AI", "Cloudflare"],
+  ["React", "Next.js", "Node.js", "FastAPI", "PostgreSQL", "Render", "Docker", "OpenAI API", "Telegram API", "WhatsApp API", "Stripe", "Kaspi Pay"],
 ] as const;
 
 const CASE_PROOF: Record<string, { before: string; after: string; integrations: string[]; outcome: string }> = {
@@ -528,7 +555,7 @@ function HeroPipeline() {
             <p><span className="text-cyan-400">INFO</span> Yandex.Eda integration: ok</p>
             <p><span className="text-primary">❯</span> doscode/mmg-dashboard: aggregating sources</p>
             <p><span className="text-cyan-400">INFO</span> 5 data sources merged in 240ms</p>
-            <p><span className="text-orange-400">WARN</span> retry openai/embed (1/3) — recovered</p>
+            <p><span className="text-orange-400">WARN</span> retry openai/embed (1/3) - recovered</p>
             <p><span className="text-primary">❯</span> doscode/mmg: 1C ⇄ AgentMail sync ok</p>
             <p><span className="text-cyan-400">INFO</span> Latency p95: 180ms</p>
             <p><span className="text-primary">❯</span> doscode/landing-sprint: ship in 47:12:08</p>
@@ -997,6 +1024,48 @@ function Services() {
   );
 }
 
+function LaunchSystem() {
+  const v115 = useV115Copy();
+
+  return (
+    <section className="relative overflow-hidden border-y border-border/50 bg-background py-16 sm:py-24">
+      <div className="absolute left-1/2 top-0 h-72 w-[720px] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]" />
+      <div className="container relative z-10 mx-auto px-6">
+        <div className="mx-auto mb-10 max-w-4xl text-center sm:mb-14">
+          <div className="mb-4 inline-flex rounded-full border border-primary/25 bg-primary/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.24em] text-primary">
+            {v115.launchKicker}
+          </div>
+          <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">
+            {v115.launchTitle}
+          </h2>
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-xl">
+            {v115.launchSubtitle}
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {v115.launchCards.map((card) => (
+            <motion.div
+              key={card.chip}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45 }}
+              className="group rounded-3xl border border-border/60 bg-card/40 p-6 transition-colors hover:border-primary/50 hover:bg-primary/5"
+            >
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10 font-mono text-sm font-bold text-primary">
+                {card.chip}
+              </div>
+              <h3 className="font-display text-2xl font-bold tracking-tight">{card.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{card.text}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function TechStrip() {
   const v115 = useV115Copy();
 
@@ -1065,7 +1134,7 @@ function Cases() {
           <div className="absolute top-0 left-0 w-40 h-40 bg-primary/10 blur-[50px] rounded-full pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-40 h-40 bg-cyan-500/10 blur-[50px] rounded-full pointer-events-none" />
 
-          {/* Dotted virality connectors — desktop only */}
+          {/* Dotted virality connectors - desktop only */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-40 hidden md:block" preserveAspectRatio="none">
             <line x1="50%" y1="50%" x2="12%" y2="18%" stroke="hsl(var(--primary))" strokeWidth="1" strokeDasharray="2 4" />
             <line x1="50%" y1="50%" x2="88%" y2="22%" stroke="#22d3ee" strokeWidth="1" strokeDasharray="2 4" />
@@ -1124,7 +1193,7 @@ function Cases() {
             </div>
           </div>
 
-          {/* Floating viral metric badges — desktop only */}
+          {/* Floating viral metric badges - desktop only */}
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1183,7 +1252,7 @@ function Cases() {
           <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/15 blur-[60px] rounded-full pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-40 h-40 bg-primary/10 blur-[50px] rounded-full pointer-events-none" />
 
-          {/* Top row: phone + QR + desktop — stack on mobile */}
+          {/* Top row: phone + QR + desktop - stack on mobile */}
           <div className="flex-1 flex flex-col md:flex-row gap-2 items-stretch min-h-0 relative">
             <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-40 hidden md:block" preserveAspectRatio="none">
               <line x1="22%" y1="50%" x2="38%" y2="50%" stroke="#fb923c" strokeWidth="1" strokeDasharray="2 3" />
@@ -2999,6 +3068,7 @@ export default function Home() {
           <>
             <Hero />
             <FastLaunch />
+            <LaunchSystem />
             <TechStrip />
             <Services />
             <Cases />
