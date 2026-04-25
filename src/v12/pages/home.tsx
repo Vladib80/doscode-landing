@@ -1044,7 +1044,10 @@ type CaseDetails = {
 };
 
 function Cases() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = getV115Lang(i18n.language);
+  const restoPulseUrl = lang === "kk" ? "/kk/restopulse" : "/restopulse";
+  const whatsAppUrl = lang === "kk" ? "/kk/whatsapp" : "/whatsapp";
   const cases: Array<{
     title: string;
     metric: string;
@@ -1446,6 +1449,7 @@ function Cases() {
         </div>
       ),
       details: t("cases.restopulse.details", { returnObjects: true }) as CaseDetails,
+      url: restoPulseUrl,
     },
     {
       title: "MMG",
@@ -1753,6 +1757,7 @@ function Cases() {
         </div>
       ),
       details: t("cases.whatsapp.details", { returnObjects: true }) as CaseDetails,
+      url: whatsAppUrl,
     },
   ];
 
