@@ -2382,19 +2382,19 @@ const RESTOPULSE_COPY = {
     metricTwo: "iiko",
     metricTwoLabel: "данные ресторана",
     metricThree: "Telegram",
-    metricThreeLabel: "без нового dashboard",
-    sectionTitle: "Не еще один dashboard. Просто то, что владелец должен знать утром.",
-    sectionText: "RestoPulse сделан как операционный продукт DosCode: сначала конкретная боль, потом интерфейс, автоматизация и понятный sales-flow через Telegram bot.",
+    metricThreeLabel: "строго Telegram bot",
+    sectionTitle: "Не dashboard. Telegram bot, который сам присылает отчет.",
+    sectionText: "RestoPulse не требует заходить в отдельный кабинет. Владелец получает короткий Telegram-отчет каждое утро и сразу видит, что проверить сегодня.",
     cards: [
       ["Продажи и динамика", "Выручка, заказы, средний чек и сравнение с прошлой неделей без ручной проверки iiko."],
       ["Касса и риски", "Скидки, возвраты, отмены и странные изменения сразу попадают в блок внимания."],
       ["Команда и смены", "Какая смена сработала лучше, где просел чек и что нужно обсудить с управляющим."]
     ],
-    flowTitle: "Как работает заявка",
-    flow: ["Ресторан нажимает CTA", "Бот спрашивает iiko и число точек", "Мы отправляем пример отчета", "Если подходит, запускаем пилот"],
+    flowTitle: "Что будет в первом отчете",
+    flow: ["Продажи за вчера и сравнение с прошлой неделей", "Средний чек, заказы и динамика", "Скидки, возвраты, отмены и кассовые сигналы", "Что проверить сегодня, чтобы не терять деньги"],
     reportTitle: "RestoPulse report",
     reportText: "Вчера 1 842 000 ₸. Выше прошлой среды на 12%. Проверьте скидки после 21:00 и позиции с падением маржи.",
-    footerCta: "Хочу такой отчет"
+    footerCta: "Получить пример в Telegram"
   },
   kk: {
     badge: "DosCode өнімі / мейрамханалар / iiko",
@@ -2410,19 +2410,19 @@ const RESTOPULSE_COPY = {
     metricTwo: "iiko",
     metricTwoLabel: "мейрамхана деректері",
     metricThree: "Telegram",
-    metricThreeLabel: "жаңа dashboard қажет емес",
-    sectionTitle: "Тағы бір dashboard емес. Иесі таңертең білуі керек нәрсе.",
-    sectionText: "RestoPulse DosCode операциялық өнімі ретінде жасалды: алдымен нақты мәселе, кейін интерфейс, автоматтандыру және Telegram bot арқылы түсінікті sales-flow.",
+    metricThreeLabel: "тек Telegram bot",
+    sectionTitle: "Dashboard емес. Есепті өзі жіберетін Telegram bot.",
+    sectionText: "RestoPulse бөлек кабинетке кіруді талап етпейді. Иесі әр таң сайын қысқа Telegram есеп алып, бүгін нені тексеру керегін бірден көреді.",
     cards: [
       ["Сатылым және динамика", "Түсім, тапсырыс, орташа чек және өткен аптамен салыстыру iiko-ны қолмен тексермей келеді."],
       ["Касса және тәуекел", "Жеңілдіктер, қайтарымдар, бас тартулар және күмәнді өзгерістер бірден назар блогына түседі."],
       ["Команда және ауысым", "Қай ауысым жақсы жұмыс істеді, қай жерде чек төмендеді және басқарушымен нені талқылау керек."]
     ],
-    flowTitle: "Өтінім қалай жүреді",
-    flow: ["Мейрамхана CTA басады", "Бот iiko және нүкте санын сұрайды", "Біз есеп үлгісін жібереміз", "Сәйкес келсе, пилот қосамыз"],
+    flowTitle: "Бірінші есепте не болады",
+    flow: ["Кешегі сатылым және өткен аптамен салыстыру", "Орташа чек, тапсырыстар және динамика", "Жеңілдіктер, қайтарымдар, бас тартулар және касса сигналдары", "Ақша жоғалтпау үшін бүгін нені тексеру керек"],
     reportTitle: "RestoPulse есебі",
     reportText: "Кеше 1 842 000 ₸. Өткен сәрсенбіден 12% жоғары. 21:00-ден кейінгі жеңілдіктерді және маржасы төмендеген позицияларды тексеріңіз.",
-    footerCta: "Осындай есеп керек"
+    footerCta: "Telegram-да үлгі алу"
   },
   en: {
     badge: "DosCode product / restaurants / iiko",
@@ -2438,19 +2438,19 @@ const RESTOPULSE_COPY = {
     metricTwo: "iiko",
     metricTwoLabel: "restaurant data",
     metricThree: "Telegram",
-    metricThreeLabel: "no new dashboard",
-    sectionTitle: "Not another dashboard. Just what the owner needs every morning.",
-    sectionText: "RestoPulse follows the DosCode product pattern: clear pain, useful interface, automation, and a Telegram bot sales flow.",
+    metricThreeLabel: "strictly Telegram bot",
+    sectionTitle: "Not a dashboard. A Telegram bot that sends the report itself.",
+    sectionText: "RestoPulse does not ask the owner to open another portal. It sends a short Telegram report every morning with what needs attention today.",
     cards: [
       ["Sales and trend", "Revenue, orders, average check and week comparison without manual iiko checks."],
       ["Cash and risk", "Discounts, refunds, cancellations and suspicious changes move into an attention block."],
       ["Team and shifts", "Which shift worked better, where check dropped and what to discuss with the manager."]
     ],
-    flowTitle: "How the enquiry works",
-    flow: ["Restaurant clicks CTA", "Bot asks about iiko and locations", "We send a sample report", "If it fits, we launch a pilot"],
+    flowTitle: "What the first report shows",
+    flow: ["Yesterday's sales and week comparison", "Average check, orders and trend", "Discounts, refunds, cancellations and cash signals", "What to check today to stop money leaks"],
     reportTitle: "RestoPulse report",
     reportText: "Yesterday 1,842,000 ₸. Up 12% vs last Wednesday. Check discounts after 21:00 and items with margin drop.",
-    footerCta: "I want this report"
+    footerCta: "Get sample in Telegram"
   }
 } as const;
 
