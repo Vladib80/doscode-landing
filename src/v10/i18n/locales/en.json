@@ -185,6 +185,29 @@
         "stack": ["React", "React Native", "Node.js", "PostgreSQL", "iiko API", "Kaspi Pay"]
       }
     },
+    "restopulse": {
+      "metric": "iiko reports in Telegram",
+      "desc": "Telegram-first reporting for restaurants on iiko: daily owner briefs, sales, average check, categories, anomalies and AI recommendations without opening another dashboard.",
+      "details": {
+        "overview": "RestoPulse came from a real Chicago Pizza need: the owner needed a short daily Telegram brief, not another admin panel. The service pulls iiko data, builds an owner report and highlights what matters: sales, checks, categories, anomalies and today's actions.",
+        "capabilities": [
+          "Daily owner report in Telegram",
+          "Sales, orders, average check and period dynamics",
+          "Categories, dishes, delivery, pickup and dine-in in one report",
+          "AI recommendations on top of calculated numbers",
+          "Detail buttons directly inside Telegram",
+          "Report schedule and send-status control",
+          "Support for multiple restaurants and recipients"
+        ],
+        "outcomes": [
+          "The owner sees key numbers without opening iiko",
+          "Fewer manual manager reports",
+          "Faster detection of sales, delivery or average-check drops",
+          "Format can be adapted for restaurant groups using iiko"
+        ],
+        "stack": ["React", "Express", "PostgreSQL", "iiko API", "Telegram Bot API", "AI"]
+      }
+    },
     "mmg": {
       "metric": "Excel + WhatsApp → one system",
       "desc": "Internal platform for Medical Marketing Group: catalog, customer-tier pricing, tenders, 1C sync, FX risk and role-based access for the owner and managers.",

@@ -205,6 +205,12 @@ const CASE_PROOF: Record<string, { before: string; after: string; integrations: 
     integrations: ["Kaspi", "iiko", "Loyalty"],
     outcome: "прямые заказы + база",
   },
+  RestoPulse: {
+    before: "iiko и ручные проверки",
+    after: "Telegram-отчёты владельцу",
+    integrations: ["iiko", "Telegram", "AI"],
+    outcome: "ежедневный контроль ресторана",
+  },
   MMG: {
     before: "Excel + WhatsApp",
     after: "1C-connected dashboard",
@@ -1299,6 +1305,132 @@ function Cases() {
       ),
       details: t("cases.chicago.details", { returnObjects: true }) as CaseDetails,
       url: "https://chicagopizza.kz",
+    },
+    {
+      title: "RestoPulse",
+      metric: t("cases.restopulse.metric"),
+      desc: t("cases.restopulse.desc"),
+      visual: (
+        <div className="w-full h-full bg-[#0a0a0a] border border-border/50 rounded-xl p-3 shadow-inner relative overflow-hidden flex flex-col">
+          <div className="absolute -top-10 right-0 w-48 h-48 bg-primary/12 blur-[60px] rounded-full pointer-events-none" />
+          <div className="absolute -bottom-10 left-0 w-44 h-44 bg-cyan-500/12 blur-[60px] rounded-full pointer-events-none" />
+
+          <div className="relative z-10 flex items-center justify-between gap-2 border-b border-border/50 pb-2 mb-2">
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_rgba(132,204,22,0.7)]" />
+              <div className="min-w-0">
+                <div className="truncate text-[8px] sm:text-[9px] font-mono text-primary uppercase tracking-[0.22em]">RestoPulse</div>
+                <div className="truncate text-[8px] font-bold text-foreground sm:text-[9px]">iiko owner reports</div>
+              </div>
+            </div>
+            <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-1 text-[7px] font-mono text-primary">09:00 sent</span>
+          </div>
+
+          <div className="relative z-10 flex flex-1 min-h-0 gap-2">
+            <motion.div
+              initial={{ opacity: 0, x: -12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45 }}
+              className="w-[118px] sm:w-[138px] shrink-0 rounded-[22px] border border-border bg-[#0f1115] p-1.5 shadow-[0_0_34px_-12px_rgba(132,204,22,0.45)]"
+            >
+              <div className="flex h-full flex-col overflow-hidden rounded-[18px] bg-[#0a0a0a]">
+                <div className="flex items-center justify-between px-2 pt-1.5 pb-1 text-[6px] font-mono text-muted-foreground">
+                  <span>9:00</span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary/80" />
+                </div>
+                <div className="px-2 pb-2 flex-1 flex flex-col gap-1.5">
+                  <div className="rounded-lg border border-primary/30 bg-primary/10 p-1.5">
+                    <div className="text-[6px] font-mono uppercase tracking-widest text-primary">Daily report</div>
+                    <div className="mt-1 text-[10px] font-bold leading-tight text-foreground">Chicago Pizza</div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-1">
+                    <div className="rounded-md border border-border/40 bg-card/70 p-1">
+                      <div className="text-[5px] font-mono text-muted-foreground uppercase">Sales</div>
+                      <div className="text-[7px] font-mono font-bold text-primary">+12%</div>
+                    </div>
+                    <div className="rounded-md border border-border/40 bg-card/70 p-1">
+                      <div className="text-[5px] font-mono text-muted-foreground uppercase">Orders</div>
+                      <div className="text-[7px] font-mono font-bold text-foreground">247</div>
+                    </div>
+                    <div className="rounded-md border border-border/40 bg-card/70 p-1 col-span-2">
+                      <div className="text-[5px] font-mono text-muted-foreground uppercase">Avg check</div>
+                      <div className="text-[7px] font-mono font-bold text-cyan-400">₸ 5 420</div>
+                    </div>
+                  </div>
+
+                  <div className="mt-auto rounded-lg border border-cyan-400/25 bg-cyan-400/10 p-1.5">
+                    <div className="text-[6px] font-mono text-cyan-400">AI note</div>
+                    <div className="mt-1 space-y-1">
+                      <div className="h-1 w-full rounded bg-cyan-400/40" />
+                      <div className="h-1 w-3/4 rounded bg-cyan-400/25" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <div className="flex flex-1 min-w-0 flex-col gap-2">
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.12 }}
+                className="rounded-2xl border border-border/40 bg-card/70 p-2.5"
+              >
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <Database className="h-3.5 w-3.5 text-primary" />
+                    <span className="truncate text-[8px] font-mono uppercase tracking-[0.22em] text-primary">iiko sync</span>
+                  </div>
+                  <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                </div>
+                <div className="grid grid-cols-3 gap-1.5">
+                  {["sales", "checks", "items"].map((item, i) => (
+                    <div key={item} className="rounded-lg border border-border/40 bg-background/70 p-1.5">
+                      <div className="text-[5px] font-mono uppercase text-muted-foreground">{item}</div>
+                      <div className={`mt-1 h-1.5 rounded ${i === 0 ? "w-5/6 bg-primary" : i === 1 ? "w-2/3 bg-cyan-400" : "w-3/4 bg-orange-400"}`} />
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.22 }}
+                className="grid grid-cols-2 gap-2"
+              >
+                <div className="rounded-2xl border border-primary/25 bg-primary/10 p-2.5">
+                  <LineChart className="mb-2 h-4 w-4 text-primary" />
+                  <div className="text-[7px] font-mono text-muted-foreground uppercase">Revenue</div>
+                  <div className="mt-1 text-[12px] font-mono font-bold text-primary">₸ 1.2M</div>
+                </div>
+                <div className="rounded-2xl border border-cyan-400/25 bg-cyan-400/10 p-2.5">
+                  <Bot className="mb-2 h-4 w-4 text-cyan-400" />
+                  <div className="text-[7px] font-mono text-muted-foreground uppercase">Advice</div>
+                  <div className="mt-1 text-[8px] font-mono text-cyan-400">проверьте delivery</div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.32 }}
+                className="mt-auto flex items-center gap-2 rounded-2xl border border-border/40 bg-background/75 px-2.5 py-2"
+              >
+                <Clock className="h-3.5 w-3.5 text-primary" />
+                <span className="min-w-0 flex-1 truncate text-[8px] font-mono text-foreground">daily / weekly / month-to-date</span>
+                <Send className="h-3.5 w-3.5 text-primary" />
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      ),
+      details: t("cases.restopulse.details", { returnObjects: true }) as CaseDetails,
     },
     {
       title: "MMG",
