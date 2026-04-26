@@ -225,30 +225,33 @@
       }
     },
     "restopulse": {
-      "metric": "iiko reports in Telegram",
-      "desc": "Telegram-first reporting for restaurants on iiko: daily owner briefs, sales, average check, categories, anomalies and AI recommendations without opening another dashboard.",
+      "metric": "Telegram cockpit for iiko",
+      "desc": "Telegram-first reporting for restaurants on iiko: sales, payments, cancellations, suppliers, dishes, shifts, discounts, delivery and clear owner actions without opening another dashboard.",
       "details": {
-        "overview": "RestoPulse came from a real Chicago Pizza need: the owner needed a short daily Telegram brief, not another admin panel. The service pulls iiko data, builds an owner report and highlights what matters: sales, checks, categories, anomalies and today's actions.",
+        "overview": "RestoPulse came from a real Chicago Pizza need: the owner needed a short daily Telegram brief, not another admin panel. The service pulls iiko data and builds an owner report: sales, payments, cancellations, suppliers, shifts, dishes, discounts, delivery, comparisons and actions for today.",
         "capabilities": [
-          "Daily owner report in Telegram",
-          "Sales, orders, average check and period dynamics",
-          "Categories, dishes, delivery, pickup and dine-in in one report",
-          "AI recommendations on top of calculated numbers",
-          "Detail buttons directly inside Telegram",
-          "Report schedule and send-status control",
-          "Support for multiple restaurants and recipients"
+          "Daily, weekly, monthly, MTD and YTD owner reports in Telegram",
+          "Sales, orders, average check, channels and every payment type with totals",
+          "Cancelled orders with possible nearby paid orders of similar time and amount",
+          "Suppliers: invoices, payments, services, top purchased goods, average prices and price jumps",
+          "Dishes: top 10 and weak 10 items by revenue and quantity",
+          "Staff and shifts: who clocked in, who is on shift, who finished and when they worked",
+          "Discounts, delivery, demand hours, locations and aggregator commission",
+          "Detail buttons directly inside Telegram: channels, payments, cancellations, suppliers, dishes, shifts, discounts, delivery, hours, locations",
+          "Owner advice with evidence, action and a metric to watch tomorrow"
         ],
         "outcomes": [
           "The owner sees key numbers without opening iiko",
-          "Fewer manual manager reports",
-          "Faster detection of sales, delivery or average-check drops",
+          "Fewer manual manager reports and fewer blind spots across payments, cancellations and purchases",
+          "Faster detection of sales drops, delivery issues, suspicious cancellations or supplier price jumps",
           "Format can be adapted for restaurant groups using iiko"
         ],
         "stack": [
           "React",
           "Express",
           "PostgreSQL",
-          "iiko API",
+          "iiko Resto API",
+          "iiko TRANSACTIONS",
           "Telegram Bot API",
           "AI"
         ]

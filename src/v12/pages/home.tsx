@@ -274,10 +274,10 @@ const CASE_PROOF: Record<string, { before: string; after: string; integrations: 
     outcome: "прямые заказы + база",
   },
   RestoPulse: {
-    before: "iiko и ручные проверки",
-    after: "Telegram-отчёты владельцу",
-    integrations: ["iiko", "Telegram", "AI"],
-    outcome: "ежедневный контроль ресторана",
+    before: "iiko, поставщики и ручные проверки",
+    after: "Telegram-кокпит владельцу",
+    integrations: ["iiko", "Telegram", "AI", "Suppliers"],
+    outcome: "контроль продаж, отмен и закупок",
   },
   MMG: {
     before: "Excel + WhatsApp",
@@ -1448,7 +1448,7 @@ function Cases() {
               <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_rgba(132,204,22,0.7)]" />
               <div className="min-w-0">
                 <div className="truncate text-[8px] sm:text-[9px] font-mono text-primary uppercase tracking-[0.22em]">RestoPulse</div>
-                <div className="truncate text-[8px] font-bold text-foreground sm:text-[9px]">iiko owner reports</div>
+                <div className="truncate text-[8px] font-bold text-foreground sm:text-[9px]">iiko owner cockpit</div>
               </div>
             </div>
             <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-1 text-[7px] font-mono text-primary">09:00 sent</span>
@@ -1539,7 +1539,7 @@ function Cases() {
                 <div className="rounded-2xl border border-cyan-400/25 bg-cyan-400/10 p-2.5">
                   <Bot className="mb-2 h-4 w-4 text-cyan-400" />
                   <div className="text-[7px] font-mono text-muted-foreground uppercase">Advice</div>
-                  <div className="mt-1 text-[8px] font-mono text-cyan-400">проверьте delivery</div>
+                  <div className="mt-1 text-[8px] font-mono text-cyan-400">цены + отмены</div>
                 </div>
               </motion.div>
 
@@ -1551,7 +1551,7 @@ function Cases() {
                 className="mt-auto flex items-center gap-2 rounded-2xl border border-border/40 bg-background/75 px-2.5 py-2"
               >
                 <Clock className="h-3.5 w-3.5 text-primary" />
-                <span className="min-w-0 flex-1 truncate text-[8px] font-mono text-foreground">daily / weekly / month-to-date</span>
+                <span className="min-w-0 flex-1 truncate text-[8px] font-mono text-foreground">payments / cancellations / suppliers</span>
                 <Send className="h-3.5 w-3.5 text-primary" />
               </motion.div>
             </div>
@@ -2492,7 +2492,7 @@ const RESTOPULSE_COPY = {
     badge: "продукт DosCode / Telegram bot / iiko",
     title: "RestoPulse",
     accent: "Автоматические отчеты ресторана в Telegram.",
-    subtitle: "RestoPulse подключается к iiko и сам отправляет владельцу отчеты в Telegram: каждый день, каждую неделю, каждый месяц и с начала года. Продажи, средний чек, смены, персонал, лучшие и слабые блюда, скидки, доставка, точки и конкретные советы, что делать дальше.",
+    subtitle: "RestoPulse подключается к iiko и сам отправляет владельцу отчеты в Telegram: продажи, оплаты, смены, персонал, блюда, скидки, доставка, отмены, поставщики и конкретные советы, что проверить сегодня.",
     primary: "Получить пример Telegram-отчета",
     secondary: "Обсудить подключение",
     navBack: "Все продукты DosCode",
@@ -2501,29 +2501,29 @@ const RESTOPULSE_COPY = {
     metricOneLabel: "утренний отчет каждый день",
     metricTwo: "Week / Month / YTD",
     metricTwoLabel: "неделя, месяц, год",
-    metricThree: "🤖 Совет",
-    metricThreeLabel: "конкретные действия владельцу",
+    metricThree: "📦 Поставщики",
+    metricThreeLabel: "закупки, цены и оплаты",
     sectionTitle: "RestoPulse показывает владельцу, что происходит в ресторане, прямо в Telegram.",
     sectionText: "Короткий итог приходит сам. Детали открываются кнопками: каналы продаж, часы спроса, скидки, доставка, точки, блюда, смена и совет владельцу.",
     cards: [
       ["Автоотчеты по периодам", "За вчера, неделя, месяц, MTD и YTD. Можно быстро посмотреть годовую картину и сравнение с прошлым периодом."],
-      ["Продажи и каналы", "Выручка, заказы, средний чек, зал, доставка, агрегаторы, самовывоз и доля каждого канала."],
+      ["Продажи, каналы и оплаты", "Выручка, заказы, средний чек, зал, доставка, агрегаторы, самовывоз и каждый тип оплаты с суммой."],
       ["Блюда: лучшие и слабые", "Топ позиции по выручке и количеству, слабые позиции меню и товары, которые стоит проверить."],
-      ["Персонал и смены", "Кто отмечался за день, кто сейчас на смене, кто завершил смену и когда работал."],
+      ["Персонал, смены и отмены", "Кто работал, кто завершил смену, сколько отменено и есть ли похожие оплаченные заказы рядом по времени и сумме."],
       ["Скидки, доставка, часы", "Скидки и промо, доставка, опоздания, часы спроса и точки, где возникает просадка."],
-      ["Совет владельцу", "Кнопка 🤖 Совет дает конкретное действие: что проверить, где теряются деньги и какую метрику смотреть завтра."]
+      ["Поставщики и закупки", "Накладные, оплаты поставщикам, услуги, топ товаров, скачки цен и разрывы между оплатами и накладными."]
     ],
     flowTitle: "Кнопки внутри Telegram bot",
-    flow: ["📅 За вчера, 📆 неделя, 🗓 месяц, 📈 MTD, 📊 YTD", "📊 Каналы, 🏬 точки, ⏰ часы, 🍕 блюда", "🎯 скидки, 🚚 доставка, 👥 смена", "🤖 Совет: конкретные рекомендации для владельца"],
+    flow: ["📅 За вчера, 📆 неделя, 🗓 месяц, 📈 MTD, 📊 YTD", "📊 Каналы, 💳 оплаты, 🏬 точки, ⏰ часы, 🍕 блюда", "🎯 скидки, 🚚 доставка, 👥 смена, 🚫 отмены", "📦 Поставщики и 🤖 Совет: закупки, цены, действия владельцу"],
     reportTitle: "RestoPulse report",
-    reportText: "Вчера 1 842 000 ₸. ▲12% к прошлой среде. Топ блюдо: Pepperoni. Слабые позиции: 3. Совет: проверьте скидки после 21:00 и усилите прямую доставку.",
+    reportText: "Вчера 1 842 000 ₸. ▲12% к прошлой среде. Оплаты: Halyk, Kaspi, агрегаторы. Отмены: 2 для проверки. Поставщики: цена фри +18%. Совет: проверьте скидки и закупки.",
     footerCta: "Получить пример в Telegram"
   },
   kk: {
     badge: "DosCode өнімі / Telegram bot / iiko",
     title: "RestoPulse",
     accent: "Мейрамхана есептері Telegram-да автоматты түрде.",
-    subtitle: "RestoPulse iiko-ға қосылып, иесіне Telegram арқылы есептерді өзі жібереді: күн сайын, апта сайын, ай сайын және жыл басынан бері. Сатылым, орташа чек, ауысым, персонал, ең жақсы және әлсіз тағамдар, жеңілдіктер, жеткізу, нүктелер және нақты не істеу керегі.",
+    subtitle: "RestoPulse iiko-ға қосылып, иесіне Telegram арқылы есептерді өзі жібереді: сатылым, төлемдер, ауысым, персонал, тағамдар, жеңілдіктер, жеткізу, отменалар, поставщиктер және бүгін нені тексеру керегі.",
     primary: "Telegram есеп үлгісін алу",
     secondary: "Қосуды талқылау",
     navBack: "DosCode өнімдері",
@@ -2532,29 +2532,29 @@ const RESTOPULSE_COPY = {
     metricOneLabel: "күнделікті таңғы есеп",
     metricTwo: "Week / Month / YTD",
     metricTwoLabel: "апта, ай, жыл",
-    metricThree: "🤖 Кеңес",
-    metricThreeLabel: "иесіне нақты әрекет",
+    metricThree: "📦 Поставщиктер",
+    metricThreeLabel: "закуп, баға және төлем",
     sectionTitle: "RestoPulse мейрамханада не болып жатқанын иесіне Telegram ішінде көрсетеді.",
     sectionText: "Қысқа қорытынды өзі келеді. Детальдар кнопкалар арқылы ашылады: сату каналдары, сұраныс сағаттары, жеңілдіктер, жеткізу, нүктелер, тағамдар, ауысым және иесіне кеңес.",
     cards: [
       ["Период бойынша автоесеп", "Кеше, апта, ай, MTD және YTD. Жыл басынан бергі жағдайды және өткен кезеңмен салыстыруды тез көруге болады."],
-      ["Сатылым және каналдар", "Түсім, тапсырыс, орташа чек, зал, жеткізу, агрегаторлар, алып кету және әр каналдың үлесі."],
+      ["Сатылым, каналдар және төлемдер", "Түсім, тапсырыс, орташа чек, зал, жеткізу, агрегаторлар, алып кету және әр төлем түрінің сомасы."],
       ["Тағамдар: үздік және әлсіз", "Түсім мен сан бойынша топ позициялар, әлсіз мәзір позициялары және тексеру керек тауарлар."],
-      ["Персонал және ауысым", "Кім жұмысқа белгіленді, қазір кім сменада, кім сменаны аяқтады және қашан жұмыс істеді."],
+      ["Персонал, ауысым және отменалар", "Кім жұмыс істеді, кім сменаны аяқтады, қанша заказ отмена болды және уақыт/сома бойынша ұқсас төленген заказ бар ма."],
       ["Жеңілдіктер, жеткізу, сағаттар", "Промо мен жеңілдіктер, жеткізу, кешігулер, сұраныс сағаттары және қай нүктеде төмендеу бар."],
-      ["Иесіне кеңес", "🤖 Кеңес кнопкасы нақты әрекет береді: нені тексеру, ақша қай жерде жоғалуы мүмкін және ертең қай метриканы қарау."]
+      ["Поставщиктер және закуп", "Накладной, поставщик төлемдері, қызметтер, топ тауарлар, баға секіруі және төлем/накладной айырмасы."]
     ],
     flowTitle: "Telegram bot ішіндегі кнопкалар",
-    flow: ["📅 Кеше, 📆 апта, 🗓 ай, 📈 MTD, 📊 YTD", "📊 Каналдар, 🏬 нүктелер, ⏰ сағаттар, 🍕 тағамдар", "🎯 жеңілдіктер, 🚚 жеткізу, 👥 ауысым", "🤖 Кеңес: иесіне нақты ұсыныстар"],
+    flow: ["📅 Кеше, 📆 апта, 🗓 ай, 📈 MTD, 📊 YTD", "📊 Каналдар, 💳 төлемдер, 🏬 нүктелер, ⏰ сағаттар, 🍕 тағамдар", "🎯 жеңілдіктер, 🚚 жеткізу, 👥 ауысым, 🚫 отменалар", "📦 Поставщиктер және 🤖 Кеңес: закуп, баға, иесіне әрекет"],
     reportTitle: "RestoPulse есебі",
-    reportText: "Кеше 1 842 000 ₸. ▲12% өткен сәрсенбіге. Топ тағам: Pepperoni. Әлсіз позициялар: 3. Кеңес: 21:00-ден кейінгі жеңілдіктерді тексеріп, тікелей жеткізуді күшейтіңіз.",
+    reportText: "Кеше 1 842 000 ₸. ▲12% өткен сәрсенбіге. Төлемдер: Halyk, Kaspi, агрегаторлар. Отменалар: 2 тексеруге. Поставщиктер: фри бағасы +18%. Кеңес: скидка мен закупты тексеріңіз.",
     footerCta: "Telegram-да үлгі алу"
   },
   en: {
     badge: "DosCode product / Telegram bot / iiko",
     title: "RestoPulse",
     accent: "Automated restaurant reports in Telegram.",
-    subtitle: "RestoPulse connects to iiko and sends restaurant reports in Telegram: daily, weekly, monthly and year-to-date. Sales, average check, shifts, staff, best and worst menu items, discounts, delivery, locations and actionable owner advice.",
+    subtitle: "RestoPulse connects to iiko and sends restaurant reports in Telegram: sales, payments, shifts, staff, dishes, discounts, delivery, cancellations, suppliers and clear owner actions.",
     primary: "Get Telegram report sample",
     secondary: "Discuss setup",
     navBack: "All DosCode products",
@@ -2563,22 +2563,22 @@ const RESTOPULSE_COPY = {
     metricOneLabel: "morning report every day",
     metricTwo: "Week / Month / YTD",
     metricTwoLabel: "week, month, year",
-    metricThree: "🤖 Advice",
-    metricThreeLabel: "clear owner actions",
+    metricThree: "📦 Suppliers",
+    metricThreeLabel: "purchases, prices, payments",
     sectionTitle: "RestoPulse shows the owner what is happening in the restaurant, inside Telegram.",
     sectionText: "The short summary arrives automatically. Details open with buttons: sales channels, demand hours, discounts, delivery, locations, dishes, shift and owner advice.",
     cards: [
       ["Automated period reports", "Yesterday, week, month, MTD and YTD. Owners can quickly see the year-to-date picture and compare periods."],
-      ["Sales and channels", "Revenue, orders, average check, dine-in, delivery, aggregators, pickup and each channel's share."],
+      ["Sales, channels and payments", "Revenue, orders, average check, dine-in, delivery, aggregators, pickup and every payment type with totals."],
       ["Best and worst items", "Top menu items by revenue and quantity, weak positions and items worth checking."],
-      ["Staff and shifts", "Who clocked in, who is on shift now, who finished and when they worked."],
+      ["Staff, shifts and cancellations", "Who worked, who finished the shift, cancelled orders and possible nearby paid orders with similar time and amount."],
       ["Discounts, delivery, hours", "Promos and discounts, delivery delays, demand hours and locations with drops."],
-      ["Owner advice", "The 🤖 Advice button gives a concrete next action: what to check, where money may be leaking and which metric to watch." ]
+      ["Suppliers and purchases", "Invoices, supplier payments, services, top purchased goods, price jumps and payment/invoice gaps." ]
     ],
     flowTitle: "Telegram bot buttons",
-    flow: ["📅 yesterday, 📆 week, 🗓 month, 📈 MTD, 📊 YTD", "📊 channels, 🏬 locations, ⏰ hours, 🍕 dishes", "🎯 discounts, 🚚 delivery, 👥 shift", "🤖 Advice: actionable recommendations for the owner"],
+    flow: ["📅 yesterday, 📆 week, 🗓 month, 📈 MTD, 📊 YTD", "📊 channels, 💳 payments, 🏬 locations, ⏰ hours, 🍕 dishes", "🎯 discounts, 🚚 delivery, 👥 shift, 🚫 cancellations", "📦 Suppliers and 🤖 Advice: purchases, prices, owner actions"],
     reportTitle: "RestoPulse report",
-    reportText: "Yesterday 1,842,000 ₸. ▲12% vs last Wednesday. Top item: Pepperoni. Weak items: 3. Advice: check discounts after 21:00 and strengthen direct delivery.",
+    reportText: "Yesterday 1,842,000 ₸. ▲12% vs last Wednesday. Payments: Halyk, Kaspi, aggregators. Cancellations: 2 to review. Suppliers: fries price +18%. Advice: check discounts and purchases.",
     footerCta: "Get sample in Telegram"
   }
 } as const;
@@ -2608,7 +2608,7 @@ function RestoPulseMockup({ copy }: { copy: typeof RESTOPULSE_COPY.ru }) {
             ))}
           </div>
           <div className="grid grid-cols-2 gap-2 pt-1">
-            {["📊 Каналы", "🤖 Совет", "🎯 Скидки", "🚚 Доставка", "⏰ Часы", "🍕 Блюда", "👥 Смена", "📊 YTD"].map((button) => (
+            {["📊 Каналы", "💳 Оплаты", "🚫 Отмены", "📦 Поставщики", "🤖 Совет", "🎯 Скидки", "🚚 Доставка", "🍕 Блюда"].map((button) => (
               <div key={button} className="rounded-xl border border-border/50 bg-background/70 px-2 py-2 text-center font-mono text-[11px] text-foreground/80">
                 {button}
               </div>
@@ -2633,42 +2633,42 @@ function RestoPulsePage() {
         subtitle: "RestoPulse мейрамхана иесіне күнді 30 секундта түсінуге көмектеседі. Сандар ғана емес, қай жерде ақша, уақыт немесе бақылау жоғалып жатқанын көрсетеді.",
         beforeTitle: "RestoPulse-қа дейін",
         afterTitle: "RestoPulse-пен",
-        before: ["iiko-ға кіріп, бірнеше есепті қолмен қарау керек", "Әлсіз тағамдар, скидкалар және жеткізу мәселелері кеш байқалады", "Менеджердің қысқа түсіндірмесіне сенуге тура келеді", "Апта, ай, жыл басы бөлек қаралады"],
-        after: ["Есеп Telegram-ға өзі келеді", "Сатылым, орташа чек, смена, тағамдар және скидкалар бір жерде", "🤖 Кеңес нақты не тексеру керегін айтады", "Кеше, апта, ай, MTD және YTD бір bot ішінде"]
+        before: ["iiko-ға кіріп, бірнеше есепті қолмен қарау керек", "Төлемдер, отменалар және поставщиктер бөлек тексеріледі", "Менеджердің қысқа түсіндірмесіне сенуге тура келеді", "Апта, ай, жыл басы бөлек қаралады"],
+        after: ["Есеп Telegram-ға өзі келеді", "Сатылым, төлемдер, ауысым, отменалар және поставщиктер бір жерде", "🤖 Кеңес нақты не тексеру керегін айтады", "Кеше, апта, ай, MTD және YTD бір bot ішінде"]
       }
     : {
         title: "Если утром вы не открыли iiko, вы уже можете узнать проблему слишком поздно.",
         subtitle: "RestoPulse помогает владельцу понять день за 30 секунд. Не просто цифры, а где ресторан теряет деньги, время или контроль.",
         beforeTitle: "До RestoPulse",
         afterTitle: "С RestoPulse",
-        before: ["Нужно заходить в iiko и вручную искать нужные отчеты", "Слабые блюда, скидки и проблемы доставки всплывают поздно", "Приходится верить короткому пересказу управляющего", "Неделя, месяц и год смотрятся отдельно"],
-        after: ["Отчет сам приходит в Telegram", "Продажи, чек, смена, блюда и скидки в одном месте", "🤖 Совет говорит, что проверить сегодня", "Вчера, неделя, месяц, MTD и YTD в одном bot"]
+        before: ["Нужно заходить в iiko и вручную искать нужные отчеты", "Оплаты, отмены и поставщики проверяются отдельно", "Приходится верить короткому пересказу управляющего", "Неделя, месяц и год смотрятся отдельно"],
+        after: ["Отчет сам приходит в Telegram", "Продажи, оплаты, смена, отмены и поставщики в одном месте", "🤖 Совет говорит, что проверить сегодня", "Вчера, неделя, месяц, MTD и YTD в одном bot"]
       };
   const reportBlocks = isKk
     ? [
-        ["Күнделікті", "Кешегі сатылым, тапсырыс, орташа чек, ауысым, топ тағам және не тексеру керек."],
-        ["Апталық", "Апта динамикасы, каналдар, сұраныс сағаттары, жеткізу және слабый жерлер."],
-        ["Айлық", "Ай қорытындысы, жоспар темпі, MTD және ай соңына дейін керек күндік сатылым."],
-        ["YTD", "Жыл басынан бергі нәтиже және өткен жылмен салыстыру. Стратегиялық бақылау үшін."]
+        ["Күнделікті", "Кешегі сатылым, тапсырыс, орташа чек, ауысым, төлемдер, отменалар және не тексеру керек."],
+        ["Апталық", "Апта динамикасы, каналдар, сұраныс сағаттары, жеткізу, поставщиктер және әлсіз жерлер."],
+        ["Айлық", "Ай қорытындысы, жоспар темпі, MTD, закуп, поставщик төлемдері және ай соңына дейін керек күндік сатылым."],
+        ["YTD", "Жыл басынан бергі нәтиже, өткен жылмен салыстыру және сатылым/закуп бойынша стратегиялық бақылау."]
       ]
     : [
-        ["Ежедневный", "Продажи за вчера, заказы, средний чек, смена, топ блюдо и что проверить сегодня."],
-        ["Еженедельный", "Динамика недели, каналы, часы спроса, доставка и слабые места."],
-        ["Ежемесячный", "Итог месяца, темп к плану, MTD и сколько нужно в день до конца месяца."],
-        ["YTD", "С начала года и сравнение с прошлым годом. Для стратегического контроля."]
+        ["Ежедневный", "Продажи за вчера, заказы, средний чек, смена, оплаты, отмены и что проверить сегодня."],
+        ["Еженедельный", "Динамика недели, каналы, часы спроса, доставка, поставщики и слабые места."],
+        ["Ежемесячный", "Итог месяца, темп к плану, MTD, закупки, оплаты поставщикам и сколько нужно в день до конца месяца."],
+        ["YTD", "С начала года, сравнение с прошлым годом и стратегический контроль по продажам и закупкам."]
       ];
   const advice = isKk
     ? {
         title: "Совет тек әдемі мәтін емес. Ол әрекет береді.",
-        evidence: "Агрегаторлар түсімнің 38% алды, скидкалар 21:00-ден кейін өсті, орташа чек кешкі уақытта төмендеді.",
-        action: "Бүгін кешкі сменада прямой delivery промокодын қосып, 21:00-ден кейінгі қолмен скидкаларды тексеріңіз.",
-        watch: "Ертең қараңыз: прямой delivery үлесі, орташа чек, скидка сомасы."
+        evidence: "Агрегаторлар түсімнің 38% алды, отменаларда тексеретін 5 ұқсас заказ бар, фри бағасы поставщикте 18% өсті.",
+        action: "Бүгін отмена тарихын, қолмен скидкаларды және фри бойынша соңғы накладнойды тексеріңіз. Агрегатор заказдарына прямой заказ QR қосыңыз.",
+        watch: "Ертең қараңыз: прямой delivery үлесі, отменалар, скидкалар және негізгі закуп бағалары."
       }
     : {
         title: "Совет это не красивый текст. Это действие.",
-        evidence: "Агрегаторы забрали 38% выручки, скидки выросли после 21:00, средний чек просел вечером.",
-        action: "Сегодня на вечерней смене включите промокод на прямую доставку и проверьте ручные скидки после 21:00.",
-        watch: "Завтра смотрите: доля прямой доставки, средний чек, сумма скидок."
+        evidence: "Агрегаторы забрали 38% выручки, отмены дали 5 совпадений для проверки, цена фри у поставщика выросла на 18%.",
+        action: "Сегодня проверьте историю отмен, ручные скидки и последнюю накладную по фри. Для агрегаторов добавьте QR на прямой заказ.",
+        watch: "Завтра смотрите: доля прямой доставки, отмены, скидки и цены ключевых закупок."
       };
   const faq = isKk
     ? [
@@ -2676,16 +2676,20 @@ function RestoPulsePage() {
         ["Қандай периодтар бар?", "Кеше, апта, ай, MTD және YTD."],
         ["Персонал бойынша не көрсетеді?", "Кім сменада болды, кім қазір жұмыс істеп тұр, кім сменаны аяқтады және уақыттары."],
         ["Тағамдар бойынша не бар?", "Топ 10 және әлсіз 10 позиция. Түсім және саны бойынша."],
+        ["Поставщиктер бойынша не бар?", "Накладной, төлемдер, қызметтер, топ закуп тауарлары, орташа баға және баға өзгерісі."],
+        ["Отменалар бойынша не бар?", "Отмена заказдар және уақыт/сома бойынша ұқсас төленген заказдар. Бұл тексеру сигналы, айыптау емес."],
         ["Қосу үшін не керек?", "iiko деректеріне қол жеткізу және есеп алатын Telegram chat."],
-        ["Кеңес қайдан шығады?", "Bot сатылым, каналдар, скидкалар, тағамдар және салыстырулар бойынша нақты сигналдарды қарайды."]
+        ["Кеңес қайдан шығады?", "Bot сатылым, төлемдер, каналдар, скидкалар, тағамдар, отменалар, поставщиктер және салыстырулар бойынша сигналдарды қарайды."]
       ]
     : [
         ["Это dashboard?", "Нет. Это Telegram bot. Отчеты и детали приходят прямо в Telegram."],
         ["Какие периоды есть?", "За вчера, неделя, месяц, MTD и YTD."],
         ["Что показывает по персоналу?", "Кто был на смене, кто сейчас работает, кто завершил смену и время работы."],
         ["Что показывает по блюдам?", "Топ 10 и слабые 10 позиций по выручке и количеству."],
+        ["Что есть по поставщикам?", "Накладные, оплаты, услуги, топ закупленных товаров, средняя цена и скачки цен."],
+        ["Что есть по отменам?", "Отмененные заказы и возможные похожие оплаченные заказы рядом по времени и сумме. Это сигнал для проверки, не обвинение."],
         ["Что нужно для подключения?", "Доступ к данным iiko и Telegram chat, куда отправлять отчеты."],
-        ["Откуда берется совет?", "Bot смотрит продажи, каналы, скидки, блюда и сравнения, затем дает конкретное действие владельцу."]
+        ["Откуда берется совет?", "Bot смотрит продажи, оплаты, каналы, скидки, блюда, отмены, поставщиков и сравнения, затем дает конкретное действие владельцу."]
       ];
 
   return (
