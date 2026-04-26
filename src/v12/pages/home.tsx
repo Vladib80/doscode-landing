@@ -9,8 +9,8 @@ import pricingModel from "../../../docs/pricing-model.json";
 
 const TELEGRAM_URL = "https://t.me/doscode_bot";
 
-const GOOGLE_ADS_ID = import.meta.env.VITE_GOOGLE_ADS_ID || "";
-const GOOGLE_ADS_TELEGRAM_CLICK_LABEL = import.meta.env.VITE_GOOGLE_ADS_TELEGRAM_CLICK_LABEL || "";
+const GOOGLE_ADS_ID = import.meta.env.VITE_GOOGLE_ADS_ID || "AW-18119849813";
+const GOOGLE_ADS_TELEGRAM_CLICK_LABEL = import.meta.env.VITE_GOOGLE_ADS_TELEGRAM_CLICK_LABEL || "Dh6ICKXy4KIcENXum8BD";
 
 declare global {
   interface Window {
