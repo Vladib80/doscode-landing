@@ -193,7 +193,14 @@ ${renderStructuredData(config)}
   </head>
   <body>
     <div id="root"></div>
-    <noscript>Please enable JavaScript to view this site.</noscript>
+    <noscript>
+      <main style="max-width: 860px; margin: 40px auto; padding: 24px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6;">
+        <h1>DosCode - сайты, лендинги, MVP и автоматизация для бизнеса в Казахстане</h1>
+        <p>DosCode запускает рабочий путь от предложения до заявки: сайт, форма, Telegram или WhatsApp, оплата, аналитика, бот, дашборд или MVP.</p>
+        <p>Услуги: лендинги и сайты, интернет-магазины, нативные приложения, бизнес-дашборды, MVP, Telegram-боты, WhatsApp-сценарии и AI-автоматизация.</p>
+        <p>Контакты: <a href="https://t.me/doscode_bot">Telegram</a> · <a href="mailto:hello@doscode.kz">hello@doscode.kz</a> · <a href="/contacts/">контактная информация</a> · <a href="/privacy/">политика конфиденциальности</a> · <a href="/terms/">условия работы</a>.</p>
+      </main>
+    </noscript>
     <script type="module" src="${landingEntry}"></script>
   </body>
 </html>
@@ -219,7 +226,10 @@ function buildSitemap(lastmod) {
     { loc: `${siteUrl}/restopulse`, alternates: restopulseAlternateLinks, priority: '0.9' },
     { loc: `${siteUrl}/kk/restopulse`, alternates: restopulseAlternateLinks, priority: '0.9' },
     { loc: `${siteUrl}/whatsapp`, alternates: whatsappAlternateLinks, priority: '0.9' },
-    { loc: `${siteUrl}/kk/whatsapp`, alternates: whatsappAlternateLinks, priority: '0.9' }
+    { loc: `${siteUrl}/kk/whatsapp`, alternates: whatsappAlternateLinks, priority: '0.9' },
+    { loc: `${siteUrl}/contacts/`, alternates: [{ hreflang: 'ru-KZ', href: `${siteUrl}/contacts/` }], priority: '0.7' },
+    { loc: `${siteUrl}/privacy/`, alternates: [{ hreflang: 'ru-KZ', href: `${siteUrl}/privacy/` }], priority: '0.5' },
+    { loc: `${siteUrl}/terms/`, alternates: [{ hreflang: 'ru-KZ', href: `${siteUrl}/terms/` }], priority: '0.5' }
   ];
 
   const body = urls

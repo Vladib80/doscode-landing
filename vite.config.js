@@ -18,6 +18,9 @@ const rollupInputs = {
   restopulseKk: 'kk/restopulse/index.html',
   whatsapp: 'whatsapp/index.html',
   whatsappKk: 'kk/whatsapp/index.html',
+  contacts: 'contacts/index.html',
+  privacy: 'privacy/index.html',
+  terms: 'terms/index.html',
 };
 
 if (fs.existsSync('duck-inspired.html')) {

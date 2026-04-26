@@ -3042,9 +3042,12 @@ function Footer() {
           <span className="font-mono">© 2026</span>
         </div>
         <div className="font-mono">{t("footer.city")}</div>
-        <div className="flex items-center gap-6 font-mono">
+        <div className="flex flex-wrap items-center justify-center gap-4 font-mono md:justify-end">
           <a href={TELEGRAM_URL} className="hover:text-primary transition-colors">{t("footer.telegram")}</a>
           <a href="mailto:hello@doscode.kz" className="hover:text-primary transition-colors">{t("footer.email")}</a>
+          <a href="/contacts/" className="hover:text-primary transition-colors">Контакты</a>
+          <a href="/privacy/" className="hover:text-primary transition-colors">Privacy</a>
+          <a href="/terms/" className="hover:text-primary transition-colors">Terms</a>
         </div>
       </div>
     </footer>
