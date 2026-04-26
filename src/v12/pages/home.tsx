@@ -8,6 +8,8 @@ import { applyV10Theme, getV10ThemeFromRoot, type V10Theme } from "../../v10/the
 import pricingModel from "../../../docs/pricing-model.json";
 
 const TELEGRAM_URL = "https://t.me/doscode_bot";
+const RESTOPULSE_DEMO_URL = "https://t.me/doscode_bot?start=restopulse_demo";
+const RESTOPULSE_FIT_URL = "https://t.me/doscode_bot?start=restopulse_fit";
 
 const GOOGLE_ADS_ID = import.meta.env.VITE_GOOGLE_ADS_ID || "AW-18119849813";
 const GOOGLE_ADS_TELEGRAM_CLICK_LABEL = import.meta.env.VITE_GOOGLE_ADS_TELEGRAM_CLICK_LABEL || "Dh6ICKXy4KIcENXum8BD";
@@ -1165,6 +1167,7 @@ function Cases() {
     visual: React.ReactNode;
     details: CaseDetails;
     url?: string;
+    demoUrl?: string;
   }> = [
     {
       title: "DosPass",
@@ -1560,6 +1563,7 @@ function Cases() {
       ),
       details: t("cases.restopulse.details", { returnObjects: true }) as CaseDetails,
       url: restoPulseUrl,
+      demoUrl: RESTOPULSE_DEMO_URL,
     },
     {
       title: "MMG",
@@ -1935,6 +1939,21 @@ function Cases() {
                       >
                         <span>{t("cases.openSite")}</span>
                         <ArrowRight className="w-4 h-4" />
+                      </a>
+                    )}
+                    {c.demoUrl && (
+                      <a
+                        href={c.demoUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          trackTelegramCtaClick();
+                        }}
+                        className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-sm font-mono text-cyan-300 transition-colors hover:bg-cyan-400/15"
+                      >
+                        <Bot className="w-4 h-4" />
+                        <span>{lang === "kk" ? "Telegram демо" : "Демо в Telegram"}</span>
                       </a>
                     )}
                     <button
@@ -2493,7 +2512,7 @@ const RESTOPULSE_COPY = {
     title: "RestoPulse",
     accent: "Ресторан сам докладывает владельцу в Telegram.",
     subtitle: "Не надо каждое утро открывать iiko, искать нужные отчеты и собирать картину вручную. RestoPulse берет данные из iiko и присылает короткий отчет владельцу: что произошло, где есть риск и что проверить сегодня.",
-    primary: "Получить пример отчета",
+    primary: "Посмотреть демо в Telegram",
     secondary: "Проверить, подойдет ли нам",
     navBack: "Все продукты DosCode",
     metricCards: [
@@ -2577,7 +2596,7 @@ const RESTOPULSE_COPY = {
     title: "RestoPulse",
     accent: "Мейрамхана иесіне Telegram-да өзі есеп береді.",
     subtitle: "Күн сайын iiko ашып, бірнеше есепті қолмен жинаудың қажеті жоқ. RestoPulse iiko деректерін алып, иесіне қысқа есеп жібереді: не болды, қай жерде қауіп бар және бүгін нені тексеру керек.",
-    primary: "Есеп үлгісін алу",
+    primary: "Telegram демоны көру",
     secondary: "Бізге келе ме, тексеру",
     navBack: "DosCode өнімдері",
     metricCards: [["30 сек", "күнді iiko ашпай түсіну"], ["5 период", "күн, апта, ай, MTD, YTD"], ["12 деталь", "Telegram ішіндегі кнопкалар"]],
@@ -2631,7 +2650,7 @@ const RESTOPULSE_COPY = {
     title: "RestoPulse",
     accent: "Your restaurant reports to you in Telegram.",
     subtitle: "RestoPulse turns iiko data into a short owner report: what happened, where money may be leaking and what to check today.",
-    primary: "Get report sample",
+    primary: "Open Telegram demo",
     secondary: "Check fit",
     navBack: "All DosCode products",
     metricCards: [["30 sec", "understand the day"], ["5 periods", "day, week, month, MTD, YTD"], ["12 details", "inside Telegram"]],
@@ -2718,8 +2737,8 @@ function RestoPulsePage() {
   const { i18n } = useTranslation();
   const lang = getV115Lang(i18n.language);
   const copy = RESTOPULSE_COPY[lang];
-  const primaryUrl = `https://t.me/doscode_bot?start=restopulse_${lang === "kk" ? "kk" : "ru"}`;
-  const secondaryUrl = `https://t.me/doscode_bot?start=restopulse_fit_${lang === "kk" ? "kk" : "ru"}`;
+  const primaryUrl = RESTOPULSE_DEMO_URL;
+  const secondaryUrl = RESTOPULSE_FIT_URL;
 
   return (
     <div className="restopulse-page">
