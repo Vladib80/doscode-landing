@@ -8,6 +8,47 @@ import { applyV10Theme, getV10ThemeFromRoot, type V10Theme } from "../../v10/the
 import pricingModel from "../../../docs/pricing-model.json";
 
 const TELEGRAM_URL = "https://t.me/doscode_bot";
+
+const GOOGLE_ADS_ID = import.meta.env.VITE_GOOGLE_ADS_ID || "";
+const GOOGLE_ADS_TELEGRAM_CLICK_LABEL = import.meta.env.VITE_GOOGLE_ADS_TELEGRAM_CLICK_LABEL || "";
+
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+    __doscodeGoogleAdsLoaded?: boolean;
+  }
+}
+
+function loadGoogleAdsTag() {
+  if (typeof window === "undefined" || !GOOGLE_ADS_ID || window.__doscodeGoogleAdsLoaded) return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function gtagShim(...args: unknown[]) {
+    window.dataLayer?.push(args);
+  };
+  window.gtag("js", new Date());
+  window.gtag("config", GOOGLE_ADS_ID);
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GOOGLE_ADS_ID)}`;
+  document.head.appendChild(script);
+  window.__doscodeGoogleAdsLoaded = true;
+}
+
+function trackGoogleAdsConversion(label: string, eventCategory: string) {
+  if (typeof window === "undefined" || !GOOGLE_ADS_ID || !label || !window.gtag) return;
+  window.gtag("event", "conversion", {
+    send_to: `${GOOGLE_ADS_ID}/${label}`,
+    event_category: eventCategory,
+  });
+}
+
+function trackTelegramCtaClick() {
+  trackGoogleAdsConversion(GOOGLE_ADS_TELEGRAM_CLICK_LABEL, "lead_click");
+}
+
 const LOCALE_PATHS: Record<"ru" | "kk" | "en", string> = {
   ru: "/",
   kk: "/kk/",
@@ -3057,6 +3098,18 @@ function Footer() {
 export default function Home() {
   const isRestoPulsePage = typeof window !== "undefined" && ["/restopulse", "/restopulse/", "/kk/restopulse", "/kk/restopulse/"].includes(window.location.pathname);
   const isWhatsAppPage = typeof window !== "undefined" && ["/whatsapp", "/whatsapp/", "/kk/whatsapp", "/kk/whatsapp/"].includes(window.location.pathname);
+
+  useEffect(() => {
+    loadGoogleAdsTag();
+
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target instanceof Element ? event.target.closest('a[href*="t.me/doscode_bot"]') : null;
+      if (target) trackTelegramCtaClick();
+    };
+
+    document.addEventListener("click", handleClick, { capture: true });
+    return () => document.removeEventListener("click", handleClick, { capture: true });
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary selection:text-primary-foreground">
