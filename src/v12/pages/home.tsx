@@ -274,10 +274,10 @@ const CASE_PROOF: Record<string, { before: string; after: string; integrations: 
     outcome: "прямые заказы + база",
   },
   RestoPulse: {
-    before: "iiko, поставщики и ручные проверки",
-    after: "Telegram-кокпит владельцу",
-    integrations: ["iiko", "Telegram", "AI", "Suppliers"],
-    outcome: "контроль продаж, отмен и закупок",
+    before: "iiko и ручные проверки",
+    after: "Telegram-отчёты владельцу",
+    integrations: ["iiko", "Telegram", "AI"],
+    outcome: "ежедневный контроль ресторана",
   },
   MMG: {
     before: "Excel + WhatsApp",
@@ -1448,7 +1448,7 @@ function Cases() {
               <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_rgba(132,204,22,0.7)]" />
               <div className="min-w-0">
                 <div className="truncate text-[8px] sm:text-[9px] font-mono text-primary uppercase tracking-[0.22em]">RestoPulse</div>
-                <div className="truncate text-[8px] font-bold text-foreground sm:text-[9px]">iiko owner cockpit</div>
+                <div className="truncate text-[8px] font-bold text-foreground sm:text-[9px]">iiko owner reports</div>
               </div>
             </div>
             <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-1 text-[7px] font-mono text-primary">09:00 sent</span>
@@ -1539,7 +1539,7 @@ function Cases() {
                 <div className="rounded-2xl border border-cyan-400/25 bg-cyan-400/10 p-2.5">
                   <Bot className="mb-2 h-4 w-4 text-cyan-400" />
                   <div className="text-[7px] font-mono text-muted-foreground uppercase">Advice</div>
-                  <div className="mt-1 text-[8px] font-mono text-cyan-400">цены + отмены</div>
+                  <div className="mt-1 text-[8px] font-mono text-cyan-400">проверьте delivery</div>
                 </div>
               </motion.div>
 
@@ -1551,7 +1551,7 @@ function Cases() {
                 className="mt-auto flex items-center gap-2 rounded-2xl border border-border/40 bg-background/75 px-2.5 py-2"
               >
                 <Clock className="h-3.5 w-3.5 text-primary" />
-                <span className="min-w-0 flex-1 truncate text-[8px] font-mono text-foreground">payments / cancellations / suppliers</span>
+                <span className="min-w-0 flex-1 truncate text-[8px] font-mono text-foreground">daily / weekly / month-to-date</span>
                 <Send className="h-3.5 w-3.5 text-primary" />
               </motion.div>
             </div>
@@ -2489,131 +2489,225 @@ function CTA() {
 
 const RESTOPULSE_COPY = {
   ru: {
-    badge: "продукт DosCode / Telegram bot / iiko",
+    badge: "DosCode product / iiko + Telegram",
     title: "RestoPulse",
-    accent: "Автоматические отчеты ресторана в Telegram.",
-    subtitle: "RestoPulse подключается к iiko и сам отправляет владельцу отчеты в Telegram: продажи, оплаты, смены, персонал, блюда, скидки, доставка, отмены, поставщики и конкретные советы, что проверить сегодня.",
-    primary: "Получить пример Telegram-отчета",
-    secondary: "Обсудить подключение",
+    accent: "Ресторан сам докладывает владельцу в Telegram.",
+    subtitle: "Не надо каждое утро открывать iiko, искать нужные отчеты и собирать картину вручную. RestoPulse берет данные из iiko и присылает короткий отчет владельцу: что произошло, где есть риск и что проверить сегодня.",
+    primary: "Получить пример отчета",
+    secondary: "Проверить, подойдет ли нам",
     navBack: "Все продукты DosCode",
-    productLabel: "Что делает bot",
-    metricOne: "Daily",
-    metricOneLabel: "утренний отчет каждый день",
-    metricTwo: "Week / Month / YTD",
-    metricTwoLabel: "неделя, месяц, год",
-    metricThree: "📦 Поставщики",
-    metricThreeLabel: "закупки, цены и оплаты",
-    sectionTitle: "RestoPulse показывает владельцу, что происходит в ресторане, прямо в Telegram.",
-    sectionText: "Короткий итог приходит сам. Детали открываются кнопками: каналы продаж, часы спроса, скидки, доставка, точки, блюда, смена и совет владельцу.",
-    cards: [
-      ["Автоотчеты по периодам", "За вчера, неделя, месяц, MTD и YTD. Можно быстро посмотреть годовую картину и сравнение с прошлым периодом."],
-      ["Продажи, каналы и оплаты", "Выручка, заказы, средний чек, зал, доставка, агрегаторы, самовывоз и каждый тип оплаты с суммой."],
-      ["Блюда: лучшие и слабые", "Топ позиции по выручке и количеству, слабые позиции меню и товары, которые стоит проверить."],
-      ["Персонал, смены и отмены", "Кто работал, кто завершил смену, сколько отменено и есть ли похожие оплаченные заказы рядом по времени и сумме."],
-      ["Скидки, доставка, часы", "Скидки и промо, доставка, опоздания, часы спроса и точки, где возникает просадка."],
-      ["Поставщики и закупки", "Накладные, оплаты поставщикам, услуги, топ товаров, скачки цен и разрывы между оплатами и накладными."]
+    metricCards: [
+      ["30 сек", "понять день без входа в iiko"],
+      ["5 периодов", "день, неделя, месяц, MTD, YTD"],
+      ["12 деталей", "кнопки внутри Telegram"],
     ],
-    flowTitle: "Кнопки внутри Telegram bot",
-    flow: ["📅 За вчера, 📆 неделя, 🗓 месяц, 📈 MTD, 📊 YTD", "📊 Каналы, 💳 оплаты, 🏬 точки, ⏰ часы, 🍕 блюда", "🎯 скидки, 🚚 доставка, 👥 смена, 🚫 отмены", "📦 Поставщики и 🤖 Совет: закупки, цены, действия владельцу"],
-    reportTitle: "RestoPulse report",
-    reportText: "Вчера 1 842 000 ₸. ▲12% к прошлой среде. Оплаты: Halyk, Kaspi, агрегаторы. Отмены: 2 для проверки. Поставщики: цена фри +18%. Совет: проверьте скидки и закупки.",
-    footerCta: "Получить пример в Telegram"
+    mockupTitle: "🚨 Отчет владельцу",
+    mockupDate: "Вчера · Telegram · iiko",
+    mockupLines: [
+      "🔥 Выручка: 1 842 000 ₸",
+      "▲12% к прошлой среде",
+      "Заказы: 214 · чек: 8 607 ₸",
+      "Зал: 1 086 000 ₸",
+      "Доставка: 756 000 ₸",
+      "Проверить: скидки после 21:00",
+      "Отмены рядом с оплатами",
+    ],
+    mockupButtons: ["📊 Каналы", "💳 Оплаты", "🚫 Отмены", "🎯 Скидки", "🚚 Доставка", "📦 Поставщики", "📉 Списания", "🍕 Блюда", "👥 Смена", "🤖 Совет"],
+    productLabel: "главная мысль",
+    sectionTitle: "Это не еще один dashboard. Это утренний контроль ресторана в кармане.",
+    sectionText: "Владелец ресторана не должен быть аналитиком iiko. Ему нужно быстро понять: продажи нормальные или нет, где просадка, кто работал, какие блюда тянут меню, где скидки, отмены, доставка или списания начинают съедать деньги.",
+    painTitle: "Почему владельцы редко смотрят отчеты iiko каждый день? Потому что это неудобно.",
+    painSubtitle: "Нужно зайти, выбрать период, открыть несколько отчетов, сравнить цифры, вспомнить вчерашний контекст и понять, что важно. В реальной операционке на это просто нет времени.",
+    beforeTitle: "Обычно",
+    afterTitle: "С RestoPulse",
+    before: ["Открывать iiko вручную", "Переключаться между отчетами", "Разбираться в каналах, скидках и сменах", "Ждать объяснений от управляющего", "Замечать проблемы уже после факта"],
+    after: ["Отчет сам приходит в Telegram", "Главные цифры видны сразу", "Детали открываются кнопками", "Bot подсвечивает риски", "Есть конкретное действие на сегодня"],
+    outcomeTitle: "Что владелец видит без ручной сводки",
+    outcomeSubtitle: "Мы не продаем красивые графики. Мы продаем ежедневную привычку контроля, которая раньше требовала времени и дисциплины.",
+    capabilities: [
+      ["Продажи и каналы", "Выручка, заказы, средний чек, зал, доставка, агрегаторы, самовывоз и доля каждого канала."],
+      ["Оплаты", "Наличные, карты, Kaspi, бонусы и непонятные типы оплат, которые нужно сверить в iiko."],
+      ["Отмены", "Крупные отмены и возможные совпадения рядом по сумме и времени с оплаченными заказами."],
+      ["Скидки и утечки", "Какие скидки съели оборот, где возможна утечка, какие промо нужно проверить."],
+      ["Доставка", "Доля доставки, агрегаторы, прямые заказы, опоздания и операционные сигналы."],
+      ["Блюда", "Топ позиции, слабые позиции, menu engineering и сигналы по марже, если есть себестоимость."],
+      ["Смена", "Кто работал, кто сейчас на смене, кто завершил смену и в какое время."],
+      ["Поставщики и склад", "Закупки, оплаты поставщикам, списания, причины, склады и продукты, которые стоит проверить."],
+      ["Точки и часы", "Какая точка лидирует, где просадка, в какие часы ресторан зарабатывает или теряет темп."],
+    ],
+    periodsTitle: "Один bot. Любой период, который обычно нужен владельцу.",
+    periods: [
+      ["День", "Что было вчера и что проверить сегодня утром."],
+      ["Неделя", "Динамика, каналы, часы спроса и слабые места недели."],
+      ["Месяц", "Итог месяца, темп продаж и контроль к концу периода."],
+      ["MTD", "С начала месяца, чтобы не ждать закрытия месяца."],
+      ["YTD", "С начала года и сравнение с прошлым годом."],
+    ],
+    controlTitle: "Особенно важно: RestoPulse показывает не только выручку.",
+    controlText: "Выручка сама по себе не говорит, где течет прибыль. Поэтому внутри есть контрольные блоки, которые владелец обычно не смотрит каждый день, хотя именно там часто лежат деньги.",
+    controlRows: [
+      ["Отмены", "видно крупные отмены и подозрительно похожие оплаченные заказы рядом"],
+      ["Скидки", "видно, какие скидки реально съели оборот, без неправильной математики iiko"],
+      ["Агрегаторы", "видно, сколько оборота ушло в каналы с комиссией"],
+      ["Списания", "видно продукты, причины и склады, где нужна ручная сверка"],
+    ],
+    adviceTitle: "Bot не просто сообщает цифры. Он говорит, что сделать.",
+    adviceEvidence: "Агрегаторы дали 38% оборота, скидки выросли после 21:00, отмена на 44 600 ₸ похожа на ручную ошибку, доставка просела вечером.",
+    adviceAction: "Сегодня: сверить отмены, проверить ручные скидки после 21:00, поставить промокод на прямую доставку в вечернюю смену.",
+    adviceWatch: "Завтра смотреть: доля прямой доставки, сумма скидок, отмены рядом с оплатами.",
+    askTitle: "Можно спросить bot в любой момент",
+    askSubtitle: "Не нужно ждать следующий отчет. В Telegram можно написать простой вопрос, а bot ответит безопасной готовой сводкой по данным iiko.",
+    askExamples: ["сколько продаж вчера", "скидки вчера", "отмены вчера", "доставка сегодня", "смена вчера", "поставщики вчера", "списания вчера"],
+    proofTitle: "Сделано на реальной ресторанной операционке, не на фантазиях SaaS-маркетолога.",
+    proofText: "RestoPulse вырос из ежедневных вопросов владельца ресторана: что случилось вчера, где теряем деньги, кого или что проверить сегодня. Поэтому страница говорит не про аналитику ради аналитики, а про контроль без ручной работы.",
+    faq: [
+      ["Это замена iiko?", "Нет. iiko остается источником данных. RestoPulse делает выжимку для владельца в Telegram, чтобы не открывать отчеты вручную каждый день."],
+      ["Какие периоды есть?", "День, неделя, месяц, MTD и YTD. Можно быстро переключаться кнопками."],
+      ["Какие детали открываются кнопками?", "Каналы, оплаты, отмены, совет, скидки, доставка, поставщики, точки, часы, списания, блюда и смена."],
+      ["Это AI chat по всем данным ресторана?", "Нет. Ответы безопасные и заранее ограниченные. Bot не выдумывает цифры и не показывает персональные данные гостей."],
+      ["Что нужно для подключения?", "Доступ к данным iiko и Telegram chat, куда будут приходить отчеты."],
+      ["Для кого это?", "Для владельца или управляющего ресторана на iiko, который хочет видеть картину каждый день без ручной сводки."],
+    ],
+    finalTitle: "Пусть ресторан сам докладывает вам в Telegram.",
+    finalText: "Покажем пример отчета и скажем, какие блоки можно подключить под ваш iiko.",
+    footerCta: "Получить пример отчета"
   },
   kk: {
-    badge: "DosCode өнімі / Telegram bot / iiko",
+    badge: "DosCode өнімі / iiko + Telegram",
     title: "RestoPulse",
-    accent: "Мейрамхана есептері Telegram-да автоматты түрде.",
-    subtitle: "RestoPulse iiko-ға қосылып, иесіне Telegram арқылы есептерді өзі жібереді: сатылым, төлемдер, ауысым, персонал, тағамдар, жеңілдіктер, жеткізу, отменалар, поставщиктер және бүгін нені тексеру керегі.",
-    primary: "Telegram есеп үлгісін алу",
-    secondary: "Қосуды талқылау",
+    accent: "Мейрамхана иесіне Telegram-да өзі есеп береді.",
+    subtitle: "Күн сайын iiko ашып, бірнеше есепті қолмен жинаудың қажеті жоқ. RestoPulse iiko деректерін алып, иесіне қысқа есеп жібереді: не болды, қай жерде қауіп бар және бүгін нені тексеру керек.",
+    primary: "Есеп үлгісін алу",
+    secondary: "Бізге келе ме, тексеру",
     navBack: "DosCode өнімдері",
-    productLabel: "Bot не істейді",
-    metricOne: "Daily",
-    metricOneLabel: "күнделікті таңғы есеп",
-    metricTwo: "Week / Month / YTD",
-    metricTwoLabel: "апта, ай, жыл",
-    metricThree: "📦 Поставщиктер",
-    metricThreeLabel: "закуп, баға және төлем",
-    sectionTitle: "RestoPulse мейрамханада не болып жатқанын иесіне Telegram ішінде көрсетеді.",
-    sectionText: "Қысқа қорытынды өзі келеді. Детальдар кнопкалар арқылы ашылады: сату каналдары, сұраныс сағаттары, жеңілдіктер, жеткізу, нүктелер, тағамдар, ауысым және иесіне кеңес.",
-    cards: [
-      ["Период бойынша автоесеп", "Кеше, апта, ай, MTD және YTD. Жыл басынан бергі жағдайды және өткен кезеңмен салыстыруды тез көруге болады."],
-      ["Сатылым, каналдар және төлемдер", "Түсім, тапсырыс, орташа чек, зал, жеткізу, агрегаторлар, алып кету және әр төлем түрінің сомасы."],
-      ["Тағамдар: үздік және әлсіз", "Түсім мен сан бойынша топ позициялар, әлсіз мәзір позициялары және тексеру керек тауарлар."],
-      ["Персонал, ауысым және отменалар", "Кім жұмыс істеді, кім сменаны аяқтады, қанша заказ отмена болды және уақыт/сома бойынша ұқсас төленген заказ бар ма."],
-      ["Жеңілдіктер, жеткізу, сағаттар", "Промо мен жеңілдіктер, жеткізу, кешігулер, сұраныс сағаттары және қай нүктеде төмендеу бар."],
-      ["Поставщиктер және закуп", "Накладной, поставщик төлемдері, қызметтер, топ тауарлар, баға секіруі және төлем/накладной айырмасы."]
+    metricCards: [["30 сек", "күнді iiko ашпай түсіну"], ["5 период", "күн, апта, ай, MTD, YTD"], ["12 деталь", "Telegram ішіндегі кнопкалар"]],
+    mockupTitle: "🚨 Иесіне есеп",
+    mockupDate: "Кеше · Telegram · iiko",
+    mockupLines: ["🔥 Түсім: 1 842 000 ₸", "▲12% өткен сәрсенбіге", "Тапсырыс: 214 · чек: 8 607 ₸", "Зал: 1 086 000 ₸", "Жеткізу: 756 000 ₸", "Тексеру: 21:00-ден кейінгі скидкалар", "Оплаталарға жақын отменалар"],
+    mockupButtons: ["📊 Каналдар", "💳 Төлемдер", "🚫 Отмена", "🎯 Скидкалар", "🚚 Жеткізу", "📦 Поставщик", "📉 Списания", "🍕 Тағамдар", "👥 Смена", "🤖 Кеңес"],
+    productLabel: "негізгі ой",
+    sectionTitle: "Бұл тағы бір dashboard емес. Бұл мейрамхананың таңғы бақылауы.",
+    sectionText: "Мейрамхана иесі iiko аналитигі болмауы керек. Оған тез түсіну керек: сатылым дұрыс па, қай жерде төмендеу бар, кім жұмыс істеді, қандай тағамдар тартып тұр, скидка, отмена, жеткізу немесе списание ақша жеп жатқан жоқ па.",
+    painTitle: "Неге иелер iiko есептерін күн сайын қарамайды? Өйткені ол ыңғайсыз.",
+    painSubtitle: "Кіру керек, период таңдау керек, бірнеше есеп ашу керек, салыстыру керек, контексті еске түсіру керек. Реал операцияда бұған уақыт жоқ.",
+    beforeTitle: "Әдетте",
+    afterTitle: "RestoPulse-пен",
+    before: ["iiko-ға қолмен кіру", "Бірнеше есеп арасында жүру", "Канал, скидка, сменаны өзі түсіну", "Менеджер түсіндірмесін күту", "Проблеманы кеш байқау"],
+    after: ["Есеп Telegram-ға өзі келеді", "Негізгі сандар бірден көрінеді", "Детальдар кнопкамен ашылады", "Bot қауіптерді көрсетеді", "Бүгінгі нақты әрекет бар"],
+    outcomeTitle: "Иесі қолмен сводкасыз не көреді",
+    outcomeSubtitle: "Біз әдемі график сатпаймыз. Біз бұрын уақыт пен тәртіп талап еткен күнделікті бақылау әдетін сатамыз.",
+    capabilities: [
+      ["Сатылым және каналдар", "Түсім, тапсырыс, орташа чек, зал, жеткізу, агрегаторлар, алып кету және әр каналдың үлесі."],
+      ["Төлемдер", "Қолма-қол, карта, Kaspi, бонус және iiko ішінде тексеру керек түсініксіз төлем түрлері."],
+      ["Отменалар", "Ірі отменалар және сомасы мен уақыты бойынша оплаченный заказдарға ұқсас жағдайлар."],
+      ["Скидка және утечка", "Қай скидкалар оборотты жеді, қай промоны тексеру керек."],
+      ["Жеткізу", "Жеткізу үлесі, агрегаторлар, прямой заказдар, кешігулер және операциялық сигналдар."],
+      ["Тағамдар", "Топ позициялар, әлсіз позициялар, menu engineering және себестоимость болса маржа сигналдары."],
+      ["Смена", "Кім жұмыс істеді, кім қазір сменада, кім аяқтады және қашан жұмыс істеді."],
+      ["Поставщик және склад", "Закуп, поставщик оплаталары, списание, себептер, складтар және тексерілетін өнімдер."],
+      ["Нүктелер және сағаттар", "Қай нүкте алда, қай жерде төмендеу, қай сағатта мейрамхана ақша табады немесе темп жоғалтады."],
     ],
-    flowTitle: "Telegram bot ішіндегі кнопкалар",
-    flow: ["📅 Кеше, 📆 апта, 🗓 ай, 📈 MTD, 📊 YTD", "📊 Каналдар, 💳 төлемдер, 🏬 нүктелер, ⏰ сағаттар, 🍕 тағамдар", "🎯 жеңілдіктер, 🚚 жеткізу, 👥 ауысым, 🚫 отменалар", "📦 Поставщиктер және 🤖 Кеңес: закуп, баға, иесіне әрекет"],
-    reportTitle: "RestoPulse есебі",
-    reportText: "Кеше 1 842 000 ₸. ▲12% өткен сәрсенбіге. Төлемдер: Halyk, Kaspi, агрегаторлар. Отменалар: 2 тексеруге. Поставщиктер: фри бағасы +18%. Кеңес: скидка мен закупты тексеріңіз.",
-    footerCta: "Telegram-да үлгі алу"
+    periodsTitle: "Бір bot. Иесіне керек барлық период.",
+    periods: [["Күн", "Кеше не болды және бүгін нені тексеру керек."], ["Апта", "Динамика, каналдар, сұраныс сағаттары және әлсіз жерлер."], ["Ай", "Ай қорытындысы, сатылым темпі және период соңына бақылау."], ["MTD", "Ай басынан бері, ай жабылғанын күтпей."], ["YTD", "Жыл басынан бері және өткен жылмен салыстыру."]],
+    controlTitle: "Маңыздысы: RestoPulse тек түсімді көрсетпейді.",
+    controlText: "Түсімнің өзі пайда қай жерде кетіп жатқанын айтпайды. Сондықтан ішінде иесі күн сайын қарамайтын, бірақ ақша жиі жатқан бақылау блоктары бар.",
+    controlRows: [["Отменалар", "ірі отменалар және оплаталарға ұқсас заказдар көрінеді"], ["Скидкалар", "қай скидкалар оборотты нақты жегені көрінеді"], ["Агрегаторлар", "комиссиясы бар каналдарға қанша оборот кеткені көрінеді"], ["Списания", "өнім, себеп және склад бойынша тексеру нүктелері көрінеді"]],
+    adviceTitle: "Bot тек цифр жібермейді. Ол не істеу керегін айтады.",
+    adviceEvidence: "Агрегаторлар обороттың 38% алды, скидкалар 21:00-ден кейін өсті, 44 600 ₸ отмена қолмен қате сияқты, жеткізу кешке түсті.",
+    adviceAction: "Бүгін: отменаларды сверить ету, 21:00-ден кейінгі қолмен скидкаларды тексеру, кешкі сменада прямой delivery промокодын қосу.",
+    adviceWatch: "Ертең қараңыз: прямой delivery үлесі, скидка сомасы, оплаталарға жақын отменалар.",
+    askTitle: "Bot-тан кез келген уақытта сұрауға болады",
+    askSubtitle: "Келесі есепті күтудің қажеті жоқ. Telegram-ға қарапайым сұрақ жазсаңыз, bot iiko деректері бойынша қауіпсіз қысқа жауап береді.",
+    askExamples: ["кеше қанша сатылым", "скидки вчера", "отмены вчера", "доставка сегодня", "смена вчера", "поставщики вчера", "списания вчера"],
+    proofTitle: "Нақты мейрамхана операциясынан жасалған. SaaS маркетолог фантазиясы емес.",
+    proofText: "RestoPulse иесінің күнделікті сұрақтарынан шықты: кеше не болды, қай жерде ақша кетіп жатыр, бүгін кімді немесе нені тексеру керек.",
+    faq: [["Бұл iiko орнына ма?", "Жоқ. iiko дерек көзі болып қалады. RestoPulse иесіне Telegram-да қысқа выжимка береді."], ["Қандай периодтар бар?", "Күн, апта, ай, MTD және YTD."], ["Қандай детальдар бар?", "Каналдар, төлемдер, отменалар, кеңес, скидкалар, жеткізу, поставщиктер, нүктелер, сағаттар, списания, тағамдар және смена."], ["Бұл барлық дерек бойынша AI chat па?", "Жоқ. Жауаптар қауіпсіз және шектеулі. Bot цифр ойлап таппайды және қонақтардың жеке деректерін көрсетпейді."], ["Қосу үшін не керек?", "iiko деректеріне қолжетімділік және есеп келетін Telegram chat."], ["Кімге арналған?", "iiko қолданатын мейрамхана иесіне немесе управляющийге." ]],
+    finalTitle: "Мейрамханаңыз Telegram-да өзі есеп берсін.",
+    finalText: "Есеп үлгісін көрсетеміз және сіздің iiko бойынша қандай блоктарды қосуға болатынын айтамыз.",
+    footerCta: "Есеп үлгісін алу"
   },
   en: {
-    badge: "DosCode product / Telegram bot / iiko",
+    badge: "DosCode product / iiko + Telegram",
     title: "RestoPulse",
-    accent: "Automated restaurant reports in Telegram.",
-    subtitle: "RestoPulse connects to iiko and sends restaurant reports in Telegram: sales, payments, shifts, staff, dishes, discounts, delivery, cancellations, suppliers and clear owner actions.",
-    primary: "Get Telegram report sample",
-    secondary: "Discuss setup",
+    accent: "Your restaurant reports to you in Telegram.",
+    subtitle: "RestoPulse turns iiko data into a short owner report: what happened, where money may be leaking and what to check today.",
+    primary: "Get report sample",
+    secondary: "Check fit",
     navBack: "All DosCode products",
-    productLabel: "What the bot does",
-    metricOne: "Daily",
-    metricOneLabel: "morning report every day",
-    metricTwo: "Week / Month / YTD",
-    metricTwoLabel: "week, month, year",
-    metricThree: "📦 Suppliers",
-    metricThreeLabel: "purchases, prices, payments",
-    sectionTitle: "RestoPulse shows the owner what is happening in the restaurant, inside Telegram.",
-    sectionText: "The short summary arrives automatically. Details open with buttons: sales channels, demand hours, discounts, delivery, locations, dishes, shift and owner advice.",
-    cards: [
-      ["Automated period reports", "Yesterday, week, month, MTD and YTD. Owners can quickly see the year-to-date picture and compare periods."],
-      ["Sales, channels and payments", "Revenue, orders, average check, dine-in, delivery, aggregators, pickup and every payment type with totals."],
-      ["Best and worst items", "Top menu items by revenue and quantity, weak positions and items worth checking."],
-      ["Staff, shifts and cancellations", "Who worked, who finished the shift, cancelled orders and possible nearby paid orders with similar time and amount."],
-      ["Discounts, delivery, hours", "Promos and discounts, delivery delays, demand hours and locations with drops."],
-      ["Suppliers and purchases", "Invoices, supplier payments, services, top purchased goods, price jumps and payment/invoice gaps." ]
-    ],
-    flowTitle: "Telegram bot buttons",
-    flow: ["📅 yesterday, 📆 week, 🗓 month, 📈 MTD, 📊 YTD", "📊 channels, 💳 payments, 🏬 locations, ⏰ hours, 🍕 dishes", "🎯 discounts, 🚚 delivery, 👥 shift, 🚫 cancellations", "📦 Suppliers and 🤖 Advice: purchases, prices, owner actions"],
-    reportTitle: "RestoPulse report",
-    reportText: "Yesterday 1,842,000 ₸. ▲12% vs last Wednesday. Payments: Halyk, Kaspi, aggregators. Cancellations: 2 to review. Suppliers: fries price +18%. Advice: check discounts and purchases.",
-    footerCta: "Get sample in Telegram"
+    metricCards: [["30 sec", "understand the day"], ["5 periods", "day, week, month, MTD, YTD"], ["12 details", "inside Telegram"]],
+    mockupTitle: "🚨 Owner report",
+    mockupDate: "Yesterday · Telegram · iiko",
+    mockupLines: ["🔥 Revenue: 1,842,000 ₸", "▲12% vs last Wednesday", "Orders: 214 · avg check: 8,607 ₸", "Dine-in: 1,086,000 ₸", "Delivery: 756,000 ₸", "Check: discounts after 21:00", "Cancellations near payments"],
+    mockupButtons: ["📊 Channels", "💳 Payments", "🚫 Cancels", "🎯 Discounts", "🚚 Delivery", "📦 Suppliers", "📉 Writeoffs", "🍕 Dishes", "👥 Shift", "🤖 Advice"],
+    productLabel: "core idea",
+    sectionTitle: "Not another dashboard. Morning restaurant control in your pocket.",
+    sectionText: "A restaurant owner should not have to become an iiko analyst. RestoPulse highlights sales, channels, staff, dishes, discounts, delivery, cancellations and writeoffs.",
+    painTitle: "Owners do not check iiko reports every day because it takes work.",
+    painSubtitle: "RestoPulse compresses that manual work into a Telegram report.",
+    beforeTitle: "Usually",
+    afterTitle: "With RestoPulse",
+    before: ["Open iiko manually", "Switch between reports", "Interpret channels and discounts", "Wait for manager summary", "Notice issues late"],
+    after: ["Report arrives automatically", "Main numbers are visible", "Details open by buttons", "Risks are highlighted", "Today action is clear"],
+    outcomeTitle: "What the owner sees without a manual summary",
+    outcomeSubtitle: "Not pretty charts. Daily control that used to require time and discipline.",
+    capabilities: [["Sales and channels", "Revenue, orders, average check, dine-in, delivery, aggregators, pickup."], ["Payments", "Cash, cards, Kaspi, bonuses and unclear payment types."], ["Cancellations", "Large cancellations and possible nearby paid orders."], ["Discounts", "Discounts and leakage checks."], ["Delivery", "Delivery share, aggregators, direct orders and delays."], ["Dishes", "Top, weak and menu engineering signals."], ["Shift", "Who worked and when."], ["Suppliers and stock", "Purchases, supplier payments, writeoffs and warehouses."], ["Locations and hours", "Location and hour demand patterns."]],
+    periodsTitle: "One bot. Every period an owner needs.",
+    periods: [["Day", "Yesterday and what to check today."], ["Week", "Weekly dynamics and weak spots."], ["Month", "Monthly pace and control."], ["MTD", "Month-to-date before month-end."], ["YTD", "Year-to-date vs last year."]],
+    controlTitle: "RestoPulse shows more than revenue.",
+    controlText: "Revenue alone does not show where profit leaks.",
+    controlRows: [["Cancellations", "large cancels and nearby paid orders"], ["Discounts", "which discounts ate turnover"], ["Aggregators", "turnover in commission-heavy channels"], ["Writeoffs", "products, reasons and warehouses to check"]],
+    adviceTitle: "The bot tells you what to do next.",
+    adviceEvidence: "Aggregators took 38% of revenue, discounts rose after 21:00, one cancel looks like a manual error.",
+    adviceAction: "Today: reconcile cancellations, check manual discounts after 21:00 and push direct delivery.",
+    adviceWatch: "Tomorrow: direct delivery share, discounts, cancellations near payments.",
+    askTitle: "Ask the bot anytime",
+    askSubtitle: "Simple Telegram questions return safe predefined summaries.",
+    askExamples: ["sales yesterday", "discounts yesterday", "cancellations yesterday", "delivery today", "shift yesterday", "suppliers yesterday", "writeoffs yesterday"],
+    proofTitle: "Built from real restaurant operations.",
+    proofText: "RestoPulse came from owner questions, not generic SaaS positioning.",
+    faq: [["Does it replace iiko?", "No. iiko remains the data source."], ["Which periods?", "Day, week, month, MTD and YTD."], ["Which details?", "Channels, payments, cancellations, advice, discounts, delivery, suppliers, locations, hours, writeoffs, dishes and shifts."], ["Is this broad AI chat?", "No. It is safe predefined reporting."], ["What is needed?", "iiko data access and a Telegram chat."], ["Who is it for?", "Restaurant owners and managers using iiko."]],
+    finalTitle: "Let the restaurant report to you in Telegram.",
+    finalText: "We will show a sample and map the blocks for your iiko.",
+    footerCta: "Get report sample"
   }
 } as const;
 
-function RestoPulseMockup({ copy }: { copy: typeof RESTOPULSE_COPY.ru }) {
+type RestoPulseCopy = typeof RESTOPULSE_COPY.ru;
+
+function RestoPulseMockup({ copy }: { copy: RestoPulseCopy }) {
   return (
-    <div className="relative rounded-[2rem] border border-border/60 bg-card/40 p-3 shadow-2xl">
+    <div className="restopulse-mockup relative overflow-hidden rounded-[2rem] border border-border/60 bg-card/40 p-3 shadow-2xl">
+      <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-primary/20 blur-3xl" />
       <div className="rounded-[1.5rem] border border-border/50 bg-background/95 p-4 sm:p-5">
         <div className="mb-4 flex items-center gap-3 border-b border-border/50 pb-4">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/15 font-mono font-bold text-primary">RP</div>
           <div>
             <div className="font-display text-lg font-bold">RestoPulse</div>
-            <div className="font-mono text-xs text-muted-foreground">08:30 · Telegram bot</div>
+            <div className="font-mono text-xs text-muted-foreground">{copy.mockupDate}</div>
           </div>
         </div>
-        <div className="space-y-3">
-          <div className="rounded-2xl border border-primary/20 bg-primary/10 p-4">
-            <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.24em] text-primary">{copy.reportTitle}</div>
-            <p className="text-sm leading-relaxed text-foreground/90">{copy.reportText}</p>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            {[["1.84M ₸", "revenue"], ["+12%", "vs period"], ["214", "orders"], ["8 607 ₸", "avg check"]].map(([value, label]) => (
-              <div key={label} className="rounded-2xl border border-border/50 bg-card/60 p-3">
-                <div className="font-mono text-lg font-bold text-foreground">{value}</div>
-                <div className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>
-              </div>
+        <div className="rounded-2xl border border-primary/20 bg-primary/10 p-4">
+          <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.24em] text-primary">{copy.mockupTitle}</div>
+          <div className="space-y-2">
+            {copy.mockupLines.map((line) => (
+              <p key={line} className="text-sm leading-relaxed text-foreground/90">{line}</p>
             ))}
           </div>
-          <div className="grid grid-cols-2 gap-2 pt-1">
-            {["📊 Каналы", "💳 Оплаты", "🚫 Отмены", "📦 Поставщики", "🤖 Совет", "🎯 Скидки", "🚚 Доставка", "🍕 Блюда"].map((button) => (
-              <div key={button} className="rounded-xl border border-border/50 bg-background/70 px-2 py-2 text-center font-mono text-[11px] text-foreground/80">
-                {button}
-              </div>
-            ))}
-          </div>
+        </div>
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          {[["1.84M ₸", "выручка"], ["214", "заказы"], ["8 607 ₸", "средний чек"], ["5", "к проверке"]].map(([value, label]) => (
+            <div key={label} className="rounded-2xl border border-border/50 bg-card/60 p-3">
+              <div className="font-mono text-lg font-bold text-foreground">{value}</div>
+              <div className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 grid grid-cols-2 gap-2">
+          {copy.mockupButtons.map((button) => (
+            <div key={button} className="rounded-xl border border-border/50 bg-background/70 px-2 py-2 text-center font-mono text-[11px] text-foreground/80">
+              {button}
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -2626,81 +2720,16 @@ function RestoPulsePage() {
   const copy = RESTOPULSE_COPY[lang];
   const primaryUrl = `https://t.me/doscode_bot?start=restopulse_${lang === "kk" ? "kk" : "ru"}`;
   const secondaryUrl = `https://t.me/doscode_bot?start=restopulse_fit_${lang === "kk" ? "kk" : "ru"}`;
-  const isKk = lang === "kk";
-  const pain = isKk
-    ? {
-        title: "Егер таңертең iiko ашпасаңыз, кеше не болғанын кеш білесіз.",
-        subtitle: "RestoPulse мейрамхана иесіне күнді 30 секундта түсінуге көмектеседі. Сандар ғана емес, қай жерде ақша, уақыт немесе бақылау жоғалып жатқанын көрсетеді.",
-        beforeTitle: "RestoPulse-қа дейін",
-        afterTitle: "RestoPulse-пен",
-        before: ["iiko-ға кіріп, бірнеше есепті қолмен қарау керек", "Төлемдер, отменалар және поставщиктер бөлек тексеріледі", "Менеджердің қысқа түсіндірмесіне сенуге тура келеді", "Апта, ай, жыл басы бөлек қаралады"],
-        after: ["Есеп Telegram-ға өзі келеді", "Сатылым, төлемдер, ауысым, отменалар және поставщиктер бір жерде", "🤖 Кеңес нақты не тексеру керегін айтады", "Кеше, апта, ай, MTD және YTD бір bot ішінде"]
-      }
-    : {
-        title: "Если утром вы не открыли iiko, вы уже можете узнать проблему слишком поздно.",
-        subtitle: "RestoPulse помогает владельцу понять день за 30 секунд. Не просто цифры, а где ресторан теряет деньги, время или контроль.",
-        beforeTitle: "До RestoPulse",
-        afterTitle: "С RestoPulse",
-        before: ["Нужно заходить в iiko и вручную искать нужные отчеты", "Оплаты, отмены и поставщики проверяются отдельно", "Приходится верить короткому пересказу управляющего", "Неделя, месяц и год смотрятся отдельно"],
-        after: ["Отчет сам приходит в Telegram", "Продажи, оплаты, смена, отмены и поставщики в одном месте", "🤖 Совет говорит, что проверить сегодня", "Вчера, неделя, месяц, MTD и YTD в одном bot"]
-      };
-  const reportBlocks = isKk
-    ? [
-        ["Күнделікті", "Кешегі сатылым, тапсырыс, орташа чек, ауысым, төлемдер, отменалар және не тексеру керек."],
-        ["Апталық", "Апта динамикасы, каналдар, сұраныс сағаттары, жеткізу, поставщиктер және әлсіз жерлер."],
-        ["Айлық", "Ай қорытындысы, жоспар темпі, MTD, закуп, поставщик төлемдері және ай соңына дейін керек күндік сатылым."],
-        ["YTD", "Жыл басынан бергі нәтиже, өткен жылмен салыстыру және сатылым/закуп бойынша стратегиялық бақылау."]
-      ]
-    : [
-        ["Ежедневный", "Продажи за вчера, заказы, средний чек, смена, оплаты, отмены и что проверить сегодня."],
-        ["Еженедельный", "Динамика недели, каналы, часы спроса, доставка, поставщики и слабые места."],
-        ["Ежемесячный", "Итог месяца, темп к плану, MTD, закупки, оплаты поставщикам и сколько нужно в день до конца месяца."],
-        ["YTD", "С начала года, сравнение с прошлым годом и стратегический контроль по продажам и закупкам."]
-      ];
-  const advice = isKk
-    ? {
-        title: "Совет тек әдемі мәтін емес. Ол әрекет береді.",
-        evidence: "Агрегаторлар түсімнің 38% алды, отменаларда тексеретін 5 ұқсас заказ бар, фри бағасы поставщикте 18% өсті.",
-        action: "Бүгін отмена тарихын, қолмен скидкаларды және фри бойынша соңғы накладнойды тексеріңіз. Агрегатор заказдарына прямой заказ QR қосыңыз.",
-        watch: "Ертең қараңыз: прямой delivery үлесі, отменалар, скидкалар және негізгі закуп бағалары."
-      }
-    : {
-        title: "Совет это не красивый текст. Это действие.",
-        evidence: "Агрегаторы забрали 38% выручки, отмены дали 5 совпадений для проверки, цена фри у поставщика выросла на 18%.",
-        action: "Сегодня проверьте историю отмен, ручные скидки и последнюю накладную по фри. Для агрегаторов добавьте QR на прямой заказ.",
-        watch: "Завтра смотрите: доля прямой доставки, отмены, скидки и цены ключевых закупок."
-      };
-  const faq = isKk
-    ? [
-        ["Бұл dashboard па?", "Жоқ. Бұл Telegram bot. Есептер мен детальдар Telegram ішінде келеді."],
-        ["Қандай периодтар бар?", "Кеше, апта, ай, MTD және YTD."],
-        ["Персонал бойынша не көрсетеді?", "Кім сменада болды, кім қазір жұмыс істеп тұр, кім сменаны аяқтады және уақыттары."],
-        ["Тағамдар бойынша не бар?", "Топ 10 және әлсіз 10 позиция. Түсім және саны бойынша."],
-        ["Поставщиктер бойынша не бар?", "Накладной, төлемдер, қызметтер, топ закуп тауарлары, орташа баға және баға өзгерісі."],
-        ["Отменалар бойынша не бар?", "Отмена заказдар және уақыт/сома бойынша ұқсас төленген заказдар. Бұл тексеру сигналы, айыптау емес."],
-        ["Қосу үшін не керек?", "iiko деректеріне қол жеткізу және есеп алатын Telegram chat."],
-        ["Кеңес қайдан шығады?", "Bot сатылым, төлемдер, каналдар, скидкалар, тағамдар, отменалар, поставщиктер және салыстырулар бойынша сигналдарды қарайды."]
-      ]
-    : [
-        ["Это dashboard?", "Нет. Это Telegram bot. Отчеты и детали приходят прямо в Telegram."],
-        ["Какие периоды есть?", "За вчера, неделя, месяц, MTD и YTD."],
-        ["Что показывает по персоналу?", "Кто был на смене, кто сейчас работает, кто завершил смену и время работы."],
-        ["Что показывает по блюдам?", "Топ 10 и слабые 10 позиций по выручке и количеству."],
-        ["Что есть по поставщикам?", "Накладные, оплаты, услуги, топ закупленных товаров, средняя цена и скачки цен."],
-        ["Что есть по отменам?", "Отмененные заказы и возможные похожие оплаченные заказы рядом по времени и сумме. Это сигнал для проверки, не обвинение."],
-        ["Что нужно для подключения?", "Доступ к данным iiko и Telegram chat, куда отправлять отчеты."],
-        ["Откуда берется совет?", "Bot смотрит продажи, оплаты, каналы, скидки, блюда, отмены, поставщиков и сравнения, затем дает конкретное действие владельцу."]
-      ];
 
   return (
-    <>
-      <section className="relative overflow-hidden border-b border-border/50 pt-28 sm:pt-32 pb-16 sm:pb-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(132,204,22,0.16),transparent_32%),radial-gradient(circle_at_78%_10%,rgba(59,130,246,0.12),transparent_28%)]" />
+    <div className="restopulse-page">
+      <section className="relative overflow-hidden border-b border-border/50 pt-24 sm:pt-32 pb-14 sm:pb-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(132,204,22,0.18),transparent_34%),radial-gradient(circle_at_82%_0%,rgba(59,130,246,0.12),transparent_30%)]" />
         <div className="container relative z-10 mx-auto px-6">
           <a href={lang === "kk" ? "/kk/" : "/"} className="mb-8 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-primary">
             <ArrowRight className="h-4 w-4 rotate-180" /> {copy.navBack}
           </a>
-          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
             <div>
               <div className="mb-5 inline-flex rounded-full border border-primary/25 bg-primary/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-primary">
                 {copy.badge}
@@ -2709,7 +2738,7 @@ function RestoPulsePage() {
                 {copy.title}<span className="block text-primary">{copy.accent}</span>
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">{copy.subtitle}</p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="restopulse-cta-row mt-8 flex flex-col gap-3 sm:flex-row">
                 <a href={primaryUrl} target="_blank" rel="noreferrer">
                   <Button size="lg" className="h-14 w-full gap-2 bg-primary px-6 font-mono text-primary-foreground hover:bg-primary/90 sm:w-auto">
                     <Send className="h-5 w-5" /> {copy.primary}
@@ -2722,7 +2751,7 @@ function RestoPulsePage() {
                 </a>
               </div>
               <div className="mt-8 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
-                {[[copy.metricOne, copy.metricOneLabel], [copy.metricTwo, copy.metricTwoLabel], [copy.metricThree, copy.metricThreeLabel]].map(([value, label]) => (
+                {copy.metricCards.map(([value, label]) => (
                   <div key={value} className="rounded-2xl border border-border/50 bg-card/40 p-4">
                     <div className="font-mono text-xl font-bold text-primary">{value}</div>
                     <div className="mt-1 text-sm text-muted-foreground">{label}</div>
@@ -2737,36 +2766,18 @@ function RestoPulsePage() {
 
       <section className="border-b border-border/50 py-16 sm:py-24">
         <div className="container mx-auto px-6">
-          <div className="mb-12 max-w-4xl">
-            <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">{copy.productLabel}</div>
-            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.sectionTitle}</h2>
-            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{copy.sectionText}</p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {copy.cards.map(([title, text], i) => (
-              <div key={title} className="rounded-3xl border border-border/50 bg-card/40 p-6 transition-colors hover:border-primary/40">
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 font-mono font-bold text-primary">0{i + 1}</div>
-                <h3 className="font-display text-2xl font-bold tracking-tight">{title}</h3>
-                <p className="mt-3 text-muted-foreground">{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-border/50 py-16 sm:py-24">
-        <div className="container mx-auto px-6">
-          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
             <div>
-              <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{pain.title}</h2>
-              <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{pain.subtitle}</p>
+              <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">{copy.productLabel}</div>
+              <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.sectionTitle}</h2>
+              <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{copy.sectionText}</p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              {[[pain.beforeTitle, pain.before, false], [pain.afterTitle, pain.after, true]].map(([title, items, positive]) => (
+              {[[copy.beforeTitle, copy.before, false], [copy.afterTitle, copy.after, true]].map(([title, items, positive]) => (
                 <div key={String(title)} className={`rounded-3xl border p-6 ${positive ? "border-primary/30 bg-primary/10" : "border-border/50 bg-card/40"}`}>
                   <h3 className="font-display text-2xl font-bold">{String(title)}</h3>
                   <ul className="mt-5 space-y-3">
-                    {(items as string[]).map((item) => (
+                    {(items as readonly string[]).map((item) => (
                       <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
                         <span className={positive ? "text-primary" : "text-destructive"}>{positive ? "✓" : "×"}</span>
                         <span>{item}</span>
@@ -2777,17 +2788,60 @@ function RestoPulsePage() {
               ))}
             </div>
           </div>
+          <div className="mt-12 max-w-4xl">
+            <h2 className="font-display text-3xl font-bold tracking-tighter sm:text-5xl">{copy.painTitle}</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{copy.painSubtitle}</p>
+          </div>
         </div>
       </section>
 
       <section className="border-b border-border/50 py-16 sm:py-24">
         <div className="container mx-auto px-6">
-          <div className="mb-10 max-w-3xl">
-            <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">reports</div>
-            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{isKk ? "Есептер өзі келеді. Сіз тек оқисыз." : "Отчеты приходят сами. Вы просто читаете."}</h2>
+          <div className="mb-12 max-w-4xl">
+            <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">what owner gets</div>
+            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.outcomeTitle}</h2>
+            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{copy.outcomeSubtitle}</p>
           </div>
-          <div className="grid gap-4 md:grid-cols-4">
-            {reportBlocks.map(([title, text]) => (
+          <div className="grid gap-5 md:grid-cols-3">
+            {copy.capabilities.map(([title, text], i) => (
+              <div key={title} className="rounded-3xl border border-border/50 bg-card/40 p-6 transition-colors hover:border-primary/40">
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 font-mono font-bold text-primary">{String(i + 1).padStart(2, "0")}</div>
+                <h3 className="font-display text-2xl font-bold tracking-tight">{title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24">
+        <div className="container mx-auto px-6">
+          <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+            <div>
+              <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">control blocks</div>
+              <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.controlTitle}</h2>
+              <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{copy.controlText}</p>
+            </div>
+            <div className="grid gap-3">
+              {copy.controlRows.map(([title, text]) => (
+                <div key={title} className="rounded-2xl border border-border/50 bg-background/70 p-5 sm:flex sm:items-center sm:gap-5">
+                  <div className="font-display text-2xl font-bold text-primary sm:w-40">{title}</div>
+                  <div className="mt-2 text-muted-foreground sm:mt-0">{text}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24">
+        <div className="container mx-auto px-6">
+          <div className="mb-10 max-w-4xl">
+            <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">periods</div>
+            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.periodsTitle}</h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-5">
+            {copy.periods.map(([title, text]) => (
               <div key={title} className="rounded-3xl border border-border/50 bg-card/40 p-6">
                 <div className="mb-4 font-mono text-sm font-bold text-primary">{title}</div>
                 <p className="text-sm leading-relaxed text-muted-foreground">{text}</p>
@@ -2799,11 +2853,29 @@ function RestoPulsePage() {
 
       <section className="border-b border-border/50 py-16 sm:py-24">
         <div className="container mx-auto px-6">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">🤖 owner advice</div>
+              <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.adviceTitle}</h2>
+            </div>
+            <div className="rounded-3xl border border-border/50 bg-card/50 p-6 sm:p-8">
+              <div className="space-y-5">
+                <div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">evidence</div><p className="mt-2 text-lg">{copy.adviceEvidence}</p></div>
+                <div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">action</div><p className="mt-2 text-lg text-primary">{copy.adviceAction}</p></div>
+                <div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">watch tomorrow</div><p className="mt-2 text-lg">{copy.adviceWatch}</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border/50 py-16 sm:py-24">
+        <div className="container mx-auto px-6">
           <div className="rounded-[2rem] border border-primary/20 bg-primary/5 p-6 sm:p-10">
             <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
               <div>
-                <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-5xl">{copy.flowTitle}</h2>
-                <p className="mt-4 text-muted-foreground">{isKk ? "Иесі деталдарды Telegram ішінде ашады. Жаңа жүйе үйренудің қажеті жоқ." : "Владелец открывает детали внутри Telegram. Не нужно учиться новой системе."}</p>
+                <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-5xl">{copy.askTitle}</h2>
+                <p className="mt-4 text-muted-foreground">{copy.askSubtitle}</p>
                 <div className="mt-6">
                   <a href={primaryUrl} target="_blank" rel="noreferrer">
                     <Button size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 sm:w-auto lg:w-full">{copy.footerCta}</Button>
@@ -2811,10 +2883,9 @@ function RestoPulsePage() {
                 </div>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                {copy.flow.map((item, i) => (
-                  <div key={item} className="rounded-2xl border border-border/50 bg-background/60 p-5">
-                    <div className="mb-3 font-mono text-sm font-bold text-primary">{String(i + 1).padStart(2, "0")}</div>
-                    <div className="text-lg font-semibold">{item}</div>
+                {copy.askExamples.map((item) => (
+                  <div key={item} className="rounded-2xl border border-border/50 bg-background/60 p-4 font-mono text-sm text-foreground/90">
+                    {item}
                   </div>
                 ))}
               </div>
@@ -2825,28 +2896,10 @@ function RestoPulsePage() {
 
       <section className="border-b border-border/50 py-16 sm:py-24">
         <div className="container mx-auto px-6">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div>
-              <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">🤖 advice</div>
-              <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{advice.title}</h2>
-            </div>
-            <div className="rounded-3xl border border-border/50 bg-card/50 p-6 sm:p-8">
-              <div className="space-y-5">
-                <div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">evidence</div><p className="mt-2 text-lg">{advice.evidence}</p></div>
-                <div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">action</div><p className="mt-2 text-lg text-primary">{advice.action}</p></div>
-                <div><div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">watch tomorrow</div><p className="mt-2 text-lg">{advice.watch}</p></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-border/50 py-16 sm:py-24">
-        <div className="container mx-auto px-6">
           <div className="mb-10 max-w-3xl">
             <div className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">proof</div>
-            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{isKk ? "Нақты мейрамхана операциясынан туған." : "Сделано из реальной ресторанной операционки."}</h2>
-            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{isKk ? "RestoPulse аналитика үшін аналитика емес. Ол иесінің күнделікті сұрағынан шықты: кеше не болды, бүгін нені тексеру керек, ақша қай жерде жоғалуы мүмкін." : "RestoPulse не про аналитику ради аналитики. Он появился из ежедневного вопроса владельца: что случилось вчера, что проверить сегодня, где могут теряться деньги."}</p>
+            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.proofTitle}</h2>
+            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{copy.proofText}</p>
           </div>
         </div>
       </section>
@@ -2856,10 +2909,10 @@ function RestoPulsePage() {
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">FAQ</h2>
-              <p className="mt-4 text-muted-foreground">{isKk ? "Мейрамхана иесі бірінші сұрайтын сұрақтар." : "Вопросы, которые владелец ресторана задаст первым."}</p>
+              <p className="mt-4 text-muted-foreground">Вопросы, которые владелец ресторана задаст первым.</p>
             </div>
             <div className="space-y-3">
-              {faq.map(([q, a]) => (
+              {copy.faq.map(([q, a]) => (
                 <div key={q} className="rounded-2xl border border-border/50 bg-card/40 p-5">
                   <h3 className="font-display text-xl font-bold">{q}</h3>
                   <p className="mt-2 text-muted-foreground">{a}</p>
@@ -2868,8 +2921,9 @@ function RestoPulsePage() {
             </div>
           </div>
           <div className="mt-10 rounded-[2rem] border border-primary/20 bg-primary/10 p-8 text-center">
-            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{isKk ? "Мейрамханаңыздың есебі Telegram-ға келсін." : "Пусть ресторан сам докладывает вам в Telegram."}</h2>
-            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <h2 className="font-display text-4xl font-bold tracking-tighter sm:text-6xl">{copy.finalTitle}</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">{copy.finalText}</p>
+            <div className="restopulse-cta-row mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <a href={primaryUrl} target="_blank" rel="noreferrer">
                 <Button size="lg" className="h-14 w-full bg-primary px-6 font-mono text-primary-foreground hover:bg-primary/90 sm:w-auto">{copy.primary}</Button>
               </a>
@@ -2880,10 +2934,9 @@ function RestoPulsePage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
-
 
 const WHATSAPP_COPY = {
   ru: {
