@@ -2695,7 +2695,7 @@ type RestoPulseCopy = typeof RESTOPULSE_COPY.ru;
 
 function RestoPulseMockup({ copy }: { copy: RestoPulseCopy }) {
   return (
-    <div className="restopulse-mockup relative overflow-hidden rounded-[2rem] border border-border/60 bg-card/40 p-3 shadow-2xl">
+    <div className="restopulse-mockup relative w-full max-w-[460px] justify-self-center overflow-hidden rounded-[2rem] border border-border/60 bg-card/40 p-3 shadow-2xl lg:justify-self-end">
       <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-primary/20 blur-3xl" />
       <div className="rounded-[1.5rem] border border-border/50 bg-background/95 p-4 sm:p-5">
         <div className="mb-4 flex items-center gap-3 border-b border-border/50 pb-4">
@@ -2748,15 +2748,15 @@ function RestoPulsePage() {
           <a href={lang === "kk" ? "/kk/" : "/"} className="mb-8 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-primary">
             <ArrowRight className="h-4 w-4 rotate-180" /> {copy.navBack}
           </a>
-          <div className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
               <div className="mb-5 inline-flex rounded-full border border-primary/25 bg-primary/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-primary">
                 {copy.badge}
               </div>
-              <h1 className="font-display text-5xl font-bold tracking-tighter sm:text-7xl lg:text-8xl">
+              <h1 className="max-w-4xl font-display text-4xl font-bold leading-[0.98] tracking-tighter sm:text-6xl lg:text-7xl">
                 {copy.title}<span className="block text-primary">{copy.accent}</span>
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">{copy.subtitle}</p>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">{copy.subtitle}</p>
               <div className="restopulse-cta-row mt-8 flex flex-col gap-3 sm:flex-row">
                 <a href={primaryUrl} target="_blank" rel="noreferrer">
                   <Button size="lg" className="h-14 w-full gap-2 bg-primary px-6 font-mono text-primary-foreground hover:bg-primary/90 sm:w-auto">

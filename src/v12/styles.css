@@ -291,8 +291,8 @@
   }
 
   .restopulse-page h1 {
-    font-size: clamp(44px, 12vw, 56px);
-    line-height: 0.98;
+    font-size: clamp(38px, 10.5vw, 48px);
+    line-height: 1;
   }
 
   .restopulse-page h2 {
