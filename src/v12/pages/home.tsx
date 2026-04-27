@@ -2625,6 +2625,7 @@ const RESTOPULSE_COPY = {
       "Отмены рядом с оплатами",
     ],
     mockupButtons: ["📊 Каналы", "💳 Оплаты", "🚫 Отмены", "🎯 Скидки", "🚚 Доставка", "📦 Поставщики", "📉 Списания", "🍕 Блюда", "👥 Смена", "🤖 Совет"],
+    mockupKpis: [["1.84M ₸", "выручка"], ["214", "заказы"], ["8 607 ₸", "средний чек"], ["5", "к проверке"]],
     productLabel: "главная мысль",
     sectionTitle: "Это не еще один dashboard. Это утренний контроль ресторана в кармане.",
     sectionText: "Владелец ресторана не должен быть аналитиком iiko. Ему нужно быстро понять: продажи нормальные или нет, где просадка, кто работал, какие блюда тянут меню, где скидки, отмены, доставка или списания начинают съедать деньги.",
@@ -2696,7 +2697,8 @@ const RESTOPULSE_COPY = {
     mockupTitle: "🚨 Иесіне есеп",
     mockupDate: "Кеше · Telegram · iiko",
     mockupLines: ["🔥 Түсім: 1 842 000 ₸", "▲12% өткен сәрсенбіге", "Тапсырыс: 214 · чек: 8 607 ₸", "Зал: 1 086 000 ₸", "Жеткізу: 756 000 ₸", "Тексеру: 21:00-ден кейінгі скидкалар", "Оплаталарға жақын отменалар"],
-    mockupButtons: ["📊 Каналдар", "💳 Төлемдер", "🚫 Отмена", "🎯 Скидкалар", "🚚 Жеткізу", "📦 Поставщик", "📉 Списания", "🍕 Тағамдар", "👥 Смена", "🤖 Кеңес"],
+    mockupButtons: ["📊 Каналдар", "💳 Төлемдер", "🚫 Бас тарту", "🎯 Жеңілдіктер", "🚚 Жеткізу", "📦 Жеткізуші", "📉 Есептен шығару", "🍕 Тағамдар", "👥 Ауысым", "🤖 Кеңес"],
+    mockupKpis: [["1.84M ₸", "түсім"], ["214", "тапсырыс"], ["8 607 ₸", "орташа чек"], ["5", "тексеру керек"]],
     productLabel: "негізгі ой",
     sectionTitle: "Бұл тағы бір dashboard емес. Бұл мейрамхананың таңғы бақылауы.",
     sectionText: "Мейрамхана иесі iiko аналитигі болмауы керек. Оған тез түсіну керек: сатылым дұрыс па, қай жерде төмендеу бар, кім жұмыс істеді, қандай тағамдар тартып тұр, скидка, отмена, жеткізу немесе списание ақша жеп жатқан жоқ па.",
@@ -2751,6 +2753,7 @@ const RESTOPULSE_COPY = {
     mockupDate: "Yesterday · Telegram · iiko",
     mockupLines: ["🔥 Revenue: 1,842,000 ₸", "▲12% vs last Wednesday", "Orders: 214 · avg check: 8,607 ₸", "Dine-in: 1,086,000 ₸", "Delivery: 756,000 ₸", "Check: discounts after 21:00", "Cancellations near payments"],
     mockupButtons: ["📊 Channels", "💳 Payments", "🚫 Cancels", "🎯 Discounts", "🚚 Delivery", "📦 Suppliers", "📉 Writeoffs", "🍕 Dishes", "👥 Shift", "🤖 Advice"],
+    mockupKpis: [["1.84M ₸", "revenue"], ["214", "orders"], ["8,607 ₸", "avg check"], ["5", "to check"]],
     productLabel: "core idea",
     sectionTitle: "Not another dashboard. Morning restaurant control in your pocket.",
     sectionText: "A restaurant owner should not have to become an iiko analyst. RestoPulse highlights sales, channels, staff, dishes, discounts, delivery, cancellations and writeoffs.",
@@ -2807,7 +2810,7 @@ function RestoPulseMockup({ copy }: { copy: RestoPulseCopy }) {
           </div>
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3">
-          {[["1.84M ₸", "выручка"], ["214", "заказы"], ["8 607 ₸", "средний чек"], ["5", "к проверке"]].map(([value, label]) => (
+          {copy.mockupKpis.map(([value, label]) => (
             <div key={label} className="rounded-2xl border border-border/50 bg-card/60 p-3">
               <div className="font-mono text-lg font-bold text-foreground">{value}</div>
               <div className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>
@@ -3066,6 +3069,13 @@ const WHATSAPP_COPY = {
     metricTwoLabel: "быстрое переключение",
     metricThree: "AI replies",
     metricThreeLabel: "3 варианта ответа",
+    mockupMeta: "3 аккаунта · AI включен",
+    mockupShortcut: "⌘1-⌘9",
+    mockupCustomerLabel: "сообщение клиента",
+    mockupSuggestionLabel: "AI-подсказка 1/3",
+    mockupSuggestion: "Здравствуйте! Проверил заказ. Курьер уже в пути, ориентир 18 минут. Если нужно, могу отправить ссылку на оплату.",
+    mockupActions: ["Формально", "Дружелюбно", "Кратко", "Переписать"],
+    mockupKnowledge: "База: menu.pdf · prices.xlsx · faq.docx",
     sectionTitle: "Оператор отвечает быстрее, точнее и не теряет контекст.",
     sectionText: "WhatsApp Operator Copilot держит все рабочие WhatsApp в одном окне и помогает оператору писать ответы на основе переписки, инструкций и документов компании.",
     cards: [
@@ -3114,6 +3124,13 @@ const WHATSAPP_COPY = {
     metricTwoLabel: "тез ауысу",
     metricThree: "AI replies",
     metricThreeLabel: "3 жауап нұсқасы",
+    mockupMeta: "3 аккаунт · AI қосулы",
+    mockupShortcut: "⌘1-⌘9",
+    mockupCustomerLabel: "клиент хабарламасы",
+    mockupSuggestionLabel: "AI ұсынысы 1/3",
+    mockupSuggestion: "Сәлеметсіз бе! Тапсырысты тексердім. Курьер жолда, шамамен 18 минут. Қажет болса, төлем сілтемесін жібере аламын.",
+    mockupActions: ["Ресми", "Жылы", "Қысқа", "Қайта жазу"],
+    mockupKnowledge: "База: menu.pdf · prices.xlsx · faq.docx",
     sectionTitle: "Оператор тезірек, нақтырақ жауап береді және контекст жоғалтпайды.",
     sectionText: "WhatsApp Operator Copilot барлық жұмыс WhatsApp аккаунттарын бір терезеде ұстап, операторға переписка, нұсқаулық және компания құжаттары негізінде жауап жазуға көмектеседі.",
     cards: [
@@ -3146,6 +3163,61 @@ const WHATSAPP_COPY = {
     ],
     finalTitle: "WhatsApp-ты вкладкалар хаосы емес, оператордың жұмыс орнына айналдырыңыз.",
     footerCta: "Демо алу"
+  },
+  en: {
+    badge: "DosCode product / WhatsApp / AI",
+    title: "WhatsApp Operator Copilot",
+    accent: "One workspace for every WhatsApp account and AI reply.",
+    subtitle: "Desktop app for teams that answer customers in WhatsApp: multiple accounts, fast switching, notifications, AI suggestions, draft rewrite, conversation summaries and a knowledge base for each account.",
+    primary: "Get WhatsApp Copilot demo",
+    secondary: "Discuss setup",
+    navBack: "All DosCode products",
+    productLabel: "What the app does",
+    metricOne: "∞ accounts",
+    metricOneLabel: "multiple WhatsApp accounts",
+    metricTwo: "⌘1-⌘9",
+    metricTwoLabel: "fast switching",
+    metricThree: "AI replies",
+    metricThreeLabel: "3 reply options",
+    mockupMeta: "3 accounts · AI enabled",
+    mockupShortcut: "⌘1-⌘9",
+    mockupCustomerLabel: "customer message",
+    mockupSuggestionLabel: "AI suggestion 1/3",
+    mockupSuggestion: "Hi! I checked the order. The courier is already on the way, about 18 minutes. If needed, I can send a payment link.",
+    mockupActions: ["Formal", "Casual", "Brief", "Rewrite"],
+    mockupKnowledge: "Knowledge: menu.pdf · pricing.xlsx · faq.docx",
+    sectionTitle: "Operators answer faster, more accurately, and keep context.",
+    sectionText: "WhatsApp Operator Copilot keeps all work WhatsApp accounts in one window and helps the operator write replies using the conversation, instructions and company documents.",
+    cards: [
+      ["Multiple accounts", "Each WhatsApp account has its own persistent session, survives restarts, and has its own color, badges and DND mode."],
+      ["AI suggestions", "AI generates 3 reply options for the open conversation: auto, formal, casual or brief."],
+      ["Draft rewrite", "The operator writes rough notes: price, address, condition. Copilot turns that into a proper customer reply."],
+      ["Conversation summary", "Quickly understand what the customer wanted, what was promised and what to do next."],
+      ["Knowledge base", "PDF, Excel, DOCX, menus, prices, FAQ and URLs can be attached to a specific account."],
+      ["Auto-suggest", "When a new message arrives, AI can suggest a reply if the mode is enabled."]
+    ],
+    painTitle: "When WhatsApp becomes the main sales channel, chaos starts quickly.",
+    painSubtitle: "One operator handles delivery, another answers VIP, a third handles wholesale. Accounts live in different windows, context gets lost, replies vary in quality.",
+    beforeTitle: "Before Copilot",
+    afterTitle: "With Copilot",
+    before: ["Multiple WhatsApp Web windows and browsers", "Operator searches prices, FAQ and rules manually", "Reply quality depends on shift mood and experience", "New operator takes too long to catch up"],
+    after: ["All accounts in one desktop app", "AI reads account instructions and knowledge base", "Draft turns into a finished reply", "Summary helps understand the conversation fast"],
+    buttonsTitle: "What is inside the app",
+    buttons: ["Accounts sidebar", "Unread badges", "DND mode", "AI suggestions", "Tone selector", "Draft rewrite", "Conversation summary", "Knowledge base", "Improve Instructions", "Claude / OpenAI"],
+    adviceTitle: "Main wow: AI learns from the real conversation.",
+    evidence: "Open a conversation and click Improve Instructions. The app reads recent messages and updates the account instructions around real customer questions.",
+    action: "Each account can have its own context: delivery, VIP, sales, support, menu, prices, refund rules.",
+    watch: "Result: less manual operator training, faster replies and fewer WhatsApp mistakes.",
+    faq: [
+      ["Is this WhatsApp Business API?", "No. It is a desktop app on top of WhatsApp Web for operators and multiple accounts."],
+      ["Can it use multiple accounts at once?", "Yes. Each account has a separate persistent session and fast shortcut."],
+      ["Does AI send messages by itself?", "No. AI helps prepare the reply. The operator controls sending."],
+      ["Which AI providers?", "Claude or OpenAI. You can use your own API key."],
+      ["Can we upload documents?", "Yes. PDF, DOCX, Excel, files and URLs as a knowledge base for a specific account."],
+      ["Who is it for?", "Restaurants, delivery, e-commerce, service companies and teams where WhatsApp is the main sales or support channel."]
+    ],
+    finalTitle: "Turn WhatsApp into an operator workspace, not tab chaos.",
+    footerCta: "Get demo"
   }
 } as const;
 
@@ -3158,10 +3230,10 @@ function WhatsAppCopilotMockup({ copy }: { copy: typeof WHATSAPP_COPY.ru }) {
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/15 font-mono font-bold text-primary">WA</div>
             <div>
               <div className="font-display text-lg font-bold">Operator Desk</div>
-              <div className="font-mono text-xs text-muted-foreground">3 accounts · AI enabled</div>
+              <div className="font-mono text-xs text-muted-foreground">{copy.mockupMeta}</div>
             </div>
           </div>
-          <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-1 font-mono text-xs text-primary">⌘1-⌘9</span>
+          <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-1 font-mono text-xs text-primary">{copy.mockupShortcut}</span>
         </div>
         <div className="grid gap-3 sm:grid-cols-[64px_1fr]">
           <div className="flex gap-2 sm:flex-col">
@@ -3173,19 +3245,19 @@ function WhatsAppCopilotMockup({ copy }: { copy: typeof WHATSAPP_COPY.ru }) {
           </div>
           <div className="space-y-3">
             <div className="rounded-2xl border border-border/50 bg-card/60 p-3">
-              <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.22em] text-primary">customer message</div>
+              <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.22em] text-primary">{copy.mockupCustomerLabel}</div>
               <div className="h-2 w-4/5 rounded-full bg-foreground/15" />
               <div className="mt-2 h-2 w-2/3 rounded-full bg-foreground/10" />
             </div>
             <div className="ml-auto rounded-2xl border border-primary/30 bg-primary/10 p-3">
-              <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.22em] text-primary">AI suggestion 1/3</div>
-              <p className="text-sm text-foreground/90">Здравствуйте! Проверил заказ. Курьер уже в пути, ориентир 18 минут. Если нужно, могу отправить ссылку на оплату.</p>
+              <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.22em] text-primary">{copy.mockupSuggestionLabel}</div>
+              <p className="text-sm text-foreground/90">{copy.mockupSuggestion}</p>
             </div>
             <div className="grid grid-cols-2 gap-2">
-              {["Formal", "Casual", "Brief", "Rewrite"].map((item) => <div key={item} className="rounded-xl border border-border/50 bg-background/70 px-3 py-2 text-center font-mono text-xs">{item}</div>)}
+              {copy.mockupActions.map((item) => <div key={item} className="rounded-xl border border-border/50 bg-background/70 px-3 py-2 text-center font-mono text-xs">{item}</div>)}
             </div>
             <div className="rounded-2xl border border-cyan-400/25 bg-cyan-400/10 p-3">
-              <div className="font-mono text-xs text-cyan-400">Knowledge: menu.pdf · pricing.xlsx · faq.docx</div>
+              <div className="font-mono text-xs text-cyan-400">{copy.mockupKnowledge}</div>
             </div>
           </div>
         </div>
@@ -3197,7 +3269,7 @@ function WhatsAppCopilotMockup({ copy }: { copy: typeof WHATSAPP_COPY.ru }) {
 function WhatsAppCopilotPage() {
   const { i18n } = useTranslation();
   const lang = getV115Lang(i18n.language);
-  const copy = WHATSAPP_COPY[lang === "kk" ? "kk" : "ru"];
+  const copy = WHATSAPP_COPY[lang === "kk" ? "kk" : lang === "en" ? "en" : "ru"];
   const primaryUrl = `https://t.me/doscode_bot?start=whatsapp_copilot_${lang === "kk" ? "kk" : "ru"}`;
   const secondaryUrl = `https://t.me/doscode_bot?start=whatsapp_copilot_fit_${lang === "kk" ? "kk" : "ru"}`;
   const isKk = lang === "kk";
