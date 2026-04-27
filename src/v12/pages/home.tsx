@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Terminal, Zap, Code2, Rocket, CheckCircle2, ChevronDown, Command, LayoutTemplate, Database, Cpu, Bot, LineChart, Timer, TrendingUp, TrendingDown, Minus, Check, X, Clock, Sun, Moon, ShoppingCart, Smartphone, Calculator, Clipboard, Send } from "lucide-react";
+import { ArrowRight, Terminal, Zap, Code2, Rocket, CheckCircle2, ChevronDown, Command, LayoutTemplate, Database, Cpu, Bot, LineChart, Timer, TrendingUp, TrendingDown, Minus, Check, X, Clock, Sun, Moon, ShoppingCart, Smartphone, Calculator, Clipboard, Send, Menu } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../v10/components/ui/accordion";
 import { Button } from "../../v10/components/ui/button";
 import { applyV10Theme, getV10ThemeFromRoot, type V10Theme } from "../../v10/theme-mode";
@@ -451,23 +451,37 @@ function ThemeSwitcher() {
 function Header() {
   const { t, i18n } = useTranslation();
   const lang = getV115Lang(i18n.language);
-  const isRestoPulsePage = typeof window !== "undefined" && ["/restopulse", "/restopulse/", "/kk/restopulse", "/kk/restopulse/"].includes(window.location.pathname);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const currentPath = typeof window !== "undefined" ? window.location.pathname : "/";
+  const isProductPage = ["/restopulse", "/restopulse/", "/kk/restopulse", "/kk/restopulse/", "/whatsapp", "/whatsapp/", "/kk/whatsapp", "/kk/whatsapp/"].includes(currentPath);
   const homePath = lang === "kk" ? "/kk/" : lang === "en" ? "/en/" : "/";
-  const navHref = (hash: string) => (isRestoPulsePage ? `${homePath}${hash}` : hash);
+  const productPath = (slug: "restopulse" | "whatsapp") => (lang === "kk" ? `/kk/${slug}` : `/${slug}`);
+  const navHref = (hash: string) => (isProductPage ? `${homePath}${hash}` : hash);
+  const productLabels = {
+    restopulse: "RestoPulse",
+    whatsapp: lang === "kk" ? "WhatsApp қосымша" : lang === "en" ? "WhatsApp app" : "WhatsApp app",
+  };
+  const navItems = [
+    { href: navHref("#services"), label: t("header.services"), testId: "nav-services" },
+    { href: navHref("#cases"), label: t("header.cases"), testId: "nav-cases" },
+    { href: productPath("restopulse"), label: productLabels.restopulse, testId: "nav-restopulse" },
+    { href: productPath("whatsapp"), label: productLabels.whatsapp, testId: "nav-whatsapp" },
+    { href: navHref("#process"), label: t("header.process"), testId: "nav-process" },
+    { href: navHref("#pricing"), label: t("header.pricing"), testId: "nav-pricing" },
+    { href: navHref("#faq"), label: t("header.faq"), testId: "nav-faq" },
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 border-b border-border/50 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-2 px-3 sm:px-6">
-        <div className="flex items-center gap-2 shrink-0">
+        <a href={homePath} className="flex items-center gap-2 shrink-0" aria-label="DosCode home">
           <Terminal className="h-5 w-5 text-primary" />
           <span className="font-display font-bold text-lg sm:text-xl tracking-tight">DosCode</span>
-        </div>
-        <nav className="hidden lg:flex items-center gap-5 xl:gap-8 text-sm font-medium text-muted-foreground font-mono" aria-label="Primary">
-          <a href={navHref("#services")} className="hover:text-foreground transition-colors" data-testid="nav-services">{t("header.services")}</a>
-          <a href={navHref("#cases")} className="hover:text-foreground transition-colors" data-testid="nav-cases">{t("header.cases")}</a>
-          <a href={navHref("#process")} className="hover:text-foreground transition-colors" data-testid="nav-process">{t("header.process")}</a>
-          <a href={navHref("#pricing")} className="hover:text-foreground transition-colors" data-testid="nav-pricing">{t("header.pricing")}</a>
-          <a href={navHref("#faq")} className="hover:text-foreground transition-colors" data-testid="nav-faq">{t("header.faq")}</a>
+        </a>
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-sm font-medium text-muted-foreground font-mono" aria-label="Primary">
+          {navItems.map((item) => (
+            <a key={item.testId} href={item.href} className="hover:text-foreground transition-colors" data-testid={item.testId}>{item.label}</a>
+          ))}
         </nav>
         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
           <ThemeSwitcher />
@@ -483,8 +497,47 @@ function Header() {
               <span className="text-sm">{t("header.cta")}</span>
             </Button>
           </a>
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 bg-card/40 text-foreground transition-colors hover:border-primary/40 hover:text-primary lg:hidden"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen((open) => !open)}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </div>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+            className="border-t border-border/50 bg-background/95 px-3 pb-4 pt-2 shadow-2xl backdrop-blur-md lg:hidden"
+          >
+            <nav className="mx-auto grid max-w-7xl gap-1 font-mono text-sm text-muted-foreground" aria-label="Mobile primary">
+              {navItems.map((item) => (
+                <a
+                  key={`mobile-${item.testId}`}
+                  href={item.href}
+                  className="rounded-xl px-3 py-3 transition-colors hover:bg-card/60 hover:text-foreground"
+                  data-testid={`mobile-${item.testId}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+              <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="mt-2" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="h-12 w-full justify-center gap-2 bg-primary font-mono text-primary-foreground hover:bg-primary/90">
+                  <Zap className="h-4 w-4" /> {t("header.cta")}
+                </Button>
+              </a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
