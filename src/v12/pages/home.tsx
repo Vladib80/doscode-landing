@@ -461,15 +461,18 @@ function Header() {
     restopulse: "RestoPulse",
     whatsapp: lang === "kk" ? "WhatsApp қосымша" : lang === "en" ? "WhatsApp app" : "WhatsApp app",
   };
+  const productItems = [
+    { href: productPath("restopulse"), label: productLabels.restopulse, desc: lang === "kk" ? "iiko + Telegram есептері" : "iiko + Telegram reports", testId: "nav-restopulse" },
+    { href: productPath("whatsapp"), label: productLabels.whatsapp, desc: lang === "kk" ? "WhatsApp операторына AI" : "AI desk for WhatsApp operators", testId: "nav-whatsapp" },
+  ];
   const navItems = [
     { href: navHref("#services"), label: t("header.services"), testId: "nav-services" },
     { href: navHref("#cases"), label: t("header.cases"), testId: "nav-cases" },
-    { href: productPath("restopulse"), label: productLabels.restopulse, testId: "nav-restopulse" },
-    { href: productPath("whatsapp"), label: productLabels.whatsapp, testId: "nav-whatsapp" },
     { href: navHref("#process"), label: t("header.process"), testId: "nav-process" },
     { href: navHref("#pricing"), label: t("header.pricing"), testId: "nav-pricing" },
     { href: navHref("#faq"), label: t("header.faq"), testId: "nav-faq" },
   ];
+  const productsLabel = lang === "kk" ? "Өнімдер" : lang === "en" ? "Products" : "Продукты";
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 border-b border-border/50 bg-background/80 backdrop-blur-md">
@@ -479,6 +482,25 @@ function Header() {
           <span className="font-display font-bold text-lg sm:text-xl tracking-tight">DosCode</span>
         </a>
         <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-sm font-medium text-muted-foreground font-mono" aria-label="Primary">
+          <div className="group relative">
+            <button
+              type="button"
+              className="inline-flex items-center gap-1 py-5 transition-colors hover:text-foreground"
+              data-testid="nav-products"
+              aria-haspopup="true"
+            >
+              {productsLabel}
+              <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+            </button>
+            <div className="invisible absolute left-0 top-full z-50 w-72 translate-y-2 rounded-2xl border border-border/60 bg-background/95 p-2 opacity-0 shadow-2xl backdrop-blur-md transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+              {productItems.map((item) => (
+                <a key={item.testId} href={item.href} className="block rounded-xl px-3 py-3 transition-colors hover:bg-card/70 hover:text-foreground" data-testid={item.testId}>
+                  <span className="block font-bold text-foreground">{item.label}</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{item.desc}</span>
+                </a>
+              ))}
+            </div>
+          </div>
           {navItems.map((item) => (
             <a key={item.testId} href={item.href} className="hover:text-foreground transition-colors" data-testid={item.testId}>{item.label}</a>
           ))}
@@ -518,6 +540,20 @@ function Header() {
             className="border-t border-border/50 bg-background/95 px-3 pb-4 pt-2 shadow-2xl backdrop-blur-md lg:hidden"
           >
             <nav className="mx-auto grid max-w-7xl gap-1 font-mono text-sm text-muted-foreground" aria-label="Mobile primary">
+              <div className="px-3 pb-1 pt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">{productsLabel}</div>
+              {productItems.map((item) => (
+                <a
+                  key={`mobile-${item.testId}`}
+                  href={item.href}
+                  className="rounded-xl border border-border/45 bg-card/35 px-3 py-3 transition-colors hover:bg-card/70 hover:text-foreground"
+                  data-testid={`mobile-${item.testId}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="block font-bold text-foreground">{item.label}</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{item.desc}</span>
+                </a>
+              ))}
+              <div className="mt-2 px-3 pb-1 pt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">Menu</div>
               {navItems.map((item) => (
                 <a
                   key={`mobile-${item.testId}`}
