@@ -459,11 +459,15 @@ function Header() {
   const navHref = (hash: string) => (isProductPage ? `${homePath}${hash}` : hash);
   const productLabels = {
     restopulse: "RestoPulse",
-    whatsapp: lang === "kk" ? "WhatsApp қосымша" : lang === "en" ? "WhatsApp app" : "WhatsApp app",
+    whatsapp: lang === "kk" ? "WhatsApp қосымшасы" : lang === "en" ? "WhatsApp app" : "WhatsApp-приложение",
+  };
+  const productDescriptions = {
+    restopulse: lang === "kk" ? "iiko + Telegram есептері" : lang === "en" ? "iiko + Telegram reports" : "отчеты iiko в Telegram",
+    whatsapp: lang === "kk" ? "WhatsApp операторына AI" : lang === "en" ? "AI desk for WhatsApp operators" : "AI-рабочее место для операторов",
   };
   const productItems = [
-    { href: productPath("restopulse"), label: productLabels.restopulse, desc: lang === "kk" ? "iiko + Telegram есептері" : "iiko + Telegram reports", testId: "nav-restopulse" },
-    { href: productPath("whatsapp"), label: productLabels.whatsapp, desc: lang === "kk" ? "WhatsApp операторына AI" : "AI desk for WhatsApp operators", testId: "nav-whatsapp" },
+    { href: productPath("restopulse"), label: productLabels.restopulse, desc: productDescriptions.restopulse, testId: "nav-restopulse" },
+    { href: productPath("whatsapp"), label: productLabels.whatsapp, desc: productDescriptions.whatsapp, testId: "nav-whatsapp" },
   ];
   const navItems = [
     { href: navHref("#services"), label: t("header.services"), testId: "nav-services" },
