@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Terminal, Zap, Code2, Rocket, CheckCircle2, ChevronDown, Command, LayoutTemplate, Database, Cpu, Bot, LineChart, Timer, TrendingUp, TrendingDown, Minus, Check, X, Clock, Sun, Moon } from "lucide-react";
+import { ArrowRight, Terminal, Zap, Code2, Rocket, CheckCircle2, ChevronDown, Command, LayoutTemplate, Database, Cpu, Bot, LineChart, Timer, TrendingUp, TrendingDown, Minus, Check, X, Clock, Sun, Moon, ShoppingCart, Smartphone } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../v10/components/ui/accordion";
 import { Button } from "../../v10/components/ui/button";
 import { applyV10Theme, getV10ThemeFromRoot, type V10Theme } from "../../v10/theme-mode";
@@ -308,7 +308,7 @@ function Hero() {
           className="text-xs font-mono text-muted-foreground tracking-wider mb-4"
           data-testid="hero-kicker"
         >
-          // Almaty · 2020 — present
+          {t("hero.kicker")}
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -477,6 +477,212 @@ function Services() {
             </div>
           </div>
 
+          {/* E-commerce */}
+          <div className="col-span-1 lg:col-span-2 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 overflow-hidden relative group hover:border-primary/30 transition-colors">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h3 className="text-2xl font-bold mb-3 flex items-center gap-3 font-display">
+                  <ShoppingCart className="text-primary w-6 h-6" /> {t("services.ecommerce.title")}
+                </h3>
+                <p className="text-muted-foreground max-w-xl">{t("services.ecommerce.desc")}</p>
+              </div>
+              <div className="hidden sm:flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-[0.24em] text-primary">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                Checkout Flow
+              </div>
+            </div>
+
+            <div className="mt-8 grid gap-3 lg:grid-cols-[minmax(0,1.4fr)_minmax(260px,0.9fr)]">
+              <div className="rounded-[24px] border border-border/50 bg-card/80 p-4 sm:p-5 shadow-inner relative overflow-hidden">
+                <div className="absolute top-0 left-0 h-20 w-44 rounded-full bg-primary/10 blur-[42px]" />
+                <div className="absolute bottom-[-10px] right-0 h-24 w-24 rounded-full bg-orange-400/10 blur-[36px]" />
+
+                <div className="relative z-10 flex items-center gap-2 mb-4">
+                  <div className="w-2.5 h-2.5 rounded-full bg-destructive/50" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-primary/60" />
+                  <div className="ml-2 h-8 flex-1 rounded-full border border-border/60 bg-background/80" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
+                    <ShoppingCart className="w-4 h-4" />
+                  </div>
+                </div>
+
+                <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {[129, 79, 159].map((price, i) => (
+                    <motion.div
+                      key={price}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.45, delay: i * 0.08 }}
+                      className="rounded-2xl border border-border/50 bg-background/75 p-3 space-y-3"
+                    >
+                      <div className="aspect-[4/3] rounded-xl border border-white/5 bg-[linear-gradient(135deg,rgba(132,204,22,0.22),rgba(251,146,60,0.08),transparent)]" />
+                      <div className="space-y-2">
+                        <div className="h-2 w-3/4 rounded-full bg-foreground/10" />
+                        <div className="h-2 w-1/2 rounded-full bg-foreground/10" />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-mono text-primary">{price}KZT</span>
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: 0.2 }}
+                  className="absolute bottom-4 right-4 rounded-full border border-primary/30 bg-background/90 px-3 py-1.5 text-[10px] font-mono text-primary backdrop-blur"
+                >
+                  Catalog • Cart • Pay
+                </motion.div>
+              </div>
+
+              <div className="rounded-[24px] border border-border/50 bg-card/80 p-4 sm:p-5 shadow-inner relative overflow-hidden flex flex-col justify-between gap-4">
+                <div className="absolute top-0 right-0 h-24 w-24 rounded-full bg-primary/12 blur-[40px]" />
+
+                <div className="relative z-10 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.24em] text-muted-foreground">
+                  <span>Core Modules</span>
+                  <span className="text-primary">Stack</span>
+                </div>
+
+                <div className="relative z-10 space-y-3">
+                  {[
+                    { label: "Catalog", detail: "collections • filters", width: "76%" },
+                    { label: "Checkout", detail: "cart • payments", width: "92%" },
+                    { label: "Delivery", detail: "zones • pickup", width: "63%" },
+                  ].map((item, i) => (
+                    <motion.div
+                      key={`${item.label}-${item.width}`}
+                      initial={{ opacity: 0, x: 12 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.08 }}
+                      className="rounded-2xl border border-border/50 bg-background/70 p-3"
+                    >
+                      <div className="mb-2 flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="h-2 w-2 rounded-full bg-primary" />
+                            <span className="text-[11px] font-mono text-foreground">{item.label}</span>
+                          </div>
+                          <div className="mt-1 text-[10px] font-mono text-muted-foreground">{item.detail}</div>
+                        </div>
+                        <span className="rounded-full border border-primary/20 bg-primary/10 px-2 py-1 text-[9px] font-mono uppercase tracking-[0.18em] text-primary">
+                          Ready
+                        </span>
+                      </div>
+                      <div className="h-2 overflow-hidden rounded-full bg-border/70">
+                        <motion.div
+                          className="h-full bg-primary/60"
+                          initial={{ width: 0 }}
+                          whileInView={{ width: item.width }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6, delay: 0.12 + i * 0.08 }}
+                        />
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <div className="relative z-10 grid grid-cols-3 gap-2 text-[10px] font-mono">
+                  {["Catalog", "Payment", "Logistics"].map((label, i) => (
+                    <div
+                      key={label}
+                      className={`rounded-xl border px-3 py-2 text-center ${i === 0 ? "border-primary/30 bg-primary/10 text-primary" : "border-border/50 bg-background/70 text-muted-foreground"}`}
+                    >
+                      {label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Native Apps */}
+          <div className="col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 group hover:border-primary/30 transition-colors">
+            <h3 className="text-2xl font-bold mb-3 flex items-center gap-3 font-display">
+              <Smartphone className="text-primary w-6 h-6" /> {t("services.nativeApps.title")}
+            </h3>
+            <p className="text-muted-foreground mb-8">{t("services.nativeApps.desc")}</p>
+
+            <div className="bg-card border border-border/50 rounded-2xl p-4 h-[200px] relative overflow-hidden shadow-inner">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(132,204,22,0.18),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(34,211,238,0.12),transparent_38%)]" />
+
+              <div className="absolute top-4 right-4 flex gap-1.5 text-[10px] font-mono">
+                <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-1 text-primary">iOS</span>
+                <span className="rounded-full border border-border/50 bg-background/70 px-2 py-1 text-muted-foreground">Android</span>
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -12, rotate: -10 }}
+                whileInView={{ opacity: 1, x: 0, rotate: -8 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45 }}
+                className="absolute left-6 top-8 h-[136px] w-[78px] rounded-[22px] border border-border/60 bg-[#0f1115] p-1.5 shadow-[0_0_25px_-10px_rgba(132,204,22,0.35)]"
+              >
+                <div className="h-full w-full rounded-[18px] bg-[#0a0a0a] p-2">
+                  <div className="mb-3 flex items-center justify-between text-[6px] font-mono text-muted-foreground">
+                    <span>9:41</span>
+                    <span className="h-1 w-4 rounded-full bg-primary/50" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-10 rounded-xl border border-primary/20 bg-primary/15" />
+                    <div className="grid grid-cols-2 gap-1.5">
+                      <div className="h-8 rounded-lg border border-border/50 bg-background" />
+                      <div className="h-8 rounded-lg border border-border/50 bg-background" />
+                    </div>
+                    <div className="h-8 rounded-lg border border-border/50 bg-background" />
+                    <div className="h-5 w-12 rounded-full bg-primary/20" />
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 12, rotate: 10 }}
+                whileInView={{ opacity: 1, x: 0, rotate: 8 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: 0.08 }}
+                className="absolute right-8 top-10 h-[148px] w-[86px] rounded-[24px] border border-border/60 bg-[#0f1115] p-1.5 shadow-[0_0_30px_-12px_rgba(34,211,238,0.3)]"
+              >
+                <div className="h-full w-full rounded-[20px] bg-[#0a0a0a] p-2">
+                  <div className="mb-3 flex items-center justify-between text-[6px] font-mono text-muted-foreground">
+                    <span>9:41</span>
+                    <span className="h-1 w-4 rounded-full bg-cyan-400/60" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-16 rounded-2xl border border-cyan-400/20 bg-cyan-400/10" />
+                    <div className="h-2 w-10 rounded-full bg-foreground/12" />
+                    <div className="h-2 w-14 rounded-full bg-foreground/10" />
+                    <div className="grid grid-cols-3 gap-1">
+                      <div className="h-6 rounded-lg border border-border/50 bg-background" />
+                      <div className="h-6 rounded-lg border border-border/50 bg-background" />
+                      <div className="h-6 rounded-lg border border-border/50 bg-background" />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.12 }}
+                className="absolute bottom-4 left-4 right-4 rounded-2xl border border-border/50 bg-background/80 px-3 py-2 backdrop-blur"
+              >
+                <div className="flex items-center justify-between text-[10px] font-mono">
+                  <span className="text-muted-foreground">Push • Auth • QR • Maps</span>
+                  <span className="text-primary">60fps</span>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
           {/* Landing Sprint */}
           <div className="col-span-1 border border-border/50 bg-background rounded-3xl p-6 sm:p-8 group hover:border-primary/30 transition-colors">
             <h3 className="text-2xl font-bold mb-3 font-display">{t("services.sprint.title")}</h3>
@@ -530,37 +736,6 @@ function Services() {
             </div>
           </div>
 
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function StatsBar() {
-  const { t } = useTranslation();
-  const stats = [
-    { value: "40+", label: t("stats.projects") },
-    { value: "5", label: t("stats.years") },
-    { value: t("stats.valueMvp"), label: t("stats.mvp") },
-    { value: t("stats.valueEstimate"), label: t("stats.estimate") },
-  ];
-  return (
-    <section className="border-t border-border/50 py-16 sm:py-20 bg-background" data-testid="stats-bar">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 max-w-5xl mx-auto text-center">
-          {stats.map((s, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              data-testid={`stat-${i}`}
-            >
-              <div className="text-4xl sm:text-5xl md:text-6xl font-bold font-display text-primary break-words">{s.value}</div>
-              <div className="text-xs sm:text-sm font-mono uppercase tracking-widest text-muted-foreground mt-3">{s.label}</div>
-            </motion.div>
-          ))}
         </div>
       </div>
     </section>
@@ -1041,9 +1216,154 @@ function Cases() {
       ),
       details: t("cases.mmg.details", { returnObjects: true }) as CaseDetails,
     },
+    {
+      title: "WhatsApp Operator Copilot",
+      metric: t("cases.whatsapp.metric"),
+      desc: t("cases.whatsapp.desc"),
+      visual: (
+        <div className="w-full h-full bg-[#0a0a0a] border border-border/50 rounded-xl p-3 shadow-inner relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-40 h-40 bg-primary/10 blur-[52px] rounded-full pointer-events-none" />
+          <div className="absolute bottom-0 right-0 w-44 h-44 bg-cyan-500/10 blur-[60px] rounded-full pointer-events-none" />
+
+          <div className="relative z-10 flex h-full flex-col gap-2 sm:flex-row">
+            <div className="flex w-full shrink-0 flex-row gap-1.5 sm:w-[56px] sm:flex-col">
+              {[
+                { label: "OPS", color: "bg-primary text-primary-foreground", badge: "4" },
+                { label: "WEB", color: "bg-orange-400 text-black", badge: "2" },
+                { label: "VIP", color: "bg-cyan-400 text-black", badge: "1" },
+              ].map((acc, i) => (
+                <motion.div
+                  key={acc.label}
+                  initial={{ opacity: 0, x: i === 0 ? 0 : -8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.08 * i }}
+                  className={`relative flex h-10 w-10 items-center justify-center rounded-2xl border border-border/40 font-mono text-[10px] font-bold shadow-[0_0_24px_-14px_rgba(132,204,22,0.45)] sm:h-11 sm:w-11 ${acc.color}`}
+                >
+                  {acc.label}
+                  <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full border border-[#0a0a0a] bg-background px-1 text-[8px] font-mono text-foreground">
+                    {acc.badge}
+                  </span>
+                </motion.div>
+              ))}
+              <div className="hidden flex-1 rounded-2xl border border-dashed border-border/40 sm:block" />
+            </div>
+
+            <div className="flex min-h-0 flex-1 flex-col gap-2">
+              <div className="flex items-center justify-between rounded-xl border border-border/40 bg-card/50 px-2.5 py-2">
+                <div className="min-w-0">
+                  <div className="truncate text-[7px] font-mono uppercase tracking-[0.24em] text-primary">WhatsApp Operator Desk</div>
+                  <div className="truncate text-[8px] font-bold text-foreground sm:text-[9px]">Active account / support queue</div>
+                </div>
+                <div className="flex items-center gap-1.5 text-[7px] font-mono text-muted-foreground">
+                  <span className="rounded-full border border-primary/20 bg-primary/10 px-1.5 py-0.5 text-primary">AI</span>
+                  <span className="hidden sm:inline">⌘1-⌘9</span>
+                </div>
+              </div>
+
+              <div className="flex-1 rounded-[18px] border border-border/40 bg-[#0f1115] p-2 sm:p-2.5 flex flex-col gap-2 min-h-0">
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.08 }}
+                  className="max-w-[82%] rounded-2xl rounded-bl-sm border border-border/40 bg-card/70 px-2.5 py-2"
+                >
+                  <div className="h-1.5 w-20 rounded-full bg-foreground/14" />
+                  <div className="mt-1.5 h-1.5 w-28 rounded-full bg-foreground/10" />
+                  <div className="mt-1.5 text-[7px] font-mono text-muted-foreground">customer message</div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.16 }}
+                  className="ml-auto max-w-[80%] rounded-2xl rounded-br-sm border border-primary/30 bg-primary/10 px-2.5 py-2"
+                >
+                  <div className="h-1.5 w-16 rounded-full bg-primary/50" />
+                  <div className="mt-1.5 h-1.5 w-24 rounded-full bg-primary/35" />
+                  <div className="mt-1.5 text-[7px] font-mono text-primary">draft / rewritten</div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.24 }}
+                  className="max-w-[86%] rounded-2xl rounded-bl-sm border border-border/40 bg-card/70 px-2.5 py-2"
+                >
+                  <div className="h-1.5 w-24 rounded-full bg-foreground/14" />
+                  <div className="mt-1.5 h-1.5 w-16 rounded-full bg-foreground/10" />
+                  <div className="mt-1.5 text-[7px] font-mono text-muted-foreground">follow-up + context</div>
+                </motion.div>
+
+                <div className="mt-auto flex items-center gap-2 rounded-2xl border border-border/40 bg-background/80 px-2.5 py-2">
+                  <div className="min-w-0 flex-1">
+                    <div className="h-1.5 w-24 rounded-full bg-foreground/10" />
+                    <div className="mt-1.5 h-1.5 w-16 rounded-full bg-foreground/8" />
+                  </div>
+                  <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-1 text-[7px] font-mono uppercase tracking-[0.18em] text-primary">
+                    rewrite
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex min-h-0 flex-col gap-2 sm:w-[162px]">
+              <div className="rounded-[18px] border border-primary/20 bg-card/70 p-2.5">
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5">
+                    <Bot className="h-3.5 w-3.5 text-primary" />
+                    <span className="text-[8px] font-mono uppercase tracking-[0.24em] text-primary">AI Assist</span>
+                  </div>
+                  <span className="rounded-full border border-border/40 px-1.5 py-0.5 text-[7px] font-mono text-muted-foreground">Auto</span>
+                </div>
+
+                <div className="space-y-1.5">
+                  {[1, 2, 3].map((n, i) => (
+                    <motion.div
+                      key={n}
+                      initial={{ opacity: 0, x: 10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.12 + i * 0.08 }}
+                      className={`rounded-xl border px-2 py-2 ${i === 0 ? "border-primary/30 bg-primary/10" : "border-border/40 bg-background/70"}`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className={`flex h-4 w-4 items-center justify-center rounded-full text-[7px] font-mono ${i === 0 ? "bg-primary text-primary-foreground" : "bg-card text-muted-foreground"}`}>
+                          {n}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className={`h-1.5 rounded-full ${i === 0 ? "bg-primary/50" : "bg-foreground/12"}`} />
+                          <div className={`mt-1.5 h-1.5 rounded-full ${i === 0 ? "w-4/5 bg-primary/35" : "w-3/4 bg-foreground/10"}`} />
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-auto rounded-[18px] border border-border/40 bg-card/60 p-2.5">
+                <div className="mb-2 text-[8px] font-mono uppercase tracking-[0.24em] text-muted-foreground">Knowledge</div>
+                <div className="space-y-1.5">
+                  {["policy.pdf", "faq.docx", "pricing.xlsx"].map((file, i) => (
+                    <div key={file} className={`flex items-center justify-between rounded-lg border px-2 py-1.5 ${i === 0 ? "border-primary/30 bg-primary/10 text-primary" : "border-border/40 bg-background/70 text-foreground/80"}`}>
+                      <span className="truncate text-[7px] font-mono">{file}</span>
+                      <span className="text-[7px] font-mono text-muted-foreground">ok</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+      details: t("cases.whatsapp.details", { returnObjects: true }) as CaseDetails,
+    },
   ];
 
-  const [expandedId, setExpandedId] = useState<number | null>(0);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
 
   return (
     <section id="cases" className="py-20 sm:py-24 relative">
@@ -1174,6 +1494,27 @@ function Cases() {
             );
           })}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45, delay: 0.15 }}
+          className="mt-8 rounded-3xl border border-primary/20 bg-primary/5 p-5 sm:mt-10 sm:p-6"
+        >
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl">
+              <div className="text-[11px] font-mono uppercase tracking-[0.24em] text-primary/80">{t("cases.ctaKicker")}</div>
+              <div className="mt-2 text-xl font-bold leading-tight text-foreground sm:text-2xl">{t("cases.ctaTitle")}</div>
+              <div className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">{t("cases.ctaNote")}</div>
+            </div>
+            <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="w-full lg:w-auto">
+              <Button size="lg" className="w-full lg:w-auto font-mono" data-testid="btn-cases-cta">
+                {t("cases.ctaButton")}
+              </Button>
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -1184,26 +1525,26 @@ function FastLaunch() {
   const logLines = t("fastLaunch.logLines", { returnObjects: true }) as string[];
   const tStamps = ["[T-48:00]", "[T-45:30]", "[T-24:00]", "[T-12:00]", "[T-02:00]", "[T-00:30]", "[T-00:00]"];
   return (
-    <section className="py-20 sm:py-24 bg-primary text-primary-foreground relative overflow-hidden">
+    <section className="py-14 sm:py-24 bg-primary text-primary-foreground relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiMwMDAiIG9wYWNpdHk9IjAuMSIvPjwvc3ZnPg==')] opacity-30" />
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 lg:gap-16">
           <div className="lg:w-1/2 w-full">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/20 bg-black/5 text-black font-mono text-xs sm:text-sm font-bold mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/20 bg-black/5 text-black font-mono text-xs sm:text-sm font-bold mb-4 sm:mb-6">
               <Timer className="w-4 h-4" /> {t("fastLaunch.badge")}
             </div>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-black font-display">{t("fastLaunch.title")}</h2>
-            <p className="text-xl sm:text-2xl md:text-3xl font-bold text-black mb-4">{t("fastLaunch.guarantee")}</p>
-            <p className="text-lg sm:text-2xl mb-10 text-black font-medium leading-tight">{t("fastLaunch.subtitle")}</p>
-            <div className="space-y-4 font-mono text-sm sm:text-base">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-4 sm:mb-6 text-black font-display">{t("fastLaunch.title")}</h2>
+            <p className="text-lg sm:text-2xl md:text-3xl font-bold text-black mb-3 sm:mb-4">{t("fastLaunch.guarantee")}</p>
+            <p className="text-base sm:text-2xl mb-7 sm:mb-10 text-black font-medium leading-tight">{t("fastLaunch.subtitle")}</p>
+            <div className="space-y-3 sm:space-y-4 font-mono text-sm sm:text-base">
               {[t("fastLaunch.bullet1"), t("fastLaunch.bullet2"), t("fastLaunch.bullet3"), t("fastLaunch.bullet4")].map((b, i) => (
-                <div key={i} className="flex items-center gap-4 bg-black/6 p-4 rounded-xl border border-black/12 transition-colors hover:bg-black/10">
+                <div key={i} className="flex items-center gap-3 sm:gap-4 bg-black/6 p-3 sm:p-4 rounded-xl border border-black/12 transition-colors hover:bg-black/10">
                   <CheckCircle2 className="w-5 h-5 text-black shrink-0" />
                   <span className="text-black font-medium">{b}</span>
                 </div>
               ))}
             </div>
-            <div className="mt-12 pt-8 border-t border-black/10 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+            <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-black/10 flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8">
               <div>
                 <div className="text-sm font-bold text-black/75 uppercase tracking-widest mb-1">{t("fastLaunch.priceLabel")}</div>
                 <div className="text-3xl sm:text-4xl font-bold text-black font-mono">{t("fastLaunch.price")}</div>
@@ -1215,7 +1556,7 @@ function FastLaunch() {
           </div>
 
           <div className="lg:w-1/2 w-full">
-            <div className="bg-[#0a0a0a] text-white rounded-3xl p-5 sm:p-8 font-mono text-xs sm:text-sm relative shadow-2xl overflow-hidden border border-black/20 h-[440px] sm:h-[500px] flex flex-col">
+            <div className="bg-[#0a0a0a] text-white rounded-3xl p-4 sm:p-8 font-mono text-[10px] sm:text-sm relative shadow-2xl overflow-hidden border border-black/20 h-[330px] sm:h-[500px] flex flex-col">
               <div className="absolute right-[-40px] bottom-[-20px] text-[120px] sm:text-[180px] font-bold opacity-[0.03] leading-none select-none pointer-events-none">48H</div>
               <div className="text-primary mb-4 sm:mb-6 flex items-center justify-between border-b border-white/10 pb-3 sm:pb-4">
                 <div className="flex items-center gap-2 min-w-0"><Terminal className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" /> <span className="truncate">{t("fastLaunch.logTitle")}</span></div>
@@ -1226,18 +1567,19 @@ function FastLaunch() {
                 </div>
               </div>
 
-              <div className="space-y-3 sm:space-y-4 opacity-80 flex-1 overflow-hidden relative">
+              <div className="space-y-2 sm:space-y-4 opacity-80 flex-1 overflow-hidden relative">
                 <motion.div
                   initial={{ y: 50 }}
                   whileInView={{ y: 0 }}
                   transition={{ duration: 1, ease: "easeOut" }}
-                  className="space-y-3 sm:space-y-4"
+                  className="space-y-2 sm:space-y-4"
                 >
                   {logLines.map((line, i) => {
                     const isLast = i === logLines.length - 1;
                     const isPerf = i === 4;
+                    const hideOnMobile = i === 4 || i === 5;
                     return (
-                      <p key={i} className={`flex gap-2 sm:gap-4 ${isLast ? "font-bold" : ""}`}>
+                      <p key={i} className={`${hideOnMobile ? "hidden sm:flex" : "flex"} gap-2 sm:gap-4 ${isLast ? "font-bold" : ""}`}>
                         <span className={`w-16 sm:w-20 shrink-0 ${isLast ? "text-primary" : "text-muted-foreground"}`}>{tStamps[i]}</span>
                         <span className={`min-w-0 break-words ${isPerf ? "text-cyan-400" : isLast ? "text-primary inline-flex items-center gap-2" : ""}`}>
                           {isLast && <Rocket className="w-4 h-4 inline shrink-0" />}
@@ -1507,11 +1849,10 @@ export default function Home() {
       <main>
         <Hero />
         <FastLaunch />
-        <StatsBar />
+        <Services />
         <CapabilitiesMarquee />
         <Cases />
         <Testimonials />
-        <Services />
         <Process />
         <Pricing />
         <FAQ />
