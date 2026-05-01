@@ -18,6 +18,7 @@ const rollupInputs = {
   restopulseKk: 'kk/restopulse/index.html',
   whatsapp: 'whatsapp/index.html',
   whatsappKk: 'kk/whatsapp/index.html',
+  eobEra: 'eob-era/index.html',
   contacts: 'contacts/index.html',
   privacy: 'privacy/index.html',
   terms: 'terms/index.html',

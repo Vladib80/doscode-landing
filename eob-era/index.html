@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#f4efe2" />
+    <title>PaperERA by DosCode - Dental EOB to Open Dental ERA Pitch</title>
+    <meta
+      name="description"
+      content="A simple dentist-friendly pitch deck for validating PaperERA: turning paper dental EOBs into Open Dental-ready ERA import files."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4efe2;
+        --ink: #17130f;
+        --muted: #675f55;
+        --card: rgba(255, 252, 244, 0.86);
+        --card-solid: #fffaf0;
+        --line: rgba(23, 19, 15, 0.14);
+        --gold: #c9892b;
+        --orange: #f36b2d;
+        --green: #2a9d72;
+        --blue: #3566ff;
+        --red: #db4b3f;
+        --shadow: 0 24px 80px rgba(43, 31, 18, 0.16);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top left, rgba(243, 107, 45, 0.18), transparent 34rem),
+          radial-gradient(circle at bottom right, rgba(53, 102, 255, 0.12), transparent 34rem),
+          linear-gradient(135deg, #f7f0df 0%, #efe3ca 100%);
+        color: var(--ink);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.28;
+        background-image:
+          linear-gradient(rgba(23, 19, 15, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(23, 19, 15, 0.05) 1px, transparent 1px);
+        background-size: 46px 46px;
+        mask-image: linear-gradient(to bottom, #000, transparent 86%);
+      }
+
+      a { color: inherit; }
+
+      .topbar {
+        position: fixed;
+        z-index: 20;
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(1120px, calc(100vw - 28px));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 10px 12px 10px 16px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 250, 240, 0.72);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 10px 40px rgba(43, 31, 18, 0.11);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 860;
+        letter-spacing: -0.03em;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 11px;
+        background: var(--ink);
+        color: #fff8e8;
+        font-weight: 900;
+      }
+
+      .nav-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .nav-actions a, .nav-actions button {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255,255,255,0.42);
+        color: var(--ink);
+        padding: 9px 12px;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 760;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .deck {
+        position: relative;
+        z-index: 1;
+        width: min(1180px, calc(100vw - 28px));
+        margin: 0 auto;
+        padding: 94px 0 56px;
+      }
+
+      .slide {
+        min-height: calc(100vh - 120px);
+        display: grid;
+        align-items: center;
+        padding: 32px 0;
+        scroll-margin-top: 90px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 38px;
+        background: var(--card);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+        padding: clamp(26px, 4vw, 56px);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .panel::after {
+        content: "";
+        position: absolute;
+        inset: auto -90px -130px auto;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(201, 137, 43, 0.22), transparent 68%);
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 12px;
+        background: rgba(255, 255, 255, 0.48);
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 780;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      h1, h2, h3, p { margin: 0; }
+
+      h1 {
+        max-width: 940px;
+        margin-top: 24px;
+        font-size: clamp(44px, 7.4vw, 96px);
+        line-height: 0.96;
+        letter-spacing: -0.078em;
+      }
+
+      h2 {
+        max-width: 880px;
+        margin-top: 18px;
+        font-size: clamp(36px, 5.4vw, 74px);
+        line-height: 0.96;
+        letter-spacing: -0.07em;
+      }
+
+      h3 {
+        font-size: clamp(22px, 2.3vw, 31px);
+        line-height: 1.04;
+        letter-spacing: -0.046em;
+      }
+
+      .lead {
+        max-width: 760px;
+        margin-top: 22px;
+        color: var(--muted);
+        font-size: clamp(19px, 2.2vw, 28px);
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 18px;
+        margin-top: 42px;
+      }
+
+      .span-4 { grid-column: span 4; }
+      .span-5 { grid-column: span 5; }
+      .span-6 { grid-column: span 6; }
+      .span-7 { grid-column: span 7; }
+      .span-12 { grid-column: span 12; }
+
+      .card {
+        position: relative;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: 24px;
+        background: rgba(255, 252, 244, 0.7);
+      }
+
+      .card.dark {
+        color: #fff7e8;
+        background: #17130f;
+        border-color: rgba(255,255,255,0.12);
+      }
+
+      .card.orange {
+        background: linear-gradient(135deg, rgba(243, 107, 45, 0.18), rgba(255, 252, 244, 0.78));
+      }
+
+      .card.blue {
+        background: linear-gradient(135deg, rgba(53, 102, 255, 0.14), rgba(255, 252, 244, 0.78));
+      }
+
+      .label {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .dark .label { color: rgba(255, 247, 232, 0.58); }
+
+      .metric {
+        margin-top: 10px;
+        font-size: clamp(31px, 4.6vw, 56px);
+        font-weight: 900;
+        line-height: 0.96;
+        letter-spacing: -0.062em;
+      }
+
+      .small {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.45;
+      }
+
+      .dark .small { color: rgba(255, 247, 232, 0.72); }
+
+      ul.clean {
+        margin: 20px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 12px;
+      }
+
+      ul.clean li {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        color: var(--muted);
+        font-size: clamp(17px, 1.5vw, 21px);
+        line-height: 1.34;
+      }
+
+      ul.clean li::before {
+        content: "";
+        flex: 0 0 10px;
+        width: 10px;
+        height: 10px;
+        margin-top: 9px;
+        border-radius: 50%;
+        background: var(--orange);
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+        margin-top: 30px;
+        align-items: stretch;
+      }
+
+      .step {
+        min-height: 180px;
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        padding: 18px;
+        background: rgba(255, 252, 244, 0.76);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+      }
+
+      .step:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        background: var(--ink);
+        color: #fff8e8;
+        font-weight: 900;
+      }
+
+      .icon {
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        border-radius: 18px;
+        background: #17130f;
+        color: #fff8e8;
+        font-size: 26px;
+      }
+
+      .step h3 { margin-top: 18px; font-size: 21px; }
+      .step p { margin-top: 8px; color: var(--muted); line-height: 1.34; }
+
+      .screen {
+        border-radius: 30px;
+        border: 10px solid #17130f;
+        background: #fffaf0;
+        box-shadow: 0 28px 70px rgba(23,19,15,0.22);
+        overflow: hidden;
+      }
+
+      .screen-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px;
+        background: #17130f;
+        color: #fff8e8;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .screen-body { padding: 18px; }
+
+      .dropzone {
+        border: 2px dashed rgba(23,19,15,0.26);
+        border-radius: 24px;
+        padding: 26px 18px;
+        text-align: center;
+        background: rgba(243,107,45,0.08);
+      }
+
+      .status-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: center;
+        margin-top: 12px;
+        padding: 13px 14px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fffdf7;
+        font-size: 14px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border-radius: 999px;
+        padding: 7px 10px;
+        font-size: 12px;
+        font-weight: 820;
+      }
+
+      .pill.green { background: rgba(42, 157, 114, 0.14); color: #1b7d59; }
+      .pill.yellow { background: rgba(201, 137, 43, 0.17); color: #946012; }
+      .pill.red { background: rgba(219, 75, 63, 0.14); color: #a9332b; }
+
+      .comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-top: 34px;
+      }
+
+      .before-after {
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        padding: 26px;
+        min-height: 330px;
+        background: rgba(255, 252, 244, 0.72);
+      }
+
+      .before-after.after {
+        background: #17130f;
+        color: #fff7e8;
+      }
+
+      .before-after.after .small, .before-after.after li { color: rgba(255,247,232,0.72); }
+
+      .risk-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .risk {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 20px;
+        background: rgba(255, 252, 244, 0.72);
+      }
+
+      .risk strong { display: block; font-size: 18px; letter-spacing: -0.03em; }
+      .risk span { display: block; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+
+      .questions {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .question {
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 18px;
+        background: rgba(255,255,255,0.5);
+        font-size: 18px;
+        line-height: 1.3;
+      }
+
+      .footer-note {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-weight: 850;
+        border: 1px solid var(--line);
+        background: #17130f;
+        color: #fff7e8;
+      }
+
+      .button.secondary { background: rgba(255,255,255,0.54); color: var(--ink); }
+
+      @media (max-width: 900px) {
+        .topbar { position: sticky; top: 8px; transform: none; left: auto; width: calc(100vw - 18px); margin: 8px auto 0; }
+        .deck { padding-top: 18px; }
+        .slide { min-height: auto; padding: 12px 0; }
+        .panel { border-radius: 28px; }
+        .grid, .comparison, .questions, .risk-grid { grid-template-columns: 1fr; }
+        .span-4, .span-5, .span-6, .span-7, .span-12 { grid-column: span 1; }
+        .flow { grid-template-columns: 1fr; }
+        .step:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -15px; transform: translateX(50%); }
+        .nav-actions a.hide-mobile { display: none; }
+      }
+
+      @media print {
+        body { background: white; }
+        body::before, .topbar { display: none; }
+        .deck { width: 100%; padding: 0; }
+        .slide { min-height: auto; break-after: page; padding: 0; }
+        .panel { box-shadow: none; border-radius: 0; min-height: 100vh; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="topbar" aria-label="Deck navigation">
+      <div class="brand"><span class="brand-mark">D</span><span>PaperERA by DosCode</span></div>
+      <div class="nav-actions">
+        <a href="#flow" class="hide-mobile">Flow</a>
+        <a href="#questions" class="hide-mobile">Questions</a>
+        <button type="button" onclick="window.print()">Save PDF</button>
+      </div>
+    </nav>
+
+    <main class="deck">
+      <section class="slide" id="intro">
+        <div class="panel">
+          <span class="eyebrow">Validation deck for a dental practice owner</span>
+          <h1>Turn paper dental EOBs into Open Dental-ready ERA files.</h1>
+          <p class="lead">A fast web tool for dental offices that still spend staff time reading paper EOBs and manually posting insurance payments.</p>
+          <div class="grid">
+            <div class="card dark span-4">
+              <div class="label">Simple promise</div>
+              <div class="metric">Upload EOB</div>
+              <p class="small">Photo, scan, PDF, or batch.</p>
+            </div>
+            <div class="card orange span-4">
+              <div class="label">What comes out</div>
+              <div class="metric">ERA 835</div>
+              <p class="small">Import-ready payment file for Open Dental workflow.</p>
+            </div>
+            <div class="card blue span-4">
+              <div class="label">Safety rule</div>
+              <div class="metric">Review first</div>
+              <p class="small">Automatic only when totals and matching are clean.</p>
+            </div>
+          </div>
+          <div class="footer-note">Working name: PaperERA. Built for validation first, not a finished medical billing product yet.</div>
+        </div>
+      </section>
+
+      <section class="slide" id="problem">
+        <div class="panel">
+          <span class="eyebrow">The pain</span>
+          <h2>Insurance payments arrive electronically, on paper, and in messy scanned documents.</h2>
+          <div class="comparison">
+            <div class="before-after">
+              <h3>Today</h3>
+              <ul class="clean">
+                <li>Staff opens paper EOBs, PDFs, or check stubs.</li>
+                <li>They search the patient and claim in the practice system.</li>
+                <li>They manually enter paid amount, deductible, write-off, patient responsibility, and remark codes.</li>
+                <li>They check if the check or EFT total matches the claim lines.</li>
+              </ul>
+            </div>
+            <div class="before-after after">
+              <h3>With PaperERA</h3>
+              <ul class="clean">
+                <li>Upload the EOB batch once.</li>
+                <li>The system reads each page and extracts the payment details.</li>
+                <li>Totals and claim matches are checked before anything is imported.</li>
+                <li>Open Dental receives an ERA-style file so staff can process inside their normal workflow.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="flow">
+        <div class="panel">
+          <span class="eyebrow">Product flow</span>
+          <h2>It should feel like depositing a check with a banking app.</h2>
+          <p class="lead">The dentist does not need a technical workflow. The office needs a fast, visible, trustable process.</p>
+          <div class="flow" aria-label="PaperERA workflow">
+            <div class="step">
+              <div><div class="icon">📄</div><h3>Scan or photo</h3></div>
+              <p>Paper EOB, mailed check stub, PDF, or ZIP batch.</p>
+            </div>
+            <div class="step">
+              <div><div class="icon">🔎</div><h3>AI reads it</h3></div>
+              <p>Extract payer, patient, claim, procedure, paid amount, write-off, deductible.</p>
+            </div>
+            <div class="step">
+              <div><div class="icon">🧮</div><h3>Math checks</h3></div>
+              <p>Code verifies totals, required fields, duplicates, and basic payment logic.</p>
+            </div>
+            <div class="step">
+              <div><div class="icon">🦷</div><h3>Match claim</h3></div>
+              <p>Compare patient, subscriber ID, service date, CDT code, billed amount, payer.</p>
+            </div>
+            <div class="step">
+              <div><div class="icon">✅</div><h3>Import ERA</h3></div>
+              <p>Generate an Open Dental-compatible ERA 835 for staff to process.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="demo">
+        <div class="panel">
+          <span class="eyebrow">What the user sees</span>
+          <h2>A clean dashboard, not a technical billing tool.</h2>
+          <div class="grid">
+            <div class="span-5">
+              <p class="lead">The key is live confidence: Ready, Needs review, or Failed. No black box.</p>
+              <ul class="clean">
+                <li>Results appear page by page while the batch is still processing.</li>
+                <li>Staff can review uncertain cases before import.</li>
+                <li>Clean cases become ERA-ready.</li>
+                <li>CSV/Excel stays as a debug fallback, not the paid product.</li>
+              </ul>
+            </div>
+            <div class="span-7">
+              <div class="screen" aria-label="Product mockup">
+                <div class="screen-top"><span>PaperERA batch</span><span>Open Dental target</span></div>
+                <div class="screen-body">
+                  <div class="dropzone">
+                    <div style="font-size: 36px;">📸</div>
+                    <h3 style="margin-top: 8px;">Drop EOB PDF or take photos</h3>
+                    <p class="small">Delta Dental batch, 12 pages, check total $4,280.50</p>
+                  </div>
+                  <div class="status-row"><span>Delta Dental, check #10482, 8 claim lines</span><span class="pill green">Ready</span></div>
+                  <div class="status-row"><span>MetLife, missing subscriber ID on page 3</span><span class="pill yellow">Review</span></div>
+                  <div class="status-row"><span>Cigna, unreadable scan image</span><span class="pill red">Rescan</span></div>
+                  <div class="status-row"><span>Export</span><span class="pill green">Generate ERA 835</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="safety">
+        <div class="panel">
+          <span class="eyebrow">Important safety framing</span>
+          <h2>The AI is the reader, not the accountant.</h2>
+          <p class="lead">This is the line we should repeat to dentists. The model reads the EOB. Rules and practice data decide whether it is safe.</p>
+          <div class="risk-grid">
+            <div class="risk"><strong>Wrong claim match</strong><span>Never auto-import when patient, date, code, amount, or payer match is weak.</span></div>
+            <div class="risk"><strong>Totals do not reconcile</strong><span>If check total does not equal the claim-line payments, the batch becomes review-only.</span></div>
+            <div class="risk"><strong>Messy scan</strong><span>Bad photos, missing pages, or unreadable text get flagged immediately.</span></div>
+            <div class="risk"><strong>Secondary insurance</strong><span>Complex coordination of benefits starts as review-only.</span></div>
+            <div class="risk"><strong>Duplicate payment</strong><span>Check number, payer, amount, date, claim IDs, and file fingerprint are checked.</span></div>
+            <div class="risk"><strong>HIPAA/PHI</strong><span>Real version needs encryption, access logs, deletion policy, and vendors that support BAA.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="open-dental">
+        <div class="panel">
+          <span class="eyebrow">Why Open Dental first</span>
+          <h2>Open Dental gives us the cleanest first wedge.</h2>
+          <div class="grid">
+            <div class="card span-6">
+              <h3>Path A: native ERA workflow</h3>
+              <p class="small">Generate X12 835 text from the extracted EOB, create an ERA/Etrans record, then let Open Dental process it through its normal payment workflow.</p>
+            </div>
+            <div class="card span-6">
+              <h3>Path B: direct posting later</h3>
+              <p class="small">After trust is proven, update claim procedures, claims, claim payments, and attach the EOB through the Open Dental API. More powerful, but higher risk.</p>
+            </div>
+            <div class="card dark span-12">
+              <div class="label">Validation truth</div>
+              <div class="metric">If ERA import does not work reliably, the idea is weaker.</div>
+              <p class="small">So the first technical proof is not a pretty app. It is one real EOB converted into a valid Open Dental-importable ERA workflow.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="mvp">
+        <div class="panel">
+          <span class="eyebrow">MVP plan</span>
+          <h2>Build the smallest version that proves real office value.</h2>
+          <div class="grid">
+            <div class="card span-4">
+              <div class="label">Phase 0</div>
+              <h3>Collect samples</h3>
+              <p class="small">20 to 100 anonymized EOBs/check stubs, top 5 payers, PMS version, clearinghouse, weekly volume.</p>
+            </div>
+            <div class="card span-4">
+              <div class="label">Phase 1</div>
+              <h3>Extraction and validation</h3>
+              <p class="small">Upload, OCR/AI extraction, strict structured data, total checks, confidence labels.</p>
+            </div>
+            <div class="card span-4">
+              <div class="label">Phase 2</div>
+              <h3>Open Dental ERA proof</h3>
+              <p class="small">Generate minimal valid 835, test in Open Dental, confirm matching behavior, find missing identifiers.</p>
+            </div>
+          </div>
+          <div class="footer-note">Not promising full autoposting yet. The validation target is faster, safer ERA preparation for real EOBs.</div>
+        </div>
+      </section>
+
+      <section class="slide" id="questions">
+        <div class="panel">
+          <span class="eyebrow">Questions for your brother-in-law</span>
+          <h2>We need office reality, not guesses.</h2>
+          <div class="questions">
+            <div class="question">1. What practice management software do you use? If Open Dental, which version?</div>
+            <div class="question">2. Do you already receive ERA/835 files from any payers?</div>
+            <div class="question">3. Which clearinghouse do you use? DentalXChange, ClaimConnect, Change Healthcare, Vyne, Tesia, other?</div>
+            <div class="question">4. What are the top 5 insurance payers by EOB volume?</div>
+            <div class="question">5. How many EOBs or checks per week, and how many pages per batch?</div>
+            <div class="question">6. How many staff hours per week go to payment posting?</div>
+            <div class="question">7. Do checks usually cover one patient or many patients?</div>
+            <div class="question">8. Can you provide 20 to 100 anonymized real samples?</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="close">
+        <div class="panel">
+          <span class="eyebrow">Decision we want from the call</span>
+          <h2>Is this painful enough that a dental office would test it with real documents?</h2>
+          <p class="lead">If yes, next step is not a big build. Next step is a controlled proof with anonymized samples and one Open Dental workflow test.</p>
+          <div class="grid">
+            <div class="card orange span-4"><h3>Green light</h3><p class="small">Pain is real, volume is meaningful, samples are available.</p></div>
+            <div class="card blue span-4"><h3>Yellow light</h3><p class="small">Pain exists, but PMS or payer workflow makes ERA import unclear.</p></div>
+            <div class="card span-4"><h3>Red light</h3><p class="small">Volume is low, existing ERA coverage already solves it, or staff would not trust it.</p></div>
+          </div>
+          <div class="cta-row">
+            <a class="button" href="mailto:hello@doscode.kz?subject=PaperERA%20dental%20EOB%20validation">Send sample plan</a>
+            <a class="button secondary" href="#questions">Review questions</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
