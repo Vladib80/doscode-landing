@@ -14,6 +14,7 @@ const rollupInputs = {
   v10Lite: 'v10-lite.html',
   v11: 'v11.html',
   v12: 'v12.html',
+  v15: 'v15.html',
   restopulse: 'restopulse/index.html',
   restopulseKk: 'kk/restopulse/index.html',
   whatsapp: 'whatsapp/index.html',
