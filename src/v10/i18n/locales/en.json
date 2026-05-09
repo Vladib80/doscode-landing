@@ -9,7 +9,7 @@
     "ctaShort": "Telegram"
   },
   "hero": {
-    "kicker": "// Almaty · 2020 - present",
+    "kicker": "Almaty · since 2020",
     "badge": "48-hour landing · MVPs · bots · dashboards",
     "title1": "Fast digital product launches for business.",
     "title2": "From offer to sales.",
@@ -350,32 +350,32 @@
       {
         "title": "Request",
         "desc": "Message us on Telegram or email. Share the task, goal and timing in any format that is convenient.",
-        "time": "// 1 hour"
+        "time": "≈ 1 hour"
       },
       {
         "title": "Estimate",
         "desc": "We clarify the context, ask the right follow-up questions and come back with a clear estimate or range. If needed, we jump on a short call already with context.",
-        "time": "// 1 day"
+        "time": "1 day"
       },
       {
         "title": "Prototype",
         "desc": "We assemble the structure and logic. Approve the foundation.",
-        "time": "// 2–5 days"
+        "time": "2–5 days"
       },
       {
         "title": "Build",
         "desc": "We code. Fast, clean, with weekly demos for larger projects.",
-        "time": "// depends on project"
+        "time": "depends on project"
       },
       {
         "title": "Launch",
         "desc": "Production deploy. Domain and analytics wired up.",
-        "time": "// 1 day"
+        "time": "1 day"
       },
       {
         "title": "Support",
-        "desc": "A month of bug fixes free. After that - as needed.",
-        "time": "// 1 month included"
+        "desc": "A month of bug fixes free. After that — as needed.",
+        "time": "1 month included"
       }
     ]
   },
