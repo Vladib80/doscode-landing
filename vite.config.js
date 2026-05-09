@@ -20,6 +20,7 @@ const rollupInputs = {
   whatsapp: 'whatsapp/index.html',
   whatsappKk: 'kk/whatsapp/index.html',
   eobEra: 'eob-era/index.html',
+  kazakhstanRisk: 'kazakhstan-risk/index.html',
   contacts: 'contacts/index.html',
   privacy: 'privacy/index.html',
   terms: 'terms/index.html',
