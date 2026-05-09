@@ -1,7 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import {
-  AlertTriangle,
   ArrowRight,
   BadgeCheck,
   Building2,
@@ -12,6 +11,7 @@ import {
   Globe2,
   Landmark,
   LockKeyhole,
+  Mail,
   PackageCheck,
   Route,
   SearchCheck,
@@ -21,49 +21,15 @@ import {
 } from 'lucide-react';
 import './styles.css';
 
-const CTA_LABEL = 'Send one Kazakhstan counterparty for review';
+const CTA_LABEL = 'Request a counterparty review';
 const EMAIL = 'hello@doscode.kz';
+const MAILTO = `mailto:${EMAIL}?subject=Kazakhstan counterparty risk report&body=Company name/BIN:%0AWebsite:%0AProduct:%0ARoute:%0AEnd user/end use:%0ADeadline:%0AAnything that looks unusual:`;
 
-const researchPoints = [
-  {
-    label: 'Pattern 1',
-    title: 'Enterprise compliance pages lead with risk reduction, not visuals',
-    evidence:
-      'Dow Jones due diligence pages package trust around report depth, source quality, and audit readiness. GOV.UK guidance reinforces that sanctions compliance requires more than a list check.',
-  },
-  {
-    label: 'Pattern 2',
-    title: 'Specialist screening pages educate on hidden ownership and network risk',
-    evidence:
-      'Sayari-style sanctions pages focus on ownership, control, networks, and export-control gaps that basic name matching can miss.',
-  },
-  {
-    label: 'Pattern 3',
-    title: 'B2B conversion depends on clarity, credibility, and low-friction next steps',
-    evidence:
-      'NN/g credibility guidance emphasizes accurate representation, transparent content, and trustworthy presentation. Contentsquare benchmarks are based on large cross-industry session data, so speed, scannability, and mobile clarity matter.',
-  },
-];
-
-const designDirections = [
-  {
-    name: 'Enterprise Risk Desk',
-    score: 'Best fit',
-    summary:
-      'Sober, compliance-style page with a report preview, source checklist, pricing, and proof of process. Optimized for consultants and exporters who need trust before they buy.',
-  },
-  {
-    name: 'Founder Pilot Offer',
-    score: 'Fastest test',
-    summary:
-      'Lean one-screen sales page built around a $249 pilot. Faster to scan, but weaker for compliance trust and white-label buyers.',
-  },
-  {
-    name: 'Intelligence Dashboard Concept',
-    score: 'Most visual',
-    summary:
-      'Dark OSINT dashboard aesthetic with maps, risk scores, and network graphics. Looks modern, but risks overpromising SaaS and automation.',
-  },
+const trustProof = [
+  ['24-48h turnaround', 'Fast enough for live shipment decisions.'],
+  ['Human-reviewed memo', 'AI-assisted research, but final output is analyst reviewed.'],
+  ['Confidential intake', 'Send only the details needed for the first review.'],
+  ['Not legal advice', 'Decision-support memo, not sanctions clearance.'],
 ];
 
 const checks = [
@@ -113,6 +79,8 @@ const buyers = [
   ['Export-control lawyers', 'Evidence package to support legal review, not replace it.'],
 ];
 
+const intakeItems = ['Company name or BIN', 'Website or contact details', 'Product and HS code if known', 'Route, payment party, end user, deadline'];
+
 function App() {
   return (
     <main>
@@ -129,30 +97,32 @@ function App() {
           <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
         </nav>
-        <a className="header-cta" href={`mailto:${EMAIL}?subject=Kazakhstan counterparty risk report`}>Request review</a>
+        <a className="header-cta" href={MAILTO}>Request review</a>
       </header>
 
       <section className="hero" id="top">
         <div className="hero-copy">
           <div className="eyebrow"><ShieldAlert size={16} /> Russia-diversion red flag review for Kazakhstan shipments</div>
-          <h1>Before shipping to Kazakhstan, check for Russia-diversion red flags.</h1>
+          <h1>Check Kazakhstan shipments for Russia-diversion red flags before you ship.</h1>
           <p className="hero-subhead">
-            24-48h human-reviewed counterparty risk reports for U.S. exporters, freight forwarders, customs brokers, and trade compliance consultants.
+            24-48h human-reviewed counterparty risk memos for U.S. exporters, freight forwarders, customs brokers, and trade compliance teams.
           </p>
           <div className="hero-actions">
-            <a className="button primary" href={`mailto:${EMAIL}?subject=Kazakhstan counterparty risk report&body=Company name/BIN:%0AWebsite:%0AProduct:%0AEnd user/end use:%0ADeadline:`}>{CTA_LABEL}<ArrowRight size={18} /></a>
-            <a className="button secondary" href="/kazakhstan-risk/KTEKZ-client-facing-sample.pdf">View sample report</a>
+            <a className="button primary" href={MAILTO}>{CTA_LABEL}<ArrowRight size={18} /></a>
+            <a className="button secondary" href="/kazakhstan-risk/KTEKZ-client-facing-sample.pdf">View anonymized sample memo</a>
           </div>
+          <p className="cta-note">Send the company, product, route, end user, and deadline. We reply with next steps before starting the paid review.</p>
           <div className="trust-strip" aria-label="Trust highlights">
             <span><Timer size={16} /> 24-48h</span>
             <span><Users size={16} /> Human reviewed</span>
-            <span><LockKeyhole size={16} /> Not legal advice</span>
+            <span><LockKeyhole size={16} /> Confidential intake</span>
+            <span><BadgeCheck size={16} /> Not legal advice</span>
           </div>
         </div>
 
         <aside className="report-card" aria-label="Sample report preview">
           <div className="report-card-top">
-            <span className="status-dot" /> Sample memo preview
+            <span className="status-dot" /> Anonymized memo preview
             <strong>Counterparty Risk Review</strong>
           </div>
           <div className="risk-grid">
@@ -176,32 +146,25 @@ function App() {
             <p><Route size={16} /> Product, route, payment, and end-user red flags</p>
           </div>
           <div className="memo-footer">
-            <FileSearch size={18} /> Evidence memo, not clearance
+            <FileSearch size={18} /> Concise evidence memo, not clearance
           </div>
         </aside>
       </section>
 
-      <section className="decision-section">
-        <div className="section-kicker">Design direction chosen from data</div>
-        <h2>Chosen direction: Enterprise Risk Desk.</h2>
-        <p className="section-intro">
-          I considered three directions and chose the one most aligned with compliance-buyer behavior: clarity, documented process, pricing confidence, and trust before flash.
-        </p>
-        <div className="direction-grid">
-          {designDirections.map((direction) => (
-            <article className={direction.score === 'Best fit' ? 'direction-card selected' : 'direction-card'} key={direction.name}>
-              <span>{direction.score}</span>
-              <h3>{direction.name}</h3>
-              <p>{direction.summary}</p>
-            </article>
-          ))}
+      <section className="proof-section" aria-label="Why teams use this before shipping">
+        <div className="section-kicker">Built for real shipment decisions</div>
+        <div className="proof-header">
+          <h2>A fast second look before an export creates compliance exposure.</h2>
+          <p className="section-intro">
+            This is not a generic list screen or a black-box SaaS score. It is a narrow, human-reviewed Kazakhstan counterparty memo built to help your team decide whether to proceed, request more documents, escalate, or pause.
+          </p>
         </div>
-        <div className="research-grid">
-          {researchPoints.map((point) => (
-            <article key={point.title}>
-              <span>{point.label}</span>
-              <h3>{point.title}</h3>
-              <p>{point.evidence}</p>
+        <div className="proof-grid">
+          {trustProof.map(([title, text]) => (
+            <article key={title}>
+              <CheckCircle2 size={20} />
+              <h3>{title}</h3>
+              <p>{text}</p>
             </article>
           ))}
         </div>
@@ -280,6 +243,7 @@ function App() {
               <ul>
                 {plan.bullets.map((bullet) => <li key={bullet}><PackageCheck size={16} /> {bullet}</li>)}
               </ul>
+              <a className="plan-cta" href={MAILTO}>Start this review</a>
             </article>
           ))}
         </div>
@@ -300,6 +264,17 @@ function App() {
               <p>{text}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="intake-section">
+        <div>
+          <div className="section-kicker">What to send</div>
+          <h2>Start with one real counterparty.</h2>
+          <p className="section-intro">You do not need a portal or full onboarding to test this. Send enough detail to understand the buyer, goods, route, and deadline.</p>
+        </div>
+        <div className="intake-card">
+          {intakeItems.map((item) => <p key={item}><Mail size={17} /> {item}</p>)}
         </div>
       </section>
 
@@ -328,7 +303,7 @@ function App() {
         <Gauge size={32} />
         <h2>Have one Kazakhstan buyer worth checking?</h2>
         <p>Send the counterparty, product, and deadline. The first useful test is a paid pilot, not another software build.</p>
-        <a className="button primary" href={`mailto:${EMAIL}?subject=Kazakhstan counterparty risk report&body=Company name/BIN:%0AWebsite:%0AProduct:%0AEnd user/end use:%0ADeadline:`}>{CTA_LABEL}<ArrowRight size={18} /></a>
+        <a className="button primary" href={MAILTO}>{CTA_LABEL}<ArrowRight size={18} /></a>
         <small>Supports internal compliance review. Final decisions should be made with qualified export-control or sanctions counsel where appropriate.</small>
       </section>
     </main>
