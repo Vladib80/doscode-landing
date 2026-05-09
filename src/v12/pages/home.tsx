@@ -63,11 +63,11 @@ type EstimateScope = "lean" | "standard" | "custom";
 
 const V115_COPY = {
   ru: {
-    heroBadge: "48-часовой лендинг · MVP · боты · дашборды",
-    heroTitle: "Быстро запускаем сайты, MVP и автоматизацию для бизнеса.",
-    heroAccent: "Чтобы были заявки, продажи и порядок.",
+    heroBadge: "Сайты · MVP · боты · дашборды",
+    heroTitle: "Сайты, MVP и автоматизация для бизнеса.",
+    heroAccent: "Первый макет — через 4 часа. Смета — за день.",
     heroSubtitle:
-      "Делаем не просто красивую страницу. Собираем рабочий путь: сайт, заявка, Telegram/WhatsApp, оплата, аналитика, бот или дашборд. Первый макет лендинга показываем через 3-4 часа. Оценку проекта даём за день.",
+      "Алматы, с 2020. Делаем рабочие штуки для малого и среднего бизнеса в Казахстане: сайт с заявками, Telegram-бота для заказов, дашборд с цифрами или MVP с пользователями.",
     heroCta: "Получить оценку за день",
     techKicker: "то, чем вы уже пользуетесь",
     techTitle: "Подключаем привычные инструменты",
@@ -96,11 +96,11 @@ const V115_COPY = {
     briefIntro: "Привет, хочу оценить проект DosCode.",
   },
   kk: {
-    heroBadge: "48 сағатта лендинг · MVP · боттар · дашбордтар",
-    heroTitle: "Бизнеске digital-өнімдерді тез іске қосамыз.",
-    heroAccent: "Офферден сатылымға дейін.",
+    heroBadge: "Сайт · MVP · боттар · дашбордтар",
+    heroTitle: "Бизнеске сайт, MVP және автоматизация.",
+    heroAccent: "Алғашқы макет — 4 сағатта. Смета — 1 күнде.",
     heroSubtitle:
-      "Жай ғана бет емес, жұмыс істейтін бизнес-флоу құрамыз: лендинг, өтінім, Telegram/WhatsApp, төлем, аналитика, бот, дашборд немесе MVP. Лендингтің алғашқы макеті - 3-4 сағатта, жоба бағасы - 24 сағатта.",
+      "Алматы, 2020 жылдан. Қазақстандағы шағын және орта бизнеске жұмыс істейтін шешімдер: өтінімдері бар сайт, тапсырысқа арналған Telegram-бот, цифрлары бар дашборд немесе нақты MVP.",
     heroCta: "24 сағатта бағалау алу",
     techKicker: "бизнес қазір қолданатын интеграциялар",
     techTitle: "Сіздің нақты жұмысыңызға қосыламыз",
@@ -129,12 +129,12 @@ const V115_COPY = {
     briefIntro: "Сәлем, DosCode жобасын бағалатқым келеді.",
   },
   en: {
-    heroBadge: "48-hour landing · MVPs · bots · dashboards",
-    heroTitle: "Fast digital product launches for business.",
-    heroAccent: "From offer to sales.",
+    heroBadge: "Sites · MVPs · bots · dashboards",
+    heroTitle: "Web, MVPs and automation for Kazakhstan business.",
+    heroAccent: "First mockup in 4 hours. Estimate in a day.",
     heroSubtitle:
-      "We do not just ship pages. We launch working business flows: landing page, lead capture, Telegram/WhatsApp, payments, analytics, bots, dashboards or MVPs. First landing mockup in 3-4 hours, project estimate in 24 hours.",
-    heroCta: "Get an estimate in 24 hours",
+      "Almaty, since 2020. We build working tools for small and mid-sized businesses: a site that captures leads, a Telegram bot for orders, an ops dashboard with real numbers, or a full MVP.",
+    heroCta: "Get an estimate in a day",
     techKicker: "integrations the business already uses",
     techTitle: "We connect to your real workflow",
     techSubtitle: "Kaspi, iiko, 1C, WhatsApp, Telegram, spreadsheets, payments, analytics and AI. We pick the stack by timeline, budget and support needs, not for a pretty list.",
@@ -258,8 +258,7 @@ const V115_PRICING_CARDS = {
 } as const;
 
 const TECH_STRIP_ROWS = [
-  ["Kaspi", "iiko", "1C", "WhatsApp", "Telegram", "Google Sheets", "Excel", "CRM", "Payments", "Analytics", "AI", "Cloudflare"],
-  ["React", "Next.js", "Node.js", "FastAPI", "PostgreSQL", "Render", "Docker", "OpenAI API", "Telegram API", "WhatsApp API", "Stripe", "Kaspi Pay"],
+  ["Kaspi", "iiko", "1C", "WhatsApp", "Telegram", "Google Sheets"],
 ] as const;
 
 const CASE_PROOF: Record<string, { before: string; after: string; integrations: string[]; outcome: string }> = {
@@ -485,7 +484,7 @@ function Header() {
           <Terminal className="h-5 w-5 text-primary" />
           <span className="font-display font-bold text-lg sm:text-xl tracking-tight">DosCode</span>
         </a>
-        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-sm font-medium text-muted-foreground font-mono" aria-label="Primary">
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-sm font-medium text-muted-foreground" aria-label="Primary">
           <div className="group relative">
             <button
               type="button"
@@ -543,7 +542,7 @@ function Header() {
             transition={{ duration: 0.18 }}
             className="border-t border-border/50 bg-background/95 px-3 pb-4 pt-2 shadow-2xl backdrop-blur-md lg:hidden"
           >
-            <nav className="mx-auto grid max-w-7xl gap-1 font-mono text-sm text-muted-foreground" aria-label="Mobile primary">
+            <nav className="mx-auto grid max-w-7xl gap-1 text-sm text-muted-foreground" aria-label="Mobile primary">
               <div className="px-3 pb-1 pt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">{productsLabel}</div>
               {productItems.map((item) => (
                 <a
@@ -570,7 +569,7 @@ function Header() {
                 </a>
               ))}
               <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="mt-2" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="h-12 w-full justify-center gap-2 bg-primary font-mono text-primary-foreground hover:bg-primary/90">
+                <Button className="h-12 w-full justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
                   <Zap className="h-4 w-4" /> {t("header.cta")}
                 </Button>
               </a>
@@ -713,7 +712,7 @@ function Hero() {
   const { t } = useTranslation();
   const v115 = useV115Copy();
   return (
-    <section className="v115-hero relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden flex flex-col items-center justify-center min-h-[90vh]">
+    <section className="v115-hero relative pt-24 pb-12 md:pt-32 md:pb-16 overflow-hidden flex flex-col items-center justify-center">
       <div className="absolute inset-0 grid-bg opacity-40" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
 
@@ -722,7 +721,7 @@ function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="text-xs font-mono text-muted-foreground tracking-wider mb-4"
+          className="text-xs text-muted-foreground tracking-wider mb-4"
           data-testid="hero-kicker"
         >
           {t("hero.kicker")}
@@ -731,7 +730,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono mb-8 uppercase tracking-widest"
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs mb-8 uppercase tracking-widest"
         >
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
           {v115.heroBadge}
@@ -763,13 +762,13 @@ function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="w-full sm:w-auto">
-            <Button size="lg" className="w-full sm:w-auto text-base h-14 px-8 font-mono tracking-wide bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-transform" data-testid="btn-hero-primary">
+            <Button size="lg" className="w-full sm:w-auto text-base h-14 px-8 tracking-wide bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-transform" data-testid="btn-hero-primary">
               <Calculator className="mr-2 h-5 w-5" />
               {v115.heroCta}
             </Button>
           </a>
           <a href="#cases" className="w-full sm:w-auto">
-            <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 font-mono border-border/50 hover:bg-card/50" data-testid="btn-hero-cases">
+            <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 border-border/50 hover:bg-card/50" data-testid="btn-hero-cases">
               {t("hero.ctaSecondary")}
             </Button>
           </a>
@@ -779,7 +778,7 @@ function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="v10-hero-trust mx-auto mt-5 flex w-[calc(100vw-2rem)] max-w-sm flex-wrap items-center justify-center gap-3 text-xs font-mono text-muted-foreground sm:mt-6 sm:w-auto sm:max-w-none sm:gap-6 sm:text-sm"
+          className="v10-hero-trust mx-auto mt-5 flex w-[calc(100vw-2rem)] max-w-sm flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground sm:mt-6 sm:w-auto sm:max-w-none sm:gap-6 sm:text-sm"
           data-testid="hero-trust-row"
         >
           <span className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> {t("hero.trustHour")}</span>
@@ -890,7 +889,6 @@ function Services() {
               </div>
               <div className="flex justify-between items-center text-xs text-muted-foreground mt-2 border-t border-border/50 pt-3">
                 <span className="uppercase tracking-wider font-bold">{t("services.dashboards.label")}</span>
-                <span className="text-primary font-mono bg-primary/10 px-2 py-1 rounded text-sm">+24.5%</span>
               </div>
             </div>
           </div>
@@ -916,10 +914,7 @@ function Services() {
                 <div className="absolute bottom-[-10px] right-0 h-24 w-24 rounded-full bg-orange-400/10 blur-[36px]" />
 
                 <div className="relative z-10 flex items-center gap-2 mb-4">
-                  <div className="w-2.5 h-2.5 rounded-full bg-destructive/50" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-primary/60" />
-                  <div className="ml-2 h-8 flex-1 rounded-full border border-border/60 bg-background/80" />
+                  <div className="h-8 flex-1 rounded-full border border-border/60 bg-background/80" />
                   <div className="flex h-8 w-8 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
                     <ShoppingCart className="w-4 h-4" />
                   </div>
@@ -1210,7 +1205,7 @@ function TechStrip() {
       <div className="container mx-auto px-6">
         <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="mb-2 text-[10px] font-mono uppercase tracking-[0.28em] text-primary">{v115.techKicker}</div>
+            <div className="mb-2 text-[10px] uppercase tracking-[0.28em] text-primary">{v115.techKicker}</div>
             <h2 id="tech-strip-title" className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
               {v115.techTitle}
             </h2>
@@ -2143,12 +2138,12 @@ function Cases() {
         >
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
-              <div className="text-[11px] font-mono uppercase tracking-[0.24em] text-primary/80">{t("cases.ctaKicker")}</div>
+              <div className="text-[11px] uppercase tracking-[0.24em] text-primary/80">{t("cases.ctaKicker")}</div>
               <div className="mt-2 text-xl font-bold leading-tight text-foreground sm:text-2xl">{t("cases.ctaTitle")}</div>
               <div className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">{t("cases.ctaNote")}</div>
             </div>
             <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="w-full lg:w-auto">
-              <Button size="lg" className="w-full lg:w-auto font-mono" data-testid="btn-cases-cta">
+              <Button size="lg" className="w-full lg:w-auto" data-testid="btn-cases-cta">
                 {t("cases.ctaButton")}
               </Button>
             </a>
@@ -2161,90 +2156,33 @@ function Cases() {
 
 function FastLaunch() {
   const { t } = useTranslation();
-  const logLines = t("fastLaunch.logLines", { returnObjects: true }) as string[];
-  const tStamps = ["[T-48:00]", "[T-45:30]", "[T-24:00]", "[T-12:00]", "[T-02:00]", "[T-00:30]", "[T-00:00]"];
   return (
     <section className="py-14 sm:py-24 bg-primary text-primary-foreground relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiMwMDAiIG9wYWNpdHk9IjAuMSIvPjwvc3ZnPg==')] opacity-30" />
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 lg:gap-16">
-          <div className="lg:w-1/2 w-full">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/20 bg-black/5 text-black font-mono text-xs sm:text-sm font-bold mb-4 sm:mb-6">
-              <Timer className="w-4 h-4" /> {t("fastLaunch.badge")}
-            </div>
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-4 sm:mb-6 text-black font-display">{t("fastLaunch.title")}</h2>
-            <p className="text-lg sm:text-2xl md:text-3xl font-bold text-black mb-3 sm:mb-4">{t("fastLaunch.guarantee")}</p>
-            <p className="text-base sm:text-2xl mb-7 sm:mb-10 text-black font-medium leading-tight">{t("fastLaunch.subtitle")}</p>
-            <div className="space-y-3 sm:space-y-4 font-mono text-sm sm:text-base">
-              {[t("fastLaunch.bullet1"), t("fastLaunch.bullet2"), t("fastLaunch.bullet3"), t("fastLaunch.bullet4")].map((b, i) => (
-                <div key={i} className="flex items-center gap-3 sm:gap-4 bg-black/6 p-3 sm:p-4 rounded-xl border border-black/12 transition-colors hover:bg-black/10">
-                  <CheckCircle2 className="w-5 h-5 text-black shrink-0" />
-                  <span className="text-black font-medium">{b}</span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-black/10 flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8">
-              <div>
-                <div className="text-sm font-bold text-black/75 uppercase tracking-widest mb-1">{t("fastLaunch.priceLabel")}</div>
-                <div className="text-3xl sm:text-4xl font-bold text-black font-mono">{t("fastLaunch.price")}</div>
-              </div>
-              <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto h-14 sm:h-16 px-8 sm:px-10 text-base sm:text-lg bg-black text-primary hover:bg-black/90 font-mono transition-transform hover:scale-105" data-testid="btn-fast-launch">{t("fastLaunch.cta")}</Button>
-              </a>
-            </div>
+        <div className="mx-auto max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/20 bg-black/5 text-black text-xs sm:text-sm font-bold mb-4 sm:mb-6">
+            <Timer className="w-4 h-4" /> {t("fastLaunch.badge")}
           </div>
-
-          <div className="lg:w-1/2 w-full">
-            <div className="bg-[#0a0a0a] text-white rounded-3xl p-4 sm:p-8 font-mono text-[10px] sm:text-sm relative shadow-2xl overflow-hidden border border-black/20 h-[330px] sm:h-[500px] flex flex-col">
-              <div className="absolute right-[-40px] bottom-[-20px] text-[120px] sm:text-[180px] font-bold opacity-[0.03] leading-none select-none pointer-events-none">48H</div>
-              <div className="text-primary mb-4 sm:mb-6 flex items-center justify-between border-b border-white/10 pb-3 sm:pb-4">
-                <div className="flex items-center gap-2 min-w-0"><Terminal className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" /> <span className="truncate">{t("fastLaunch.logTitle")}</span></div>
-                <div className="flex gap-2 shrink-0">
-                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/50" />
-                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/50" />
-                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-primary/50" />
-                </div>
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-4 sm:mb-6 text-black font-display">{t("fastLaunch.title")}</h2>
+          <p className="text-lg sm:text-2xl md:text-3xl font-bold text-black mb-3 sm:mb-4">{t("fastLaunch.guarantee")}</p>
+          <p className="text-base sm:text-2xl mb-7 sm:mb-10 text-black font-medium leading-tight">{t("fastLaunch.subtitle")}</p>
+          <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 text-sm sm:text-base">
+            {[t("fastLaunch.bullet1"), t("fastLaunch.bullet2"), t("fastLaunch.bullet3"), t("fastLaunch.bullet4")].map((b, i) => (
+              <div key={i} className="flex items-start gap-3 sm:gap-4 bg-black/6 p-3 sm:p-4 rounded-xl border border-black/12 transition-colors hover:bg-black/10">
+                <CheckCircle2 className="w-5 h-5 text-black shrink-0 mt-0.5" />
+                <span className="text-black font-medium">{b}</span>
               </div>
-
-              <div className="space-y-2 sm:space-y-4 opacity-80 flex-1 overflow-hidden relative">
-                <motion.div
-                  initial={{ y: 50 }}
-                  whileInView={{ y: 0 }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  className="space-y-2 sm:space-y-4"
-                >
-                  {logLines.map((line, i) => {
-                    const isLast = i === logLines.length - 1;
-                    const isPerf = i === 4;
-                    const hideOnMobile = i === 4 || i === 5;
-                    return (
-                      <p key={i} className={`${hideOnMobile ? "hidden sm:flex" : "flex"} gap-2 sm:gap-4 ${isLast ? "font-bold" : ""}`}>
-                        <span className={`w-16 sm:w-20 shrink-0 ${isLast ? "text-primary" : "text-muted-foreground"}`}>{tStamps[i]}</span>
-                        <span className={`min-w-0 break-words ${isPerf ? "text-cyan-400" : isLast ? "text-primary inline-flex items-center gap-2" : ""}`}>
-                          {isLast && <Rocket className="w-4 h-4 inline shrink-0" />}
-                          {line}
-                        </span>
-                      </p>
-                    );
-                  })}
-                </motion.div>
-              </div>
-
-              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-white/10">
-                <div className="flex justify-between text-xs text-muted-foreground mb-2 font-bold">
-                  <span>{t("fastLaunch.progress")}</span>
-                  <span className="text-primary">100%</span>
-                </div>
-                <div className="h-3 bg-white/10 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-primary"
-                    initial={{ width: "0%" }}
-                    whileInView={{ width: "100%" }}
-                    transition={{ duration: 2, ease: "easeInOut" }}
-                  />
-                </div>
-              </div>
+            ))}
+          </div>
+          <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-black/10 flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8">
+            <div>
+              <div className="text-sm font-bold text-black/75 uppercase tracking-widest mb-1">{t("fastLaunch.priceLabel")}</div>
+              <div className="text-3xl sm:text-4xl font-bold text-black">{t("fastLaunch.price")}</div>
             </div>
+            <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:w-auto h-14 sm:h-16 px-8 sm:px-10 text-base sm:text-lg bg-black text-primary hover:bg-black/90 transition-transform hover:scale-105" data-testid="btn-fast-launch">{t("fastLaunch.cta")}</Button>
+            </a>
           </div>
         </div>
       </div>
@@ -2467,10 +2405,10 @@ function Process() {
               viewport={{ once: true }}
               className="bg-card border border-border/50 p-6 sm:p-8 rounded-3xl relative z-10 hover:border-primary/50 transition-colors group"
             >
-              <div className="text-4xl sm:text-5xl font-mono font-bold text-border group-hover:text-primary/20 transition-colors mb-6">{step.num}</div>
+              <div className="text-4xl sm:text-5xl font-bold text-border group-hover:text-primary/20 transition-colors mb-6">{step.num}</div>
               <h3 className="text-2xl font-bold mb-3 font-display">{step.title}</h3>
               <p className="text-muted-foreground">{step.desc}</p>
-              <div className="text-xs font-mono text-primary mt-6 pt-4 border-t border-border/50">{step.time}</div>
+              <div className="text-xs text-primary mt-6 pt-4 border-t border-border/50 uppercase tracking-wider">{step.time}</div>
             </motion.div>
           ))}
         </div>
@@ -2529,7 +2467,7 @@ function Testimonials() {
               data-testid={`testimonial-${i}`}
             >
               <div className="flex flex-col gap-3 mb-6">
-                <span className="self-start font-mono text-xs px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary max-w-full break-words">
+                <span className="self-start text-xs px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary max-w-full break-words">
                   {q.metric}
                 </span>
                 <span className="text-primary text-base tracking-widest">★★★★★</span>
@@ -2538,12 +2476,12 @@ function Testimonials() {
                 «{q.quote}»
               </p>
               <div className="flex items-center gap-4 pt-6 border-t border-border/50 min-w-0">
-                <div className="w-12 h-12 rounded-full bg-primary/10 text-primary font-mono font-bold flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0">
                   {q.initials}
                 </div>
                 <div className="flex flex-col min-w-0">
                   <span className="font-bold text-foreground truncate">{q.author}</span>
-                  <span className="text-sm text-muted-foreground font-mono truncate">{q.role}</span>
+                  <span className="text-sm text-muted-foreground truncate">{q.role}</span>
                 </div>
               </div>
             </motion.div>
@@ -2559,7 +2497,7 @@ function Testimonials() {
         >
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
-              <div className="text-[11px] font-mono uppercase tracking-[0.24em] text-primary/80">{t("testimonials.ctaKicker")}</div>
+              <div className="text-[11px] uppercase tracking-[0.24em] text-primary/80">{t("testimonials.ctaKicker")}</div>
               <div className="mt-3 text-2xl font-bold leading-tight text-foreground sm:text-3xl">{t("testimonials.ctaTitle")}</div>
               <div className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">{t("testimonials.ctaNote")}</div>
             </div>
@@ -2589,7 +2527,7 @@ function CTA() {
           {t("ctaSection.subtitle")}
         </p>
         <a href={TELEGRAM_URL} target="_blank" rel="noreferrer">
-          <Button size="lg" className="h-16 sm:h-20 px-8 sm:px-12 text-base sm:text-xl font-mono tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 transition-transform hover:scale-105 shadow-[0_0_40px_-10px_rgba(132,204,22,0.6)]" data-testid="btn-footer-telegram">
+          <Button size="lg" className="h-16 sm:h-20 px-8 sm:px-12 text-base sm:text-xl tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 transition-transform hover:scale-105 shadow-[0_0_40px_-10px_rgba(132,204,22,0.6)]" data-testid="btn-footer-telegram">
             <Zap className="mr-2 sm:mr-3 h-5 w-5 sm:h-7 sm:w-7" />
             {t("ctaSection.button")}
           </Button>
