@@ -56,10 +56,10 @@
   },
   "services": {
     "title": "What businesses usually need",
-    "subtitle": "We do not start with technology. First we find where you need leads, sales, visibility or automation, then build the right digital product.",
+    "subtitle": "We start with the business outcome: leads, direct sales, process control or less manual work. Then we choose the right format: site, bot, dashboard, e-commerce or MVP.",
     "ai": {
       "title": "Less manual work",
-      "desc": "AI agents, scraping, data processing and automated actions where the team currently burns hours by hand.",
+      "desc": "AI agents, scraping, data processing and automated actions where the team loses hours to repeat work every day.",
       "active": "agent active",
       "trace": "Reasoning Trace",
       "step1": "→ Extract Intent: \"Scrape competitors\"",
@@ -67,19 +67,19 @@
     },
     "telegram": {
       "title": "Leads and service in messenger",
-      "desc": "Telegram bots for leads, orders, notifications, reports and internal workflows without extra dashboards.",
+      "desc": "Telegram bots for leads, orders, notifications, reports and internal workflows when another dashboard would only add friction.",
       "msg1": "Hi. I'm your assistant. Ask me anything.",
       "msg2": "Show today's stats",
       "msg3": "Pulling the data..."
     },
     "dashboards": {
       "title": "Owner-level visibility",
-      "desc": "Owner dashboards, CRM, reports and integrations with iiko, 1C, spreadsheets or APIs so decisions are based on facts.",
+      "desc": "Owner dashboards, CRM, reports and integrations with iiko, 1C, spreadsheets or APIs so decisions are based on facts, not manual summaries.",
       "label": "Revenue"
     },
     "ecommerce": {
       "title": "Sell directly",
-      "desc": "Catalogs, checkout, Kaspi, cards, delivery, pickup and loyalty so the business depends less on intermediaries."
+      "desc": "Catalogs, checkout, Kaspi, cards, delivery, pickup and loyalty so the business can accept orders directly."
     },
     "nativeApps": {
       "title": "Customer experience on mobile",
@@ -87,11 +87,11 @@
     },
     "sprint": {
       "title": "Test an offer in 48 hours",
-      "desc": "Landing page, form or Telegram/WhatsApp lead capture, basic analytics and a structure ready for ads or direct sales."
+      "desc": "Landing page, form or Telegram/WhatsApp lead capture, basic analytics and a structure ready for ads, promos or new services."
     },
     "mvp": {
       "title": "Validate a product idea",
-      "desc": "MVP / SaaS with users, payments, logic and staged launch so the first budget is not burned before customers."
+      "desc": "MVP / SaaS with users, payments, logic and staged launch so the product is validated before a large budget."
     }
   },
   "stats": {
@@ -322,9 +322,9 @@
   "fastLaunch": {
     "badge": "48-hour offer launch",
     "title": "Landing page in 48 hours",
-    "guarantee": "Not just design. Page, offer, lead capture and launch.",
+    "guarantee": "Not just design. Offer, page, lead capture and launch.",
     "subtitle": "For ads, a new service, a promo or demand testing. First mockup in 3-4 hours. If the first mockup misses the task, you do not pay for the sprint.",
-    "bullet1": "Structure for lead, booking or purchase",
+    "bullet1": "Structure for lead, booking, payment or purchase",
     "bullet2": "Telegram / WhatsApp / form as the entry point",
     "bullet3": "Basic analytics and clear CTA",
     "bullet4": "Deployment included, domain paid separately",
@@ -345,7 +345,7 @@
   },
   "process": {
     "title": "Process",
-    "subtitle": "Transparent, predictable and very fast.",
+    "subtitle": "A short path from request to launch without extra bureaucracy.",
     "steps": [
       {
         "title": "Request",

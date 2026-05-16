@@ -23,6 +23,13 @@ Email: hello@doscode.kz
 
 ## What DosCode sells
 
+DosCode scopes projects by the business job rather than by a generic "website" label:
+
+- Need leads quickly: landing page, form, Telegram or WhatsApp capture, basic analytics, and campaign-ready structure.
+- Need direct orders: catalog, checkout, payments, Kaspi, delivery, pickup, loyalty, and admin workflow.
+- Need process control: dashboards, reports, roles, alerts, 1C, iiko, spreadsheets, WhatsApp, Telegram, CRM, and operational integrations.
+- Need a first product: MVP, SaaS, portal, internal platform, backend logic, user roles, payments, analytics, and staged deployment.
+
 ### Fast landing pages and websites
 
 For businesses that need a clear offer, a fast page, lead capture, and a launch path. DosCode can connect Telegram, WhatsApp, forms, payments, and analytics.
@@ -47,6 +54,16 @@ Typical timeline: 4 to 12+ weeks
 ## Integrations DosCode can work with
 
 Kaspi, iiko, 1C, WhatsApp, Telegram, Google Sheets, Excel, CRM tools, payments, analytics, AI APIs, Stripe, Kaspi Pay, OpenAI API, Telegram API, and WhatsApp API.
+
+## Main homepage sections
+
+- Hero: explains the core offer and directs ready buyers to Telegram or case studies.
+- Fast launch: describes the 48-hour landing sprint for ads, promos, new services, and demand validation.
+- Launch system: explains why DosCode treats a landing page as part of a full sales path, not a standalone design asset.
+- Technology strip: lists common integrations and tools.
+- Services: websites, bots, dashboards, e-commerce, native apps, MVPs, AI automation, and Telegram flows.
+- Cases: DosPass, Chicago Pizza, RestoPulse, MMG, WhatsApp Operator Copilot and other shipped work.
+- Testimonials, process, budget estimator, FAQ, and final CTA.
 
 ## Product pages
 
