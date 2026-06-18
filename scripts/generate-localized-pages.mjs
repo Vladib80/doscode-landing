@@ -22,10 +22,10 @@ const localeConfigs = {
     htmlLang: 'ru',
     dir: '.',
     url: `${siteUrl}/`,
-    title: 'DosCode — сайты, лендинги, интернет-магазины и MVP в Казахстане',
+    title: 'DosCode — сайты, MVP, e-commerce и автоматизация для бизнеса в Казахстане',
     description:
-      'Разрабатываем сайты и лендинги за 48 часов, интернет-магазины, нативные приложения, бизнес-дашборды, MVP и автоматизацию для бизнеса в Казахстане.',
-    imageAlt: 'DosCode — разработка сайтов и цифровых продуктов для бизнеса в Казахстане',
+      'Запускаем сайты и лендинги за 48 часов, e-commerce, MVP, Telegram-ботов, WhatsApp-сценарии, дашборды и автоматизацию для бизнеса в Казахстане.',
+    imageAlt: 'DosCode — сайты, MVP, боты, дашборды и автоматизация для бизнеса в Казахстане',
     ogLocale: 'ru_KZ',
     ogLocaleAlternates: ['kk_KZ', 'en_US']
   },
@@ -34,10 +34,10 @@ const localeConfigs = {
     htmlLang: 'kk',
     dir: 'kk',
     url: `${siteUrl}/kk/`,
-    title: 'DosCode — Қазақстандағы сайттар, лендингтер, e-commerce және MVP',
+    title: 'DosCode — Қазақстан бизнесіне сайт, MVP, e-commerce және автоматизация',
     description:
-      'Қазақстан бизнесіне сайттар мен лендингтерді 48 сағатта, e-commerce, нативті қосымша, бизнес-дашборд, MVP және автоматтандыру жобаларын іске қосамыз.',
-    imageAlt: 'DosCode — Қазақстан бизнесіне сайттар мен цифрлық өнімдер әзірлеу',
+      'Қазақстан бизнесіне 48 сағатта лендинг, сайт, e-commerce, MVP, Telegram-бот, WhatsApp сценарийі, дашборд және автоматтандыру жобаларын іске қосамыз.',
+    imageAlt: 'DosCode — Қазақстан бизнесіне сайт, MVP, бот, дашборд және автоматизация',
     ogLocale: 'kk_KZ',
     ogLocaleAlternates: ['ru_KZ', 'en_US']
   },
@@ -46,12 +46,96 @@ const localeConfigs = {
     htmlLang: 'en',
     dir: 'en',
     url: `${siteUrl}/en/`,
-    title: 'DosCode — Websites, Landing Pages, E-commerce and MVPs in Kazakhstan',
+    title: 'DosCode — Websites, MVPs, E-commerce and Automation in Kazakhstan',
     description:
-      'DosCode builds websites and landing pages in 48 hours, e-commerce, native apps, business dashboards, MVPs and automation for businesses in Kazakhstan.',
-    imageAlt: 'DosCode — websites and digital products for businesses in Kazakhstan',
+      'DosCode launches 48-hour landing pages, websites, e-commerce, MVPs, Telegram bots, WhatsApp flows, dashboards and automation for businesses in Kazakhstan.',
+    imageAlt: 'DosCode — websites, MVPs, bots, dashboards and automation for Kazakhstan businesses',
     ogLocale: 'en_US',
     ogLocaleAlternates: ['ru_KZ', 'kk_KZ']
+  }
+};
+
+const schemaContent = {
+  ru: {
+    inLanguage: 'ru-KZ',
+    serviceDescription:
+      'DosCode помогает бизнесу в Казахстане запускать рабочий путь от оффера до заявки, оплаты, аналитики и автоматизации.',
+    audience: 'Малый и средний бизнес, фаундеры, рестораны, e-commerce, сервисные компании и операционные команды в Казахстане.',
+    services: [
+      'Лендинги и сайты за 48 часов',
+      'Интернет-магазины и прямые заказы',
+      'MVP и SaaS-продукты',
+      'Telegram-боты и WhatsApp-сценарии',
+      'Дашборды, отчёты и бизнес-автоматизация'
+    ],
+    faq: [
+      {
+        question: 'Что делает DosCode?',
+        answer: 'DosCode строит сайты, лендинги, e-commerce, MVP, ботов, дашборды и автоматизацию для бизнеса в Казахстане.'
+      },
+      {
+        question: 'Сколько занимает запуск лендинга?',
+        answer: 'При готовом оффере и контенте лендинг можно запустить за 48 часов, а оценку проекта получить за день.'
+      },
+      {
+        question: 'Какие языки поддерживает сайт?',
+        answer: 'Основная страница DosCode доступна на русском, казахском и английском языках.'
+      }
+    ]
+  },
+  kk: {
+    inLanguage: 'kk-KZ',
+    serviceDescription:
+      'DosCode Қазақстан бизнесіне офферден өтінімге, төлемге, аналитикаға және автоматизацияға дейінгі жұмыс істейтін digital-жолды іске қосуға көмектеседі.',
+    audience: 'Қазақстандағы шағын және орта бизнес, фаундерлер, ресторандар, e-commerce, сервис компаниялары және операциялық командалар.',
+    services: [
+      '48 сағатта лендинг және сайт',
+      'Интернет-дүкен және тікелей тапсырыс',
+      'MVP және SaaS өнімдері',
+      'Telegram-боттар және WhatsApp сценарийлері',
+      'Дашбордтар, есептер және бизнес-автоматизация'
+    ],
+    faq: [
+      {
+        question: 'DosCode не істейді?',
+        answer: 'DosCode Қазақстан бизнесіне сайт, лендинг, e-commerce, MVP, бот, дашборд және автоматизация жасайды.'
+      },
+      {
+        question: 'Лендинг қанша уақытта іске қосылады?',
+        answer: 'Оффер мен контент дайын болса, лендингті 48 сағатта іске қосуға болады, ал жобаның бағасын бір күнде ала аласыз.'
+      },
+      {
+        question: 'Сайт қандай тілдерді қолдайды?',
+        answer: 'DosCode негізгі беті орыс, қазақ және ағылшын тілдерінде қолжетімді.'
+      }
+    ]
+  },
+  en: {
+    inLanguage: 'en-US',
+    serviceDescription:
+      'DosCode helps Kazakhstan businesses launch working digital paths from offer to lead, payment, analytics and automation.',
+    audience: 'Small and mid-sized businesses, founders, restaurants, e-commerce, service companies and operations teams in Kazakhstan.',
+    services: [
+      '48-hour landing pages and websites',
+      'E-commerce and direct order flows',
+      'MVP and SaaS products',
+      'Telegram bots and WhatsApp workflows',
+      'Dashboards, reporting and business automation'
+    ],
+    faq: [
+      {
+        question: 'What does DosCode do?',
+        answer: 'DosCode builds websites, landing pages, e-commerce, MVPs, bots, dashboards and automation for businesses in Kazakhstan.'
+      },
+      {
+        question: 'How fast can a landing page launch?',
+        answer: 'With a ready offer and content, a landing page can launch in 48 hours and the project estimate can be prepared in a day.'
+      },
+      {
+        question: 'Which languages does the site support?',
+        answer: 'The main DosCode page is available in Russian, Kazakh and English.'
+      }
+    ]
   }
 };
 
@@ -68,31 +152,131 @@ function renderOgLocaleAlternates(locales) {
 }
 
 function renderStructuredData(config) {
+  const content = schemaContent[config.langKey];
+  const pageId = `${config.url}#webpage`;
+  const serviceId = `${siteUrl}/#professional-service`;
+  const orgId = `${siteUrl}/#organization`;
+  const websiteId = `${siteUrl}/#website`;
+  const faqId = `${config.url}#faq`;
+  const offerCatalogId = `${siteUrl}/#offer-catalog`;
   const data = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'DosCode',
-    url: siteUrl,
-    logo: `${siteUrl}/logo.png`,
-    email: 'hello@doscode.kz',
-    description: config.description,
-    areaServed: {
-      '@type': 'Country',
-      name: 'Kazakhstan'
-    },
-    availableLanguage: ['ru', 'kk', 'en'],
-    contactPoint: [
+    '@graph': [
       {
-        '@type': 'ContactPoint',
-        contactType: 'sales',
+        '@type': 'Organization',
+        '@id': orgId,
+        name: 'DosCode',
+        url: siteUrl,
+        logo: {
+          '@type': 'ImageObject',
+          url: `${siteUrl}/logo.png`
+        },
         email: 'hello@doscode.kz',
-        url: 'https://t.me/doscode_bot',
-        availableLanguage: ['Russian', 'Kazakh', 'English']
+        description: config.description,
+        areaServed: {
+          '@type': 'Country',
+          name: 'Kazakhstan'
+        },
+        availableLanguage: ['ru', 'kk', 'en'],
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            contactType: 'sales',
+            email: 'hello@doscode.kz',
+            url: 'https://t.me/doscode_bot',
+            availableLanguage: ['Russian', 'Kazakh', 'English']
+          }
+        ]
+      },
+      {
+        '@type': 'WebSite',
+        '@id': websiteId,
+        url: siteUrl,
+        name: 'DosCode',
+        publisher: { '@id': orgId },
+        inLanguage: ['ru-KZ', 'kk-KZ', 'en-US']
+      },
+      {
+        '@type': 'WebPage',
+        '@id': pageId,
+        url: config.url,
+        name: config.title,
+        description: config.description,
+        isPartOf: { '@id': websiteId },
+        about: { '@id': serviceId },
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: ogImageUrl
+        },
+        inLanguage: content.inLanguage,
+        breadcrumb: { '@id': `${config.url}#breadcrumb` },
+        mainEntity: { '@id': faqId }
+      },
+      {
+        '@type': 'ProfessionalService',
+        '@id': serviceId,
+        name: 'DosCode',
+        url: siteUrl,
+        image: ogImageUrl,
+        email: 'hello@doscode.kz',
+        priceRange: '100000 KZT - 5000000+ KZT',
+        description: content.serviceDescription,
+        audience: {
+          '@type': 'Audience',
+          audienceType: content.audience
+        },
+        areaServed: {
+          '@type': 'Country',
+          name: 'Kazakhstan'
+        },
+        provider: { '@id': orgId },
+        hasOfferCatalog: { '@id': offerCatalogId }
+      },
+      {
+        '@type': 'OfferCatalog',
+        '@id': offerCatalogId,
+        name: 'DosCode services',
+        itemListElement: content.services.map((serviceName) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: serviceName,
+            provider: { '@id': orgId },
+            areaServed: {
+              '@type': 'Country',
+              name: 'Kazakhstan'
+            }
+          }
+        }))
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': faqId,
+        mainEntity: content.faq.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer
+          }
+        }))
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${config.url}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'DosCode',
+            item: config.url
+          }
+        ]
       }
     ]
   };
 
-  return `    <script type="application/ld+json">${JSON.stringify(data)}</script>`;
+  return `    <script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
 }
 
 function renderShell(config) {
@@ -107,6 +291,7 @@ function renderShell(config) {
     <meta name="description" content="${config.description}" />
     <link rel="canonical" href="${config.url}" />
 ${renderAlternateMeta()}
+    <link rel="alternate" type="text/plain" title="DosCode AI summary" href="${siteUrl}/llms.txt" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="DosCode" />
 

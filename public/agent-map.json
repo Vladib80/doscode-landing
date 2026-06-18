@@ -20,7 +20,18 @@
         "kk": "https://doscode.kz/kk/",
         "en": "https://doscode.kz/en/"
       },
-      "sections": ["services", "cases", "process", "pricing", "faq"]
+      "sections": [
+        "hero",
+        "fastLaunch",
+        "launchSystem",
+        "technology",
+        "services",
+        "cases",
+        "testimonials",
+        "process",
+        "projectEstimator",
+        "faq"
+      ]
     },
     {
       "title": "RestoPulse",
